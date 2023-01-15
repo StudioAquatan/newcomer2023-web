@@ -4,5 +4,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "prettier.configPath": ".prettierrc.json"
+  "prettier.configPath": ".prettierrc"
 }
