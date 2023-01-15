@@ -6,12 +6,10 @@ type CardProps = {
   backgroundColors: Array<string>;
 };
 
-const cardStyle = css`
+const container = css`
   display: grid;
-  grid-template-rows: 150px 150px 150px;
-  grid-template-columns: 150px 150px 150px;
-  align-content: center;
-  justify-content: center;
+  grid-template-rows: repeat(3, calc(100% / 3));
+  grid-template-columns: repeat(3, calc(100% / 3));
 `;
 
 export default function Card({ clubNames, backgroundColors }: CardProps) {
@@ -27,7 +25,7 @@ export default function Card({ clubNames, backgroundColors }: CardProps) {
 
   return (
     <div>
-      <div css={cardStyle}>{stamps()}</div>
+      <div css={container}>{stamps()}</div>
     </div>
   );
 }
