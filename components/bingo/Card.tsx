@@ -1,9 +1,18 @@
+import { css } from "@emotion/react";
 import Stamp from "./Stamp";
 
 type CardProps = {
   clubNames: Array<string>;
   backgroundColors: Array<string>;
 };
+
+const cardStyle = css`
+  display: grid;
+  grid-template-rows: 150px 150px 150px;
+  grid-template-columns: 150px 150px 150px;
+  align-content: center;
+  justify-content: center;
+`;
 
 export default function Card({ clubNames, backgroundColors }: CardProps) {
   const stamps = () => {
@@ -18,16 +27,7 @@ export default function Card({ clubNames, backgroundColors }: CardProps) {
 
   return (
     <div>
-      <style jsx>{`
-        #container {
-          display: grid;
-          grid-template-rows: 150px 150px 150px;
-          grid-template-columns: 150px 150px 150px;
-          justify-content: center;
-          align-content: center;
-        }
-      `}</style>
-      <div id="container">{stamps()}</div>
+      <div css={cardStyle}>{stamps()}</div>
     </div>
   );
 }
