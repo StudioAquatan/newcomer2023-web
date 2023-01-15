@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@emotion/babel-plugin": "^11.10.5",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",
