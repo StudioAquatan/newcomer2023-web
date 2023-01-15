@@ -10,6 +10,7 @@
     "stylelint": "stylelint --ignore-path .gitignore './src/**/*.{css,scss,ts,tsx}'",
     "prettier": "prettier --config .prettierrc.json --ignore-path .gitignore './**/*.{ts,tsx,json,md}'",
     "format": "yarn prettier --write",
+    "typecheck": "tsc",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --exit-zero-on-changes"
