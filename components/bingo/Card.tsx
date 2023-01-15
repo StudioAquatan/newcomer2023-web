@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
 import Stamp from "./Stamp";
+import { StampProps } from "./Stamp";
 
-type CardProps = {
-  clubNames: Array<string>;
-  backgroundColors: Array<string>;
+export type CardProps = {
+  stamps: StampProps[];
 };
 
 const container = css`
@@ -12,16 +12,12 @@ const container = css`
   grid-template-columns: repeat(3, calc(100% / 3));
 `;
 
-export default function Card({ clubNames, backgroundColors }: CardProps) {
-  const stamps = () => {
-    const stamps = [];
-    for (let i = 0; i < clubNames.length; i++) {
-      stamps.push(
-        <Stamp clubName={clubNames[i]} backgroundColor={backgroundColors[i]} />
-      );
-    }
-    return stamps;
-  };
-
-  return <div css={container}>{stamps()}</div>;
+export default function Card({ stamps }: CardProps) {
+  return (
+    <div css={container}>
+      {stamps.map((stamp, index) => {
+        return <Stamp key={index} {...stamp} />;
+      })}
+    </div>
+  );
 }

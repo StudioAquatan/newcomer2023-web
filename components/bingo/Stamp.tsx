@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-type StampProps = {
+export type StampProps = {
   clubName: string;
   backgroundColor: string;
 };
