@@ -6,25 +6,19 @@ type StampProps = {
 };
 
 const stampStyle = (backgroundColor: string) => css`
-  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 120px;
   height: 120px;
   background: ${backgroundColor};
 `;
 
 const clubNameStyle = css`
-  position: absolute;
-  top: 5%;
-  right: 5%;
-  bottom: 5%;
-  left: 5%;
   align-items: center;
-
-  /* font-family: "Noto Sans JP"; */
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 29px;
   color: #fcfcfc;
   text-align: center;
   word-break: break-all;

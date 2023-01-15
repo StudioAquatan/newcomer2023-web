@@ -16,4 +16,5 @@ const Template: ComponentStory<typeof Stamp> = (args) => <Stamp {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   clubName: "StudioAquatan",
+  backgroundColor: "#0000FF",
 };
