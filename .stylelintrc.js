@@ -2,6 +2,7 @@ module.exports = {
   extends: [
     "stylelint-config-standard",
     "stylelint-config-idiomatic-order",
+    "stylelint-config-recess-order",
     "stylelint-prettier/recommended",
   ],
   overrides: [
