@@ -23,15 +23,15 @@ const clubNames = () => {
 };
 
 const backgroundColors = [
+  "#00FF00",
   "#FF0000",
+  "#00FF00",
   "#FF0000",
+  "#00FF00",
   "#FF0000",
+  "#00FF00",
   "#FF0000",
-  "#FF0000",
-  "#FF0000",
-  "#FF0000",
-  "#FF0000",
-  "#FF0000",
+  "#00FF00",
 ];
 
 export const Primary = Template.bind({});
