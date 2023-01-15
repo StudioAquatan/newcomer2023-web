@@ -6,16 +6,10 @@ export type StampProps = {
 };
 
 const stampStyle = (backgroundColor: string) => css`
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
   background: ${backgroundColor};
 `;
 
 const clubNameStyle = css`
-  position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;

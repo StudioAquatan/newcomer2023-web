@@ -6,12 +6,16 @@ export type CardProps = {
   stamps: StampProps[];
 };
 
-const container = css`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(50px, 1fr));
-  grid-gap: 1rem;
-  max-width: 500px;
-`;
+const container = () => {
+  const gutter = "10px";
+  return css`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: calc((100vw - ${gutter} * 2) / 3);
+    grid-gap: ${gutter};
+    width: 100%;
+  `;
+};
 
 export default function Card({ stamps }: CardProps) {
   return (
