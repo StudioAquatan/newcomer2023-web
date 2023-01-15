@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 15px 20px;
-  border-bottom: 1px solid rgb(0 0 0 / 10%);
   font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
 }
 
 svg {
@@ -27,6 +27,6 @@ button + button {
 
 .welcome {
   margin-right: 10px;
-  color: #333;
   font-size: 14px;
+  color: #333;
 }
