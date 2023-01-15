@@ -27,10 +27,8 @@ const clubNameStyle = css`
 
 export default function Stamp({ clubName, backgroundColor }: StampProps) {
   return (
-    <div>
-      <div css={[stampStyle(backgroundColor)]}>
-        <div css={clubNameStyle}>{clubName}</div>
-      </div>
+    <div css={[stampStyle(backgroundColor)]}>
+      <div css={clubNameStyle}>{clubName}</div>
     </div>
   );
 }

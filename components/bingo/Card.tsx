@@ -23,9 +23,5 @@ export default function Card({ clubNames, backgroundColors }: CardProps) {
     return stamps;
   };
 
-  return (
-    <div>
-      <div css={container}>{stamps()}</div>
-    </div>
-  );
+  return <div css={container}>{stamps()}</div>;
 }
