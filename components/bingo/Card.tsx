@@ -8,8 +8,9 @@ export type CardProps = {
 
 const container = css`
   display: grid;
-  grid-template-rows: repeat(3, calc(100% / 3));
-  grid-template-columns: repeat(3, calc(100% / 3));
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  grid-gap: 1rem;
+  max-width: 500px;
 `;
 
 export default function Card({ stamps }: CardProps) {
