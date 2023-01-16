@@ -13,11 +13,17 @@ const stampStyle = (backgroundColor: string) => css`
 `;
 
 const clubNameStyle = css`
+  display: -moz-box;
   display: -webkit-box;
+  display: -o-box;
+  display: -ms-box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -o-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -webkit-line-clamp: 3;
   width: 100%;
   overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
   text-align: center;
   word-break: break-all;
 `;
