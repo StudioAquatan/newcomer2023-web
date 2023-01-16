@@ -7,6 +7,9 @@ import { CardProps } from "./Card";
 export default {
   title: "Bingo/Card",
   component: Card,
+  parameters: {
+    layout: "fullscreen",
+  },
   argTypes: {
     stamps: { control: "object" },
   },
