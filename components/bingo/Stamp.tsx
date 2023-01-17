@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export type StampProps = {
   clubName: string;
   backgroundColor: string;
-  visited: boolean;
+  visited?: boolean;
 };
 
 const stampStyle = (backgroundColor: string) => css`
@@ -48,7 +48,7 @@ const markVisitedStyle = () => {
 export default function Stamp({
   clubName,
   backgroundColor,
-  visited,
+  visited = false,
 }: StampProps) {
   return (
     <div css={[stampStyle(backgroundColor)]}>
