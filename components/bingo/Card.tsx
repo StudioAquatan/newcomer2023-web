@@ -1,33 +1,28 @@
 import { css } from "@emotion/react";
 import Stamp from "./Stamp";
+import { StampProps } from "./Stamp";
 
-type CardProps = {
-  clubNames: Array<string>;
-  backgroundColors: Array<string>;
+export type CardProps = {
+  stamps: StampProps[];
 };
 
-const cardStyle = css`
-  display: grid;
-  grid-template-rows: 150px 150px 150px;
-  grid-template-columns: 150px 150px 150px;
-  align-content: center;
-  justify-content: center;
-`;
+const container = () => {
+  const gutter = "10px";
+  return css`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: calc((100vw - ${gutter} * 2) / 3);
+    grid-gap: ${gutter};
+    width: 100%;
+  `;
+};
 
-export default function Card({ clubNames, backgroundColors }: CardProps) {
-  const stamps = () => {
-    const stamps = [];
-    for (let i = 0; i < clubNames.length; i++) {
-      stamps.push(
-        <Stamp clubName={clubNames[i]} backgroundColor={backgroundColors[i]} />
-      );
-    }
-    return stamps;
-  };
-
+export default function Card({ stamps }: CardProps) {
   return (
-    <div>
-      <div css={cardStyle}>{stamps()}</div>
+    <div css={container}>
+      {stamps.map((stamp, index) => {
+        return <Stamp key={index} {...stamp} />;
+      })}
     </div>
   );
 }

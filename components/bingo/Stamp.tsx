@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-type StampProps = {
+export type StampProps = {
   clubName: string;
   backgroundColor: string;
 };
@@ -8,28 +8,30 @@ type StampProps = {
 const stampStyle = (backgroundColor: string) => css`
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 120px;
+  padding: 0.5rem;
   background: ${backgroundColor};
 `;
 
 const clubNameStyle = css`
-  align-items: center;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  color: #fcfcfc;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -o-box;
+  display: -ms-box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -o-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  width: 100%;
+  overflow: hidden;
   text-align: center;
   word-break: break-all;
 `;
 
 export default function Stamp({ clubName, backgroundColor }: StampProps) {
   return (
-    <div>
-      <div css={[stampStyle(backgroundColor)]}>
-        <div css={clubNameStyle}>{clubName}</div>
-      </div>
+    <div css={[stampStyle(backgroundColor)]}>
+      <div css={clubNameStyle}>{clubName}</div>
     </div>
   );
 }
