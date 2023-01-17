@@ -3,9 +3,11 @@ import { css } from "@emotion/react";
 export type StampProps = {
   clubName: string;
   backgroundColor: string;
+  visited: boolean;
 };
 
 const stampStyle = (backgroundColor: string) => css`
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0.5rem;
@@ -28,9 +30,25 @@ const clubNameStyle = css`
   word-break: break-all;
 `;
 
-export default function Stamp({ clubName, backgroundColor }: StampProps) {
+const markVisitedStyle = css`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30%;
+`;
+
+export default function Stamp({
+  clubName,
+  backgroundColor,
+  visited,
+}: StampProps) {
   return (
     <div css={[stampStyle(backgroundColor)]}>
+      {visited ? (
+        <img css={markVisitedStyle} src="/mark_visited.png" alt="visited" />
+      ) : (
+        ""
+      )}
       <div css={clubNameStyle}>{clubName}</div>
     </div>
   );
