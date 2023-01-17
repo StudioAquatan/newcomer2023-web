@@ -30,12 +30,20 @@ const clubNameStyle = css`
   word-break: break-all;
 `;
 
-const markVisitedStyle = css`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 30%;
-`;
+const markVisitedStyle = () => {
+  const minRotate = -0.15;
+  const maxRotate = 0.15;
+  const rotate = Math.random() * (maxRotate - minRotate) + minRotate;
+  const maxMove = "5%";
+
+  return css`
+    position: absolute;
+    right: calc(${maxMove} * ${Math.random()});
+    bottom: calc(${maxMove} * ${Math.random()});
+    width: 30%;
+    transform: rotate(${rotate}turn);
+  `;
+};
 
 export default function Stamp({
   clubName,
@@ -45,7 +53,7 @@ export default function Stamp({
   return (
     <div css={[stampStyle(backgroundColor)]}>
       {visited ? (
-        <img css={markVisitedStyle} src="/mark_visited.png" alt="visited" />
+        <img css={markVisitedStyle()} src="/mark_visited.png" alt="visited" />
       ) : (
         ""
       )}
