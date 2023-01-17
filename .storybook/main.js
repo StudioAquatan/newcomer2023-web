@@ -9,6 +9,7 @@ module.exports = {
   core: {
     builder: "@storybook/builder-webpack5",
   },
+  staticDirs: ["../public"],
   // https://qiita.com/1994spagetian/items/579718b7091ac7e5ec8b
   babel: async (options) => {
     // emotion用の注入設定

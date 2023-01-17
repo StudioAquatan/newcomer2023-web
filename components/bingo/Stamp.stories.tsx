@@ -13,8 +13,16 @@ export default {
 
 const Template: ComponentStory<typeof Stamp> = (args) => <Stamp {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const NotVisited = Template.bind({});
+NotVisited.args = {
   clubName: "StudioAquatan",
   backgroundColor: "#0000FF",
+  visited: false,
+};
+
+export const Visited = Template.bind({});
+Visited.args = {
+  clubName: "StudioAquatan",
+  backgroundColor: "#0000FF",
+  visited: true,
 };

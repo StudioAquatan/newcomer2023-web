@@ -18,6 +18,7 @@ export default {
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 const card: CardProps = {
+  userId: 0,
   stamps: [
     {
       clubName: "Club 1",
@@ -46,19 +47,23 @@ const card: CardProps = {
     {
       clubName: "Club 7",
       backgroundColor: "#00FF00",
+      visited: true,
     },
     {
       clubName: "Club 8",
       backgroundColor: "#FF0000",
+      visited: true,
     },
     {
       clubName: "Club 9",
       backgroundColor: "#00FF00",
+      visited: true,
     },
   ],
 };
 
 const longClub: CardProps = {
+  userId: 0,
   stamps: [
     {
       clubName: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -87,14 +92,17 @@ const longClub: CardProps = {
     {
       clubName: "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
       backgroundColor: "#00FF00",
+      visited: true,
     },
     {
       clubName: "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
       backgroundColor: "#FF0000",
+      visited: true,
     },
     {
       clubName: "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
       backgroundColor: "#00FF00",
+      visited: true,
     },
   ],
 };
