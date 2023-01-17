@@ -3,6 +3,7 @@ import Stamp from "./Stamp";
 import { StampProps } from "./Stamp";
 
 export type CardProps = {
+  userId: number;
   stamps: StampProps[];
 };
 
@@ -17,11 +18,11 @@ const container = () => {
   `;
 };
 
-export default function Card({ stamps }: CardProps) {
+export default function Card({ userId, stamps }: CardProps) {
   return (
     <div css={container}>
       {stamps.map((stamp, index) => {
-        stamp.seed = index;
+        stamp.seed = userId + index;
         return <Stamp key={index} {...stamp} />;
       })}
     </div>

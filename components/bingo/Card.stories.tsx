@@ -18,6 +18,7 @@ export default {
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 const card: CardProps = {
+  userId: 0,
   stamps: [
     {
       clubName: "Club 1",
@@ -62,6 +63,7 @@ const card: CardProps = {
 };
 
 const longClub: CardProps = {
+  userId: 0,
   stamps: [
     {
       clubName: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
