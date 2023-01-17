@@ -21,6 +21,7 @@ export default function Card({ stamps }: CardProps) {
   return (
     <div css={container}>
       {stamps.map((stamp, index) => {
+        stamp.seed = index;
         return <Stamp key={index} {...stamp} />;
       })}
     </div>
