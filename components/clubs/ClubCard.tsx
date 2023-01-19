@@ -55,9 +55,14 @@ const textContentH1Style = css`
 `;
 
 const textContentPStyle = css`
+  display: -webkit-box;
   margin: 0;
+  overflow: hidden;
   font-size: 12px;
   font-weight: lighter;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 `;
 
 export default function ClubCard({ clubName, description }: ClubCardProps) {

@@ -22,5 +22,5 @@ Default.args = {
 export const LongClubName = Template.bind({});
 LongClubName.args = {
   clubName: "ToooooooooooLongClubName",
-  description: "Make Aquatan Great Again",
+  description: "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
 };
