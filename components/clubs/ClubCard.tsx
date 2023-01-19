@@ -68,7 +68,12 @@ const textContentPStyle = css`
 export default function ClubCard({ clubName, description }: ClubCardProps) {
   return (
     <div css={container}>
-      <div data-item="clubImage" css={clubImageStyle}></div>
+      <img
+        data-item="clubImage"
+        css={clubImageStyle}
+        src="/club_icons/studioaquatan.png"
+        alt="Studio Aquatan"
+      ></img>
       <div css={textBoxStyle}>
         <div css={textContentStyle}>
           <p css={textContentH1Style}>{clubName}</p>
