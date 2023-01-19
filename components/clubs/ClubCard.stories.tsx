@@ -13,8 +13,14 @@ const Template: ComponentStory<typeof ClubCard> = (args) => (
   <ClubCard {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Default = Template.bind({});
+Default.args = {
   clubName: "StudioAquatan",
+  description: "Make Aquatan Great Again",
+};
+
+export const LongClubName = Template.bind({});
+LongClubName.args = {
+  clubName: "ToooooooooooLongClubName",
   description: "Make Aquatan Great Again",
 };

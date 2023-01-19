@@ -47,8 +47,11 @@ const textContentStyle = css`
 
 const textContentH1Style = css`
   margin: 0;
+  overflow: hidden;
   font-size: 16px;
   font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const textContentPStyle = css`
