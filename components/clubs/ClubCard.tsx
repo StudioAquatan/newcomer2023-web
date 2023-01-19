@@ -21,11 +21,6 @@ const container = css`
     cursor: pointer;
     transform: scale(1.05);
   }
-
-  &:hover > [data-item="clubImage"] {
-    background: linear-gradient(#9198e5, #712020);
-    transition: 0.5s ease-in-out;
-  }
 `;
 
 const clubImageStyle = css`
