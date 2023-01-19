@@ -46,11 +46,13 @@ const textContentStyle = css`
 `;
 
 const textContentH1Style = css`
+  margin: 0;
   font-size: 16px;
   font-weight: bold;
 `;
 
 const textContentPStyle = css`
+  margin: 0;
   font-size: 12px;
   font-weight: lighter;
 `;
