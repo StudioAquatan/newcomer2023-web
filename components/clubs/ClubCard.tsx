@@ -45,10 +45,6 @@ const textContentStyle = css`
   justify-content: space-between;
 `;
 
-const textContentSpanStyle = css`
-  font-size: 10px;
-`;
-
 const textContentH1Style = css`
   font-size: 16px;
   font-weight: bold;
@@ -66,7 +62,6 @@ export default function ClubCard({ clubName, description }: ClubCardProps) {
       <div css={textBoxStyle}>
         <div css={textContentStyle}>
           <p css={textContentH1Style}>{clubName}</p>
-          <span css={textContentSpanStyle}>Aquatan</span>
         </div>
         <p css={textContentPStyle}>{description}</p>
       </div>
