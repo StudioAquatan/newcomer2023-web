@@ -1,8 +1,48 @@
-import Card from "../components/bingo/Card";
+import ClubShowcase, {
+  ClubShowcaseProps,
+} from "../components/clubs/ClubShowcase";
+
+const cards: ClubShowcaseProps = {
+  cards: [
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+  ],
+};
 
 export default function Home() {
-  return Card({
-    userId: 0,
-    stamps: [{ clubName: "Club 1", backgroundColor: "#00FF00", visited: true }],
-  });
+  return <ClubShowcase {...cards} />;
 }
