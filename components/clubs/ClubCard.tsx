@@ -9,34 +9,22 @@ const container = css`
   display: flex;
   align-items: center;
   justify-content: left;
-  width: 100%;
-  max-width: 290px;
-  height: 70px;
-  background: #353535;
-  border-radius: 20px;
-  transition: 0.5s ease-in-out;
+  padding: 1rem;
+  border: 1px solid #aaa;
+  border-radius: 1rem;
   backdrop-filter: blur(10px);
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.05);
-  }
 `;
 
 const clubImageStyle = css`
-  width: 50px;
-  height: 50px;
-  margin-left: 10px;
+  width: 3rem;
+  height: 3rem;
   background: linear-gradient(#d7cfcf, #9198e5);
-  border-radius: 10px;
+  border-radius: 1rem;
 `;
 
 const textBoxStyle = css`
-  width: calc(100% - 90px);
-  margin-left: 10px;
-
-  /* font-family: "Poppins" sans-serif; */
-  color: white;
+  width: 13rem;
+  margin-left: 1rem;
 `;
 
 const textContentStyle = css`
