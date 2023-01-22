@@ -1,21 +1,21 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import ClubShowcase, { ClubShowcaseProps } from "./ClubShowcase";
+import ClubRow, { ClubRowProps } from "./ClubRow";
 
 export default {
-  title: "Clubs/ClubShowcase",
-  component: ClubShowcase,
+  title: "Clubs/ClubRow",
+  component: ClubRow,
   argTypes: {
     cards: { control: "object" },
   },
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof ClubShowcase>;
+} as ComponentMeta<typeof ClubRow>;
 
-const Template: ComponentStory<typeof ClubShowcase> = (args) => (
-  <ClubShowcase {...args} />
+const Template: ComponentStory<typeof ClubRow> = (args) => (
+  <ClubRow {...args} />
 );
 
 const studioaquatan = {
@@ -44,7 +44,7 @@ const cards = (inverse: boolean) => {
   };
 };
 
-const longNameClubs: ClubShowcaseProps = {
+const longNameClubs: ClubRowProps = {
   cards: [
     tooLongName,
     tooLongName,
@@ -58,7 +58,7 @@ const longNameClubs: ClubShowcaseProps = {
   inverse: false,
 };
 
-const mixed: ClubShowcaseProps = {
+const mixed: ClubRowProps = {
   cards: [
     tooLongName,
     studioaquatan,

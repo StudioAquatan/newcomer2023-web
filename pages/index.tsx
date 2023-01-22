@@ -1,8 +1,6 @@
-import ClubShowcase, {
-  ClubShowcaseProps,
-} from "../components/clubs/ClubShowcase";
+import ClubRow, { ClubRowProps } from "../components/clubs/ClubRow";
 
-const cards: ClubShowcaseProps = {
+const cards: ClubRowProps = {
   cards: [
     {
       clubName: "StudioAquatan",
@@ -45,5 +43,5 @@ const cards: ClubShowcaseProps = {
 };
 
 export default function Home() {
-  return <ClubShowcase {...cards} />;
+  return <ClubRow {...cards} />;
 }
