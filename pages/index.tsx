@@ -1,8 +1,47 @@
-import Card from "../components/bingo/Card";
+import ClubRow, { ClubRowProps } from "../components/clubs/ClubRow";
+
+const cards: ClubRowProps = {
+  cards: [
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+    {
+      clubName: "StudioAquatan",
+      description: "Make Aquatan Great Again",
+    },
+  ],
+  inverse: false,
+};
 
 export default function Home() {
-  return Card({
-    userId: 0,
-    stamps: [{ clubName: "Club 1", backgroundColor: "#00FF00", visited: true }],
-  });
+  return <ClubRow {...cards} />;
 }
