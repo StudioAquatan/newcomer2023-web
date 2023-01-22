@@ -28,17 +28,20 @@ const tooLongName = {
   description: "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
 };
 
-const cards: ClubShowcaseProps = {
-  cards: [
-    studioaquatan,
-    studioaquatan,
-    studioaquatan,
-    studioaquatan,
-    studioaquatan,
-    studioaquatan,
-    studioaquatan,
-    studioaquatan,
-  ],
+const cards = (inverse: boolean) => {
+  return {
+    cards: [
+      studioaquatan,
+      studioaquatan,
+      studioaquatan,
+      studioaquatan,
+      studioaquatan,
+      studioaquatan,
+      studioaquatan,
+      studioaquatan,
+    ],
+    inverse: inverse,
+  };
 };
 
 const longNameClubs: ClubShowcaseProps = {
@@ -52,6 +55,7 @@ const longNameClubs: ClubShowcaseProps = {
     tooLongName,
     tooLongName,
   ],
+  inverse: false,
 };
 
 const mixed: ClubShowcaseProps = {
@@ -65,10 +69,14 @@ const mixed: ClubShowcaseProps = {
     tooLongName,
     studioaquatan,
   ],
+  inverse: false,
 };
 
 export const Default = Template.bind({});
-Default.args = cards;
+Default.args = cards(false);
+
+export const Inverse = Template.bind({});
+Inverse.args = cards(true);
 
 export const LongClubName = Template.bind({});
 LongClubName.args = longNameClubs;

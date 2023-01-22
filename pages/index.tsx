@@ -41,6 +41,7 @@ const cards: ClubShowcaseProps = {
       description: "Make Aquatan Great Again",
     },
   ],
+  inverse: false,
 };
 
 export default function Home() {
