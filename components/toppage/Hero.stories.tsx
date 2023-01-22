@@ -6,6 +6,9 @@ import Hero from "./Hero";
 export default {
   title: "toppage/Hero",
   component: Hero,
+  parameters: {
+    layout: "fullscreen",
+  },
 } as ComponentMeta<typeof Hero>;
 
 const Template: ComponentStory<typeof Hero> = () => <Hero />;
