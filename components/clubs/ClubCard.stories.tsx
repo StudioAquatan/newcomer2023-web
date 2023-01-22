@@ -14,7 +14,15 @@ const Template: ComponentStory<typeof ClubCard> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
+  clubName: "Default Club Name",
+  clubImagePath: "default.png",
+  description: "Default Description",
+};
+
+export const StudioAquatan = Template.bind({});
+StudioAquatan.args = {
   clubName: "StudioAquatan",
+  clubImagePath: "studioaquatan.png",
   description: "Make Aquatan Great Again",
 };
 
