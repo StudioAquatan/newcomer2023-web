@@ -41,7 +41,7 @@ const scrollInverse = keyframes`
 const rowAnimation = (inverse: boolean) => {
   const animation = inverse ? scrollInverse : scroll;
   return css`
-    animation: ${animation} 20s linear infinite;
+    animation: ${animation} 50s linear infinite;
   `;
 };
 
