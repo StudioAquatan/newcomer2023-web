@@ -10,7 +10,7 @@ export type ClubRowProps = {
 const base = css`
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
 `;
 
