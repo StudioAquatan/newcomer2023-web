@@ -19,7 +19,7 @@ const container = css`
 const clubImageStyle = css`
   width: 3rem;
   height: 3rem;
-  background: linear-gradient(#d7cfcf, #9198e5);
+  background-color: #eee;
   border-radius: 1rem;
 `;
 
