@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 export type ClubCardProps = {
   clubName: string;
+  clubImagePath?: string;
   description: string;
 };
 
@@ -18,7 +19,7 @@ const container = css`
 const clubImageStyle = css`
   width: 3rem;
   height: 3rem;
-  background: linear-gradient(#d7cfcf, #9198e5);
+  background-color: #eee;
   border-radius: 1rem;
 `;
 
@@ -53,13 +54,17 @@ const textContentPStyle = css`
   -webkit-line-clamp: 2;
 `;
 
-export default function ClubCard({ clubName, description }: ClubCardProps) {
+export default function ClubCard({
+  clubName,
+  clubImagePath = "default.png",
+  description,
+}: ClubCardProps) {
   return (
     <div css={container}>
       <img
         data-item="clubImage"
         css={clubImageStyle}
-        src="/club_icons/studioaquatan.png"
+        src={"/club_icons/" + clubImagePath}
         alt="Studio Aquatan"
       ></img>
       <div css={textBoxStyle}>
