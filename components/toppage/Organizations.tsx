@@ -6,9 +6,22 @@ const base = css`
 
 const contentPStyle = css`
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #fff;
   text-align: center;
+
+  @media screen and (min-width: 280px) {
+    font-size: 1rem;
+  }
+  @media screen and (min-width: 480px) {
+    font-size: 1.5rem;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 1.75rem;
+  }
+  @media screen and (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 
 const logoStyle = css`
