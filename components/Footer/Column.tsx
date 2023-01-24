@@ -1,0 +1,43 @@
+import { css } from "@emotion/react";
+
+type ColumnProps = {
+  title: string;
+  links: { text: string; href: string }[];
+};
+
+const titleStyle = css`
+  padding-bottom: 0.3rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-bottom: 1px solid #000;
+`;
+
+const contents = css`
+  display: flex;
+  flex-direction: column;
+`;
+
+const linkListStyle = css`
+  padding: 0;
+  padding-left: 1rem;
+  list-style: none;
+`;
+
+export default function Column({ title, links }: ColumnProps) {
+  return (
+    <div>
+      <p css={titleStyle}>{title}</p>
+      <div css={contents}>
+        <ul css={linkListStyle}>
+          {links.map((link, index) => (
+            <li key={index}>
+              <a href={link.href}>{link.text}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
