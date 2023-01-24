@@ -22,6 +22,7 @@ const contents = css`
 const linkListStyle = css`
   padding: 0;
   padding-left: 1rem;
+  margin: 0;
   list-style: none;
 `;
 
