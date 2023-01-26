@@ -17,6 +17,7 @@ const title = css`
 const contents = css`
   display: flex;
   column-gap: 1.6rem;
+  padding-left: 1.6rem;
 `;
 
 const circle = css`
