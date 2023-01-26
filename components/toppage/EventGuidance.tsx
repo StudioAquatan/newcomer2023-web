@@ -8,21 +8,28 @@ const container = css`
 
 const title = css`
   margin: 0;
+  margin-bottom: 1.6rem;
   font-size: 4.8rem;
   font-weight: bold;
+
+  @media screen and (max-width: 1080px) {
+    font-size: 4rem;
+  }
 `;
 
 const contents = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1.6rem;
-  margin-bottom: 1.6rem;
 `;
 
 const contentPStyle = css`
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 3.2rem;
+
+  @media screen and (max-width: 1080px) {
+    font-size: 2.8rem;
+  }
 `;
 
 export default function EventGuidance() {
