@@ -11,11 +11,15 @@ const title = css`
   margin-bottom: 1.6rem;
   font-size: 4.8rem;
   font-weight: bold;
+
+  @media screen and (max-width: 1080px) {
+    font-size: 4rem;
+  }
 `;
 
 const button = css`
   padding: 1.6rem 4rem;
-  font-size: 1.6rem;
+  font-size: 2.5rem;
   text-transform: uppercase;
   background-color: #ffc8df;
   border: 0;
