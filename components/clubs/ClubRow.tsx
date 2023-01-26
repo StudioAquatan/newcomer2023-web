@@ -16,8 +16,8 @@ const base = css`
 
 const rowStyle = css`
   display: flex;
-  column-gap: 1em;
-  padding-right: 1em;
+  column-gap: 1.6rem;
+  padding-right: 1.6rem;
 `;
 
 const scroll = keyframes`

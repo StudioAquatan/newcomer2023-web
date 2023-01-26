@@ -14,7 +14,7 @@ const baseInverse = css`
 const base = (inverse: boolean) => css`
   display: flex;
   flex-wrap: wrap;
-  column-gap: 5rem;
+  column-gap: 8rem;
   justify-content: center;
   ${inverse ? baseInverse : ""}
 `;
@@ -24,25 +24,25 @@ const featureTextAreaStyle = css`
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  width: 30rem;
-  max-width: 30rem;
-  margin-bottom: 3rem;
+  width: 48rem;
+  max-width: 48rem;
+  margin-bottom: 4.8rem;
 `;
 
 const featureTitleStyle = css`
   margin: 0;
-  font-size: 3rem;
+  font-size: 4.8rem;
   font-weight: bold;
 `;
 
 const featureDescStyle = css`
   margin: 0;
-  font-size: 2rem;
+  font-size: 3.2rem;
 `;
 
 const featureImageAreaStyle = css`
-  width: 30rem;
-  max-width: 30rem;
+  width: 48rem;
+  max-width: 48rem;
 `;
 
 const featureImageStyle = css`

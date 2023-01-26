@@ -249,8 +249,8 @@ const featureStampRally = {
 const container = css`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  margin-bottom: 4rem;
+  gap: 5.6rem;
+  margin: 1.6rem 0 5.6rem;
 `;
 
 export default function Home() {

@@ -6,10 +6,10 @@ type ColumnProps = {
 };
 
 const titleStyle = css`
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.5rem;
   margin: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-size: 2rem;
   font-weight: bold;
   border-bottom: 1px solid #000;
 `;
@@ -21,8 +21,9 @@ const contents = css`
 
 const linkListStyle = css`
   padding: 0;
-  padding-left: 1rem;
+  padding-left: 1.6rem;
   margin: 0;
+  font-size: 1.6rem;
   list-style: none;
 `;
 

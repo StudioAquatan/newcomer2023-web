@@ -10,22 +10,22 @@ const container = css`
   display: flex;
   align-items: center;
   justify-content: left;
-  padding: 1rem;
+  padding: 1.6rem;
   border: 1px solid #aaa;
-  border-radius: 1rem;
+  border-radius: 1.6rem;
   backdrop-filter: blur(10px);
 `;
 
 const clubImageStyle = css`
-  width: 3rem;
-  height: 3rem;
+  width: 4.8rem;
+  height: 4.8rem;
   background-color: #eee;
-  border-radius: 1rem;
+  border-radius: 1.6rem;
 `;
 
 const textBoxStyle = css`
-  width: 13rem;
-  margin-left: 1rem;
+  width: 20.8rem;
+  margin-left: 1.6rem;
 `;
 
 const textContentStyle = css`
@@ -37,7 +37,7 @@ const textContentStyle = css`
 const textContentH1Style = css`
   margin: 0;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: bold;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -47,7 +47,7 @@ const textContentPStyle = css`
   display: -webkit-box;
   margin: 0;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: lighter;
   word-break: break-all;
   -webkit-box-orient: vertical;

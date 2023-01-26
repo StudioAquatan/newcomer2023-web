@@ -8,7 +8,7 @@ const container = css`
 
 const title = css`
   margin: 0;
-  font-size: 3rem;
+  font-size: 4.8rem;
   font-weight: bold;
 `;
 
@@ -16,13 +16,13 @@ const contents = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
 `;
 
 const contentPStyle = css`
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 `;
 
 export default function EventGuidance() {
