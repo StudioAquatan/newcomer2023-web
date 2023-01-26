@@ -27,6 +27,10 @@ const linkListStyle = css`
   list-style: none;
 `;
 
+const linkStyle = css`
+  margin-bottom: 1rem;
+`;
+
 export default function Column({ title, links }: ColumnProps) {
   return (
     <div>
@@ -34,7 +38,7 @@ export default function Column({ title, links }: ColumnProps) {
       <div css={contents}>
         <ul css={linkListStyle}>
           {links.map((link, index) => (
-            <li key={index}>
+            <li key={index} css={linkStyle}>
               <a href={link.href}>{link.text}</a>
             </li>
           ))}
