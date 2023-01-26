@@ -11,9 +11,28 @@ const container = css`
   align-items: center;
   justify-content: left;
   padding: 1.6rem;
+  overflow: hidden;
+  background: transparent;
   border: 1px solid #aaa;
   border-radius: 1.6rem;
   backdrop-filter: blur(10px);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: -50px;
+    z-index: -1;
+    width: 0;
+    height: 100%;
+    content: "";
+    background-color: #dfeddc;
+    transition: width 1000ms;
+    transform: skewX(45deg);
+  }
+
+  &:hover::before {
+    width: 250%;
+  }
 `;
 
 const clubImageStyle = css`
@@ -49,6 +68,7 @@ const textContentPStyle = css`
   overflow: hidden;
   font-size: 1.2rem;
   font-weight: lighter;
+  text-align: left;
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -60,7 +80,7 @@ export default function ClubCard({
   description,
 }: ClubCardProps) {
   return (
-    <div css={container}>
+    <button css={container}>
       <img
         data-item="clubImage"
         css={clubImageStyle}
@@ -74,6 +94,6 @@ export default function ClubCard({
         <p css={textContentPStyle}>{description}</p>
       </div>
       <div></div>
-    </div>
+    </button>
   );
 }
