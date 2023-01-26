@@ -10,6 +10,7 @@ const title = css`
   margin: 0;
   margin-bottom: 1rem;
   font-size: 3rem;
+  font-weight: bold;
 `;
 
 const button = css`
