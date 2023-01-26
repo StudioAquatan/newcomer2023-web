@@ -7,7 +7,6 @@ export type ClubShowcaseProps = {
 };
 
 const base = css`
-  position: absolute;
   display: grid;
   gap: 1rem;
 `;
