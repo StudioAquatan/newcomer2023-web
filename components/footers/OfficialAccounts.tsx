@@ -20,14 +20,27 @@ const contents = css`
   padding-left: 1.6rem;
 `;
 
-const circle = css`
+const circleButton = (color: string) => css`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 5rem;
   height: 5rem;
   background-color: #fff;
+  border: none;
   border-radius: 50%;
+  box-shadow: 0 1rem 1rem rgb(0 0 0 / 10%);
+  transition: 0.5s;
+
+  &:hover {
+    background-color: ${color};
+  }
+
+  &:active {
+    box-shadow: 0 0.3rem 0.3rem rgb(0 0 0 / 30%);
+    transition: 100ms;
+    transform: translate(0.3rem, 0.3rem);
+  }
 `;
 
 const snsIcon = css`
@@ -40,12 +53,12 @@ export default function OfficialAccounts() {
     <div>
       <p css={title}>公式アカウント</p>
       <div css={contents}>
-        <div css={circle}>
+        <button css={circleButton("#8CD4FF")}>
           <FontAwesomeIcon icon={faSquareTwitter} css={snsIcon} />
-        </div>
-        <div css={circle}>
+        </button>
+        <button css={circleButton("#E28598")}>
           <FontAwesomeIcon icon={faSquareInstagram} css={snsIcon} />
-        </div>
+        </button>
       </div>
     </div>
   );
