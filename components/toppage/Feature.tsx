@@ -16,6 +16,7 @@ const base = (inverse: boolean) => css`
   flex-wrap: wrap;
   column-gap: 8rem;
   justify-content: center;
+  margin: 1.6rem;
   ${inverse ? baseInverse : ""}
 `;
 
@@ -31,13 +32,28 @@ const featureTextAreaStyle = css`
 
 const featureTitleStyle = css`
   margin: 0;
+  margin-bottom: 1.6rem;
   font-size: 4.8rem;
   font-weight: bold;
+
+  & > span {
+    display: inline-block;
+  }
+
+  @media screen and (max-width: 1080px) {
+    font-size: 4rem;
+    text-align: center;
+  }
 `;
 
-const featureDescStyle = css`
+const featureDescriptionStyle = css`
   margin: 0;
   font-size: 3.2rem;
+
+  @media screen and (max-width: 1080px) {
+    font-size: 2.8rem;
+    text-align: center;
+  }
 `;
 
 const featureImageAreaStyle = css`
@@ -58,8 +74,11 @@ export default function Feature({
   return (
     <div css={base(inverse)}>
       <div css={featureTextAreaStyle}>
-        <p css={featureTitleStyle}>{title}</p>
-        <p css={featureDescStyle}>{description}</p>
+        <p css={featureTitleStyle}>
+          <span>{title}</span>
+          <span>とは</span>
+        </p>
+        <p css={featureDescriptionStyle}>{description}</p>
       </div>
       <div css={featureImageAreaStyle}>
         <img src={featureImagePath} alt="案内画像" css={featureImageStyle} />
