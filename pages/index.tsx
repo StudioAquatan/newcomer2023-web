@@ -250,18 +250,20 @@ const container = css`
   display: flex;
   flex-direction: column;
   gap: 5.6rem;
-  margin: 1.6rem 0 5.6rem;
+  margin-bottom: 5.6rem;
 `;
 
 export default function Home() {
   return (
-    <div css={container}>
+    <>
       <Hero />
-      <ClubShowcase {...clubs} />
-      <Feature {...featureDiagnose} />
-      <Feature {...featureStampRally} />
-      <EventGuidance />
-      <ClubList />
-    </div>
+      <div css={container}>
+        <ClubShowcase {...clubs} />
+        <Feature {...featureDiagnose} />
+        <Feature {...featureStampRally} />
+        <EventGuidance />
+        <ClubList />
+      </div>
+    </>
   );
 }
