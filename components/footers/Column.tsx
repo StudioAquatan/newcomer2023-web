@@ -39,7 +39,9 @@ export default function Column({ title, links }: ColumnProps) {
         <ul css={linkListStyle}>
           {links.map((link, index) => (
             <li key={index} css={linkStyle}>
-              <a href={link.href}>{link.text}</a>
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.text}
+              </a>
             </li>
           ))}
         </ul>

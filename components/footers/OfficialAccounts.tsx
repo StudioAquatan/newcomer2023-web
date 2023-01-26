@@ -53,12 +53,24 @@ export default function OfficialAccounts() {
     <div>
       <p css={title}>公式アカウント</p>
       <div css={contents}>
-        <button css={circleButton("#8CD4FF")}>
-          <FontAwesomeIcon icon={faSquareTwitter} css={snsIcon} />
-        </button>
-        <button css={circleButton("#E28598")}>
-          <FontAwesomeIcon icon={faSquareInstagram} css={snsIcon} />
-        </button>
+        <a
+          href="https://twitter.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button css={circleButton("#8CD4FF")}>
+            <FontAwesomeIcon icon={faSquareTwitter} css={snsIcon} />
+          </button>
+        </a>
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button css={circleButton("#E28598")}>
+            <FontAwesomeIcon icon={faSquareInstagram} css={snsIcon} />
+          </button>
+        </a>
       </div>
     </div>
   );
