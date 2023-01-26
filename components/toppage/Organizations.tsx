@@ -6,45 +6,15 @@ const base = css`
 
 const contentPStyle = css`
   margin: 0;
-  font-size: 1.6rem;
+  font-size: calc(1.6rem + 1vw);
   color: #fff;
   text-align: center;
-
-  @media screen and (min-width: 280px) {
-    font-size: 1.6rem;
-  }
-  @media screen and (min-width: 480px) {
-    font-size: 2.5rem;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    font-size: 2.8rem;
-  }
-  @media screen and (min-width: 1024px) {
-    font-size: 3.2rem;
-  }
 `;
 
 const logoStyle = css`
-  height: 2rem;
-  margin: 0 0.4rem;
+  height: calc(2rem + 1vw);
+  margin: 0 calc(0.4rem + 0.5vw);
   vertical-align: middle;
-
-  @media screen and (min-width: 280px) {
-    height: 2rem;
-    margin: 0 0.4rem;
-  }
-  @media screen and (min-width: 480px) {
-    height: 3rem;
-    margin: 0 0.8rem;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    height: 4rem;
-    margin: 0 1rem;
-  }
-  @media screen and (min-width: 1024px) {
-    height: 4.8rem;
-    margin: 0 1rem;
-  }
 `;
 
 export default function Organizations() {

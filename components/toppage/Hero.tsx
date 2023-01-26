@@ -16,23 +16,10 @@ const heroStyle = css`
 `;
 
 const heroContentStyle = css`
-  font-size: 3.2rem;
+  font-size: calc(3.2rem + 2vw);
   font-weight: bold;
   color: #fff;
   text-align: center;
-
-  @media screen and (min-width: 280px) {
-    font-size: 3.2rem;
-  }
-  @media screen and (min-width: 480px) {
-    font-size: 4.8rem;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    font-size: 6.4rem;
-  }
-  @media screen and (min-width: 1024px) {
-    font-size: 8rem;
-  }
 `;
 
 const contentPStyle = css`
