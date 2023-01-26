@@ -12,6 +12,12 @@ const base = css`
   flex-direction: row;
   width: 100%;
   overflow-x: hidden;
+
+  &:hover {
+    & > div {
+      animation-play-state: paused;
+    }
+  }
 `;
 
 const rowStyle = css`
