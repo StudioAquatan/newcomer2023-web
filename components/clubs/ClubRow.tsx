@@ -12,12 +12,18 @@ const base = css`
   flex-direction: row;
   width: 100%;
   overflow-x: hidden;
+
+  &:hover {
+    & > div {
+      animation-play-state: paused;
+    }
+  }
 `;
 
 const rowStyle = css`
   display: flex;
-  column-gap: 1em;
-  padding-right: 1em;
+  column-gap: 1.6rem;
+  padding-right: 1.6rem;
 `;
 
 const scroll = keyframes`

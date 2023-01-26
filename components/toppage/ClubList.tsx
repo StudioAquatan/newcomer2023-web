@@ -8,38 +8,41 @@ const container = css`
 
 const title = css`
   margin: 0;
-  margin-bottom: 1rem;
-  font-size: 3rem;
+  margin-bottom: 1.6rem;
+  font-size: 4.8rem;
   font-weight: bold;
+
+  @media screen and (max-width: 1080px) {
+    font-size: 4rem;
+  }
 `;
 
 const button = css`
-  padding: 17px 40px;
-  font-size: 15px;
+  padding: 1.6rem 4rem;
+  font-size: 2.5rem;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
   background-color: #ffc8df;
   border: 0;
-  border-radius: 50px;
-  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  border-radius: 4.8rem;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 1rem;
   transition: all 0.5s ease;
 
   &:hover {
-    letter-spacing: 3px;
+    letter-spacing: 0.5rem;
     background-color: #fff;
 
     /* color: #ffc8df; */
-    box-shadow: #ffc8df 0 7px 29px 0;
+    box-shadow: #ffc8df 0 0.5rem 3rem 0;
   }
 
   &:active {
-    letter-spacing: 3px;
+    letter-spacing: 0.5rem;
     background-color: #ffc8df;
 
     /* color: #ffc8df; */
     box-shadow: #ffc8df 0 0 0 0;
     transition: 100ms;
-    transform: translateY(10px);
+    transform: translateY(1rem);
   }
 `;
 

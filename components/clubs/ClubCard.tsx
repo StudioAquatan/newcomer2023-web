@@ -10,22 +10,41 @@ const container = css`
   display: flex;
   align-items: center;
   justify-content: left;
-  padding: 1rem;
+  padding: 1.6rem;
+  overflow: hidden;
+  background: transparent;
   border: 1px solid #aaa;
-  border-radius: 1rem;
+  border-radius: 1.6rem;
   backdrop-filter: blur(10px);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: -50px;
+    z-index: -1;
+    width: 0;
+    height: 100%;
+    content: "";
+    background-color: #dfeddc;
+    transition: width 1000ms;
+    transform: skewX(45deg);
+  }
+
+  &:hover::before {
+    width: 250%;
+  }
 `;
 
 const clubImageStyle = css`
-  width: 3rem;
-  height: 3rem;
+  width: 4.8rem;
+  height: 4.8rem;
   background-color: #eee;
-  border-radius: 1rem;
+  border-radius: 1.6rem;
 `;
 
 const textBoxStyle = css`
-  width: 13rem;
-  margin-left: 1rem;
+  width: 20.8rem;
+  margin-left: 1.6rem;
 `;
 
 const textContentStyle = css`
@@ -37,7 +56,7 @@ const textContentStyle = css`
 const textContentH1Style = css`
   margin: 0;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: bold;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -47,8 +66,9 @@ const textContentPStyle = css`
   display: -webkit-box;
   margin: 0;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: lighter;
+  text-align: left;
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -60,7 +80,7 @@ export default function ClubCard({
   description,
 }: ClubCardProps) {
   return (
-    <div css={container}>
+    <button css={container}>
       <img
         data-item="clubImage"
         css={clubImageStyle}
@@ -74,6 +94,6 @@ export default function ClubCard({
         <p css={textContentPStyle}>{description}</p>
       </div>
       <div></div>
-    </div>
+    </button>
   );
 }

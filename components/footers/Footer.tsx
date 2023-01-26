@@ -10,13 +10,13 @@ const footerStyle = css`
 const container = css`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 3.2rem;
 `;
 
 const organization = css`
   margin: 0;
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
+  margin-bottom: 3.2rem;
+  font-size: 2.4rem;
 
   & > span {
     display: inline-block;
@@ -26,21 +26,24 @@ const organization = css`
 const contents = css`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  gap: 3.2rem;
   max-width: 1000px;
 `;
 
 const copyright = css`
   margin: 0;
-  margin-top: 2rem;
-  font-size: 0.8rem;
+  margin-top: 3.2rem;
+  font-size: 1.3rem;
 `;
 
 const providerColumn = {
   title: "提供",
   links: [
-    { text: "あくあたん工房", href: "" },
-    { text: "企画部irodori", href: "" },
+    { text: "あくあたん工房", href: "https://www.aquatan.studio/" },
+    {
+      text: "企画部irodori",
+      href: "https://sites.google.com/view/kit-irodori/%E3%83%9B%E3%83%BC%E3%83%A0",
+    },
   ],
 };
 

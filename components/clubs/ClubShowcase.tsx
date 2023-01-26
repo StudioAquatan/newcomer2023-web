@@ -8,7 +8,8 @@ export type ClubShowcaseProps = {
 
 const base = css`
   display: grid;
-  gap: 1rem;
+  gap: 1.6rem;
+  margin: 1.6rem 0;
 `;
 
 export default function ClubShowcase({ clubs }: ClubShowcaseProps) {

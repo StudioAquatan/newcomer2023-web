@@ -12,18 +12,19 @@ const stampStyle = (backgroundColor: string) => css`
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 1rem;
   background: ${backgroundColor};
 `;
 
 const clubNameStyle = css`
   display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
   width: 100%;
   overflow: hidden;
+  font-size: 1.6rem;
   text-align: center;
   word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 `;
 
 const markVisitedStyle = (seed: number) => {

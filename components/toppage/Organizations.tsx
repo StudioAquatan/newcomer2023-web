@@ -6,28 +6,14 @@ const base = css`
 
 const contentPStyle = css`
   margin: 0;
-  font-size: 1rem;
+  font-size: calc(1.6rem + 1vw);
   color: #fff;
   text-align: center;
-
-  @media screen and (min-width: 280px) {
-    font-size: 1rem;
-  }
-  @media screen and (min-width: 480px) {
-    font-size: 1.5rem;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    font-size: 1.75rem;
-  }
-  @media screen and (min-width: 1024px) {
-    font-size: 2rem;
-  }
 `;
 
 const logoStyle = css`
-  height: 1.8rem;
-  margin-right: 0.2rem;
-  margin-left: 0.2rem;
+  height: calc(2rem + 1vw);
+  margin: 0 calc(0.4rem + 0.5vw);
   vertical-align: middle;
 `;
 

@@ -233,14 +233,14 @@ const clubs: ClubShowcaseProps = {
 };
 
 const featureDiagnose = {
-  title: "相性診断とは",
+  title: "相性診断",
   description:
     "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
   featureImagePath: "/toppage/diagnose.png",
 };
 
 const featureStampRally = {
-  title: "スタンプラリーとは",
+  title: "スタンプラリー",
   description: "QRコードを読み込んで、景品を貰いに行こう！",
   featureImagePath: "/toppage/stamp-rally.png",
   inverse: true,
@@ -249,19 +249,21 @@ const featureStampRally = {
 const container = css`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  margin-bottom: 4rem;
+  gap: 5.6rem;
+  margin-bottom: 5.6rem;
 `;
 
 export default function Home() {
   return (
-    <div css={container}>
+    <>
       <Hero />
-      <ClubShowcase {...clubs} />
-      <Feature {...featureDiagnose} />
-      <Feature {...featureStampRally} />
-      <EventGuidance />
-      <ClubList />
-    </div>
+      <div css={container}>
+        <ClubShowcase {...clubs} />
+        <Feature {...featureDiagnose} />
+        <Feature {...featureStampRally} />
+        <EventGuidance />
+        <ClubList />
+      </div>
+    </>
   );
 }

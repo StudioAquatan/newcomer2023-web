@@ -6,10 +6,10 @@ type ColumnProps = {
 };
 
 const titleStyle = css`
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.5rem;
   margin: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-size: 2rem;
   font-weight: bold;
   border-bottom: 1px solid #000;
 `;
@@ -21,9 +21,14 @@ const contents = css`
 
 const linkListStyle = css`
   padding: 0;
-  padding-left: 1rem;
+  padding-left: 1.6rem;
   margin: 0;
+  font-size: 1.6rem;
   list-style: none;
+`;
+
+const linkStyle = css`
+  margin-bottom: 1rem;
 `;
 
 export default function Column({ title, links }: ColumnProps) {
@@ -33,8 +38,10 @@ export default function Column({ title, links }: ColumnProps) {
       <div css={contents}>
         <ul css={linkListStyle}>
           {links.map((link, index) => (
-            <li key={index}>
-              <a href={link.href}>{link.text}</a>
+            <li key={index} css={linkStyle}>
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.text}
+              </a>
             </li>
           ))}
         </ul>
