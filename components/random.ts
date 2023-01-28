@@ -4,10 +4,11 @@ export default class Random {
   z: number;
   w: number;
   constructor(seed?: number) {
-    if (typeof seed === "undefined") {
+    const genSeed = () => {
       const now = new Date();
-      seed = now.getTime();
-    }
+      return now.getTime();
+    };
+    seed ??= genSeed();
     this.x = 123456789;
     this.y = 362436069;
     this.z = 521288629;
