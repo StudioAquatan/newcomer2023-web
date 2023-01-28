@@ -1,4 +1,6 @@
 import { css } from "@emotion/react";
+import { NextPageContext } from "next/types";
+import { getSelectorsByUserAgent } from "react-device-detect";
 import { ClubCardProps } from "../components/clubs/ClubCard";
 import ClubShowcase, {
   ClubShowcaseProps,
@@ -255,14 +257,16 @@ const container = css`
 
 type HomeProps = {
   showcase: ClubShowcaseProps;
+  isMobile: boolean;
 };
 
-export default function Home({ showcase }: HomeProps) {
+export default function Home({ showcase, isMobile }: HomeProps) {
   return (
     <>
       <Hero />
       <div css={container}>
         <ClubShowcase {...showcase} />
+        {isMobile ? <p>Access form Mobile</p> : ""}
         <Feature {...featureDiagnose} />
         <Feature {...featureStampRally} />
         <EventGuidance />
@@ -272,12 +276,16 @@ export default function Home({ showcase }: HomeProps) {
   );
 }
 
-export function getStaticProps() {
+export async function getServerSideProps({ req }: NextPageContext) {
+  const { isMobile } = getSelectorsByUserAgent(
+    req?.headers["user-agent"] ?? ""
+  );
   return {
     props: {
       showcase: {
         clubs: shuffle(clubs),
       },
+      isMobile,
     },
   };
 }
