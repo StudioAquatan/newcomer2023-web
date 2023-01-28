@@ -17,10 +17,8 @@ const organization = css`
   margin: 0;
   margin-bottom: 3.2rem;
   font-size: 2.4rem;
-
-  & > span {
-    display: inline-block;
-  }
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 `;
 
 const contents = css`
@@ -57,8 +55,9 @@ export default function Footer() {
     <footer css={footerStyle}>
       <div css={container}>
         <p css={organization}>
-          <span>京都工芸繊維大学</span>
-          <span>新入生歓迎企画運営委員会</span>
+          京都工芸繊維大学
+          <wbr />
+          新入生歓迎企画運営委員会
         </p>
         <div css={contents}>
           <OfficialAccounts />
