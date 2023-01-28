@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
+import { shuffle } from "../random";
 import ClubShowcase, { ClubShowcaseProps } from "./ClubShowcase";
 
 export default {
@@ -18,12 +19,8 @@ const Template: ComponentStory<typeof ClubShowcase> = (args) => (
   <ClubShowcase {...args} />
 );
 
-function shuffle({ clubs }: ClubShowcaseProps) {
-  return clubs.sort(() => Math.random() - 0.5);
-}
-
-const clubs: ClubShowcaseProps = {
-  clubs: [
+const showcase: ClubShowcaseProps = {
+  clubs: shuffle([
     {
       clubName: "アメリカ民謡研究会",
       description: "ここに説明が入る",
@@ -244,11 +241,7 @@ const clubs: ClubShowcaseProps = {
       clubName: "鳥人間サークル",
       description: "ここに説明が入る",
     },
-  ],
-};
-
-const showcase: ClubShowcaseProps = {
-  clubs: shuffle(clubs),
+  ]),
 };
 
 export const Default = Template.bind({});

@@ -25,3 +25,9 @@ export default class Random {
     return min + (r % (max + 1 - min));
   }
 }
+
+export function shuffle<T>(list: Array<T>) {
+  const now = new Date();
+  const random = new Random(now.getTime());
+  return list.sort(() => random.nextNumber(0, 1) - 0.5);
+}
