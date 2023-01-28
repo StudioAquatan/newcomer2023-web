@@ -7,6 +7,7 @@ import ClubShowcase, {
 } from "../components/clubs/ClubShowcase";
 import { shuffle } from "../components/random";
 import ClubList from "../components/toppage/ClubList";
+import EntryButton from "../components/toppage/EntryButton";
 import EventGuidance from "../components/toppage/EventGuidance";
 import Feature from "../components/toppage/Feature";
 import Hero from "../components/toppage/Hero";
@@ -266,7 +267,7 @@ export default function Home({ showcase, isMobile }: HomeProps) {
       <Hero />
       <div css={container}>
         <ClubShowcase {...showcase} />
-        {isMobile ? <p>Access form Mobile</p> : ""}
+        <EntryButton isMobile={isMobile} />
         <Feature {...featureDiagnose} />
         <Feature {...featureStampRally} />
         <EventGuidance />
