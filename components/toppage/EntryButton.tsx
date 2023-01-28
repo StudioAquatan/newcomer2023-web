@@ -44,7 +44,7 @@ const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {
 export default function EntryButton({ isMobile }: EntryButtonProps) {
   return (
     <div css={container}>
-      <ActivateButton isMobile={isMobile} />;
+      <ActivateButton isMobile={isMobile} />
     </div>
   );
 }
