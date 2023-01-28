@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof Feature> = (args) => (
 
 export const Diagnose = Template.bind({});
 Diagnose.args = {
-  title: "相性診断とは",
+  title: "相性診断",
   description:
     "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
   featureImagePath: "/toppage/diagnose.png",
@@ -25,7 +25,7 @@ Diagnose.args = {
 
 export const StampRally = Template.bind({});
 StampRally.args = {
-  title: "スタンプラリーとは",
+  title: "スタンプラリー",
   description: "QRコードを読み込んで、景品を貰いに行こう！",
   featureImagePath: "/toppage/stamp-rally.png",
   inverse: true,
