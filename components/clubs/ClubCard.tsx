@@ -97,7 +97,6 @@ export default function ClubCard({
         </div>
         <p css={textContentPStyle}>{description}</p>
       </div>
-      <div></div>
     </button>
   );
 }
