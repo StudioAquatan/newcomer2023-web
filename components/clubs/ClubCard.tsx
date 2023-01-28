@@ -33,6 +33,10 @@ const container = css`
   &:hover::before {
     width: 250%;
   }
+
+  &:active {
+    transform: scale(0.95);
+  }
 `;
 
 const clubImageStyle = css`
@@ -93,7 +97,6 @@ export default function ClubCard({
         </div>
         <p css={textContentPStyle}>{description}</p>
       </div>
-      <div></div>
     </button>
   );
 }
