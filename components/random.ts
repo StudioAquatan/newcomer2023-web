@@ -3,7 +3,11 @@ export default class Random {
   y: number;
   z: number;
   w: number;
-  constructor(seed = 88675123) {
+  constructor(seed?: number) {
+    if (typeof seed === "undefined") {
+      const now = new Date();
+      seed = now.getTime();
+    }
     this.x = 123456789;
     this.y = 362436069;
     this.z = 521288629;
@@ -26,8 +30,7 @@ export default class Random {
   }
 }
 
-export function shuffle<T>(list: Array<T>) {
-  const now = new Date();
-  const random = new Random(now.getTime());
+export function shuffle<T>(list: Array<T>, seed?: number) {
+  const random = new Random(seed);
   return list.sort(() => random.nextNumber(0, 1) - 0.5);
 }
