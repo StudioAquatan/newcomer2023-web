@@ -35,10 +35,8 @@ const featureTitleStyle = css`
   margin-bottom: 1.6rem;
   font-size: 4.8rem;
   font-weight: bold;
-
-  & > span {
-    display: inline-block;
-  }
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 
   @media screen and (max-width: 1080px) {
     font-size: 4rem;
@@ -75,8 +73,9 @@ export default function Feature({
     <div css={base(inverse)}>
       <div css={featureTextAreaStyle}>
         <p css={featureTitleStyle}>
-          <span>{title}</span>
-          <span>とは</span>
+          {title}
+          <wbr />
+          とは
         </p>
         <p css={featureDescriptionStyle}>{description}</p>
       </div>
