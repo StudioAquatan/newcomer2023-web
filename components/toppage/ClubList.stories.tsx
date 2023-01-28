@@ -6,12 +6,6 @@ import ClubList from "./ClubList";
 export default {
   title: "toppage/ClubList",
   component: ClubList,
-  parameters: {
-    backgrounds: {
-      default: "default",
-      values: [{ name: "default", value: "#AAA" }],
-    },
-  },
 } as ComponentMeta<typeof ClubList>;
 
 const Template: ComponentStory<typeof ClubList> = () => <ClubList />;
