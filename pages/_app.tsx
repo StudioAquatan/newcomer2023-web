@@ -10,6 +10,7 @@ import { globalStyles } from "../styles/globals";
 export default function App({ Component, pageProps }: AppProps) {
   const { setIsMobile } = useSetIsMobile();
 
+  // 初回だけUserAgentを取得して、状態を保存する
   useEffect(() => {
     const { isMobile } = getSelectorsByUserAgent(navigator.userAgent);
     setIsMobile({ isMobile: isMobile });
