@@ -11,9 +11,11 @@ const container = (theme: Theme) => css`
   align-items: center;
   justify-content: left;
   padding: 1.6rem;
+  margin: 0.8rem;
   overflow: hidden;
   background: transparent;
   background-color: ${theme.colors.clubCard.backgroundColor};
+  filter: drop-shadow(0 2px 2px rgb(0 0 0 / 50%));
   border: 1px solid ${theme.colors.clubCard.borderColor};
   border-radius: 1.6rem;
   backdrop-filter: blur(10px);
