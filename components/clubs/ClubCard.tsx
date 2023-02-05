@@ -11,6 +11,7 @@ const container = (theme: Theme) => css`
   align-items: center;
   justify-content: left;
   padding: 1.6rem;
+  margin: 0.8rem;
   overflow: hidden;
   background: transparent;
   background-color: ${theme.colors.clubCard.backgroundColor};
