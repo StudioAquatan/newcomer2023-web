@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 
 export type ClubCardProps = {
   clubName: string;
@@ -6,14 +6,15 @@ export type ClubCardProps = {
   description: string;
 };
 
-const container = css`
+const container = (theme: Theme) => css`
   display: flex;
   align-items: center;
   justify-content: left;
   padding: 1.6rem;
   overflow: hidden;
   background: transparent;
-  border: 1px solid #aaa;
+  background-color: ${theme.colors.clubCard.backgroundColor};
+  border: 1px solid ${theme.colors.clubCard.borderColor};
   border-radius: 1.6rem;
   backdrop-filter: blur(10px);
 
@@ -25,7 +26,7 @@ const container = css`
     width: 0;
     height: 100%;
     content: "";
-    background-color: #dfeddc;
+    background-color: ${theme.colors.clubCard.hover.backgroundColor};
     transition: width 1000ms;
     transform: skewX(45deg);
   }
@@ -57,21 +58,23 @@ const textContentStyle = css`
   justify-content: space-between;
 `;
 
-const textContentH1Style = css`
+const textContentH1Style = (theme: Theme) => css`
   margin: 0;
   overflow: hidden;
   font-size: 1.6rem;
   font-weight: bold;
+  color: ${theme.colors.clubCard.normalTextColor};
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
-const textContentPStyle = css`
+const textContentPStyle = (theme: Theme) => css`
   display: -webkit-box;
   margin: 0;
   overflow: hidden;
   font-size: 1.2rem;
   font-weight: lighter;
+  color: ${theme.colors.clubCard.normalTextColor};
   text-align: left;
   word-break: break-all;
   -webkit-box-orient: vertical;

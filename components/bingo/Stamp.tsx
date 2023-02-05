@@ -1,20 +1,26 @@
-import { css } from "@emotion/react";
+import { css, useTheme } from "@emotion/react";
 import Random from "../random";
 
 export type StampProps = {
   clubName: string;
-  backgroundColor: string;
+  backgroundColor?: string;
   visited?: boolean;
   seed?: number;
 };
 
-const stampStyle = (backgroundColor: string) => css`
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  background: ${backgroundColor};
-`;
+const stampStyle = ({ backgroundColor }: { backgroundColor: string }) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const theme = useTheme();
+
+  return css`
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    color: ${theme.colors.stamp.normalTextColor};
+    background: ${backgroundColor};
+  `;
+};
 
 const clubNameStyle = css`
   display: -webkit-box;
@@ -49,8 +55,13 @@ export default function Stamp({
   visited = false,
   seed = 0,
 }: StampProps) {
+  const theme = useTheme();
   return (
-    <div css={[stampStyle(backgroundColor)]}>
+    <div
+      css={stampStyle({
+        backgroundColor: backgroundColor ?? theme.colors.stamp.backgroundColor,
+      })}
+    >
       {visited ? (
         <img
           css={markVisitedStyle(seed)}

@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 import Column from "./Column";
 import OfficialAccounts from "./OfficialAccounts";
 
@@ -13,10 +13,11 @@ const container = css`
   padding: 3.2rem;
 `;
 
-const organization = css`
+const organization = (theme: Theme) => css`
   margin: 0;
   margin-bottom: 3.2rem;
   font-size: 2.4rem;
+  color: ${theme.colors.normalTextColor};
   word-break: keep-all;
   overflow-wrap: anywhere;
 `;
@@ -28,10 +29,11 @@ const contents = css`
   max-width: 1000px;
 `;
 
-const copyright = css`
+const copyright = (theme: Theme) => css`
   margin: 0;
   margin-top: 3.2rem;
   font-size: 1.3rem;
+  color: ${theme.colors.normalTextColor};
 `;
 
 const providerColumn = {

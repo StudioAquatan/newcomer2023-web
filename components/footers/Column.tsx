@@ -1,16 +1,17 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 
 type ColumnProps = {
   title: string;
   links: { text: string; href: string }[];
 };
 
-const titleStyle = css`
+const titleStyle = (theme: Theme) => css`
   padding-bottom: 0.5rem;
   margin: 0;
   margin-bottom: 0.8rem;
   font-size: 2rem;
   font-weight: bold;
+  color: ${theme.colors.normalTextColor};
   border-bottom: 1px solid #000;
 `;
 

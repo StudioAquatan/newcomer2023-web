@@ -1,5 +1,4 @@
-import { Global } from "@emotion/react";
-import { ThemeProvider } from "@emotion/react";
+import { Global, ThemeProvider } from "@emotion/react";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";

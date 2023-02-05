@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 import GlowingPinkButton from "../buttons/GlowingPinkButton";
 
 type EntryButtonProps = {
@@ -11,11 +11,11 @@ const container = css`
   align-items: center;
 `;
 
-const button = css`
+const disabledButton = (theme: Theme) => css`
   padding: 1.6rem 4rem;
   font-size: 2.5rem;
   text-decoration: none;
-  background-color: #aaa;
+  background-color: ${theme.colors.button.disable.backgroundColor};
   border: 0;
   border-radius: 4.8rem;
   box-shadow: rgb(0 0 0 / 5%) 0 0 1rem;
@@ -34,7 +34,7 @@ const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {
   } else {
     return (
       <>
-        <button css={button}>診断する</button>
+        <button css={disabledButton}>診断する</button>
         <p css={notice}>診断するにはスマートフォンからアクセスしてください。</p>
       </>
     );
