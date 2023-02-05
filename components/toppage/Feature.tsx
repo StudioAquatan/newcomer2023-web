@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 
 type FeatureProps = {
   title: string;
@@ -30,11 +30,12 @@ const featureTextAreaStyle = css`
   margin-bottom: 4.8rem;
 `;
 
-const featureTitleStyle = css`
+const featureTitleStyle = (theme: Theme) => css`
   margin: 0;
   margin-bottom: 1.6rem;
   font-size: 4.8rem;
   font-weight: bold;
+  color: ${theme.colors.normalTextColor};
   word-break: keep-all;
   overflow-wrap: anywhere;
 
@@ -44,9 +45,10 @@ const featureTitleStyle = css`
   }
 `;
 
-const featureDescriptionStyle = css`
+const featureDescriptionStyle = (theme: Theme) => css`
   margin: 0;
   font-size: 3.2rem;
+  color: ${theme.colors.normalTextColor};
 
   @media screen and (max-width: 1080px) {
     font-size: 2.8rem;

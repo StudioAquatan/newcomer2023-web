@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 
 const container = css`
   display: flex;
@@ -6,11 +6,12 @@ const container = css`
   align-items: center;
 `;
 
-const title = css`
+const title = (theme: Theme) => css`
   margin: 0;
   margin-bottom: 1.6rem;
   font-size: 4.8rem;
   font-weight: bold;
+  color: ${theme.colors.normalTextColor};
 
   @media screen and (max-width: 1080px) {
     font-size: 4rem;
@@ -23,9 +24,10 @@ const contents = css`
   align-items: center;
 `;
 
-const contentPStyle = css`
+const contentPStyle = (theme: Theme) => css`
   margin: 0;
   font-size: 3.2rem;
+  color: ${theme.colors.normalTextColor};
 
   @media screen and (max-width: 1080px) {
     font-size: 2.8rem;

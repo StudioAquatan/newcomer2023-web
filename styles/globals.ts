@@ -1,6 +1,6 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 
-export const globalStyles = css`
+export const globalStyles = (theme: Theme) => css`
   html,
   body {
     padding: 0;
@@ -8,6 +8,6 @@ export const globalStyles = css`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 62.5%;
-    background-color: #f7fff5;
+    background-color: ${theme.colors.backgroundColor};
   }
 `;

@@ -1,4 +1,4 @@
-import { Global } from "@emotion/react";
+import { Global, ThemeProvider } from "@emotion/react";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
@@ -6,6 +6,7 @@ import { getSelectorsByUserAgent } from "react-device-detect";
 import Layout from "../components/Layout";
 import { useSetIsMobile } from "../store/userAgent";
 import { globalStyles } from "../styles/globals";
+import { sakura } from "../themes/sakura";
 
 export default function App({ Component, pageProps }: AppProps) {
   const { setIsMobile } = useSetIsMobile();
@@ -17,9 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Layout>
-      <Global styles={globalStyles} />
-      <Component {...pageProps} />
-    </Layout>
+    <ThemeProvider theme={sakura}>
+      <Layout>
+        <Global styles={globalStyles} />
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   );
 }
