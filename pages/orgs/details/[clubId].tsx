@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import ClubDetails, {
   ClubDetailsProps,
   Organization,
-} from "../../components/clubs/ClubDetails";
+} from "../../../components/clubs/ClubDetails";
 
 const allClubs: Array<Organization> = [
   {
