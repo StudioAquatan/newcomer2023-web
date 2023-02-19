@@ -9,6 +9,8 @@ export type ClubCardProps = {
 };
 
 const buttonStyle = css`
+  padding: 0;
+  margin: 0;
   background: transparent;
   border: 0;
 `;
