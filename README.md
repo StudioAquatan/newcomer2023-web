@@ -2,6 +2,8 @@
 
 新歓 2023 企画のフロントエンド
 
+バックエンド実装：https://github.com/StudioAquatan/newcomer2023-api
+
 ## Requirements
 
 開発環境には以下のものを利用しています。
@@ -12,6 +14,10 @@
 - Next.js
 - Emotion
 - Storybook
+
+## API 定義
+
+https://head.aquatan-newcomer2023-apidocs.pages.dev/#/
 
 ## npm scripts
 
