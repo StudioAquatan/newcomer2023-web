@@ -8,6 +8,10 @@ export type ClubCardProps = {
   link: string;
 };
 
+const linkStyle = css`
+  text-decoration: none;
+`;
+
 const container = (theme: Theme) => css`
   display: flex;
   align-items: center;
@@ -15,6 +19,7 @@ const container = (theme: Theme) => css`
   padding: 1.6rem;
   margin: 0.8rem;
   overflow: hidden;
+  text-decoration: none;
   background: transparent;
   background-color: ${theme.colors.clubCard.backgroundColor};
   filter: drop-shadow(0 2px 2px rgb(0 0 0 / 50%));
@@ -92,7 +97,7 @@ export default function ClubCard({
   link,
 }: ClubCardProps) {
   return (
-    <Link href={link}>
+    <Link href={link} css={linkStyle}>
       <button css={container}>
         <img
           data-item="clubImage"
