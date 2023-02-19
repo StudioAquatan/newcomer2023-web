@@ -59,7 +59,9 @@ export default function Footer() {
         <p css={organization}>
           京都工芸繊維大学
           <wbr />
-          新入生歓迎企画運営委員会
+          新入生歓迎企画運営
+          <wbr />
+          委員会
         </p>
         <div css={contents}>
           <OfficialAccounts />
