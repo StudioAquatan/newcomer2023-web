@@ -1,9 +1,11 @@
 import { css, Theme } from "@emotion/react";
+import Link from "next/link";
 
 export type ClubCardProps = {
   clubName: string;
   clubImagePath?: string;
   description: string;
+  link: string;
 };
 
 const container = (theme: Theme) => css`
@@ -87,21 +89,24 @@ export default function ClubCard({
   clubName,
   clubImagePath = "default.png",
   description,
+  link,
 }: ClubCardProps) {
   return (
-    <button css={container}>
-      <img
-        data-item="clubImage"
-        css={clubImageStyle}
-        src={"/club_icons/" + clubImagePath}
-        alt="Studio Aquatan"
-      ></img>
-      <div css={textBoxStyle}>
-        <div css={textContentStyle}>
-          <p css={textContentH1Style}>{clubName}</p>
+    <Link href={link}>
+      <button css={container}>
+        <img
+          data-item="clubImage"
+          css={clubImageStyle}
+          src={"/club_icons/" + clubImagePath}
+          alt="Studio Aquatan"
+        ></img>
+        <div css={textBoxStyle}>
+          <div css={textContentStyle}>
+            <p css={textContentH1Style}>{clubName}</p>
+          </div>
+          <p css={textContentPStyle}>{description}</p>
         </div>
-        <p css={textContentPStyle}>{description}</p>
-      </div>
-    </button>
+      </button>
+    </Link>
   );
 }

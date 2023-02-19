@@ -21,11 +21,13 @@ const Template: ComponentStory<typeof ClubRow> = (args) => (
 const studioaquatan = {
   clubName: "StudioAquatan",
   description: "Make Aquatan Great Again",
+  link: "/",
 };
 
 const tooLongName = {
   clubName: "ToooooooooooLongClubName",
   description: "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
+  link: "/",
 };
 
 const cards = (inverse: boolean) => {
