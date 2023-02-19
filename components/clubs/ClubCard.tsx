@@ -1,10 +1,19 @@
 import { css, Theme } from "@emotion/react";
+import Link from "next/link";
 
 export type ClubCardProps = {
   clubName: string;
   clubImagePath?: string;
   description: string;
+  link: string;
 };
+
+const buttonStyle = css`
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+`;
 
 const container = (theme: Theme) => css`
   display: flex;
@@ -13,7 +22,7 @@ const container = (theme: Theme) => css`
   padding: 1.6rem;
   margin: 0.8rem;
   overflow: hidden;
-  background: transparent;
+  text-decoration: none;
   background-color: ${theme.colors.clubCard.backgroundColor};
   filter: drop-shadow(0 2px 2px rgb(0 0 0 / 50%));
   border: 1px solid ${theme.colors.clubCard.borderColor};
@@ -87,21 +96,26 @@ export default function ClubCard({
   clubName,
   clubImagePath = "default.png",
   description,
+  link,
 }: ClubCardProps) {
   return (
-    <button css={container}>
-      <img
-        data-item="clubImage"
-        css={clubImageStyle}
-        src={"/club_icons/" + clubImagePath}
-        alt="Studio Aquatan"
-      ></img>
-      <div css={textBoxStyle}>
-        <div css={textContentStyle}>
-          <p css={textContentH1Style}>{clubName}</p>
+    <Link href={link}>
+      <button css={buttonStyle}>
+        <div css={container}>
+          <img
+            data-item="clubImage"
+            css={clubImageStyle}
+            src={"/club_icons/" + clubImagePath}
+            alt="Studio Aquatan"
+          ></img>
+          <div css={textBoxStyle}>
+            <div css={textContentStyle}>
+              <p css={textContentH1Style}>{clubName}</p>
+            </div>
+            <p css={textContentPStyle}>{description}</p>
+          </div>
         </div>
-        <p css={textContentPStyle}>{description}</p>
-      </div>
-    </button>
+      </button>
+    </Link>
   );
 }

@@ -17,6 +17,7 @@ Default.args = {
   clubName: "Default Club Name",
   clubImagePath: "default.png",
   description: "Default Description",
+  link: "/",
 };
 
 export const StudioAquatan = Template.bind({});
@@ -24,10 +25,12 @@ StudioAquatan.args = {
   clubName: "StudioAquatan",
   clubImagePath: "studioaquatan.png",
   description: "Make Aquatan Great Again",
+  link: "/",
 };
 
 export const LongClubName = Template.bind({});
 LongClubName.args = {
   clubName: "ToooooooooooLongClubName",
   description: "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
+  link: "/",
 };
