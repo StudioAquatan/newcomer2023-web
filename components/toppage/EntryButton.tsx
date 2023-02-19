@@ -23,9 +23,11 @@ const disabledButton = (theme: Theme) => css`
 
 const notice = css`
   padding: 0;
+  padding: 0 3.2rem;
   margin: 0;
   margin-top: 1.6rem;
   font-size: 1.6rem;
+  text-align: center;
 `;
 
 const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {

@@ -16,7 +16,7 @@ const base = (inverse: boolean) => css`
   flex-wrap: wrap;
   column-gap: 8rem;
   justify-content: center;
-  margin: 1.6rem;
+  padding: 0 3.2rem;
   ${inverse ? baseInverse : ""}
 `;
 
