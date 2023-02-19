@@ -4,7 +4,7 @@ import React from "react";
 import ClubDetails from "./ClubDetails";
 
 export default {
-  title: "ClubDetails/ClubDetails",
+  title: "Clubs/ClubDetails",
   component: ClubDetails,
   parameters: {
     layout: "fullscreen",
