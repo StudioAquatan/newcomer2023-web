@@ -10,4 +10,15 @@ export const globalStyles = (theme: Theme) => css`
     font-size: 62.5%;
     background-color: ${theme.colors.backgroundColor};
   }
+
+  main {
+    flex-grow: 1;
+    min-height: 100vh;
+  }
+  /* stylelint-disable selector-id-pattern */
+  #__next {
+    display: flex;
+    flex-direction: column;
+  }
+  /* stylelint-enable selector-id-pattern */
 `;
