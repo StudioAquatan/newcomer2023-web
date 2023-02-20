@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import Stamp from "./Stamp";
 import { StampProps } from "./Stamp";
 
-export type CardProps = {
+export type StampCardProps = {
   userId: number;
   stamps: StampProps[];
 };
@@ -18,7 +18,7 @@ const container = () => {
   `;
 };
 
-export default function Card({ userId, stamps }: CardProps) {
+export default function Card({ userId, stamps }: StampCardProps) {
   return (
     <div css={container}>
       {stamps.map((stamp, index) => {

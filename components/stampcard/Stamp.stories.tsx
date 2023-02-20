@@ -4,7 +4,7 @@ import React from "react";
 import Stamp from "./Stamp";
 
 export default {
-  title: "Bingo/Stamp",
+  title: "StampCard/Stamp",
   component: Stamp,
   argTypes: {
     backgroundColor: { control: "color" },

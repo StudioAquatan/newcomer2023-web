@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import Card from "./Card";
-import { CardProps } from "./Card";
+import Card from "./StampCard";
+import { StampCardProps } from "./StampCard";
 
 export default {
-  title: "Bingo/Card",
+  title: "StampCard/StampCard",
   component: Card,
   parameters: {
     layout: "fullscreen",
@@ -17,7 +17,7 @@ export default {
 
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
-const card: CardProps = {
+const card: StampCardProps = {
   userId: 0,
   stamps: [
     {
@@ -62,7 +62,7 @@ const card: CardProps = {
   ],
 };
 
-const longClub: CardProps = {
+const longClub: StampCardProps = {
   userId: 0,
   stamps: [
     {
