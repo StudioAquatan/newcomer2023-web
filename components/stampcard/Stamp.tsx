@@ -2,7 +2,7 @@ import { css, useTheme } from "@emotion/react";
 import Random from "../random";
 
 export type StampProps = {
-  clubName: string;
+  orgName: string;
   backgroundColor?: string;
   visited?: boolean;
   seed?: number;
@@ -22,7 +22,7 @@ const stampStyle = ({ backgroundColor }: { backgroundColor: string }) => {
   `;
 };
 
-const clubNameStyle = css`
+const orgNameStyle = css`
   display: -webkit-box;
   width: 100%;
   overflow: hidden;
@@ -50,7 +50,7 @@ const markVisitedStyle = (seed: number) => {
 };
 
 export default function Stamp({
-  clubName,
+  orgName,
   backgroundColor,
   visited = false,
   seed = 0,
@@ -71,7 +71,7 @@ export default function Stamp({
       ) : (
         ""
       )}
-      <div css={clubNameStyle}>{clubName}</div>
+      <div css={orgNameStyle}>{orgName}</div>
     </div>
   );
 }

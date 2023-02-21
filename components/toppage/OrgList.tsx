@@ -19,7 +19,7 @@ const title = (theme: Theme) => css`
   }
 `;
 
-export default function ClubList() {
+export default function OrgList() {
   return (
     <div css={container}>
       <p css={title}>部活動一覧</p>

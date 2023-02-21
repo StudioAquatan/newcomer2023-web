@@ -1,13 +1,11 @@
 import { css } from "@emotion/react";
-import ClubShowcase, {
-  ClubShowcaseProps,
-} from "../components/clubs/ClubShowcase";
+import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
 import { shuffle } from "../components/random";
-import ClubList from "../components/toppage/ClubList";
 import EntryButton from "../components/toppage/EntryButton";
 import EventGuidance from "../components/toppage/EventGuidance";
 import Feature from "../components/toppage/Feature";
 import Hero from "../components/toppage/Hero";
+import OrgList from "../components/toppage/OrgList";
 import { useIsMobile } from "../store/userAgent";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4010";
@@ -35,7 +33,7 @@ const container = css`
 `;
 
 type HomeProps = {
-  showcase: ClubShowcaseProps;
+  showcase: OrgShowcaseProps;
 };
 
 export default function Home({ showcase }: HomeProps) {
@@ -45,12 +43,12 @@ export default function Home({ showcase }: HomeProps) {
     <>
       <Hero />
       <div css={container}>
-        <ClubShowcase {...showcase} />
+        <OrgShowcase {...showcase} />
         <EntryButton isMobile={isMobile} />
         <Feature {...featureDiagnose} />
         <Feature {...featureStampRally} />
         <EventGuidance />
-        <ClubList />
+        <OrgList />
       </div>
     </>
   );
@@ -60,16 +58,16 @@ export async function getServerSideProps() {
   const response = await fetch(API_URL + "/orgs");
   const data = await response.json();
 
-  const clubs = data.map((club: any) => ({
-    clubName: club.fullName,
-    description: club.shortDescription,
+  const orgs = data.map((org: any) => ({
+    orgName: org.fullName,
+    description: org.shortDescription,
     link: "/orgs/details/0",
   }));
 
   return {
     props: {
       showcase: {
-        clubs: shuffle(clubs),
+        orgs: shuffle(orgs),
       },
     },
   };

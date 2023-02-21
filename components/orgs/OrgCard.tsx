@@ -1,9 +1,9 @@
 import { css, Theme } from "@emotion/react";
 import Link from "next/link";
 
-export type ClubCardProps = {
-  clubName: string;
-  clubImagePath?: string;
+export type OrgCardProps = {
+  orgName: string;
+  orgImagePath?: string;
   description: string;
   link: string;
 };
@@ -23,9 +23,9 @@ const container = (theme: Theme) => css`
   margin: 0.8rem;
   overflow: hidden;
   text-decoration: none;
-  background-color: ${theme.colors.clubCard.backgroundColor};
+  background-color: ${theme.colors.orgCard.backgroundColor};
   filter: drop-shadow(0 2px 2px rgb(0 0 0 / 50%));
-  border: 1px solid ${theme.colors.clubCard.borderColor};
+  border: 1px solid ${theme.colors.orgCard.borderColor};
   border-radius: 1.6rem;
   backdrop-filter: blur(10px);
 
@@ -37,7 +37,7 @@ const container = (theme: Theme) => css`
     width: 0;
     height: 100%;
     content: "";
-    background-color: ${theme.colors.clubCard.hover.backgroundColor};
+    background-color: ${theme.colors.orgCard.hover.backgroundColor};
     transition: width 1000ms;
     transform: skewX(45deg);
   }
@@ -51,7 +51,7 @@ const container = (theme: Theme) => css`
   }
 `;
 
-const clubImageStyle = css`
+const orgImageStyle = css`
   width: 4.8rem;
   height: 4.8rem;
   background-color: #eee;
@@ -74,7 +74,7 @@ const textContentH1Style = (theme: Theme) => css`
   overflow: hidden;
   font-size: 1.6rem;
   font-weight: bold;
-  color: ${theme.colors.clubCard.normalTextColor};
+  color: ${theme.colors.orgCard.normalTextColor};
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
@@ -85,32 +85,32 @@ const textContentPStyle = (theme: Theme) => css`
   overflow: hidden;
   font-size: 1.2rem;
   font-weight: lighter;
-  color: ${theme.colors.clubCard.normalTextColor};
+  color: ${theme.colors.orgCard.normalTextColor};
   text-align: left;
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 `;
 
-export default function ClubCard({
-  clubName,
-  clubImagePath = "default.png",
+export default function OrgCard({
+  orgName,
+  orgImagePath = "default.png",
   description,
   link,
-}: ClubCardProps) {
+}: OrgCardProps) {
   return (
     <Link href={link}>
       <button css={buttonStyle}>
         <div css={container}>
           <img
-            data-item="clubImage"
-            css={clubImageStyle}
-            src={"/club_icons/" + clubImagePath}
+            data-item="orgImage"
+            css={orgImageStyle}
+            src={"/org_icons/" + orgImagePath}
             alt="Studio Aquatan"
           ></img>
           <div css={textBoxStyle}>
             <div css={textContentStyle}>
-              <p css={textContentH1Style}>{clubName}</p>
+              <p css={textContentH1Style}>{orgName}</p>
             </div>
             <p css={textContentPStyle}>{description}</p>
           </div>

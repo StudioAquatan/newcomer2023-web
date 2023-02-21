@@ -1,36 +1,34 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import ClubRow, { ClubRowProps } from "./ClubRow";
+import OrgRow, { OrgRowProps } from "./OrgRow";
 
 export default {
-  title: "Clubs/ClubRow",
-  component: ClubRow,
+  title: "Orgs/OrgRow",
+  component: OrgRow,
   argTypes: {
-    cards: { control: "object" },
+    orgs: { control: "object" },
   },
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof ClubRow>;
+} as ComponentMeta<typeof OrgRow>;
 
-const Template: ComponentStory<typeof ClubRow> = (args) => (
-  <ClubRow {...args} />
-);
+const Template: ComponentStory<typeof OrgRow> = (args) => <OrgRow {...args} />;
 
 const studioaquatan = {
-  clubName: "StudioAquatan",
+  orgName: "StudioAquatan",
   description: "Make Aquatan Great Again",
   link: "/",
 };
 
 const tooLongName = {
-  clubName: "ToooooooooooLongClubName",
+  orgName: "ToooooooooooLongOrgName",
   description: "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
   link: "/",
 };
 
-const cards = (inverse: boolean) => {
+const orgs = (inverse: boolean) => {
   return {
     cards: [
       studioaquatan,
@@ -46,7 +44,7 @@ const cards = (inverse: boolean) => {
   };
 };
 
-const longNameClubs: ClubRowProps = {
+const longNameOrgs: OrgRowProps = {
   cards: [
     tooLongName,
     tooLongName,
@@ -60,7 +58,7 @@ const longNameClubs: ClubRowProps = {
   inverse: false,
 };
 
-const mixed: ClubRowProps = {
+const mixed: OrgRowProps = {
   cards: [
     tooLongName,
     studioaquatan,
@@ -75,13 +73,13 @@ const mixed: ClubRowProps = {
 };
 
 export const Default = Template.bind({});
-Default.args = cards(false);
+Default.args = orgs(false);
 
 export const Inverse = Template.bind({});
-Inverse.args = cards(true);
+Inverse.args = orgs(true);
 
-export const LongClubName = Template.bind({});
-LongClubName.args = longNameClubs;
+export const LongOrgName = Template.bind({});
+LongOrgName.args = longNameOrgs;
 
 export const Mixed = Template.bind({});
 Mixed.args = mixed;

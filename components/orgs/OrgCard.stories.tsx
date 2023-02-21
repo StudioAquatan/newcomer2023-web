@@ -1,36 +1,36 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import ClubCard from "./ClubCard";
+import OrgCard from "./OrgCard";
 
 export default {
-  title: "Clubs/ClubCard",
-  component: ClubCard,
-} as ComponentMeta<typeof ClubCard>;
+  title: "Orgs/OrgCard",
+  component: OrgCard,
+} as ComponentMeta<typeof OrgCard>;
 
-const Template: ComponentStory<typeof ClubCard> = (args) => (
-  <ClubCard {...args} />
+const Template: ComponentStory<typeof OrgCard> = (args) => (
+  <OrgCard {...args} />
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  clubName: "Default Club Name",
-  clubImagePath: "default.png",
+  orgName: "Default Org Name",
+  orgImagePath: "default.png",
   description: "Default Description",
   link: "/",
 };
 
 export const StudioAquatan = Template.bind({});
 StudioAquatan.args = {
-  clubName: "StudioAquatan",
-  clubImagePath: "studioaquatan.png",
+  orgName: "StudioAquatan",
+  orgImagePath: "studioaquatan.png",
   description: "Make Aquatan Great Again",
   link: "/",
 };
 
-export const LongClubName = Template.bind({});
-LongClubName.args = {
-  clubName: "ToooooooooooLongClubName",
+export const LongOrgName = Template.bind({});
+LongOrgName.args = {
+  orgName: "ToooooooooooLongOrgName",
   description: "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
   link: "/",
 };

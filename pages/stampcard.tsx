@@ -8,41 +8,41 @@ const card: StampCardProps = {
   userId: 0,
   stamps: [
     {
-      clubName: "Club 1",
+      orgName: "Org 1",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "Club 2",
+      orgName: "Org 2",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "Club 3",
+      orgName: "Org 3",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "Club 4",
+      orgName: "Org 4",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "Club 5",
+      orgName: "Org 5",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "Club 6",
+      orgName: "Org 6",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "Club 7",
+      orgName: "Org 7",
       backgroundColor: "#00FF00",
       visited: true,
     },
     {
-      clubName: "Club 8",
+      orgName: "Org 8",
       backgroundColor: "#FF0000",
       visited: true,
     },
     {
-      clubName: "Club 9",
+      orgName: "Org 9",
       backgroundColor: "#00FF00",
       visited: true,
     },
@@ -96,7 +96,7 @@ const stampCardBottom = css`
   margin: 0 3.2rem;
 `;
 
-const otherClubs = css`
+const otherOrgs = css`
   padding: 0;
   margin: 0;
   font-size: 2rem;
@@ -115,7 +115,7 @@ export default function StampCardPage(props: StampCardPageProps) {
       </div>
       <div css={stampCardBottom}>
         <GlowingPinkButton text="シェアしてみよう!" href="/" />
-        <p css={otherClubs}>
+        <p css={otherOrgs}>
           他の部活を見る
           <br />
           <FontAwesomeIcon icon={faChevronDown} />

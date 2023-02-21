@@ -22,8 +22,8 @@ export type Organization = {
   links?: Array<string>;
 };
 
-export type ClubDetailsProps = {
-  club: Organization;
+export type OrgDetailsProps = {
+  org: Organization;
 };
 
 const container = css`
@@ -90,26 +90,26 @@ function ItemLinks({ links }: { links: Array<string> }) {
   );
 }
 
-export default function ClubDetails({ club }: ClubDetailsProps) {
+export default function OrgDetails({ org }: OrgDetailsProps) {
   return (
     <div css={container}>
       <div css={logoContainer}>
-        <img src={club.logo?.src} alt={club.shortName} css={logo} />
+        <img src={org.logo?.src} alt={org.shortName} css={logo} />
       </div>
-      <Item title={club.fullName} value={club.description} />
+      <Item title={org.fullName} value={org.description} />
       <Item
         title="活動場所"
-        value={club.location ?? club.fullName + "に問い合わせてください"}
+        value={org.location ?? org.fullName + "に問い合わせてください"}
       />
       <Item
         title="部費/サークル費"
-        value={club.fees ?? club.fullName + "に問い合わせてください"}
+        value={org.fees ?? org.fullName + "に問い合わせてください"}
       />
       <Item
         title="活動日"
-        value={club.activeDays ?? club.fullName + "に問い合わせてください"}
+        value={org.activeDays ?? org.fullName + "に問い合わせてください"}
       />
-      <ItemLinks links={club.links ?? []} />
+      <ItemLinks links={org.links ?? []} />
     </div>
   );
 }

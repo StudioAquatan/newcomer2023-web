@@ -1,17 +1,17 @@
 import { css } from "@emotion/react";
-import ClubDetails, {
-  ClubDetailsProps,
+import OrgDetails, {
+  OrgDetailsProps,
   Organization,
-} from "../../../components/clubs/ClubDetails";
+} from "../../../components/orgs/OrgDetails";
 
-const allClubs: Array<Organization> = [
+const allOrgs: Array<Organization> = [
   {
     id: "0",
-    fullName: "Club 1",
+    fullName: "Org 1",
     shortName: "C1",
     shortDescription: "Short description",
     logo: {
-      src: "/club_icons/default.png",
+      src: "/org_icons/default.png",
       width: 150,
       height: 150,
     },
@@ -24,16 +24,16 @@ const allClubs: Array<Organization> = [
 ];
 
 // TODO: キャッシュで持たせて、アプリ全体で共有したい
-const allClubsCache = new Map(allClubs.map((club) => [club.id, club]));
+const allOrgsCache = new Map(allOrgs.map((org) => [org.id, org]));
 
 const base = css`
   padding: 0 3.2rem;
 `;
 
-export default function ClubDetail({ club }: ClubDetailsProps) {
+export default function OrgDetail({ org }: OrgDetailsProps) {
   return (
     <div css={base}>
-      <ClubDetails club={club} />
+      <OrgDetails org={org} />
     </div>
   );
 }
@@ -41,11 +41,11 @@ export default function ClubDetail({ club }: ClubDetailsProps) {
 export async function getServerSideProps({
   params,
 }: {
-  params: { clubId: string };
+  params: { orgId: string };
 }) {
-  const { clubId } = params;
+  const { orgId } = params;
 
-  if (!allClubsCache.has(clubId)) {
+  if (!allOrgsCache.has(orgId)) {
     return {
       notFound: true,
     };
@@ -53,7 +53,7 @@ export async function getServerSideProps({
 
   return {
     props: {
-      club: allClubsCache.get(clubId),
+      org: allOrgsCache.get(orgId),
     },
   };
 }

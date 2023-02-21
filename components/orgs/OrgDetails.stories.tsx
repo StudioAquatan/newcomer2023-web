@@ -1,29 +1,29 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import ClubDetails from "./ClubDetails";
+import OrgDetails from "./OrgDetails";
 
 export default {
-  title: "Clubs/ClubDetails",
-  component: ClubDetails,
+  title: "Orgs/OrgDetails",
+  component: OrgDetails,
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof ClubDetails>;
+} as ComponentMeta<typeof OrgDetails>;
 
-const Template: ComponentStory<typeof ClubDetails> = (args) => (
-  <ClubDetails {...args} />
+const Template: ComponentStory<typeof OrgDetails> = (args) => (
+  <OrgDetails {...args} />
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  club: {
+  org: {
     id: "0",
     fullName: "Studio Aquatan",
     shortName: "StudioAquatan",
     shortDescription: "あくあたん工房です",
     logo: {
-      src: "/club_icons/studioaquatan.png",
+      src: "/org_icons/studioaquatan.png",
       width: 150,
       height: 150,
     },
