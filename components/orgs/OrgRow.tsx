@@ -1,9 +1,9 @@
 import { css, keyframes } from "@emotion/react";
-import ClubCard from "./ClubCard";
-import { ClubCardProps } from "./ClubCard";
+import OrgCard from "./OrgCard";
+import { OrgCardProps } from "./OrgCard";
 
-export type ClubRowProps = {
-  cards: ClubCardProps[];
+export type OrgRowProps = {
+  cards: OrgCardProps[];
   inverse: boolean;
 };
 
@@ -49,17 +49,17 @@ const rowAnimation = (inverse: boolean) => {
   `;
 };
 
-export default function ClubRow({ cards, inverse }: ClubRowProps) {
+export default function OrgRow({ cards, inverse }: OrgRowProps) {
   return (
     <div css={base}>
       <div css={[rowStyle, rowAnimation(inverse)]}>
         {cards.map((card, index) => {
-          return <ClubCard key={index} {...card} />;
+          return <OrgCard key={index} {...card} />;
         })}
       </div>
       <div css={[rowStyle, rowAnimation(inverse)]}>
         {cards.map((card, index) => {
-          return <ClubCard key={index} {...card} />;
+          return <OrgCard key={index} {...card} />;
         })}
       </div>
     </div>

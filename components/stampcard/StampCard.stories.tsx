@@ -21,86 +21,86 @@ const card: StampCardProps = {
   userId: 0,
   stamps: [
     {
-      clubName: "Club 1",
+      orgName: "Org 1",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "Club 2",
+      orgName: "Org 2",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "Club 3",
+      orgName: "Org 3",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "Club 4",
+      orgName: "Org 4",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "Club 5",
+      orgName: "Org 5",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "Club 6",
+      orgName: "Org 6",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "Club 7",
+      orgName: "Org 7",
       backgroundColor: "#00FF00",
       visited: true,
     },
     {
-      clubName: "Club 8",
+      orgName: "Org 8",
       backgroundColor: "#FF0000",
       visited: true,
     },
     {
-      clubName: "Club 9",
+      orgName: "Org 9",
       backgroundColor: "#00FF00",
       visited: true,
     },
   ],
 };
 
-const longClub: StampCardProps = {
+const longOrg: StampCardProps = {
   userId: 0,
   stamps: [
     {
-      clubName: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      orgName: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      orgName: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      orgName: "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      orgName: "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      orgName: "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
       backgroundColor: "#00FF00",
     },
     {
-      clubName: "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      orgName: "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
       backgroundColor: "#FF0000",
     },
     {
-      clubName: "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+      orgName: "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
       backgroundColor: "#00FF00",
       visited: true,
     },
     {
-      clubName: "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+      orgName: "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
       backgroundColor: "#FF0000",
       visited: true,
     },
     {
-      clubName: "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+      orgName: "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
       backgroundColor: "#00FF00",
       visited: true,
     },
@@ -110,5 +110,5 @@ const longClub: StampCardProps = {
 export const Default = Template.bind({});
 Default.args = card;
 
-export const LongClubName = Template.bind({});
-LongClubName.args = longClub;
+export const LongOrgName = Template.bind({});
+LongOrgName.args = longOrg;

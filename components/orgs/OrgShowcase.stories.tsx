@@ -2,298 +2,298 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
 import { shuffle } from "../random";
-import ClubShowcase, { ClubShowcaseProps } from "./ClubShowcase";
+import OrgShowcase, { OrgShowcaseProps } from "./OrgShowcase";
 
 export default {
-  title: "Clubs/ClubShowcase",
-  component: ClubShowcase,
+  title: "Orgs/OrgShowcase",
+  component: OrgShowcase,
   argTypes: {
-    cards: { control: "object" },
+    orgs: { control: "object" },
   },
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof ClubShowcase>;
+} as ComponentMeta<typeof OrgShowcase>;
 
-const Template: ComponentStory<typeof ClubShowcase> = (args) => (
-  <ClubShowcase {...args} />
+const Template: ComponentStory<typeof OrgShowcase> = (args) => (
+  <OrgShowcase {...args} />
 );
 
-const showcase: ClubShowcaseProps = {
-  clubs: shuffle(
+const showcase: OrgShowcaseProps = {
+  orgs: shuffle(
     [
       {
-        clubName: "アメリカ民謡研究会",
+        orgName: "アメリカ民謡研究会",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "奇術部",
+        orgName: "奇術部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "ギター部",
+        orgName: "ギター部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "軽音楽部",
+        orgName: "軽音楽部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "交響楽団",
+        orgName: "交響楽団",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "古美術研究会",
+        orgName: "古美術研究会",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "コンピュータ部",
+        orgName: "コンピュータ部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "茶道部",
+        orgName: "茶道部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "自然愛好会",
+        orgName: "自然愛好会",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "室内管弦楽団",
+        orgName: "室内管弦楽団",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "写真研究部",
+        orgName: "写真研究部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "美術部",
+        orgName: "美術部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "漫画研究部",
+        orgName: "漫画研究部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "テーブルトーク部",
+        orgName: "テーブルトーク部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "文藝部",
+        orgName: "文藝部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "アニメーション研究会",
+        orgName: "アニメーション研究会",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "音楽サークルRaccoon",
+        orgName: "音楽サークルRaccoon",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "ダンスサークル",
+        orgName: "ダンスサークル",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "映像研究会オリヲン座",
+        orgName: "映像研究会オリヲン座",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "謎解き研究部 Xcape",
+        orgName: "謎解き研究部 Xcape",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "e-sports部",
+        orgName: "e-sports部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "アメリカンフットボール部",
+        orgName: "アメリカンフットボール部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "弓道部",
+        orgName: "弓道部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "剣道部",
+        orgName: "剣道部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "硬式テニス部",
+        orgName: "硬式テニス部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "硬式野球部",
+        orgName: "硬式野球部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "サッカー部",
+        orgName: "サッカー部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "自動車部",
+        orgName: "自動車部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "水泳部",
+        orgName: "水泳部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "ソフトテニス部",
+        orgName: "ソフトテニス部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "卓球部",
+        orgName: "卓球部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "バスケットボール部",
+        orgName: "バスケットボール部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "男子バレーボール部",
+        orgName: "男子バレーボール部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "男子ラクロス部",
+        orgName: "男子ラクロス部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "女子ラクロス部",
+        orgName: "女子ラクロス部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "軟式野球部",
+        orgName: "軟式野球部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "バドミントン部",
+        orgName: "バドミントン部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "ハンドボール部",
+        orgName: "ハンドボール部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "ラグビー部",
+        orgName: "ラグビー部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "陸上競技部",
+        orgName: "陸上競技部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "ワンダーフォーゲル部",
+        orgName: "ワンダーフォーゲル部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "合気道部",
+        orgName: "合気道部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "スキー部",
+        orgName: "スキー部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "モーターサイクルスポーツクラブ",
+        orgName: "モーターサイクルスポーツクラブ",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "バスケットボール同好会",
+        orgName: "バスケットボール同好会",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "バドミントンサークル",
+        orgName: "バドミントンサークル",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "生協学生委員会",
+        orgName: "生協学生委員会",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "企画部",
+        orgName: "企画部",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "加子母木匠塾",
+        orgName: "加子母木匠塾",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "フットサルサークルWith",
+        orgName: "フットサルサークルWith",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "地域創生学生団体（テクテク工房）",
+        orgName: "地域創生学生団体（テクテク工房）",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "ぽっけ",
+        orgName: "ぽっけ",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "学生フォーミュラ",
+        orgName: "学生フォーミュラ",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "ロボコン",
+        orgName: "ロボコン",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },
       {
-        clubName: "鳥人間サークル",
+        orgName: "鳥人間サークル",
         description: "ここに説明が入る",
         link: "/orgs/details/0",
       },

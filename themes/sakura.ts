@@ -19,7 +19,7 @@ declare module "@emotion/react" {
           textColor: string;
         };
       };
-      clubCard: {
+      orgCard: {
         backgroundColor: string;
         normalTextColor: string;
         borderColor: string;
@@ -53,7 +53,7 @@ export const sakura = {
         textColor: "#512C3C",
       },
     },
-    clubCard: {
+    orgCard: {
       backgroundColor: "#FFFFFF",
       normalTextColor: "#000000",
       borderColor: "#8B8B8B",
