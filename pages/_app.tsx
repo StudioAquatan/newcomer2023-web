@@ -8,6 +8,11 @@ import { useSetIsMobile } from "../store/userAgent";
 import { globalStyles } from "../styles/globals";
 import { sakura } from "../themes/sakura";
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  console.log("API Mocking Enabled");
+  require("../mocks");
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   const { setIsMobile } = useSetIsMobile();
 
