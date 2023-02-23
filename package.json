@@ -15,7 +15,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --exit-zero-on-changes",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "generate:aspida": "openapi2aspida"
   },
   "dependencies": {
     "@aspida/axios": "^1.11.0",
