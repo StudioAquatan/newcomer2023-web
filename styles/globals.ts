@@ -1,12 +1,15 @@
 import { css, Theme } from "@emotion/react";
+import { GenShinGothicP } from "./fonts/GenShinGoithcP";
 
 export const globalStyles = (theme: Theme) => css`
+  ${GenShinGothicP}
   html,
   body {
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: GenShinGothic-P, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
     font-size: 62.5%;
     background-color: ${theme.colors.backgroundColor};
   }
