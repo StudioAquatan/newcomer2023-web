@@ -15,9 +15,11 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --exit-zero-on-changes",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "generate:aspida": "openapi2aspida"
   },
   "dependencies": {
+    "@aspida/fetch": "^1.11.0",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
@@ -56,6 +58,7 @@
     "chromatic": "^6.14.0",
     "husky": "^8.0.0",
     "msw": "^1.0.1",
+    "openapi2aspida": "^0.21.0",
     "postcss-syntax": "^0.36.2",
     "sb": "^6.5.15",
     "stylelint": "^14.16.1",

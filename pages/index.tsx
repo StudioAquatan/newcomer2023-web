@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { apiClient } from "../api/apiClient";
 import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
 import { shuffle } from "../components/random";
 import EntryButton from "../components/toppage/EntryButton";
@@ -7,8 +8,6 @@ import Feature from "../components/toppage/Feature";
 import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
 import { useIsMobile } from "../store/userAgent";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4010";
 
 const featureDiagnose = {
   link: "/orgs/details/0",
@@ -55,14 +54,19 @@ export default function Home({ showcase }: HomeProps) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch(API_URL + "/orgs");
-  const data = await response.json();
-
-  const orgs = data.map((org: any) => ({
-    orgName: org.fullName,
-    description: org.shortDescription,
-    link: "/orgs/details/0",
-  }));
+  const orgs = await apiClient.orgs
+    .$get()
+    .then((res) => {
+      return res.map((org) => ({
+        orgName: org.fullName,
+        description: org.shortDescription,
+        link: "/orgs/details/0", // TODO: ここはorg.idにする
+      }));
+    })
+    .catch((error) => {
+      console.log(error);
+      return [];
+    });
 
   return {
     props: {
