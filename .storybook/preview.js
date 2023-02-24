@@ -1,6 +1,16 @@
 import { globalStyles } from "../styles/globals";
 import { Global, ThemeProvider } from "@emotion/react";
 import { sakura } from "../themes/sakura";
+import { initialize, mswDecorator } from "msw-storybook-addon";
+import { handlers } from "../mocks/handlers";
+
+initialize();
+
+const defaultHandlers = Object.entries(handlers).map(([api, statusHandler]) => {
+  return {
+    api: statusHandler.success,
+  };
+});
 
 export const decorators = [
   (Story) => (
@@ -11,6 +21,7 @@ export const decorators = [
       </ThemeProvider>
     </>
   ),
+  mswDecorator,
 ];
 
 export const parameters = {
@@ -20,5 +31,8 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+  },
+  msw: {
+    handlers: defaultHandlers,
   },
 };
