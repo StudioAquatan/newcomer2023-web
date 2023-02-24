@@ -9,7 +9,7 @@ export const handlers = {
     success: rest.post(API_URL + "/user", mockUserPostSuccess),
     invalid: rest.post(API_URL + "/user", mockUserPostInvalid),
   },
-  orgsPost: {
+  orgsGet: {
     success: rest.get(API_URL + "/orgs", mockOrgsPostSuccess),
     invalid: rest.get(API_URL + "/orgs", mockOrgsPostInvalid),
   },
