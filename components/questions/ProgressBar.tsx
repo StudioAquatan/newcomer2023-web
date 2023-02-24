@@ -1,5 +1,4 @@
 import { css, useTheme } from "@emotion/react";
-import { Question } from "../../api/@types";
 
 const container = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -24,14 +23,17 @@ const progressBar = (progress: number) => {
 };
 
 type ProgressBarProps = {
-  current: number;
-  questions: Question[];
+  progress: number;
 };
 
-export default function ProgressBar({ questions, current }: ProgressBarProps) {
+export default function ProgressBar({ progress }: ProgressBarProps) {
+  if (progress < 0 || progress > 1) {
+    throw new Error("Progress must be between 0 and 1");
+  }
+
   return (
     <div css={container}>
-      <p css={progressBar(current / questions.length)}></p>
+      <p css={progressBar(progress)}></p>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function Diagnose({ questions, initialCurrent }: DiagnoseProps) {
   const [current] = useState(initialCurrent);
   return (
     <div>
-      <ProgressBar questions={questions} current={current} />
+      <ProgressBar progress={current / questions.length} />
     </div>
   );
 }
