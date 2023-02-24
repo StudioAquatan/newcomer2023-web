@@ -31,6 +31,10 @@ declare module "@emotion/react" {
         backgroundColor: string;
         normalTextColor: string;
       };
+      progressBar: {
+        backgroundColor: string;
+        progressColor: string;
+      };
     };
   }
 }
@@ -64,6 +68,10 @@ export const sakura = {
     stamp: {
       backgroundColor: "#FFC8DF",
       normalTextColor: "#F6F6F6",
+    },
+    progressBar: {
+      backgroundColor: "#DFEDDC",
+      progressColor: "#FF8DBD",
     },
   },
 };
