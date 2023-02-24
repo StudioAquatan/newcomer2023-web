@@ -47,5 +47,5 @@ export const mockQuestionsGetSuccess: ResponseResolver<
   MockedRequest,
   typeof restContext
 > = async (req, res, ctx) => {
-  return res(ctx.status(200), ctx.json({ questions }));
+  return res(ctx.status(200), ctx.json(questions));
 };
