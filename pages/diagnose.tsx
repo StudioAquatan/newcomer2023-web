@@ -9,6 +9,7 @@ type DiagnoseProps = {
 };
 
 export default function Diagnose({ questions, initialCurrent }: DiagnoseProps) {
+  // TODO: 質問を答えるとcurrentが1ずつ増えるようにsetStateする
   const [current] = useState(initialCurrent);
   return (
     <div>
