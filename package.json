@@ -59,6 +59,7 @@
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "chromatic": "^6.14.0",
     "husky": "^8.0.0",
+    "lodash": "^4.17.21",
     "msw": "^1.0.1",
     "openapi2aspida": "^0.21.0",
     "postcss-syntax": "^0.36.2",
