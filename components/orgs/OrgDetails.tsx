@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import parse from "html-react-parser";
+import { OrganizationFull } from "../../api/@types";
 
 export type Image = {
   src: string;
@@ -7,24 +8,8 @@ export type Image = {
   height: number;
 };
 
-export type Organization = {
-  id: string;
-  fullName: string;
-  shortName: string;
-  shortDescription: string;
-  logo?: Image;
-  stampBackground?: Image;
-  stampColor?: string;
-  altLogo?: Image;
-  description: string;
-  location?: string;
-  fees?: string;
-  activeDays?: string;
-  links?: Array<string>;
-};
-
 export type OrgDetailsProps = {
-  org: Organization;
+  org: OrganizationFull;
 };
 
 const container = css`
