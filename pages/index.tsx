@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { apiClient } from "../api/apiClient";
+import { OrgCardProps } from "../components/orgs/OrgCard";
 import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
 import { shuffle } from "../components/random";
 import EntryButton from "../components/toppage/EntryButton";
@@ -60,22 +61,23 @@ export async function getServerSideProps() {
   const orgs = await apiClient.orgs
     .$get()
     .then((res) => {
-      return res.map((org) => ({
-        orgName: org.fullName,
-        orgImagePath: org.logo?.src ?? "/org_icons/default.png",
-        description: org.shortDescription,
-        link: "/orgs/details/" + org.id,
-      }));
+      return res;
     })
     .catch((error) => {
-      console.log(error);
-      return [];
+      throw new Error(error);
     });
+
+  const orgCards: OrgCardProps[] = orgs.map((org) => ({
+    orgName: org.fullName,
+    orgImagePath: org.logo?.src ?? "/org_icons/default.png",
+    description: org.shortDescription,
+    link: "/orgs/details/" + org.id,
+  }));
 
   return {
     props: {
       showcase: {
-        orgs: shuffle(orgs),
+        orgs: shuffle(orgCards),
       },
     },
   };
