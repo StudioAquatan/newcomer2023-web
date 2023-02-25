@@ -1,55 +1,17 @@
 import { css } from "@emotion/react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { QuestionResult, Recommendation } from "../api/@types";
+import { apiClient } from "../api/apiClient";
 import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
+import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
+import useStampCardSeed from "../hooks/cardSeed";
 
-const card: StampCardProps = {
-  userId: 0,
-  stamps: [
-    {
-      orgName: "Org 1",
-      backgroundColor: "#00FF00",
-    },
-    {
-      orgName: "Org 2",
-      backgroundColor: "#FF0000",
-    },
-    {
-      orgName: "Org 3",
-      backgroundColor: "#00FF00",
-    },
-    {
-      orgName: "Org 4",
-      backgroundColor: "#FF0000",
-    },
-    {
-      orgName: "Org 5",
-      backgroundColor: "#00FF00",
-    },
-    {
-      orgName: "Org 6",
-      backgroundColor: "#FF0000",
-    },
-    {
-      orgName: "Org 7",
-      backgroundColor: "#00FF00",
-      visited: true,
-    },
-    {
-      orgName: "Org 8",
-      backgroundColor: "#FF0000",
-      visited: true,
-    },
-    {
-      orgName: "Org 9",
-      backgroundColor: "#00FF00",
-      visited: true,
-    },
-  ],
+type StampCardPageProps = {
+  recommendation: Recommendation;
+  questions?: QuestionResult;
 };
-
-type StampCardPageProps = StampCardProps;
 
 const container = css`
   display: flex;
@@ -103,7 +65,23 @@ const otherOrgs = css`
   text-align: center;
 `;
 
-export default function StampCardPage(props: StampCardPageProps) {
+export default function StampCardPage({ recommendation }: StampCardPageProps) {
+  const { data: seedData } = useStampCardSeed();
+  const FALLBACKSEED = 0;
+  const seed = seedData?.seed ?? FALLBACKSEED;
+
+  const stamps: StampProps[] = recommendation.orgs.map((org, index) => {
+    return {
+      orgName: org.org.id, // TODO: 団体名をキャッシュからIDを使って取得する
+      visited: org.isVisited,
+      seed: seed + index,
+    };
+  });
+
+  const props: StampCardProps = {
+    stamps: stamps,
+  };
+
   return (
     <div css={container}>
       <div css={stampCardHeader}>
@@ -126,9 +104,16 @@ export default function StampCardPage(props: StampCardPageProps) {
 }
 
 export async function getServerSideProps() {
+  const recommendations = await apiClient.recommendation
+    .$get()
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+
   return {
-    props: {
-      ...card,
-    },
+    props: recommendations,
   };
 }
