@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import parse from "html-react-parser";
 
 export type Image = {
   src: string;
@@ -59,7 +60,7 @@ function Item({ title, value }: { title: string; value: string }) {
   return (
     <div>
       <p css={itemTitle}>{title}</p>
-      <p css={itemValue}>{value}</p>
+      <p css={itemValue}>{parse(value)}</p>
     </div>
   );
 }
