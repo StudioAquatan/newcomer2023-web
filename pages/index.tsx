@@ -62,8 +62,9 @@ export async function getServerSideProps() {
     .then((res) => {
       return res.map((org) => ({
         orgName: org.fullName,
+        orgImagePath: org.logo?.src ?? "/org_icons/default.png",
         description: org.shortDescription,
-        link: "/orgs/details/0", // TODO: ここはorg.idにする
+        link: "/orgs/details/" + org.id,
       }));
     })
     .catch((error) => {
