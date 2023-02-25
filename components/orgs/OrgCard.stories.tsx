@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof OrgCard> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   orgName: "Default Org Name",
-  orgImagePath: "default.png",
+  orgImagePath: "/org_icons/default.png",
   description: "Default Description",
   link: "/",
 };
@@ -23,7 +23,7 @@ Default.args = {
 export const StudioAquatan = Template.bind({});
 StudioAquatan.args = {
   orgName: "StudioAquatan",
-  orgImagePath: "studioaquatan.png",
+  orgImagePath: "/org_icons/studioaquatan.png",
   description: "Make Aquatan Great Again",
   link: "/",
 };
