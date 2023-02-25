@@ -70,13 +70,15 @@ export default function StampCardPage({ recommendation }: StampCardPageProps) {
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
 
-  const stamps: StampProps[] = recommendation.orgs.map((org, index) => {
-    return {
-      orgName: org.org.id, // TODO: 団体名をキャッシュからIDを使って取得する
-      visited: org.isVisited,
-      seed: seed + index,
-    };
-  });
+  // TODO: 表示位置がつけられたもののみ使う
+  const stamps: StampProps[] = recommendation.orgs.map(
+    (recommendationItem, index) => {
+      return {
+        recommendation: recommendationItem,
+        seed: seed + index,
+      };
+    }
+  );
 
   const props: StampCardProps = {
     stamps: stamps,
