@@ -1,14 +1,19 @@
 import { css, useTheme } from "@emotion/react";
+import { RecommendationItem } from "../../api/@types";
 import Random from "../random";
 
 export type StampProps = {
-  orgName: string;
-  backgroundColor?: string;
-  visited?: boolean;
+  recommendation: RecommendationItem;
   seed?: number;
 };
 
-const stampStyle = ({ backgroundColor }: { backgroundColor: string }) => {
+const stampStyle = ({
+  backgroundColor,
+  backgroundImagePath,
+}: {
+  backgroundColor: string;
+  backgroundImagePath: string;
+}) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const theme = useTheme();
 
@@ -19,6 +24,7 @@ const stampStyle = ({ backgroundColor }: { backgroundColor: string }) => {
     padding: 1rem;
     color: ${theme.colors.stamp.normalTextColor};
     background: ${backgroundColor};
+    background-image: url(${backgroundImagePath});
   `;
 };
 
@@ -49,20 +55,16 @@ const markVisitedStyle = (seed: number) => {
   `;
 };
 
-export default function Stamp({
-  orgName,
-  backgroundColor,
-  visited = false,
-  seed = 0,
-}: StampProps) {
+export default function Stamp({ recommendation, seed = 0 }: StampProps) {
   const theme = useTheme();
   return (
     <div
       css={stampStyle({
-        backgroundColor: backgroundColor ?? theme.colors.stamp.backgroundColor,
+        backgroundColor: theme.colors.stamp.backgroundColor,
+        backgroundImagePath: "/org_icons/default.png",
       })}
     >
-      {visited ? (
+      {recommendation.isVisited ? (
         <img
           css={markVisitedStyle(seed)}
           src="/mark_visited.png"
@@ -71,7 +73,8 @@ export default function Stamp({
       ) : (
         ""
       )}
-      <div css={orgNameStyle}>{orgName}</div>
+      {/* TODO: 団体名をキャッシュからIDを使って取得する */}
+      <div css={orgNameStyle}>{recommendation.org.id}</div>
     </div>
   );
 }
