@@ -27,7 +27,7 @@ Default.args = {
       width: 150,
       height: 150,
     },
-    description: "Make Aquatan Great Again",
+    description: "<p>Make Aquatan Great Again<br/>Make Aquatan Great Again</p>",
     location: "8-302",
     fees: "なし",
     activeDays: "LT会/部会 毎月最終金曜日 18:00~",

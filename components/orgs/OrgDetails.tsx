@@ -1,4 +1,6 @@
 import { css } from "@emotion/react";
+import parse from "html-react-parser";
+import { OrganizationFull } from "../../api/@types";
 
 export type Image = {
   src: string;
@@ -6,24 +8,8 @@ export type Image = {
   height: number;
 };
 
-export type Organization = {
-  id: string;
-  fullName: string;
-  shortName: string;
-  shortDescription: string;
-  logo?: Image;
-  stampBackground?: Image;
-  stampColor?: string;
-  altLogo?: Image;
-  description: string;
-  location?: string;
-  fees?: string;
-  activeDays?: string;
-  links?: Array<string>;
-};
-
 export type OrgDetailsProps = {
-  org: Organization;
+  org: OrganizationFull;
 };
 
 const container = css`
@@ -49,17 +35,19 @@ const itemTitle = css`
 `;
 
 const itemValue = css`
-  padding: 0;
-  padding-bottom: 1.5rem;
-  margin: 0;
-  font-size: 1.6rem;
+  & > p {
+    padding: 0;
+    padding-bottom: 1.5rem;
+    margin: 0;
+    font-size: 1.6rem;
+  }
 `;
 
 function Item({ title, value }: { title: string; value: string }) {
   return (
     <div>
       <p css={itemTitle}>{title}</p>
-      <p css={itemValue}>{value}</p>
+      <div css={itemValue}>{parse(value)}</div>
     </div>
   );
 }
@@ -99,15 +87,19 @@ export default function OrgDetails({ org }: OrgDetailsProps) {
       <Item title={org.fullName} value={org.description} />
       <Item
         title="活動場所"
-        value={org.location ?? org.fullName + "に問い合わせてください"}
+        value={
+          "<p>" + org.location ?? org.fullName + "に問い合わせてください</p>"
+        }
       />
       <Item
         title="部費/サークル費"
-        value={org.fees ?? org.fullName + "に問い合わせてください"}
+        value={"<p>" + org.fees ?? org.fullName + "に問い合わせてください</p>"}
       />
       <Item
         title="活動日"
-        value={org.activeDays ?? org.fullName + "に問い合わせてください"}
+        value={
+          "<p>" + org.activeDays ?? org.fullName + "に問い合わせてください</p>"
+        }
       />
       <ItemLinks links={org.links ?? []} />
     </div>

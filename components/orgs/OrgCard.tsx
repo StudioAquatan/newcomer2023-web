@@ -94,7 +94,7 @@ const textContentPStyle = (theme: Theme) => css`
 
 export default function OrgCard({
   orgName,
-  orgImagePath = "default.png",
+  orgImagePath = "/org_icons/default.png",
   description,
   link,
 }: OrgCardProps) {
@@ -103,9 +103,8 @@ export default function OrgCard({
       <button css={buttonStyle}>
         <div css={container}>
           <img
-            data-item="orgImage"
             css={orgImageStyle}
-            src={"/org_icons/" + orgImagePath}
+            src={orgImagePath}
             alt="Studio Aquatan"
           ></img>
           <div css={textBoxStyle}>
