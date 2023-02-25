@@ -1,8 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { cloneDeep } from "lodash";
 import React from "react";
+import { Recommendation } from "../../api/@types";
 
+import { recommendationGetSuccessResponseJson } from "../../mocks/api/recommendation";
 import Card from "./StampCard";
-import { StampCardProps } from "./StampCard";
 
 export default {
   title: "StampCard/StampCard",
@@ -17,114 +19,34 @@ export default {
 
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
-const card: StampCardProps = {
-  stamps: [
-    {
-      orgName: "Org 1",
-      backgroundColor: "#00FF00",
-      seed: 1,
-    },
-    {
-      orgName: "Org 2",
-      backgroundColor: "#FF0000",
-      seed: 2,
-    },
-    {
-      orgName: "Org 3",
-      backgroundColor: "#00FF00",
-      seed: 3,
-    },
-    {
-      orgName: "Org 4",
-      backgroundColor: "#FF0000",
-      seed: 4,
-    },
-    {
-      orgName: "Org 5",
-      backgroundColor: "#00FF00",
-      seed: 5,
-    },
-    {
-      orgName: "Org 6",
-      backgroundColor: "#FF0000",
-      seed: 6,
-    },
-    {
-      orgName: "Org 7",
-      backgroundColor: "#00FF00",
-      visited: true,
-      seed: 7,
-    },
-    {
-      orgName: "Org 8",
-      backgroundColor: "#FF0000",
-      visited: true,
-      seed: 8,
-    },
-    {
-      orgName: "Org 9",
-      backgroundColor: "#00FF00",
-      visited: true,
-      seed: 9,
-    },
-  ],
-};
+function getStampCard(recommendation: Recommendation) {
+  return {
+    stamps: recommendation.orgs.map((item, index) => {
+      return {
+        recommendation: item,
+        seed: 0 + index,
+      };
+    }),
+  };
+}
 
-const longOrg: StampCardProps = {
-  stamps: [
-    {
-      orgName: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      backgroundColor: "#00FF00",
-      seed: 1,
-    },
-    {
-      orgName: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      backgroundColor: "#FF0000",
-      seed: 2,
-    },
-    {
-      orgName: "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-      backgroundColor: "#00FF00",
-      seed: 3,
-    },
-    {
-      orgName: "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-      backgroundColor: "#FF0000",
-      seed: 4,
-    },
-    {
-      orgName: "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-      backgroundColor: "#00FF00",
-      seed: 5,
-    },
-    {
-      orgName: "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-      backgroundColor: "#FF0000",
-      seed: 6,
-    },
-    {
-      orgName: "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
-      backgroundColor: "#00FF00",
-      visited: true,
-      seed: 7,
-    },
-    {
-      orgName: "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
-      backgroundColor: "#FF0000",
-      visited: true,
-      seed: 8,
-    },
-    {
-      orgName: "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
-      backgroundColor: "#00FF00",
-      visited: true,
-      seed: 9,
-    },
-  ],
-};
+const { recommendation } = recommendationGetSuccessResponseJson;
+const visitedRecommendation = cloneDeep(recommendation);
 
-export const Default = Template.bind({});
-Default.args = card;
+const visitedStamps = getStampCard(visitedRecommendation);
 
-export const LongOrgName = Template.bind({});
-LongOrgName.args = longOrg;
+const notVisitedRecommendation = cloneDeep(recommendation);
+notVisitedRecommendation.orgs = notVisitedRecommendation.orgs.map((item) => {
+  item.isVisited = false;
+  return {
+    ...item,
+  };
+});
+
+const notVisitedStamps = getStampCard(notVisitedRecommendation);
+
+export const Visited = Template.bind({});
+Visited.args = visitedStamps;
+
+export const NotVisited = Template.bind({});
+NotVisited.args = notVisitedStamps;
