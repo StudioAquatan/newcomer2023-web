@@ -33,7 +33,7 @@ export async function getServerSideProps({
       return [];
     });
 
-  if (!orgs) {
+  if (orgs.length === 0) {
     return {
       notFound: true,
     };
