@@ -13,6 +13,7 @@ const button = (theme: Theme) => {
     font-size: 2.5rem;
     text-decoration: none;
     text-transform: uppercase;
+    cursor: pointer;
     background-color: ${theme.colors.button.enable.backgroundColor};
     border: 0;
     border-radius: 4.8rem;
