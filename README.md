@@ -33,3 +33,15 @@ https://head.aquatan-newcomer2023-apidocs.pages.dev/#/
 | fix       | eslint、stylelint、フォーマットの修正        |
 | format    | フォーマットの修正                           |
 | storybook | storybook の起動                             |
+
+## 環境変数
+
+`env.local` に環境変数をセットします。
+
+- `NEXT_PUBLIC_API_URL` は API サーバへの URL をセットします。
+- MSW を使って API のモックを有効にする場合は `NEXT_PUBLIC_API_MOCKING` に `enabled` をセットします。それ以外の値の場合はモックは無効になります。
+
+```env.local
+NEXT_PUBLIC_API_URL=https://api-server-host
+NEXT_PUBLIC_API_MOCKING=enabled
+```
