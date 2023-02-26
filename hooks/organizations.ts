@@ -1,9 +1,5 @@
 import useSWR from "swr";
 import { apiClient } from "../api/apiClient";
-import {
-  useOrganizationsMap as useOrganizationsMapJotai,
-  useSetOrganizationsMap,
-} from "../store/organizationsMap";
 
 export function useOrganizations() {
   return useSWR(
@@ -15,7 +11,7 @@ export function useOrganizations() {
           return res;
         })
         .catch((err) => {
-          throw new Error(err);
+          throw new Error("Failed to fetch /orgs.", err);
         });
 
       return res;
@@ -25,30 +21,17 @@ export function useOrganizations() {
 }
 
 export function useOrganizationsMap() {
-  const { organizationsMap } = useOrganizationsMapJotai();
-  const { setOrganizationsMap } = useSetOrganizationsMap();
-  const { data: organizations, error } = useOrganizations();
+  const { data: organizations } = useOrganizations();
+  return useSWR(
+    "/orgsMap",
+    () => {
+      if (!organizations) {
+        throw new Error("Empty organizations. Failed to fetch /orgsMap.");
+      }
 
-  if (organizationsMap.size > 0) {
-    // キャッシュで返す
-    return {
-      organizationsMap: organizationsMap,
-    };
-  } else {
-    if (error) {
-      throw new Error(error);
-    }
-
-    if (!organizations) {
-      return {
-        organizationsMap: organizationsMap,
-      };
-    }
-
-    const orgMap = new Map(organizations.map((org) => [org.id, org]));
-    setOrganizationsMap({ organizationsMap: orgMap });
-    return {
-      organizationsMap: orgMap,
-    };
-  }
+      const orgMap = new Map(organizations.map((org) => [org.id, org]));
+      return orgMap;
+    },
+    { revalidateOnFocus: false }
+  );
 }
