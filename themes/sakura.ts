@@ -35,6 +35,10 @@ declare module "@emotion/react" {
         backgroundColor: string;
         progressColor: string;
       };
+      storyLike: {
+        backgroundColor: string;
+        normalTextColor: string;
+      };
     };
   }
 }
@@ -72,6 +76,10 @@ export const sakura = {
     progressBar: {
       backgroundColor: "#DFEDDC",
       progressColor: "#FF8DBD",
+    },
+    storyLike: {
+      backgroundColor: "#202020",
+      normalTextColor: "#E6E6E6",
     },
   },
 };
