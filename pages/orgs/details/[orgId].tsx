@@ -1,18 +1,14 @@
-import { css } from "@emotion/react";
 import { apiClient } from "../../../api/apiClient";
-import OrgDetails, {
+import OrgDetailsText, {
   OrgDetailsProps,
-} from "../../../components/orgs/OrgDetails";
-
-const base = css`
-  padding: 0 3.2rem;
-`;
+} from "../../../components/orgs/details/OrgDetailsText";
+import StoryLikeContainer from "../../../components/orgs/details/StoryLikeContainer";
 
 export default function OrgDetail({ org }: OrgDetailsProps) {
   return (
-    <div css={base}>
-      <OrgDetails org={org} />
-    </div>
+    <StoryLikeContainer numPages={5} currentPage={1} pageProgress={0.5}>
+      <OrgDetailsText org={org} type="summary" />
+    </StoryLikeContainer>
   );
 }
 
