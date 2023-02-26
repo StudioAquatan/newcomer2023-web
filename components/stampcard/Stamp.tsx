@@ -1,5 +1,6 @@
 import { css, useTheme } from "@emotion/react";
 import { RecommendationItem } from "../../api/@types";
+import { useOrganizations } from "../../hooks/organizations";
 import Random from "../random";
 
 export type StampProps = {
@@ -57,6 +58,14 @@ const markVisitedStyle = (seed: number) => {
 
 export default function Stamp({ recommendation, seed = 0 }: StampProps) {
   const theme = useTheme();
+  const { data: organizations } = useOrganizations();
+
+  if (organizations === undefined) {
+    return <div>loading...</div>;
+  }
+
+  const { organizationsMap } = organizations;
+
   return (
     <div
       css={stampStyle({
@@ -73,8 +82,9 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
       ) : (
         ""
       )}
-      {/* TODO: 団体名をキャッシュからIDを使って取得する */}
-      <div css={orgNameStyle}>{recommendation.org.id}</div>
+      <div css={orgNameStyle}>
+        {organizationsMap?.get(recommendation.org.id)?.fullName}
+      </div>
     </div>
   );
 }
