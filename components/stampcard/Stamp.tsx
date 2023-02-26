@@ -1,24 +1,28 @@
-import { css, useTheme } from "@emotion/react";
+import { css, Theme, useTheme } from "@emotion/react";
+import { RecommendationItem } from "../../api/@types";
+import { useOrganizations } from "../../hooks/organizations";
 import Random from "../random";
 
 export type StampProps = {
-  orgName: string;
-  backgroundColor?: string;
-  visited?: boolean;
+  recommendation: RecommendationItem;
   seed?: number;
 };
 
-const stampStyle = ({ backgroundColor }: { backgroundColor: string }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const theme = useTheme();
-
+const stampStyle = ({
+  theme,
+  backgroundImagePath,
+}: {
+  theme: Theme;
+  backgroundImagePath: string;
+}) => {
   return css`
     position: relative;
     display: flex;
     align-items: center;
     padding: 1rem;
     color: ${theme.colors.stamp.normalTextColor};
-    background: ${backgroundColor};
+    background: ${theme.colors.stamp.backgroundColor};
+    background-image: url(${backgroundImagePath});
   `;
 };
 
@@ -49,20 +53,24 @@ const markVisitedStyle = (seed: number) => {
   `;
 };
 
-export default function Stamp({
-  orgName,
-  backgroundColor,
-  visited = false,
-  seed = 0,
-}: StampProps) {
+export default function Stamp({ recommendation, seed = 0 }: StampProps) {
   const theme = useTheme();
+  const { data: organizations } = useOrganizations();
+
+  if (organizations === undefined) {
+    return <div>loading...</div>;
+  }
+
+  const { organizationsMap } = organizations;
+
   return (
     <div
       css={stampStyle({
-        backgroundColor: backgroundColor ?? theme.colors.stamp.backgroundColor,
+        theme,
+        backgroundImagePath: "/org_icons/default.png",
       })}
     >
-      {visited ? (
+      {recommendation.isVisited ? (
         <img
           css={markVisitedStyle(seed)}
           src="/mark_visited.png"
@@ -71,7 +79,9 @@ export default function Stamp({
       ) : (
         ""
       )}
-      <div css={orgNameStyle}>{orgName}</div>
+      <div css={orgNameStyle}>
+        {organizationsMap?.get(recommendation.org.id)?.fullName}
+      </div>
     </div>
   );
 }

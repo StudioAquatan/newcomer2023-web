@@ -19,8 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const { setIsMobile } = useSetIsMobile();
 
-  // 初回だけUserAgentを取得して、状態を保存する
+  // 初回だけ動かすやつ
   useEffect(() => {
+    // スマホ判定用にUserAgentを取得しておく
     const { isMobile } = getSelectorsByUserAgent(navigator.userAgent);
     setIsMobile({ isMobile: isMobile });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

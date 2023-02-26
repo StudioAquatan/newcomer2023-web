@@ -8,7 +8,6 @@ export type StampCardSizeProps = {
 };
 
 export type StampCardProps = {
-  userId: number;
   stamps: StampProps[];
   size?: StampCardSizeProps;
 };
@@ -29,13 +28,12 @@ const container = (size: StampCardSizeProps) => {
   `;
 };
 
-export default function Card({ userId, stamps, size }: StampCardProps) {
+export default function Card({ stamps, size }: StampCardProps) {
   size ??= { maxWidth: "90vw", maxHeight: "65vh" };
 
   return (
     <div css={container(size)}>
       {stamps.map((stamp, index) => {
-        stamp.seed = userId + index;
         return <Stamp key={index} {...stamp} />;
       })}
     </div>
