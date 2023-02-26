@@ -1,4 +1,4 @@
-import { css, useTheme } from "@emotion/react";
+import { css, Theme, useTheme } from "@emotion/react";
 import { RecommendationItem } from "../../api/@types";
 import { useOrganizations } from "../../hooks/organizations";
 import Random from "../random";
@@ -9,22 +9,19 @@ export type StampProps = {
 };
 
 const stampStyle = ({
-  backgroundColor,
+  theme,
   backgroundImagePath,
 }: {
-  backgroundColor: string;
+  theme: Theme;
   backgroundImagePath: string;
 }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const theme = useTheme();
-
   return css`
     position: relative;
     display: flex;
     align-items: center;
     padding: 1rem;
     color: ${theme.colors.stamp.normalTextColor};
-    background: ${backgroundColor};
+    background: ${theme.colors.stamp.backgroundColor};
     background-image: url(${backgroundImagePath});
   `;
 };
@@ -69,7 +66,7 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
   return (
     <div
       css={stampStyle({
-        backgroundColor: theme.colors.stamp.backgroundColor,
+        theme,
         backgroundImagePath: "/org_icons/default.png",
       })}
     >
