@@ -5,7 +5,36 @@ export const recommendationGetSuccessResponseJson = {
     orgs: [
       {
         org: {
-          id: "ID1",
+          id: "0",
+          fullName: "Organaization 0",
+          shortName: "string",
+          shortDescription: "string",
+          logo: {
+            src: "/org_icons/default.png",
+            width: 0,
+            height: 0,
+          },
+          stampBackground: {
+            src: "/org_icons/default.png",
+            width: 0,
+            height: 0,
+          },
+          stampColor: "string",
+          altLogo: "string",
+          description: "string",
+          location: "string",
+          fees: "string",
+          activeDays: "string",
+          links: ["string"],
+        },
+        coefficient: 0,
+        isVisited: true,
+        isExcluded: true,
+        stampSlot: -1,
+      },
+      {
+        org: {
+          id: "1",
           fullName: "Organaization 1",
           shortName: "string",
           shortDescription: "string",
@@ -34,7 +63,7 @@ export const recommendationGetSuccessResponseJson = {
       },
       {
         org: {
-          id: "ID2",
+          id: "2",
           fullName: "Organaization 2",
           shortName: "string",
           shortDescription: "string",
@@ -63,7 +92,7 @@ export const recommendationGetSuccessResponseJson = {
       },
       {
         org: {
-          id: "ID3",
+          id: "3",
           fullName: "Organaization 3",
           shortName: "string",
           shortDescription: "string",
@@ -92,7 +121,7 @@ export const recommendationGetSuccessResponseJson = {
       },
       {
         org: {
-          id: "ID4",
+          id: "4",
           fullName: "Organaization 4",
           shortName: "string",
           shortDescription: "string",
@@ -121,7 +150,7 @@ export const recommendationGetSuccessResponseJson = {
       },
       {
         org: {
-          id: "ID5",
+          id: "5",
           fullName: "Organaization 5",
           shortName: "string",
           shortDescription: "string",
@@ -150,7 +179,7 @@ export const recommendationGetSuccessResponseJson = {
       },
       {
         org: {
-          id: "ID6",
+          id: "6",
           fullName: "Organaization 6",
           shortName: "string",
           shortDescription: "string",
@@ -179,7 +208,7 @@ export const recommendationGetSuccessResponseJson = {
       },
       {
         org: {
-          id: "ID7",
+          id: "7",
           fullName: "Organaization 7",
           shortName: "string",
           shortDescription: "string",
@@ -208,37 +237,8 @@ export const recommendationGetSuccessResponseJson = {
       },
       {
         org: {
-          id: "ID8",
+          id: "8",
           fullName: "Organaization 8",
-          shortName: "string",
-          shortDescription: "string",
-          logo: {
-            src: "/org_icons/default.png",
-            width: 0,
-            height: 0,
-          },
-          stampBackground: {
-            src: "/org_icons/default.png",
-            width: 0,
-            height: 0,
-          },
-          stampColor: "string",
-          altLogo: "string",
-          description: "string",
-          location: "string",
-          fees: "string",
-          activeDays: "string",
-          links: ["string"],
-        },
-        coefficient: 0,
-        isVisited: true,
-        isExcluded: true,
-        stampSlot: -1,
-      },
-      {
-        org: {
-          id: "ID9",
-          fullName: "Organaization 9",
           shortName: "string",
           shortDescription: "string",
           logo: {
