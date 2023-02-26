@@ -27,6 +27,7 @@ const circleButton = (color: string) => css`
   justify-content: center;
   width: 5rem;
   height: 5rem;
+  cursor: pointer;
   background-color: #fff;
   border: none;
   border-radius: 50%;
