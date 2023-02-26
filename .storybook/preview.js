@@ -6,11 +6,12 @@ import { handlers } from "../mocks/handlers";
 
 initialize();
 
-const defaultHandlers = Object.entries(handlers).map(([api, statusHandler]) => {
-  return {
-    api: statusHandler.success,
-  };
-});
+const defaultHandlers = Object.fromEntries(
+  Object.entries(handlers).map(([api, statusHandler]) => [
+    api,
+    statusHandler.success,
+  ])
+);
 
 export const decorators = [
   (Story) => (
@@ -33,6 +34,10 @@ export const parameters = {
     },
   },
   msw: {
+    // デフォルトでは全て成功するハンドラーを設定する
+    // 別のハンドラーに置き換えたい場合は各コンポーネントのストーリーで
+    // 対応するキーにハンドラーを設定する
+    // https://github.com/mswjs/msw-storybook-addon#advanced-usage
     handlers: defaultHandlers,
   },
 };
