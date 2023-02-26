@@ -14,7 +14,7 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isActiveMockWorker, setIsActiveMockWorker] = useState(
-    process.env.NEXT_PUBLIC_API_MOCKING === "enabled"
+    process.env.NEXT_PUBLIC_API_MOCKING === "enabled" ? false : true
   );
 
   const { setIsMobile } = useSetIsMobile();
