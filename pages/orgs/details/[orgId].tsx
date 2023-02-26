@@ -18,6 +18,7 @@ export default function OrgDetail({ org }: OrgDetailsProps) {
 
 // 各団体詳細ページの初期データを生成しておく
 export async function getStaticPaths() {
+  // getStaticPaths時、MSWを使ったモックが有効になる前にAPIにアクセスしてしまう
   const orgs = await apiClient.orgs
     .$get()
     .then((res) => {
@@ -27,7 +28,13 @@ export async function getStaticPaths() {
       throw Error(error);
     });
 
-  const paths = orgs.map((org) => `/orgs/details/${org.id}`);
+  const paths = orgs.map((org, index) => {
+    if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+      // モック時の団体IDは0から始まる数字なので、代わりにそれを利用する
+      return `/orgs/details/${index}`;
+    }
+    return `/orgs/details/${org.id}`;
+  });
 
   return {
     paths,
@@ -57,7 +64,7 @@ export async function getStaticProps({
   const org = orgMap.get(orgId);
 
   if (org === undefined) {
-    throw Error("団体が見つかりませんでした");
+    throw Error("団体が見つかりませんでした ID: " + orgId);
   }
 
   return {
