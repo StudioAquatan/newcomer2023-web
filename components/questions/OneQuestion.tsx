@@ -15,9 +15,9 @@ const container = css`
 // TODO: ここで、question.questionTypeに応じて、適切なコンポーネントを呼び出す
 export default function OneQuestion({ question }: QuestionProps) {
   return (
-    <div css={container}>
+    <fieldset css={container}>
       <div>Q. {question.questionText}</div>
       <FiveRadioButton questionId={question.id} />
-    </div>
+    </fieldset>
   );
 }
