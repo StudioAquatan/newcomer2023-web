@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     async function initMocks() {
-      require("../mocks");
+      await require("../mocks");
       setIsActiveMockWorker(true);
     }
 
