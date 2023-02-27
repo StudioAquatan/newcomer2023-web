@@ -8,33 +8,49 @@ export type StampProps = {
   seed?: number;
 };
 
-const stampStyle = ({
-  theme,
-  backgroundImagePath,
-}: {
-  theme: Theme;
-  backgroundImagePath: string;
-}) => {
+const stampStyle = ({ theme }: { theme: Theme }) => {
   return css`
     position: relative;
     display: flex;
     align-items: center;
-    padding: 1rem;
     color: ${theme.colors.stamp.normalTextColor};
     background: ${theme.colors.stamp.backgroundColor};
-    background-image: url(${backgroundImagePath});
   `;
 };
 
 const orgNameStyle = css`
+  z-index: 2;
   display: -webkit-box;
   width: 100%;
+  padding: 1rem;
   overflow: hidden;
   font-size: 1.6rem;
   text-align: center;
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+`;
+
+const logoContainer = css`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
+
+const logoFilter = css`
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 20%); /* 背景色 */
+`;
+
+const logoStyle = css`
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const markVisitedStyle = (seed: number) => {
@@ -48,6 +64,7 @@ const markVisitedStyle = (seed: number) => {
     position: absolute;
     right: calc(${maxMove} * ${random.nextNumber(0, 1)});
     bottom: calc(${maxMove} * ${random.nextNumber(0, 1)});
+    z-index: 2;
     width: 30%;
     transform: rotate(${rotate}turn);
   `;
@@ -62,12 +79,12 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
   }
 
   const { organizationsMap } = organizations;
+  const org = organizationsMap.get(recommendation.org.id);
 
   return (
     <div
       css={stampStyle({
         theme,
-        backgroundImagePath: "/org_icons/default.png",
       })}
     >
       {recommendation.isVisited ? (
@@ -79,8 +96,10 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
       ) : (
         ""
       )}
-      <div css={orgNameStyle}>
-        {organizationsMap?.get(recommendation.org.id)?.fullName}
+      <div css={orgNameStyle}>{org?.fullName ?? ""}</div>
+      <div css={logoContainer}>
+        <img src={org?.logo?.src ?? ""} alt="logo" css={logoStyle} />
+        <div css={logoFilter}></div>
       </div>
     </div>
   );
