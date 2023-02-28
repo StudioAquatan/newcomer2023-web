@@ -26,6 +26,8 @@ const orgNameStyle = css`
   overflow: hidden;
   font-size: 1.6rem;
   text-align: center;
+  text-shadow: 2px 2px 2px #000, -2px 2px 2px #000, 2px -2px 2px #000,
+    -2px -2px 2px #000;
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
