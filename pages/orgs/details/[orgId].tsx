@@ -1,14 +1,85 @@
+import Head from "next/head";
+import React from "react";
+import { OrganizationFull } from "../../../api/@types";
 import { apiClient } from "../../../api/apiClient";
-import OrgDetailsText, {
-  OrgDetailsProps,
-} from "../../../components/orgs/details/OrgDetailsText";
-import StoryLikeContainer from "../../../components/orgs/details/StoryLikeContainer";
+import FullscreenPager from "../../../components/orgs/FullscreenPager";
+import OrgDetailsText from "../../../components/orgs/details/OrgDetailsText";
+import OrgPicture from "../../../components/orgs/details/OrgPicture";
+import StoryLikeContainer, {
+  ContentContainer,
+  PaddedContainer,
+} from "../../../components/orgs/details/StoryLikeContainer";
 
-export default function OrgDetail({ org }: OrgDetailsProps) {
+const resourceRoot =
+  process.env.NEXT_PUBLIC_RESOURCE_URL ?? "http://localhost:3333";
+
+type Props = {
+  org: OrganizationFull;
+  orgImage: Array<{
+    isMovie: boolean;
+    name: string;
+    width: number;
+    height: number;
+  }>;
+};
+export default function OrgDetail({ org, orgImage }: Props) {
+  const totalPages = orgImage.length + 2;
+  const [pageId, setPageId] = React.useState(0);
+
+  const handleLeftClick = () => {
+    setPageId((page) => page - 1);
+  };
+
+  const handleRightClick = () => {
+    setPageId((page) => page + 1);
+  };
+
   return (
-    <StoryLikeContainer numPages={5} currentPage={1} pageProgress={0.5}>
-      <OrgDetailsText org={org} type="summary" />
-    </StoryLikeContainer>
+    <>
+      <Head>
+        <title>{org.fullName}</title>
+      </Head>
+      <StoryLikeContainer
+        numPages={totalPages}
+        currentPage={pageId}
+        pageProgress={0.5}
+        paginationComponent={
+          <>
+            {pageId > 0 && (
+              <FullscreenPager type="left" showIcon onClick={handleLeftClick} />
+            )}
+            {pageId + 1 <= totalPages - 1 && (
+              <FullscreenPager
+                type="right"
+                showIcon
+                onClick={handleRightClick}
+              />
+            )}
+          </>
+        }
+      >
+        <ContentContainer>
+          <PaddedContainer>
+            <OrgDetailsText org={org} type="summary" />
+          </PaddedContainer>
+        </ContentContainer>
+        <ContentContainer>
+          <PaddedContainer>
+            <OrgDetailsText org={org} type="misc" />
+          </PaddedContainer>
+        </ContentContainer>
+        {orgImage.map((image, key) => (
+          <ContentContainer key={key}>
+            <OrgPicture
+              url={`${resourceRoot}/${org.id}/${image.name}`}
+              width={image.width}
+              height={image.height}
+              isMovie={image.isMovie}
+            />
+          </ContentContainer>
+        ))}
+      </StoryLikeContainer>
+    </>
   );
 }
 
@@ -56,9 +127,13 @@ export async function getStaticProps({
     throw Error("団体が見つかりませんでした");
   }
 
+  const imagesRes = await fetch(`${resourceRoot}/manifest.json`);
+  const images = await imagesRes.json();
+
   return {
     props: {
-      org: org,
+      org,
+      orgImage: images[orgId] ?? [],
     },
   };
 }
