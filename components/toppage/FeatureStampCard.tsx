@@ -18,7 +18,6 @@ export default function FeatureStampCard({
 }: FeatureStampCardProps) {
   const seed = 0;
 
-  // TODO: 全団体からランダムに9団体選ぶようにする
   const stamps: StampProps[] = recommendation.orgs.map(
     (recommendationItem, index) => {
       return {
