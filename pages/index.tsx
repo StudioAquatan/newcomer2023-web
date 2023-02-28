@@ -88,7 +88,7 @@ export async function getServerSideProps() {
   const random = new Random();
 
   // ここでランダムに9つの組織を選んでスタンプカードの例にする
-  const recommendation = {
+  const recommendation: Recommendation = {
     orgs: shuffle(orgs)
       .splice(0, 9)
       .map((org, index) => ({
@@ -100,6 +100,8 @@ export async function getServerSideProps() {
         isExcluded: false,
         stampSlot: index,
       })),
+    ignoreRemains: 0,
+    renewRemains: 0,
   };
 
   return {
