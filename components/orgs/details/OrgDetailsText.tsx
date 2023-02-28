@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import Image from "next/image";
 import { OrganizationFull } from "../../../api/@types";
 
 export type Image = {
@@ -12,11 +13,16 @@ export type OrgDetailsProps = {
   type: "summary" | "misc";
 };
 
-const container = css`
+const outer = css`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   height: calc(100% - 30px);
+`;
+
+const container = css`
+  width: min(600px, 90vw);
 `;
 
 const logoContainer = css`
@@ -28,6 +34,7 @@ const logoContainer = css`
 
 const logo = css`
   width: 8vh;
+  height: 8vh;
   border-radius: 100%;
   box-shadow: 2px 2px 10px rgb(255 255 255 / 50%);
 `;
@@ -93,38 +100,48 @@ function ItemLinks({ links }: { links: Array<string> }) {
 
 export default function OrgDetailsText({ org, type }: OrgDetailsProps) {
   return (
-    <div css={container}>
-      <div css={logoContainer}>
-        <img src={org.logo?.src} alt={org.shortName} css={logo} />
-        <span css={orgName}>{org.fullName}</span>
+    <div css={outer}>
+      <div css={container}>
+        <div css={logoContainer}>
+          {org.logo && (
+            <Image
+              src={org.logo.src}
+              alt={org.shortName}
+              css={logo}
+              width={256}
+              height={256}
+            />
+          )}
+          <span css={orgName}>{org.fullName}</span>
+        </div>
+
+        {type === "summary" && (
+          <>
+            <div
+              css={orgDescription}
+              dangerouslySetInnerHTML={{ __html: org.description }}
+            />
+            <Item
+              title="活動場所"
+              value={org.location ?? org.fullName + "に問い合わせてください"}
+            />
+          </>
+        )}
+
+        {type === "misc" && (
+          <>
+            <Item
+              title="活動日"
+              value={org.activeDays ?? org.fullName + "に問い合わせてください"}
+            />
+            <Item
+              title="部費/サークル費"
+              value={org.fees ?? org.fullName + "に問い合わせてください"}
+            />
+            <ItemLinks links={org.links ?? []} />
+          </>
+        )}
       </div>
-
-      {type === "summary" && (
-        <>
-          <div
-            css={orgDescription}
-            dangerouslySetInnerHTML={{ __html: org.description }}
-          />
-          <Item
-            title="活動場所"
-            value={org.location ?? org.fullName + "に問い合わせてください"}
-          />
-        </>
-      )}
-
-      {type === "misc" && (
-        <>
-          <Item
-            title="活動日"
-            value={org.activeDays ?? org.fullName + "に問い合わせてください"}
-          />
-          <Item
-            title="部費/サークル費"
-            value={org.fees ?? org.fullName + "に問い合わせてください"}
-          />
-          <ItemLinks links={org.links ?? []} />
-        </>
-      )}
     </div>
   );
 }
