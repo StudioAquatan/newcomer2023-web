@@ -8,34 +8,69 @@ const container = () => {
   return css`
     display: flex;
     flex-direction: column;
-    height: calc(100vh - min(15px, 3vw) * 2);
-    padding: min(15px, 3vw);
+    height: 100vh;
     color: ${theme.colors.storyLike.normalTextColor};
     background-color: ${theme.colors.storyLike.backgroundColor};
   `;
 };
 
-const contentContainer = css`
+const contentHolder = css`
   flex-grow: 1;
-  padding: 0.5rem;
+  overflow: hidden;
 `;
 
-type Props = React.ComponentProps<typeof ProgressPagination>;
+const contentBox = (page: number) => css`
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  transform: translateX(-${page * 100}vw);
+`;
+
+const contentContainer = css`
+  flex-shrink: 0;
+  width: 100vw;
+`;
+
+const progressContainer = css`
+  padding: 1rem;
+`;
+
+const paddedContainer = css`
+  padding: 2rem;
+`;
+
+type Props = {
+  paginationComponent?: React.ReactNode;
+} & React.ComponentProps<typeof ProgressPagination>;
+
+export function ContentContainer({ children }: React.PropsWithChildren) {
+  return <div css={contentContainer}>{children}</div>;
+}
+
+export function PaddedContainer({ children }: React.PropsWithChildren) {
+  return <div css={paddedContainer}>{children}</div>;
+}
 
 export default function StoryLikeContainer({
   children,
   numPages,
   currentPage,
   pageProgress,
+  paginationComponent = null,
 }: React.PropsWithChildren<Props>) {
   return (
     <div css={container}>
-      <ProgressPagination
-        numPages={numPages}
-        currentPage={currentPage}
-        pageProgress={pageProgress}
-      />
-      <div css={contentContainer}>{children}</div>
+      <div css={progressContainer}>
+        <ProgressPagination
+          numPages={numPages}
+          currentPage={currentPage}
+          pageProgress={pageProgress}
+        />
+      </div>
+      <div css={contentHolder}>
+        <div css={contentBox(currentPage)}>{children}</div>
+      </div>
+      {paginationComponent}
     </div>
   );
 }
