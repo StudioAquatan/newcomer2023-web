@@ -1,29 +1,32 @@
 import { css } from "@emotion/react";
+import { Recommendation } from "../api/@types";
 import { apiClient } from "../api/apiClient";
 import { OrgCardProps } from "../components/orgs/OrgCard";
 import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
-import { shuffle } from "../components/random";
+import Random, { shuffle } from "../components/random";
 import EntryButton from "../components/toppage/EntryButton";
 import EventGuidance from "../components/toppage/EventGuidance";
 import Feature from "../components/toppage/Feature";
+import FeatureStampCard from "../components/toppage/FeatureStampCard";
 import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
 import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
+
+const diagnoseContentStyle = css`
+  width: 100%;
+`;
+
+const diagnoseContentNode = (
+  <img src="/toppage/diagnose.png" alt="相性診断" css={diagnoseContentStyle} />
+);
 
 const featureDiagnose = {
   link: "/orgs/details/0",
   title: "相性診断",
   description:
     "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
-  featureImagePath: "/toppage/diagnose.png",
-};
-
-const featureStampRally = {
-  title: "スタンプラリー",
-  description: "QRコードを読み込んで、景品を貰いに行こう！",
-  featureImagePath: "/toppage/stamp-rally.png",
-  inverse: true,
+  featureContentNode: diagnoseContentNode,
 };
 
 const container = css`
@@ -35,12 +38,20 @@ const container = css`
 
 type HomeProps = {
   showcase: OrgShowcaseProps;
+  recommendation: Recommendation;
 };
 
-export default function Home({ showcase }: HomeProps) {
+export default function Home({ showcase, recommendation }: HomeProps) {
   const { isMobile } = useIsMobile();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
   useUser();
+
+  const featureStampRally = {
+    title: "スタンプラリー",
+    description: "QRコードを読み込んで、景品を貰いに行こう！",
+    inverse: true,
+    recommendation: recommendation,
+  };
 
   return (
     <>
@@ -49,7 +60,7 @@ export default function Home({ showcase }: HomeProps) {
         <OrgShowcase {...showcase} />
         <EntryButton isMobile={isMobile} />
         <Feature {...featureDiagnose} />
-        <Feature {...featureStampRally} />
+        <FeatureStampCard {...featureStampRally} />
         <EventGuidance />
         <OrgList />
       </div>
@@ -74,11 +85,29 @@ export async function getServerSideProps() {
     link: "/orgs/details/" + org.id,
   }));
 
+  const random = new Random();
+
+  // ここでランダムに9つの組織を選んでスタンプカードの例にする
+  const recommendation = {
+    orgs: shuffle(orgs)
+      .splice(0, 9)
+      .map((org, index) => ({
+        org: {
+          id: org.id,
+        },
+        coefficient: 0,
+        isVisited: random.nextNumber(0, 1) > 0.5,
+        isExcluded: false,
+        stampSlot: index,
+      })),
+  };
+
   return {
     props: {
       showcase: {
         orgs: shuffle(orgCards),
       },
+      recommendation,
     },
   };
 }
