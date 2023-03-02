@@ -110,10 +110,12 @@ export function useDetailsAutoTimer() {
   React.useEffect(() => {
     if (pageList[activePage]?.autoNextTimer && !paused) {
       // カウントダウンタイマースタート
+      const now = Date.now();
+      const time = 10000;
       const interval = setInterval(() => {
         // progressの値はこのコンテキストでは変わらないので
-        setProgress((progress) => Math.min(progress + 0.01, 1));
-      }, 10000 / 100); // 15 sec
+        setProgress(Math.min((Date.now() - now) / time, 1.0));
+      }, 1000 / 60); // 15 sec
 
       return () => clearInterval(interval);
     }

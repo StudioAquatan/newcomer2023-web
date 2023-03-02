@@ -22,7 +22,6 @@ const progressBar = () => {
   return css`
     height: 100%;
     background-color: ${theme.colors.progressBar.progressColor};
-    transition: width 0.01s linear;
   `;
 };
 
