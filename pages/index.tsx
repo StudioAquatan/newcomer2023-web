@@ -7,7 +7,7 @@ import Random, { shuffle } from "../components/random";
 import EntryButton from "../components/toppage/EntryButton";
 import EventGuidance from "../components/toppage/EventGuidance";
 import Feature from "../components/toppage/Feature";
-import FeatureStampCard from "../components/toppage/FeatureStampCard";
+import FeatureStampRally from "../components/toppage/FeatureStampRally";
 import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
 import useUser from "../hooks/user";
@@ -60,7 +60,7 @@ export default function Home({ showcase, recommendation }: HomeProps) {
         <OrgShowcase {...showcase} />
         <EntryButton isMobile={isMobile} />
         <Feature {...featureDiagnose} />
-        <FeatureStampCard {...featureStampRally} />
+        <FeatureStampRally {...featureStampRally} />
         <EventGuidance />
         <OrgList />
       </div>
