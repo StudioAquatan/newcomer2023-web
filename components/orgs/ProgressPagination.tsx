@@ -16,13 +16,13 @@ const pageBar = () => {
   `;
 };
 
-const progressBar = (progress: number) => {
+const progressBar = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const theme = useTheme();
   return css`
-    width: ${progress * 100}%;
     height: 100%;
     background-color: ${theme.colors.progressBar.progressColor};
+    transition: width 0.01s linear;
   `;
 };
 
@@ -41,7 +41,7 @@ export default function ProgressPagination({
     throw new Error("Progress must be between 0 and 1");
   }
 
-  if (currentPage >= numPages) {
+  if (currentPage > numPages) {
     throw new Error("Page number must be in page range");
   }
 
@@ -51,19 +51,22 @@ export default function ProgressPagination({
         if (index === currentPage) {
           return (
             <div css={pageBar} key={index}>
-              <div css={progressBar(pageProgress)} />
+              <div
+                css={progressBar}
+                style={{ width: `${pageProgress * 100}%` }}
+              />
             </div>
           );
         } else if (index < currentPage) {
           return (
             <div css={pageBar} key={index}>
-              <div css={progressBar(1)} />
+              <div css={progressBar} style={{ width: `${100}%` }} />
             </div>
           );
         } else {
           return (
             <div css={pageBar} key={index}>
-              <div css={progressBar(0)} />
+              <div css={progressBar} style={{ width: `${0}%` }} />
             </div>
           );
         }

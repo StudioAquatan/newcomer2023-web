@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { OrganizationFull } from "../../../api/@types";
 import { apiClient } from "../../../api/apiClient";
+import { ResourceBucketItem } from "../../../api/resource-bucket";
 import FullscreenPager from "../../../components/orgs/FullscreenPager";
 import ProgressPagination from "../../../components/orgs/ProgressPagination";
 import OrgDetailsText from "../../../components/orgs/details/OrgDetailsText";
@@ -12,29 +13,50 @@ import StoryLikeContainer, {
   PaddedContainer,
   ProgressContainer,
 } from "../../../components/orgs/details/StoryLikeContainer";
+import {
+  useDetailsAutoTimer,
+  useDetailsIsEnd,
+  useDetailsPageMover,
+  useDetailsPager,
+  useDetailsPages,
+} from "../../../store/organizationDetails";
 
 const resourceRoot =
   process.env.NEXT_PUBLIC_RESOURCE_URL ?? "http://localhost:3333";
 
+function Progress({ numPages }: { numPages: number }) {
+  const pager = useDetailsPager();
+
+  useDetailsAutoTimer();
+
+  return (
+    <ProgressContainer>
+      <ProgressPagination
+        currentPage={pager.currentPage}
+        pageProgress={pager.progress}
+        numPages={numPages}
+      />
+    </ProgressContainer>
+  );
+}
+
 type Props = {
   org: OrganizationFull;
-  orgImage: Array<{
-    isMovie: boolean;
-    name: string;
-    width: number;
-    height: number;
-  }>;
+  orgImage: Array<ResourceBucketItem>;
 };
 export default function OrgDetail({ org, orgImage }: Props) {
-  const totalPages = orgImage.length + 2;
-  const [pageId, setPageId] = React.useState(0);
+  const { numPages, currentPage } = useDetailsPages(orgImage);
+  const isEnd = useDetailsIsEnd();
+
+  const { moveNextPage, movePrevPage, canMoveNext, canMovePrev } =
+    useDetailsPageMover();
 
   const handleLeftClick = () => {
-    setPageId((page) => page - 1);
+    movePrevPage();
   };
 
   const handleRightClick = () => {
-    setPageId((page) => page + 1);
+    moveNextPage();
   };
 
   return (
@@ -43,14 +65,8 @@ export default function OrgDetail({ org, orgImage }: Props) {
         <title>{org.fullName}</title>
       </Head>
       <StoryLikeContainer>
-        <ProgressContainer>
-          <ProgressPagination
-            currentPage={pageId}
-            pageProgress={0.5}
-            numPages={totalPages}
-          />
-        </ProgressContainer>
-        <ContentPager currentPage={pageId}>
+        <Progress numPages={numPages} />
+        <ContentPager currentPage={currentPage}>
           <ContentContainer>
             <PaddedContainer>
               <OrgDetailsText org={org} type="summary" />
@@ -72,12 +88,13 @@ export default function OrgDetail({ org, orgImage }: Props) {
             </ContentContainer>
           ))}
         </ContentPager>
-        {pageId > 0 && (
+        {canMovePrev && (
           <FullscreenPager type="left" showIcon onClick={handleLeftClick} />
         )}
-        {pageId + 1 <= totalPages - 1 && (
+        {canMoveNext && (
           <FullscreenPager type="right" showIcon onClick={handleRightClick} />
         )}
+        {isEnd && <p>閉じる</p>}
       </StoryLikeContainer>
     </>
   );
