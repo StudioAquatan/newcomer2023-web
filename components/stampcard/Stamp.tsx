@@ -1,4 +1,5 @@
 import { css, Theme, useTheme } from "@emotion/react";
+import Link from "next/link";
 import { RecommendationItem } from "../../api/@types";
 import { useOrganizations } from "../../hooks/organizations";
 import Random from "../random";
@@ -14,7 +15,7 @@ const stampStyle = ({ theme }: { theme: Theme }) => {
     display: flex;
     align-items: center;
     color: ${theme.colors.stamp.normalTextColor};
-    background: ${theme.colors.stamp.backgroundColor};
+    border: 3px solid ${theme.colors.stamp.backgroundColor};
   `;
 };
 
@@ -26,6 +27,8 @@ const orgNameStyle = css`
   overflow: hidden;
   font-size: 1.6rem;
   text-align: center;
+  text-shadow: 2px 2px 2px #000, -2px 2px 2px #000, 2px -2px 2px #000,
+    -2px -2px 2px #000;
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -82,7 +85,8 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
   const org = organizationsMap.get(recommendation.org.id);
 
   return (
-    <div
+    <Link
+      href={"/orgs/details/" + org?.id}
       css={stampStyle({
         theme,
       })}
@@ -96,11 +100,11 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
       ) : (
         ""
       )}
-      <div css={orgNameStyle}>{org?.fullName ?? ""}</div>
+      <div css={orgNameStyle}>{org?.shortName ?? ""}</div>
       <div css={logoContainer}>
         <img src={org?.logo?.src ?? ""} alt="logo" css={logoStyle} />
         <div css={logoFilter}></div>
       </div>
-    </div>
+    </Link>
   );
 }

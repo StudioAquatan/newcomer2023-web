@@ -3,7 +3,7 @@ import { css, Theme } from "@emotion/react";
 type FeatureProps = {
   title: string;
   description: string;
-  featureImagePath: string;
+  featureContentNode: React.ReactNode;
   inverse?: boolean;
 };
 
@@ -56,19 +56,15 @@ const featureDescriptionStyle = (theme: Theme) => css`
   }
 `;
 
-const featureImageAreaStyle = css`
+const featureContentAreaStyle = css`
   width: 48rem;
   max-width: 48rem;
-`;
-
-const featureImageStyle = css`
-  width: 100%;
 `;
 
 export default function Feature({
   title,
   description,
-  featureImagePath,
+  featureContentNode,
   inverse = false,
 }: FeatureProps) {
   return (
@@ -81,9 +77,7 @@ export default function Feature({
         </p>
         <p css={featureDescriptionStyle}>{description}</p>
       </div>
-      <div css={featureImageAreaStyle}>
-        <img src={featureImagePath} alt="案内画像" css={featureImageStyle} />
-      </div>
+      <div css={featureContentAreaStyle}>{featureContentNode}</div>
     </div>
   );
 }
