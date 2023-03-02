@@ -3,11 +3,14 @@ import React from "react";
 import { OrganizationFull } from "../../../api/@types";
 import { apiClient } from "../../../api/apiClient";
 import FullscreenPager from "../../../components/orgs/FullscreenPager";
+import ProgressPagination from "../../../components/orgs/ProgressPagination";
 import OrgDetailsText from "../../../components/orgs/details/OrgDetailsText";
 import OrgPicture from "../../../components/orgs/details/OrgPicture";
 import StoryLikeContainer, {
   ContentContainer,
+  ContentPager,
   PaddedContainer,
+  ProgressContainer,
 } from "../../../components/orgs/details/StoryLikeContainer";
 
 const resourceRoot =
@@ -39,45 +42,42 @@ export default function OrgDetail({ org, orgImage }: Props) {
       <Head>
         <title>{org.fullName}</title>
       </Head>
-      <StoryLikeContainer
-        numPages={totalPages}
-        currentPage={pageId}
-        pageProgress={0.5}
-        paginationComponent={
-          <>
-            {pageId > 0 && (
-              <FullscreenPager type="left" showIcon onClick={handleLeftClick} />
-            )}
-            {pageId + 1 <= totalPages - 1 && (
-              <FullscreenPager
-                type="right"
-                showIcon
-                onClick={handleRightClick}
-              />
-            )}
-          </>
-        }
-      >
-        <ContentContainer>
-          <PaddedContainer>
-            <OrgDetailsText org={org} type="summary" />
-          </PaddedContainer>
-        </ContentContainer>
-        <ContentContainer>
-          <PaddedContainer>
-            <OrgDetailsText org={org} type="misc" />
-          </PaddedContainer>
-        </ContentContainer>
-        {orgImage.map((image, key) => (
-          <ContentContainer key={key}>
-            <OrgPicture
-              url={`${resourceRoot}/${org.id}/${image.name}`}
-              width={image.width}
-              height={image.height}
-              isMovie={image.isMovie}
-            />
+      <StoryLikeContainer>
+        <ProgressContainer>
+          <ProgressPagination
+            currentPage={pageId}
+            pageProgress={0.5}
+            numPages={totalPages}
+          />
+        </ProgressContainer>
+        <ContentPager currentPage={pageId}>
+          <ContentContainer>
+            <PaddedContainer>
+              <OrgDetailsText org={org} type="summary" />
+            </PaddedContainer>
           </ContentContainer>
-        ))}
+          <ContentContainer>
+            <PaddedContainer>
+              <OrgDetailsText org={org} type="misc" />
+            </PaddedContainer>
+          </ContentContainer>
+          {orgImage.map((image, key) => (
+            <ContentContainer key={key}>
+              <OrgPicture
+                url={`${resourceRoot}/${org.id}/${image.name}`}
+                width={image.width}
+                height={image.height}
+                isMovie={image.isMovie}
+              />
+            </ContentContainer>
+          ))}
+        </ContentPager>
+        {pageId > 0 && (
+          <FullscreenPager type="left" showIcon onClick={handleLeftClick} />
+        )}
+        {pageId + 1 <= totalPages - 1 && (
+          <FullscreenPager type="right" showIcon onClick={handleRightClick} />
+        )}
       </StoryLikeContainer>
     </>
   );

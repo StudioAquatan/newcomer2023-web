@@ -18,7 +18,4 @@ const Template: ComponentStory<typeof StoryLikeContainer> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   children: <p>Test</p>,
-  numPages: 5,
-  currentPage: 0,
-  pageProgress: 0.2,
 };
