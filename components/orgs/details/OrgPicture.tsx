@@ -18,11 +18,11 @@ const container = css`
 `;
 
 const image = css`
-  width: auto;
-  min-width: calc(min(100vw, 400px));
+  width: calc(min(100vw, 800px));
   max-width: 100vw;
   height: auto;
   max-height: 90vh;
+  object-fit: contain;
 `;
 
 export default function OrgPicture({ url, isMovie, width, height }: Props) {
@@ -50,8 +50,8 @@ export default function OrgPicture({ url, isMovie, width, height }: Props) {
           src={url}
           alt=""
           css={image}
-          width={500}
-          height={(500 / width) * height}
+          width={700}
+          height={(700 / width) * height}
         />
       )}
     </div>
