@@ -15,7 +15,7 @@ const stampStyle = ({ theme }: { theme: Theme }) => {
     display: flex;
     align-items: center;
     color: ${theme.colors.stamp.normalTextColor};
-    background: ${theme.colors.stamp.backgroundColor};
+    border: 3px solid ${theme.colors.stamp.backgroundColor};
   `;
 };
 
