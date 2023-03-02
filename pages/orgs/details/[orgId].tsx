@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import Head from "next/head";
 import React from "react";
 import { OrganizationFull } from "../../../api/@types";
@@ -11,7 +12,6 @@ import StoryLikeContainer, {
   ContentContainer,
   ContentPager,
   PaddedContainer,
-  ProgressContainer,
 } from "../../../components/orgs/details/StoryLikeContainer";
 import {
   useDetailsAutoTimer,
@@ -24,19 +24,25 @@ import {
 const resourceRoot =
   process.env.NEXT_PUBLIC_RESOURCE_URL ?? "http://localhost:3333";
 
+const progressContainer = css`
+  position: fixed;
+  top: 0;
+  width: calc(100vw - 1rem * 2);
+  margin: 1rem;
+`;
 function Progress({ numPages }: { numPages: number }) {
   const pager = useDetailsPager();
 
   useDetailsAutoTimer();
 
   return (
-    <ProgressContainer>
+    <div css={progressContainer}>
       <ProgressPagination
         currentPage={pager.currentPage}
         pageProgress={pager.progress}
         numPages={numPages}
       />
-    </ProgressContainer>
+    </div>
   );
 }
 

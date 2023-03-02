@@ -19,6 +19,7 @@ const outer = css`
   align-items: center;
   justify-content: center;
   height: calc(100% - 30px);
+  padding: 30px 0;
 `;
 
 const container = css`
