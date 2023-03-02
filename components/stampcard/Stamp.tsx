@@ -1,4 +1,5 @@
 import { css, Theme, useTheme } from "@emotion/react";
+import Link from "next/link";
 import { RecommendationItem } from "../../api/@types";
 import { useOrganizations } from "../../hooks/organizations";
 import Random from "../random";
@@ -84,7 +85,8 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
   const org = organizationsMap.get(recommendation.org.id);
 
   return (
-    <div
+    <Link
+      href={"/orgs/details/" + org?.id}
       css={stampStyle({
         theme,
       })}
@@ -103,6 +105,6 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
         <img src={org?.logo?.src ?? ""} alt="logo" css={logoStyle} />
         <div css={logoFilter}></div>
       </div>
-    </div>
+    </Link>
   );
 }
