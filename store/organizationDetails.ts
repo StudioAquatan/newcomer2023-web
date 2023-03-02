@@ -137,3 +137,12 @@ export function useDetailsAutoTimer() {
 export function useDetailsIsEnd() {
   return useAtomValue(isEndAtom);
 }
+
+export function useDetailsProgress() {
+  const setValue = useSetAtom(activeProgressAtom);
+  return {
+    set(progress: number) {
+      setValue(Math.min(progress, 1));
+    },
+  };
+}

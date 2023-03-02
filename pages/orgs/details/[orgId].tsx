@@ -84,6 +84,7 @@ export default function OrgDetail({ org, orgImage }: Props) {
                 width={image.width}
                 height={image.height}
                 isMovie={image.isMovie}
+                isActive={key + 2 == currentPage}
               />
             </ContentContainer>
           ))}
