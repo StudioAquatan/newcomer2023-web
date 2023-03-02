@@ -3,19 +3,19 @@ import { StampProps } from "../stampcard/Stamp";
 import StampCard, { StampCardProps } from "../stampcard/StampCard";
 import Feature from "./Feature";
 
-type FeatureStampCardProps = {
+type FeatureStampRallyProps = {
   title: string;
   description: string;
   inverse?: boolean;
   recommendation: Recommendation;
 };
 
-export default function FeatureStampCard({
+export default function FeatureStampRally({
   title,
   description,
   inverse = false,
   recommendation,
-}: FeatureStampCardProps) {
+}: FeatureStampRallyProps) {
   const seed = 0;
 
   const stamps: StampProps[] = recommendation.orgs.map(

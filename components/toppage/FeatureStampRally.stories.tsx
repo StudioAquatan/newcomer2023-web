@@ -2,18 +2,18 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { Recommendation } from "../../api/@types";
 
-import FeatureStampCard from "./FeatureStampCard";
+import FeatureStampRally from "./FeatureStampRally";
 
 export default {
   title: "toppage/Feature",
-  component: FeatureStampCard,
+  component: FeatureStampRally,
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof FeatureStampCard>;
+} as ComponentMeta<typeof FeatureStampRally>;
 
-const Template: ComponentStory<typeof FeatureStampCard> = (args) => (
-  <FeatureStampCard {...args} />
+const Template: ComponentStory<typeof FeatureStampRally> = (args) => (
+  <FeatureStampRally {...args} />
 );
 
 const orgIds = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
@@ -32,11 +32,10 @@ const recommendation: Recommendation = {
   renewRemains: 0,
 };
 
-export const Diagnose = Template.bind({});
-Diagnose.args = {
-  title: "相性診断",
-  description:
-    "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
+export const StampRally = Template.bind({});
+StampRally.args = {
+  title: "スタンプラリー",
+  description: "QRコードを読み込んで、景品を貰いに行こう！",
   recommendation: recommendation,
   inverse: true,
 };
