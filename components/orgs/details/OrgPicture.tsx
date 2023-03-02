@@ -1,9 +1,17 @@
 import { css } from "@emotion/react";
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCirclePlay,
+  faVolumeMute,
+  faVolumeDown,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React from "react";
-import { useDetailsProgress } from "../../../store/organizationDetails";
+import {
+  useDetailsMuteValue,
+  useDetailsProgress,
+  useDetailsMute,
+} from "../../../store/organizationDetails";
 
 type Props = {
   url: string;
@@ -14,7 +22,6 @@ type Props = {
 };
 
 const container = css`
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,10 +35,10 @@ const image = css`
   max-height: 90vh;
   object-fit: contain;
 `;
-// TODO: progress barが固定値で入っている(4px + 1rem)
+
 const playButton = css`
   position: absolute;
-  top: calc(50% - min(35vw, 250px) / 2 - 4px - 1rem);
+  top: calc(50% - min(35vw, 250px) / 2);
   left: calc(50% - min(35vw, 250px) / 2);
   display: flex;
   align-items: center;
@@ -46,6 +53,32 @@ const playButton = css`
   }
 `;
 
+const muteButton = css`
+  position: absolute;
+  right: 5vw;
+  bottom: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: min(12vw, 80px);
+  height: min(12vw, 80px);
+  font-size: min(10vw, 60px);
+  color: rgb(255 255 255 / 50%);
+
+  &:hover {
+    color: rgb(255 255 255 / 80%);
+  }
+`;
+
+export function OrgMovieControl() {
+  const muteState = useDetailsMute();
+  return (
+    <a css={muteButton} onClick={muteState.toggle}>
+      <FontAwesomeIcon icon={muteState.isMute ? faVolumeMute : faVolumeDown} />
+    </a>
+  );
+}
+
 export default function OrgPicture({
   url,
   isMovie,
@@ -56,6 +89,7 @@ export default function OrgPicture({
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const { set: setProgress } = useDetailsProgress();
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const muted = useDetailsMuteValue();
   React.useEffect(() => {
     if (!isMovie || !videoRef.current) return;
     if (!videoRef.current.canPlayType("application/vnd.apple.mpegURL")) {
@@ -126,12 +160,11 @@ export default function OrgPicture({
           <video
             src={url}
             css={image}
-            muted
+            muted={muted}
             ref={videoRef}
-            controls
             onPlay={handlePlayStart}
           />
-          {isPlaying || (
+          {!isPlaying && isActive && (
             <a css={playButton} onClick={handlePlay}>
               <FontAwesomeIcon icon={faCirclePlay} />
             </a>

@@ -7,7 +7,9 @@ import { ResourceBucketItem } from "../../../api/resource-bucket";
 import FullscreenPager from "../../../components/orgs/FullscreenPager";
 import ProgressPagination from "../../../components/orgs/ProgressPagination";
 import OrgDetailsText from "../../../components/orgs/details/OrgDetailsText";
-import OrgPicture from "../../../components/orgs/details/OrgPicture";
+import OrgPicture, {
+  OrgMovieControl,
+} from "../../../components/orgs/details/OrgPicture";
 import StoryLikeContainer, {
   ContentContainer,
   ContentPager,
@@ -15,6 +17,7 @@ import StoryLikeContainer, {
 } from "../../../components/orgs/details/StoryLikeContainer";
 import {
   useDetailsAutoTimer,
+  useDetailsCurrentIsMovie,
   useDetailsIsEnd,
   useDetailsPageMover,
   useDetailsPager,
@@ -65,6 +68,8 @@ export default function OrgDetail({ org, orgImage }: Props) {
     moveNextPage();
   };
 
+  const isMovie = useDetailsCurrentIsMovie();
+
   return (
     <>
       <Head>
@@ -101,6 +106,7 @@ export default function OrgDetail({ org, orgImage }: Props) {
         {canMoveNext && (
           <FullscreenPager type="right" onClick={handleRightClick} />
         )}
+        {isMovie && <OrgMovieControl />}
         {isEnd && <p>閉じる</p>}
       </StoryLikeContainer>
     </>

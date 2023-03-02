@@ -11,6 +11,7 @@ import { ResourceBucketItem } from "../api/resource-bucket";
 
 export interface PageInfo {
   autoNextTimer: boolean;
+  isMovie: boolean;
 }
 
 const pageListAtom = atom<PageInfo[]>([]);
@@ -18,6 +19,8 @@ const activePageAtom = atomWithReset<number>(0);
 const activeProgressAtom = atomWithReset<number>(0);
 const isEndAtom = atomWithReset<boolean>(false);
 const pausedAtom = atom<boolean>(false);
+
+const movieMutedAtom = atomWithReset<boolean>(true);
 
 // 最上位コンポーネントで動かす予定のものなのでre-renderしないように設計
 // 値を何も見ていない
@@ -31,10 +34,11 @@ export function useDetailsPages(orgImages: ResourceBucketItem[]) {
   // ページ情報はuseEffectで反映
   React.useEffect(() => {
     setPageList([
-      { autoNextTimer: true }, // 概要1
-      { autoNextTimer: true }, // 概要2
+      { autoNextTimer: true, isMovie: false }, // 概要1
+      { autoNextTimer: true, isMovie: false }, // 概要2
       ...orgImages.map(({ isMovie }) => ({
         autoNextTimer: !isMovie,
+        isMovie,
       })), // 残り
     ]);
     // 変更が生じたら1からやる
@@ -74,6 +78,7 @@ export function useDetailsPageMover() {
   const setActivePage = useSetAtom(activePageAtom);
   const resetActiveProgress = useResetAtom(activeProgressAtom);
   const resetIsEnd = useResetAtom(isEndAtom);
+  const resetMuted = useResetAtom(movieMutedAtom);
 
   const canMoveNext = pageList.length - 1 >= activePage + 1;
   const canMovePrev = activePage > 0;
@@ -84,6 +89,7 @@ export function useDetailsPageMover() {
         setActivePage(activePage + 1);
         resetActiveProgress();
         resetIsEnd();
+        resetMuted();
       }
     },
     canMovePrev,
@@ -92,6 +98,7 @@ export function useDetailsPageMover() {
         setActivePage(activePage - 1);
         resetActiveProgress();
         resetIsEnd();
+        resetMuted();
       }
     },
   };
@@ -145,4 +152,26 @@ export function useDetailsProgress() {
       setValue(Math.min(progress, 1));
     },
   };
+}
+
+export function useDetailsCurrentIsMovie() {
+  const pageList = useAtomValue(pageListAtom);
+  const activePage = useAtomValue(activePageAtom);
+
+  return pageList[activePage]?.isMovie ?? false;
+}
+
+export function useDetailsMute() {
+  const [isMute, setMute] = useAtom(movieMutedAtom);
+  return {
+    toggle() {
+      setMute((muted) => !muted);
+    },
+    isMute,
+  };
+}
+
+export function useDetailsMuteValue() {
+  const muted = useAtomValue(movieMutedAtom);
+  return muted;
 }
