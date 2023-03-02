@@ -91,6 +91,27 @@ export default function OrgPicture({
     }
   }, [isActive, setProgress]);
 
+  React.useEffect(() => {
+    if (!videoRef.current) return;
+    if (!isActive) return;
+    const handleTouchEnd = () => {
+      videoRef.current?.play();
+    };
+    const handleTouchStart = () => {
+      if (!videoRef.current?.paused) {
+        window.addEventListener("touchend", handleTouchEnd);
+      }
+      videoRef.current?.pause();
+    };
+
+    window.addEventListener("touchstart", handleTouchStart);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [isActive]);
+
   const handlePlay = () => {
     if (!videoRef.current) return;
     videoRef.current.play();
