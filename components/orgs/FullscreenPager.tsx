@@ -38,6 +38,10 @@ const button = css`
   height: 9em;
   background: rgb(255 255 255 / 10%);
   border-radius: 6em;
+
+  @media (max-width: 420px) {
+    display: none;
+  }
 `;
 
 function LeftIcon() {
@@ -61,12 +65,11 @@ function RightIcon() {
 }
 
 type Props = {
-  showIcon: boolean;
   type: "left" | "right";
   onClick?: () => unknown;
 };
 
-export default function FullscreenPager({ showIcon, type, onClick }: Props) {
+export default function FullscreenPager({ type, onClick }: Props) {
   const containerCss =
     type === "left"
       ? [pager, leftPager]
@@ -75,12 +78,10 @@ export default function FullscreenPager({ showIcon, type, onClick }: Props) {
       : null;
   return (
     <div css={containerCss} onClick={onClick}>
-      {showIcon && (
-        <a css={button}>
-          {type === "left" && <LeftIcon />}
-          {type === "right" && <RightIcon />}
-        </a>
-      )}
+      <a css={button}>
+        {type === "left" && <LeftIcon />}
+        {type === "right" && <RightIcon />}
+      </a>
     </div>
   );
 }

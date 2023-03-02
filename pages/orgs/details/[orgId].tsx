@@ -90,10 +90,10 @@ export default function OrgDetail({ org, orgImage }: Props) {
           ))}
         </ContentPager>
         {canMovePrev && (
-          <FullscreenPager type="left" showIcon onClick={handleLeftClick} />
+          <FullscreenPager type="left" onClick={handleLeftClick} />
         )}
         {canMoveNext && (
-          <FullscreenPager type="right" showIcon onClick={handleRightClick} />
+          <FullscreenPager type="right" onClick={handleRightClick} />
         )}
         {isEnd && <p>閉じる</p>}
       </StoryLikeContainer>

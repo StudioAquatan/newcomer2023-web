@@ -21,12 +21,10 @@ const Template: ComponentStory<typeof FullscreenPager> = (args) => (
 
 export const Left = Template.bind({});
 Left.args = {
-  showIcon: true,
   type: "left",
 };
 
 export const Right = Template.bind({});
 Right.args = {
-  showIcon: true,
   type: "right",
 };
