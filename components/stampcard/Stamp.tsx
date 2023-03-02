@@ -98,7 +98,7 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
       ) : (
         ""
       )}
-      <div css={orgNameStyle}>{org?.fullName ?? ""}</div>
+      <div css={orgNameStyle}>{org?.shortName ?? ""}</div>
       <div css={logoContainer}>
         <img src={org?.logo?.src ?? ""} alt="logo" css={logoStyle} />
         <div css={logoFilter}></div>
