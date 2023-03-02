@@ -82,6 +82,9 @@ const textContentH1Style = (theme: Theme) => css`
 
 const textContentPStyle = (theme: Theme) => css`
   display: -webkit-box;
+
+  /* 2行分で高さを固定にしてしまう */
+  height: 3.6rem;
   margin: 0;
   overflow: hidden;
   font-size: 1.2rem;
