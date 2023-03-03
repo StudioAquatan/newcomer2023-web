@@ -36,8 +36,10 @@ const logoContainer = css`
 const logo = css`
   width: 8vh;
   height: 8vh;
+  background-color: rgb(255 255 255 / 70%);
   border-radius: 100%;
   box-shadow: 2px 2px 10px rgb(255 255 255 / 50%);
+  object-fit: contain;
 `;
 
 const orgName = css`
