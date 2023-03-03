@@ -13,6 +13,7 @@ import { useIsMobile } from "./userAgent";
 export interface PageInfo {
   autoNextTimer: boolean;
   isMovie: boolean;
+  duration?: number;
 }
 
 const pageListAtom = atom<PageInfo[]>([]);
@@ -21,7 +22,7 @@ const activeProgressAtom = atomWithReset<number>(0);
 const isEndAtom = atomWithReset<boolean>(false);
 const pausedAtom = atom<boolean>(false);
 
-const movieMutedAtom = atomWithReset<boolean>(true);
+const movieMutedAtom = atomWithReset<boolean>(false);
 
 // 最上位コンポーネントで動かす予定のものなのでre-renderしないように設計
 // 値を何も見ていない
@@ -38,7 +39,7 @@ export function useDetailsPages(orgImages: ResourceBucketItem[]) {
   // ページ情報はuseEffectで反映
   React.useEffect(() => {
     setPageList([
-      { autoNextTimer: isMobile, isMovie: false }, // 概要1
+      { autoNextTimer: isMobile, isMovie: false, duration: 15000 }, // 概要1
       { autoNextTimer: isMobile, isMovie: false }, // 概要2
       ...orgImages.map(({ isMovie }) => ({
         autoNextTimer: !isMovie,
@@ -83,7 +84,6 @@ export function useDetailsPageMover() {
   const setActivePage = useSetAtom(activePageAtom);
   const resetActiveProgress = useResetAtom(activeProgressAtom);
   const resetIsEnd = useResetAtom(isEndAtom);
-  const resetMuted = useResetAtom(movieMutedAtom);
 
   const canMoveNext = pageList.length - 1 >= activePage + 1;
   const canMovePrev = activePage > 0;
@@ -94,7 +94,6 @@ export function useDetailsPageMover() {
         setActivePage(activePage + 1);
         resetActiveProgress();
         resetIsEnd();
-        resetMuted();
       }
     },
     canMovePrev,
@@ -103,7 +102,6 @@ export function useDetailsPageMover() {
         setActivePage(activePage - 1);
         resetActiveProgress();
         resetIsEnd();
-        resetMuted();
       }
     },
   };
@@ -123,7 +121,7 @@ export function useDetailsAutoTimer() {
     if (pageList[activePage]?.autoNextTimer && !paused) {
       // カウントダウンタイマースタート
       const now = Date.now();
-      const time = 10000;
+      const time = pageList[activePage]?.duration ?? 10000;
       const interval = setInterval(() => {
         // progressの値はこのコンテキストでは変わらないので
         setProgress(Math.min((Date.now() - now) / time, 1.0));

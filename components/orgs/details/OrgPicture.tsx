@@ -3,6 +3,7 @@ import {
   faCirclePlay,
   faVolumeMute,
   faVolumeDown,
+  faCirclePause,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -12,6 +13,7 @@ import {
   useDetailsProgress,
   useDetailsMute,
 } from "../../../store/organizationDetails";
+import { useIsMobile } from "../../../store/userAgent";
 
 type Props = {
   url: string;
@@ -22,6 +24,7 @@ type Props = {
 };
 
 const container = css`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,10 +50,16 @@ const playButton = css`
   height: min(35vw, 250px);
   font-size: min(30vw, 200px);
   color: rgb(255 255 255 / 50%);
+  cursor: pointer;
+  transition: color 0.1s ease-in-out;
 
   &:hover {
     color: rgb(255 255 255 / 80%);
   }
+`;
+
+const pauseButton = css`
+  color: rgb(255 255 255 / 0%);
 `;
 
 const muteButton = css`
@@ -90,7 +99,9 @@ export default function OrgPicture({
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const { set: setProgress } = useDetailsProgress();
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isInitalPlayStarted, setInitialPlay] = React.useState(false);
   const muted = useDetailsMuteValue();
+  const { isMobile } = useIsMobile();
   React.useEffect(() => {
     if (!isMovie || !videoRef.current) return;
     if (!videoRef.current.canPlayType("application/vnd.apple.mpegURL")) {
@@ -104,13 +115,11 @@ export default function OrgPicture({
       };
       startWithHls();
     }
-    setIsPlaying(false);
   }, [isMovie, url]);
 
   React.useEffect(() => {
     if (!videoRef.current) return;
     if (isActive) {
-      videoRef.current.play();
       setProgress(0);
 
       const interval = setInterval(() => {
@@ -124,6 +133,7 @@ export default function OrgPicture({
     } else {
       videoRef.current.currentTime = 0;
       videoRef.current.pause();
+      setInitialPlay(false);
     }
   }, [isActive, setProgress]);
 
@@ -136,8 +146,8 @@ export default function OrgPicture({
     const handleTouchStart = () => {
       if (!videoRef.current?.paused) {
         window.addEventListener("touchend", handleTouchEnd);
+        videoRef.current?.pause();
       }
-      videoRef.current?.pause();
     };
 
     window.addEventListener("touchstart", handleTouchStart);
@@ -149,11 +159,16 @@ export default function OrgPicture({
   }, [isActive]);
 
   const handlePlay = () => {
-    if (!videoRef.current) return;
-    videoRef.current.play();
+    videoRef.current?.play();
   };
-
-  const handlePlayStart = () => setIsPlaying(true);
+  const handlePause = () => {
+    videoRef.current?.pause();
+  };
+  const handlePlayStart = () => {
+    setIsPlaying(true);
+    setInitialPlay(true);
+  };
+  const handlePaused = () => setIsPlaying(false);
 
   return (
     <div css={container}>
@@ -165,10 +180,21 @@ export default function OrgPicture({
             muted={muted}
             ref={videoRef}
             onPlay={handlePlayStart}
+            onPause={handlePaused}
           />
-          {!isPlaying && isActive && (
+          {isMobile && !isInitalPlayStarted && (
             <a css={playButton} onClick={handlePlay}>
               <FontAwesomeIcon icon={faCirclePlay} />
+            </a>
+          )}
+          {!isMobile && (
+            <a
+              css={isPlaying ? [playButton, pauseButton] : playButton}
+              onClick={isPlaying ? handlePause : handlePlay}
+            >
+              <FontAwesomeIcon
+                icon={isPlaying ? faCirclePause : faCirclePlay}
+              />
             </a>
           )}
         </>
