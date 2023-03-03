@@ -2,6 +2,7 @@ import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { atomWithReset, useResetAtom } from "jotai/utils";
 import React from "react";
 import { ResourceBucketItem } from "../api/resource-bucket";
+import { useIsMobile } from "./userAgent";
 
 // 動画ページ→動画に合わせてページ遷移
 // その他→一定時間
@@ -31,11 +32,14 @@ export function useDetailsPages(orgImages: ResourceBucketItem[]) {
   const resetActiveProgress = useResetAtom(activeProgressAtom);
   const resetIsEnd = useResetAtom(isEndAtom);
   const currentPage = useAtomValue(activePageAtom);
+  // PC/スマホ判定
+  const { isMobile } = useIsMobile();
+
   // ページ情報はuseEffectで反映
   React.useEffect(() => {
     setPageList([
-      { autoNextTimer: true, isMovie: false }, // 概要1
-      { autoNextTimer: true, isMovie: false }, // 概要2
+      { autoNextTimer: isMobile, isMovie: false }, // 概要1
+      { autoNextTimer: isMobile, isMovie: false }, // 概要2
       ...orgImages.map(({ isMovie }) => ({
         autoNextTimer: !isMovie,
         isMovie,
@@ -51,6 +55,7 @@ export function useDetailsPages(orgImages: ResourceBucketItem[]) {
     resetActiveProgress,
     resetIsEnd,
     setPageList,
+    isMobile,
   ]);
 
   return {
