@@ -120,12 +120,11 @@ export function useDetailsAutoTimer() {
   React.useEffect(() => {
     if (pageList[activePage]?.autoNextTimer && !paused) {
       // カウントダウンタイマースタート
-      const now = Date.now();
       const time = pageList[activePage]?.duration ?? 10000;
       const interval = setInterval(() => {
         // progressの値はこのコンテキストでは変わらないので
-        setProgress(Math.min((Date.now() - now) / time, 1.0));
-      }, 1000 / 60); // 15 sec
+        setProgress((progress) => Math.min(progress + 1000 / 30 / time, 1.0));
+      }, 1000 / 30); // 15 sec
 
       return () => clearInterval(interval);
     }
@@ -177,4 +176,38 @@ export function useDetailsMute() {
 export function useDetailsMuteValue() {
   const muted = useAtomValue(movieMutedAtom);
   return muted;
+}
+
+export function useDetailsPause() {
+  const [paused, setPaused] = useAtom(pausedAtom);
+  return {
+    paused,
+    pause() {
+      setPaused(true);
+    },
+    play() {
+      setPaused(false);
+    },
+  };
+}
+
+// 汚いがイベントをここで仕込む
+export function useDetailsPauseEvent() {
+  const setPaused = useSetAtom(pausedAtom);
+  React.useEffect(() => {
+    const handleTouchEnd = () => {
+      setPaused(false);
+    };
+    const handleTouchStart = () => {
+      setPaused(true);
+    };
+
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [setPaused]);
 }

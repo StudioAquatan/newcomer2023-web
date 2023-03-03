@@ -24,6 +24,7 @@ import {
   useDetailsPageMover,
   useDetailsPager,
   useDetailsPages,
+  useDetailsPauseEvent,
 } from "../../../store/organizationDetails";
 
 const resourceRoot =
@@ -91,6 +92,8 @@ export default function OrgDetail({ org, orgImage }: Props) {
   };
 
   const isMovie = useDetailsCurrentIsMovie();
+
+  useDetailsPauseEvent();
 
   return (
     <>
