@@ -86,6 +86,11 @@ const linkStyle = css`
   margin-bottom: 1rem;
 `;
 
+const linkAnchorStyle = css`
+  color: #1174ff;
+  text-decoration: none;
+`;
+
 function ItemLinks({ links }: { links: Array<string> }) {
   return (
     <div>
@@ -93,7 +98,14 @@ function ItemLinks({ links }: { links: Array<string> }) {
       <ul css={linkListStyle}>
         {links.map((link, index) => (
           <li key={index} css={linkStyle}>
-            <a href={link}>{link}</a>
+            <a
+              href={link}
+              css={linkAnchorStyle}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {link}
+            </a>
           </li>
         ))}
       </ul>
