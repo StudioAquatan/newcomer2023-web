@@ -2,7 +2,7 @@ import { css, useTheme } from "@emotion/react";
 
 const container = css`
   display: flex;
-  width: 100%;
+  flex-grow: 1;
 `;
 
 const pageBar = () => {

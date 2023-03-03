@@ -1,4 +1,6 @@
 import { css } from "@emotion/react";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import React from "react";
 import { OrganizationFull } from "../../../api/@types";
@@ -30,8 +32,25 @@ const resourceRoot =
 const progressContainer = css`
   position: fixed;
   top: 0;
+  display: flex;
   width: calc(100vw - 1rem * 2);
   margin: 1rem;
+`;
+
+const closeButton = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  margin: 0;
+  font-size: 3rem;
+  color: rgb(0 0 0 / 80%);
+  text-align: center;
+  cursor: pointer;
+  background-color: rgb(255 255 255 / 50%);
+  border-radius: 100vw;
 `;
 function Progress({ numPages }: { numPages: number }) {
   const pager = useDetailsPager();
@@ -45,6 +64,9 @@ function Progress({ numPages }: { numPages: number }) {
         pageProgress={pager.progress}
         numPages={numPages}
       />
+      <a css={closeButton}>
+        <FontAwesomeIcon icon={faClose} />
+      </a>
     </div>
   );
 }
@@ -76,7 +98,6 @@ export default function OrgDetail({ org, orgImage }: Props) {
         <title>{org.fullName}</title>
       </Head>
       <StoryLikeContainer>
-        <Progress numPages={numPages} />
         <ContentPager currentPage={currentPage}>
           <ContentContainer>
             <PaddedContainer>
@@ -106,6 +127,7 @@ export default function OrgDetail({ org, orgImage }: Props) {
         {canMoveNext && (
           <FullscreenPager type="right" onClick={handleRightClick} />
         )}
+        <Progress numPages={numPages} />
         {isMovie && <OrgMovieControl />}
         {isEnd && <p>閉じる</p>}
       </StoryLikeContainer>
