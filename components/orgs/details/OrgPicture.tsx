@@ -64,6 +64,7 @@ const muteButton = css`
   height: min(12vw, 80px);
   font-size: min(10vw, 60px);
   color: rgb(255 255 255 / 50%);
+  cursor: pointer;
 
   &:hover {
     color: rgb(255 255 255 / 80%);
@@ -110,6 +111,7 @@ export default function OrgPicture({
     if (!videoRef.current) return;
     if (isActive) {
       videoRef.current.play();
+      setProgress(0);
 
       const interval = setInterval(() => {
         const progress =
