@@ -1,20 +1,17 @@
-import { Global, ThemeProvider } from "@emotion/react";
-import { AppProps } from "next/app";
+import type { AppPropsWithLayout } from "next/app";
 import { useEffect } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
-// import { NextPageContext } from "next/types";
 import Layout from "../components/Layout";
+import Footer from "../components/footers/Footer";
 import { useRouterHistoryRecorder } from "../store/router";
 import { useSetIsMobile } from "../store/userAgent";
-import { globalStyles } from "../styles/globals";
-import { sakura } from "../themes/sakura";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   console.log("API Mocking Enabled");
   require("../mocks");
 }
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const { setIsMobile } = useSetIsMobile();
 
   // 初回だけUserAgentを取得して、状態を保存する
@@ -25,12 +22,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useRouterHistoryRecorder();
 
-  return (
-    <ThemeProvider theme={sakura}>
+  // デフォルトのレイアウトはFooter付き
+  // 各ページでgetLayoutを定義することで、ページごとにレイアウトを変更できる
+  const getLayout =
+    Component.getLayout ??
+    ((page) => (
       <Layout>
-        <Global styles={globalStyles} />
-        <Component {...pageProps} />
+        {page}
+        <Footer />
       </Layout>
-    </ThemeProvider>
-  );
+    ));
+  return getLayout(<Component {...pageProps} />);
 }
