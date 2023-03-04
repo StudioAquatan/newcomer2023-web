@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
 // import { NextPageContext } from "next/types";
 import Layout from "../components/Layout";
+import { useRouterHistoryRecorder } from "../store/router";
 import { useSetIsMobile } from "../store/userAgent";
 import { globalStyles } from "../styles/globals";
 import { sakura } from "../themes/sakura";
@@ -21,6 +22,8 @@ export default function App({ Component, pageProps }: AppProps) {
     const { isMobile } = getSelectorsByUserAgent(navigator.userAgent);
     setIsMobile({ isMobile: isMobile });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useRouterHistoryRecorder();
 
   return (
     <ThemeProvider theme={sakura}>
