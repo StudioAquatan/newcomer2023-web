@@ -18,7 +18,7 @@ export default function Diagnose({ questions, initialCurrent }: DiagnoseProps) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const questions = await apiClient.questions
     .$get()
     .then((res) => {
