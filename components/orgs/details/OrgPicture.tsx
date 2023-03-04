@@ -27,6 +27,7 @@ type Props = {
 const container = css`
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -96,7 +97,8 @@ export default function OrgPicture({
   width,
   height,
   isActive,
-}: Props) {
+  children,
+}: React.PropsWithChildren<Props>) {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const { set: setProgress } = useDetailsProgress();
   const [isPlaying, setIsPlaying] = React.useState(false);
@@ -201,6 +203,7 @@ export default function OrgPicture({
           height={(700 / width) * height}
         />
       )}
+      {children}
     </div>
   );
 }

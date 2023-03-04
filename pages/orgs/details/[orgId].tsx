@@ -68,6 +68,43 @@ function CloseButton() {
   );
 }
 
+const lastCloseContainer = css`
+  position: fixed;
+  bottom: 20vh;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+`;
+
+const lastCloseButton = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  margin: 2.5rem;
+  font-size: 2rem;
+  color: rgb(0 0 0 / 80%);
+  text-align: center;
+  cursor: pointer;
+  background-color: rgb(255 255 255 / 90%);
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: rgb(255 255 255 / 50%);
+  }
+`;
+
+function LastCloseButton() {
+  const handleClose = useDetailsClose();
+  return (
+    <div css={lastCloseContainer}>
+      <a css={lastCloseButton} onClick={handleClose}>
+        閉じる
+      </a>
+    </div>
+  );
+}
+
 function Progress({ numPages }: { numPages: number }) {
   const pager = useDetailsPager();
 
@@ -125,15 +162,15 @@ export default function OrgDetail({ org, orgImage }: Props) {
               <OrgDetailsText org={org} type="misc" />
             </PaddedContainer>
           </ContentContainer>
-          {orgImage.map((image, key) => (
-            <ContentContainer key={key}>
+          {orgImage.map((image, index) => (
+            <ContentContainer key={index}>
               <OrgPicture
                 url={`${resourceRoot}/${org.id}/${image.name}`}
                 width={image.width}
                 height={image.height}
                 isMovie={image.isMovie}
-                isActive={key + 2 == currentPage}
-              />
+                isActive={index + 2 == currentPage}
+              ></OrgPicture>
             </ContentContainer>
           ))}
         </ContentPager>
@@ -145,7 +182,7 @@ export default function OrgDetail({ org, orgImage }: Props) {
         )}
         <Progress numPages={numPages} />
         {isMovie && <OrgMovieControl />}
-        {isEnd && <p>閉じる</p>}
+        {isEnd && <LastCloseButton />}
       </StoryLikeContainer>
     </>
   );
