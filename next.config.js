@@ -14,6 +14,7 @@ const nextConfig = {
       },
     ],
   },
+  experimental: { runtime: "experimental-edge" },
 };
 
 module.exports = withExportImages(nextConfig);
