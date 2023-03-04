@@ -19,6 +19,7 @@ import StoryLikeContainer, {
 } from "../../../components/orgs/details/StoryLikeContainer";
 import {
   useDetailsAutoTimer,
+  useDetailsClose,
   useDetailsCurrentIsMovie,
   useDetailsIsEnd,
   useDetailsPageMover,
@@ -52,7 +53,21 @@ const closeButton = css`
   cursor: pointer;
   background-color: rgb(255 255 255 / 50%);
   border-radius: 100vw;
+
+  &:hover {
+    background-color: rgb(255 255 255 / 80%);
+  }
 `;
+
+function CloseButton() {
+  const handleClose = useDetailsClose();
+  return (
+    <a css={closeButton} onClick={handleClose}>
+      <FontAwesomeIcon icon={faClose} />
+    </a>
+  );
+}
+
 function Progress({ numPages }: { numPages: number }) {
   const pager = useDetailsPager();
 
@@ -65,9 +80,7 @@ function Progress({ numPages }: { numPages: number }) {
         pageProgress={pager.progress}
         numPages={numPages}
       />
-      <a css={closeButton}>
-        <FontAwesomeIcon icon={faClose} />
-      </a>
+      <CloseButton />
     </div>
   );
 }

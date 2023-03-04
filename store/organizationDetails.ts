@@ -1,7 +1,9 @@
 import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { atomWithReset, useResetAtom } from "jotai/utils";
+import { useRouter } from "next/router";
 import React from "react";
 import { ResourceBucketItem } from "../api/resource-bucket";
+import { useRouterHistory } from "./router";
 import { useIsMobile } from "./userAgent";
 
 // 動画ページ→動画に合わせてページ遷移
@@ -210,4 +212,24 @@ export function useDetailsPauseEvent() {
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [setPaused]);
+}
+
+// ここじゃない！！！！！！！！！！！
+export function useDetailsClose() {
+  const urlHistory = useRouterHistory();
+  const { push } = useRouter();
+
+  const handleClose = () => {
+    const orgsIndex = urlHistory.findIndex((url) => url.endsWith("/orgs"));
+    const stampIndex = urlHistory.findIndex((url) =>
+      url.endsWith("/stampcard")
+    );
+    if (orgsIndex > stampIndex) {
+      push("/stampcard");
+    } else {
+      push("/orgs");
+    }
+  };
+
+  return handleClose;
 }
