@@ -58,6 +58,7 @@ const orgImageStyle = css`
   height: 4.8rem;
   background-color: #eee;
   border-radius: 1.6rem;
+  object-fit: contain;
 `;
 
 const textBoxStyle = css`
