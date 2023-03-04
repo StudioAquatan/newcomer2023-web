@@ -25,14 +25,7 @@ export async function getStaticProps() {
       return res;
     })
     .catch((error) => {
-      console.log(error);
-      return [
-        {
-          id: "999",
-          questionText: "Fetch Error: Question Not Found",
-          questionType: "five",
-        },
-      ];
+      throw new Error("Failed to fetch questions", error);
     });
 
   return {
