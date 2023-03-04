@@ -6,6 +6,7 @@ import React from "react";
 import { OrganizationFull } from "../../../api/@types";
 import { apiClient } from "../../../api/apiClient";
 import { ResourceBucketItem } from "../../../api/resource-bucket";
+import Layout from "../../../components/Layout";
 import FullscreenPager from "../../../components/orgs/FullscreenPager";
 import ProgressPagination from "../../../components/orgs/ProgressPagination";
 import OrgDetailsText from "../../../components/orgs/details/OrgDetailsText";
@@ -126,7 +127,8 @@ type Props = {
   org: OrganizationFull;
   orgImage: Array<ResourceBucketItem>;
 };
-export default function OrgDetail({ org, orgImage }: Props) {
+
+const OrgDetail = ({ org, orgImage }: Props) => {
   const { numPages, currentPage } = useDetailsPages(orgImage);
   const isEnd = useDetailsIsEnd();
 
@@ -186,7 +188,14 @@ export default function OrgDetail({ org, orgImage }: Props) {
       </StoryLikeContainer>
     </>
   );
-}
+};
+
+// 団体詳細ページはfooter無しで表示する
+OrgDetail.getLayout = function getLayout(page: React.ReactNode) {
+  return <Layout>{page}</Layout>;
+};
+
+export default OrgDetail;
 
 // 各団体詳細ページの初期データを生成しておく
 export async function getStaticPaths() {
