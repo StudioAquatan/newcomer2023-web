@@ -11,7 +11,7 @@ const button = () => {
   return css`
     position: relative;
     padding: 0;
-    font-family: GenShinGothic-P, sans-serif;
+    font-family: GenJyuuGothic-P, sans-serif;
     font-size: 2.5rem;
     text-decoration: none;
     cursor: pointer;

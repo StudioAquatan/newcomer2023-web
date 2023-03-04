@@ -10,7 +10,7 @@ type GlowingPinkButtonProps = {
 const button = (theme: Theme) => {
   return css`
     padding: 1.6rem 4rem;
-    font-family: GenShinGothic-P, sans-serif;
+    font-family: GenJyuuGothic-P, sans-serif;
     font-size: 2.5rem;
     text-decoration: none;
     text-transform: uppercase;

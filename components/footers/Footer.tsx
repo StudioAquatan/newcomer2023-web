@@ -32,6 +32,7 @@ const contents = css`
 const copyright = (theme: Theme) => css`
   margin: 0;
   margin-top: 3.2rem;
+  font-family: GenShinGothic-P, sans-serif;
   font-size: 1.3rem;
   color: ${theme.colors.normalTextColor};
 `;

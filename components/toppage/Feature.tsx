@@ -47,6 +47,7 @@ const featureTitleStyle = (theme: Theme) => css`
 
 const featureDescriptionStyle = (theme: Theme) => css`
   margin: 0;
+  font-family: GenShinGothic-P, sans-serif;
   font-size: 3.2rem;
   color: ${theme.colors.normalTextColor};
 

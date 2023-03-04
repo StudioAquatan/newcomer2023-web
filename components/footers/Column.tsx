@@ -30,6 +30,7 @@ const linkListStyle = css`
 
 const linkStyle = css`
   margin-bottom: 1rem;
+  font-family: GenShinGothic-P, sans-serif;
 `;
 
 export default function Column({ title, links }: ColumnProps) {

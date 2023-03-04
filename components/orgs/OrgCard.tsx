@@ -11,7 +11,7 @@ export type OrgCardProps = {
 const buttonStyle = css`
   padding: 0;
   margin: 0;
-  font-family: GenShinGothic-P, sans-serif;
+  font-family: GenJyuuGothic-P, sans-serif;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -88,6 +88,7 @@ const textContentPStyle = (theme: Theme) => css`
   height: 3.6rem;
   margin: 0;
   overflow: hidden;
+  font-family: GenShinGothicP, sans-serif;
   font-size: 1.2rem;
   color: ${theme.colors.orgCard.normalTextColor};
   text-align: left;
