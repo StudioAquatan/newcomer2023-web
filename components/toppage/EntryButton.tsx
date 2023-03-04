@@ -13,6 +13,7 @@ const container = css`
 
 const disabledButton = (theme: Theme) => css`
   padding: 1.6rem 4rem;
+  font-family: GenJyuuGothic-P, sans-serif;
   font-size: 2.5rem;
   text-decoration: none;
   background-color: ${theme.colors.button.disable.backgroundColor};
@@ -26,6 +27,7 @@ const notice = css`
   padding: 0 3.2rem;
   margin: 0;
   margin-top: 1.6rem;
+  font-family: GenShinGothic-P, sans-serif;
   font-size: 1.6rem;
   text-align: center;
 `;
