@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { Recommendation } from "../api/@types";
-import { apiClient } from "../api/apiClient";
+import { getOrgs } from "../api/cached-response";
 import { OrgCardProps } from "../components/orgs/OrgCard";
 import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
 import Random, { shuffle } from "../components/random";
@@ -69,14 +69,7 @@ export default function Home({ showcase, recommendation }: HomeProps) {
 }
 
 export async function getServerSideProps() {
-  const orgs = await apiClient.orgs
-    .$get()
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      throw new Error(error);
-    });
+  const orgs = await getOrgs();
 
   const orgCards: OrgCardProps[] = orgs.map((org) => ({
     orgName: org.fullName,
