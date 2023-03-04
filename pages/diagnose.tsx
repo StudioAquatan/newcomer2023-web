@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Question } from "../api/@types";
-import { apiClient } from "../api/apiClient";
+import { Question } from "../api-client/@types";
+import { apiClient } from "../api-client/apiClient";
 import ProgressBar from "../components/questions/ProgressBar";
 
 type DiagnoseProps = {

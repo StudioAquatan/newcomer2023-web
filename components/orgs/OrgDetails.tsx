@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import parse from "html-react-parser";
-import { OrganizationFull } from "../../api/@types";
+import { OrganizationFull } from "../../api-client/@types";
 
 export type Image = {
   src: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import useSWR from "swr";
-import { OrganizationFull } from "../api/@types";
-import { apiClient } from "../api/apiClient";
+import { OrganizationFull } from "../api-client/@types";
+import { apiClient } from "../api-client/apiClient";
 
 const organizationsContext = React.createContext<OrganizationFull[]>([]);
 

@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { apiClient } from "../api/apiClient";
+import { apiClient } from "../api-client/apiClient";
 
 export default function useUser() {
   return useSWR(

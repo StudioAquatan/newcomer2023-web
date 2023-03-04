@@ -1,7 +1,7 @@
 import { css, Theme, useTheme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { RecommendationItem } from "../../api/@types";
+import { RecommendationItem } from "../../api-client/@types";
 import { useOrganizations } from "../../hooks/organizations";
 import Random from "../random";
 

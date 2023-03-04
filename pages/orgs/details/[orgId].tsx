@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { getOrgs } from "../../../api/cached-response";
+import { getOrgs } from "../../../api-client/cached-response";
 import OrgDetails, {
   OrgDetailsProps,
 } from "../../../components/orgs/OrgDetails";

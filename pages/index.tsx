@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import Image from "next/image";
-import { OrganizationFull, Recommendation } from "../api/@types";
-import { getOrgs } from "../api/cached-response";
+import { OrganizationFull, Recommendation } from "../api-client/@types";
+import { getOrgs } from "../api-client/cached-response";
 import { OrgCardProps } from "../components/orgs/OrgCard";
 import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
 import Random, { shuffle } from "../components/random";
