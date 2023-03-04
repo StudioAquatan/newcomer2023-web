@@ -1,15 +1,13 @@
-async function initMocks() {
-  if (typeof window === "undefined") {
-    const { server } = await import("./server");
-    server.listen();
+import { setupWorker } from "msw";
+import { setupServer } from "msw/node";
+import { defaultHandlers } from "./handlers";
+
+export const initMocks = () => {
+  if (typeof window == "undefined") {
+    setupServer(...defaultHandlers).listen();
     console.log("[MSW] Init Mock Server");
   } else {
-    const { worker } = await import("./browser");
-    await worker.start();
+    void setupWorker(...defaultHandlers).start();
     console.log("[MSW] Init Mock Worker");
   }
 }
-
-initMocks();
-
-export {};
