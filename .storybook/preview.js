@@ -4,6 +4,15 @@ import { sakura } from "../themes/sakura";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 import { handlers } from "../mocks/handlers";
 
+import NextImage from "next/image";
+
+const OriginalNextImage = NextImage.default;
+
+Object.defineProperty(NextImage, "default", {
+  configurable: true,
+  value: (props) => <OriginalNextImage {...props} unoptimized />,
+});
+
 initialize();
 
 const defaultHandlers = Object.fromEntries(
