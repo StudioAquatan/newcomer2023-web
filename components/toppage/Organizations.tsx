@@ -1,4 +1,6 @@
 import { css } from "@emotion/react";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 
 const base = css`
@@ -31,7 +33,7 @@ export default function Organizations() {
           width={64}
           height={64}
         />
-        irodori ×{" "}
+        irodori <FontAwesomeIcon icon={faXmark} />
         <Image
           src="/toppage/studioaquatan.png"
           alt="あくあたん工房"
