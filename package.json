@@ -49,6 +49,7 @@
     "@cloudflare/next-on-pages": "^0.3.0",
     "@emotion/babel-plugin": "^11.10.5",
     "@emotion/react": "^11.10.5",
+    "@next/bundle-analyzer": "^13.2.3",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",

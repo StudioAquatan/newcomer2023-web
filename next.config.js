@@ -1,4 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires */
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.NEXT_ANALYZE === "true",
+});
 const withExportImages = require("next-export-optimize-images");
 
 /** @type {import('next').NextConfig} */
@@ -31,4 +34,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withExportImages(nextConfig);
+module.exports = withBundleAnalyzer(withExportImages(nextConfig));
