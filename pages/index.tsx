@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { Recommendation } from "../api/@types";
+import { OrganizationFull, Recommendation } from "../api/@types";
 import { getOrgs } from "../api/cached-response";
 import { OrgCardProps } from "../components/orgs/OrgCard";
 import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
@@ -10,6 +10,7 @@ import Feature from "../components/toppage/Feature";
 import FeatureStampRally from "../components/toppage/FeatureStampRally";
 import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
+import { OrganizationProvider } from "../hooks/organizations";
 import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
 
@@ -39,9 +40,10 @@ const container = css`
 type HomeProps = {
   showcase: OrgShowcaseProps;
   recommendation: Recommendation;
+  orgs: OrganizationFull[];
 };
 
-export default function Home({ showcase, recommendation }: HomeProps) {
+export default function Home({ showcase, recommendation, orgs }: HomeProps) {
   const { isMobile } = useIsMobile();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
   useUser();
@@ -54,7 +56,7 @@ export default function Home({ showcase, recommendation }: HomeProps) {
   };
 
   return (
-    <>
+    <OrganizationProvider value={orgs}>
       <Hero />
       <div css={container}>
         <OrgShowcase {...showcase} />
@@ -64,7 +66,7 @@ export default function Home({ showcase, recommendation }: HomeProps) {
         <EventGuidance />
         <OrgList />
       </div>
-    </>
+    </OrganizationProvider>
   );
 }
 
@@ -102,6 +104,7 @@ export async function getServerSideProps() {
       showcase: {
         orgs: shuffle(orgCards),
       },
+      orgs,
       recommendation,
     },
   };
