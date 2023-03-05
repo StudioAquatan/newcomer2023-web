@@ -1,17 +1,12 @@
 import { css } from "@emotion/react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { QuestionResult, Recommendation } from "../api/@types";
-import { apiClient } from "../api/apiClient";
 import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
 import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
-
-type StampCardPageProps = {
-  recommendation: Recommendation;
-  questions?: QuestionResult;
-};
+import { useRecommendation } from "../hooks/recommendation";
+import useUser from "../hooks/user";
 
 const container = css`
   display: flex;
@@ -65,10 +60,18 @@ const otherOrgs = css`
   text-align: center;
 `;
 
-export default function StampCardPage({ recommendation }: StampCardPageProps) {
+export default function StampCardPage() {
+  const { data: userData } = useUser();
+  const { data: recommendationData } = useRecommendation(userData?.token);
   const { data: seedData } = useStampCardSeed();
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
+
+  if (!recommendationData) {
+    return <div>loading...</div>;
+  }
+
+  const recommendation = recommendationData.recommendation;
 
   // TODO: 表示位置がつけられたもののみ使う
   const stamps: StampProps[] = recommendation.orgs.map(
@@ -103,19 +106,4 @@ export default function StampCardPage({ recommendation }: StampCardPageProps) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  const recommendations = await apiClient.recommendation
-    .$get()
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      throw new Error(error);
-    });
-
-  return {
-    props: recommendations,
-  };
 }
