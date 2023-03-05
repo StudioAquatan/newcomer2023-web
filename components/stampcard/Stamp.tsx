@@ -1,4 +1,5 @@
 import { css, Theme, useTheme } from "@emotion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { RecommendationItem } from "../../api/@types";
 import { useOrganizations } from "../../hooks/organizations";
@@ -69,6 +70,7 @@ const markVisitedStyle = (seed: number) => {
     bottom: calc(${maxMove} * ${random.nextNumber(0, 1)});
     z-index: 2;
     width: 30%;
+    height: auto;
     transform: rotate(${rotate}turn);
   `;
 };
@@ -92,17 +94,25 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
       })}
     >
       {recommendation.isVisited ? (
-        <img
+        <Image
           css={markVisitedStyle(seed)}
           src="/mark_visited.png"
           alt="visited"
+          width={32}
+          height={32}
         />
       ) : (
         ""
       )}
       <div css={orgNameStyle}>{org?.shortName ?? ""}</div>
       <div css={logoContainer}>
-        <img src={org?.logo?.src ?? ""} alt="logo" css={logoStyle} />
+        <Image
+          src={org?.logo?.src ?? ""}
+          alt="logo"
+          css={logoStyle}
+          width={128}
+          height={128}
+        />
         <div css={logoFilter}></div>
       </div>
     </Link>

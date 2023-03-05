@@ -1,4 +1,5 @@
 import { css, Theme } from "@emotion/react";
+import Image from "next/image";
 import Link from "next/link";
 
 export type OrgCardProps = {
@@ -108,11 +109,13 @@ export default function OrgCard({
     <Link href={link}>
       <button css={buttonStyle}>
         <div css={container}>
-          <img
+          <Image
             css={orgImageStyle}
             src={orgImagePath}
-            alt="Studio Aquatan"
-          ></img>
+            alt={orgName}
+            width={80}
+            height={80}
+          />
           <div css={textBoxStyle}>
             <div css={textContentStyle}>
               <p css={textContentH1Style}>{orgName}</p>
