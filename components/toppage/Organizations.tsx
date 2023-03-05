@@ -24,6 +24,7 @@ const logoStyle = css`
 `;
 
 const xmarkStyle = css`
+  height: 1em;
   filter: drop-shadow(1px 1px 1px #fff) drop-shadow(-1px 1px 1px #fff)
     drop-shadow(1px -1px 1px #fff) drop-shadow(-1px -1px 1px #fff);
 `;
