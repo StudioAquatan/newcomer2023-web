@@ -10,8 +10,10 @@ const base = css`
 const contentPStyle = css`
   margin: 0;
   font-size: calc(1.6rem + 1vw);
-  color: #fff;
+  color: #333;
   text-align: center;
+  text-shadow: 1px 1px 1px #fff, -1px 1px 1px #fff, 1px -1px 1px #fff,
+    -1px -1px 1px #fff;
 `;
 
 const logoStyle = css`
@@ -19,6 +21,11 @@ const logoStyle = css`
   height: calc(2rem + 1vw);
   margin: 0 calc(0.4rem + 0.5vw);
   vertical-align: middle;
+`;
+
+const xmarkStyle = css`
+  filter: drop-shadow(1px 1px 1px #fff) drop-shadow(-1px 1px 1px #fff)
+    drop-shadow(1px -1px 1px #fff) drop-shadow(-1px -1px 1px #fff);
 `;
 
 export default function Organizations() {
@@ -33,7 +40,7 @@ export default function Organizations() {
           width={64}
           height={64}
         />
-        irodori <FontAwesomeIcon icon={faXmark} />
+        irodori <FontAwesomeIcon css={xmarkStyle} icon={faXmark} />
         <Image
           src="/toppage/studioaquatan.png"
           alt="あくあたん工房"
