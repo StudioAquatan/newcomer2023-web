@@ -26,7 +26,8 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // モック用のService Workerが登録中かどうかのフラグ
-  const [ isMockWorkerRegistering, setIsMockWorkerRegistering ] = useState(isMocking);
+  const [isMockWorkerRegistering, setIsMockWorkerRegistering] =
+    useState(isMocking);
   useEffect(() => {
     // フラグが登録中を示す(=== true)なら実際に登録作業を行ってフラグをfalseにする
     if (isMockWorkerRegistering) {
@@ -36,9 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   // フラグが登録中を示す(=== true)なら登録中の旨を表示する
   if (isMockWorkerRegistering) {
-    return (
-      <div>Mock worker has not registered yet.</div>
-    );
+    return <div>Mock worker has not registered yet.</div>;
   }
 
   return (

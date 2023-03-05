@@ -10,26 +10,36 @@ const heroStyle = css`
   align-items: center;
   justify-content: center;
   height: 80vh;
-  background-color: rgb(0 0 0 / 30%);
+  background-color: rgb(0 0 0 / 10%);
   background-image: url("/toppage/hero.jpg");
   background-repeat: no-repeat;
+  background-position: bottom;
   background-size: cover;
   background-blend-mode: darken;
+
+  /* スマホで虹の塔がちょうどいい感じの場所に来るように */
+  @media screen and (max-width: 768px) {
+    background-position: -300px;
+  }
 `;
 
 const heroContentStyle = css`
   font-size: calc(3.2rem + 2vw);
   font-weight: bold;
-  color: #fff;
+  color: #333;
   text-align: center;
+  text-shadow: 2px 2px 2px #fff, -2px 2px 2px #fff, 2px -2px 2px #fff,
+    -2px -2px 2px #fff;
+`;
+
+const xmarkStyle = css`
+  height: 1em;
+  filter: drop-shadow(1px 1px 1px #fff) drop-shadow(-1px 1px 1px #fff)
+    drop-shadow(1px -1px 1px #fff) drop-shadow(-1px -1px 1px #fff);
 `;
 
 const contentPStyle = css`
   margin: 0;
-`;
-
-const faStyle = css`
-  height: 1em;
 `;
 
 export default function Hero() {
@@ -39,7 +49,7 @@ export default function Hero() {
       <div css={heroContentStyle}>
         <p css={contentPStyle}>部活動相性診断</p>
         <p css={contentPStyle}>
-          <FontAwesomeIcon css={faStyle} icon={faXmark} />
+          <FontAwesomeIcon css={xmarkStyle} icon={faXmark} />
         </p>
         <p css={contentPStyle}>スタンプラリー</p>
       </div>
