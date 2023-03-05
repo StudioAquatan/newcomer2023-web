@@ -33,7 +33,7 @@ export default function Organizations() {
           width={64}
           height={64}
         />
-        irodori <FontAwesomeIcon icon={faXmark} />
+        irodori <FontAwesomeIcon icon={faXmark} style={{ height: "1em" }} />
         <Image
           src="/toppage/studioaquatan.png"
           alt="あくあたん工房"

@@ -28,6 +28,10 @@ const contentPStyle = css`
   margin: 0;
 `;
 
+const faStyle = css`
+  height: 1em;
+`;
+
 export default function Hero() {
   return (
     <div css={heroStyle}>
@@ -35,7 +39,7 @@ export default function Hero() {
       <div css={heroContentStyle}>
         <p css={contentPStyle}>部活動相性診断</p>
         <p css={contentPStyle}>
-          <FontAwesomeIcon icon={faXmark} />
+          <FontAwesomeIcon css={faStyle} icon={faXmark} />
         </p>
         <p css={contentPStyle}>スタンプラリー</p>
       </div>
