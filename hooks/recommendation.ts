@@ -1,10 +1,16 @@
 import useSWR from "swr";
 import { apiClient } from "../api/apiClient";
 
-export function useRecommendation() {
-  return useSWR("/recommendation", async () => {
+export function useRecommendation(token: string | undefined) {
+  return useSWR(token ? ["/recommendation", token] : null, async () => {
     const recommendations = await apiClient.recommendation
-      .$get()
+      .$get({
+        config: {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        },
+      })
       .then((res) => {
         return res;
       })

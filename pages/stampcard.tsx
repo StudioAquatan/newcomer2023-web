@@ -6,6 +6,7 @@ import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
 import { useRecommendation } from "../hooks/recommendation";
+import useUser from "../hooks/user";
 
 const container = css`
   display: flex;
@@ -60,7 +61,8 @@ const otherOrgs = css`
 `;
 
 export default function StampCardPage() {
-  const { data: recommendationData } = useRecommendation();
+  const { data: userData } = useUser();
+  const { data: recommendationData } = useRecommendation(userData?.token);
   const { data: seedData } = useStampCardSeed();
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
