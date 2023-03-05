@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import Image from "next/image";
 import { OrganizationFull, Recommendation } from "../api/@types";
 import { getOrgs } from "../api/cached-response";
 import { OrgCardProps } from "../components/orgs/OrgCard";
@@ -16,10 +17,17 @@ import { useIsMobile } from "../store/userAgent";
 
 const diagnoseContentStyle = css`
   width: 100%;
+  height: auto;
 `;
 
 const diagnoseContentNode = (
-  <img src="/toppage/diagnose.png" alt="相性診断" css={diagnoseContentStyle} />
+  <Image
+    src="/toppage/diagnose.png"
+    alt="相性診断"
+    css={diagnoseContentStyle}
+    width={256}
+    height={256}
+  />
 );
 
 const featureDiagnose = {

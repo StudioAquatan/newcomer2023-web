@@ -1,4 +1,6 @@
 import { css } from "@emotion/react";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Organizations from "./Organizations";
 
@@ -32,7 +34,9 @@ export default function Hero() {
       <Organizations />
       <div css={heroContentStyle}>
         <p css={contentPStyle}>部活動相性診断</p>
-        <p css={contentPStyle}>×</p>
+        <p css={contentPStyle}>
+          <FontAwesomeIcon icon={faXmark} />
+        </p>
         <p css={contentPStyle}>スタンプラリー</p>
       </div>
     </div>
