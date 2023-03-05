@@ -70,6 +70,7 @@ const markVisitedStyle = (seed: number) => {
     bottom: calc(${maxMove} * ${random.nextNumber(0, 1)});
     z-index: 2;
     width: 30%;
+    height: auto;
     transform: rotate(${rotate}turn);
   `;
 };
@@ -93,10 +94,12 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
       })}
     >
       {recommendation.isVisited ? (
-        <img
+        <Image
           css={markVisitedStyle(seed)}
           src="/mark_visited.png"
           alt="visited"
+          width={32}
+          height={32}
         />
       ) : (
         ""
