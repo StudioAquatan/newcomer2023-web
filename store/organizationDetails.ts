@@ -1,5 +1,5 @@
 import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { atomWithReset, useResetAtom } from "jotai/utils";
+import { atomWithReset, useResetAtom, atomWithStorage } from "jotai/utils";
 import { useRouter } from "next/router";
 import React from "react";
 import { ResourceBucketItem } from "../api/resource-bucket";
@@ -24,7 +24,7 @@ const activeProgressAtom = atomWithReset<number>(0);
 const isEndAtom = atomWithReset<boolean>(false);
 const pausedAtom = atom<boolean>(false);
 
-const movieMutedAtom = atomWithReset<boolean>(false);
+const movieMutedAtom = atomWithStorage<boolean>("muted", true);
 
 // 最上位コンポーネントで動かす予定のものなのでre-renderしないように設計
 // 値を何も見ていない

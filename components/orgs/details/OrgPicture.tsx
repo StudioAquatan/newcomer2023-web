@@ -154,6 +154,12 @@ export default function OrgPicture({
     }
   }, [isActive, paused]);
 
+  React.useEffect(() => {
+    if (!isActive) return;
+
+    if (videoRef.current) videoRef.current.muted = muted;
+  }, [isActive, muted]);
+
   const handlePlay = () => {
     videoRef.current?.play();
   };
@@ -173,7 +179,6 @@ export default function OrgPicture({
           <video
             src={url}
             css={image}
-            muted={muted}
             ref={videoRef}
             onPlay={handlePlayStart}
             onPause={handlePaused}
