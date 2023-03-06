@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import Image from "next/image";
 import { OrganizationFull } from "../../../api-client/@types";
+import imgixLoader from "../../../image-loader";
 
 export type Image = {
   src: string;
@@ -125,6 +126,7 @@ export default function OrgDetailsText({ org, type }: OrgDetailsProps) {
               css={logo}
               width={256}
               height={256}
+              loader={imgixLoader}
             />
           )}
           <span css={orgName}>{org.fullName}</span>

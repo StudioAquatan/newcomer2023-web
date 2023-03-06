@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React from "react";
+import imgixLoader from "../../../image-loader";
 import {
   useDetailsMuteValue,
   useDetailsProgress,
@@ -206,6 +207,7 @@ export default function OrgPicture({
           css={image}
           width={700}
           height={(700 / width) * height}
+          loader={imgixLoader}
         />
       )}
       {children}
