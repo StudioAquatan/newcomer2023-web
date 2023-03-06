@@ -2,7 +2,6 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.NEXT_ANALYZE === "true",
 });
-const withExportImages = require("next-export-optimize-images");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -34,4 +33,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(withExportImages(nextConfig));
+module.exports = withBundleAnalyzer(nextConfig);
