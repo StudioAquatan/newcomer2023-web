@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import Image from "next/image";
-import { OrganizationFull, Recommendation } from "../api/@types";
-import { getOrgs } from "../api/cached-response";
+import { OrganizationFull, Recommendation } from "../api-client/@types";
+import { getOrgs } from "../api-client/cached-response";
 import { OrgCardProps } from "../components/orgs/OrgCard";
 import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
 import Random, { shuffle } from "../components/random";
@@ -13,6 +13,7 @@ import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
 import { OrganizationProvider } from "../hooks/organizations";
 import useUser from "../hooks/user";
+import imgixLoader from "../image-loader";
 import { useIsMobile } from "../store/userAgent";
 
 const diagnoseContentStyle = css`
@@ -27,6 +28,7 @@ const diagnoseContentNode = (
     css={diagnoseContentStyle}
     width={256}
     height={256}
+    loader={imgixLoader}
   />
 );
 
@@ -117,3 +119,7 @@ export async function getServerSideProps() {
     },
   };
 }
+
+export const config = {
+  runtime: "experimental-edge",
+};

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Organizations from "./Organizations";

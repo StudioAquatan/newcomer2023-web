@@ -1,6 +1,6 @@
 import aspida from "@aspida/fetch";
 import { stringify } from "qs";
-import api from "../api/$api";
+import api from "./$api";
 
 export const apiClient = api(
   aspida((...args) => fetch(...args), {

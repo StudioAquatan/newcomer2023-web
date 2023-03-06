@@ -1,10 +1,13 @@
 import useSWR from "swr";
-import { apiClient } from "../api/apiClient";
+import { apiClient } from "../api-client/apiClient";
 
 export default function useUser() {
   return useSWR(
     "/user",
     async () => {
+      if (typeof window === "undefined") {
+        return { token: "none", user: {} };
+      }
       const userToken = localStorage.getItem("userToken") ?? null;
       const userInfo = localStorage.getItem("userInfo") ?? null;
 

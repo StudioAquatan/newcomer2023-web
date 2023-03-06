@@ -2,7 +2,7 @@ import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { atomWithReset, useResetAtom, atomWithStorage } from "jotai/utils";
 import { useRouter } from "next/router";
 import React from "react";
-import { ResourceBucketItem } from "../api/resource-bucket";
+import { ResourceBucketItem } from "../api-client/resource-bucket";
 import { useRouterHistory } from "./router";
 import { useIsMobile } from "./userAgent";
 

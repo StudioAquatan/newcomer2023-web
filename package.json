@@ -16,7 +16,8 @@
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --exit-zero-on-changes",
     "prepare": "husky install",
-    "generate:aspida": "openapi2aspida"
+    "generate:aspida": "openapi2aspida",
+    "deploy-build": "rm public/mockServiceWorker.js && vercel build && npx @cloudflare/next-on-pages --skip-build"
   },
   "dependencies": {
     "@aspida/fetch": "^1.11.0",
@@ -46,8 +47,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@cloudflare/next-on-pages": "^0.3.0",
     "@emotion/babel-plugin": "^11.10.5",
     "@emotion/react": "^11.10.5",
+    "@next/bundle-analyzer": "^13.2.3",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",
@@ -71,9 +74,13 @@
     "stylelint-config-prettier": "^9.0.4",
     "stylelint-config-recess-order": "^3.1.0",
     "stylelint-config-standard": "^29.0.0",
-    "stylelint-prettier": "^2.0.0"
+    "stylelint-prettier": "^2.0.0",
+    "vercel": "^28.16.12"
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "resolutions": {
+    "esbuild": "^0.17.11"
   }
 }

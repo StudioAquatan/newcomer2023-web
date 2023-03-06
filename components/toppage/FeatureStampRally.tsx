@@ -1,4 +1,4 @@
-import { Recommendation } from "../../api/@types";
+import { Recommendation } from "../../api-client/@types";
 import { StampProps } from "../stampcard/Stamp";
 import StampCard, { StampCardProps } from "../stampcard/StampCard";
 import Feature from "./Feature";

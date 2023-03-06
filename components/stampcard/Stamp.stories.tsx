@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import { OrganizationFull } from "../../api/@types";
+import { OrganizationFull } from "../../api-client/@types";
 
 import Stamp from "./Stamp";
 

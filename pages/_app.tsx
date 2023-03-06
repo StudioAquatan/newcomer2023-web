@@ -1,11 +1,10 @@
-import { Global, ThemeProvider } from "@emotion/react";
 import type { AppPropsWithLayout } from "next/app";
 import { useEffect, useState } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
 import Layout from "../components/Layout";
 import Footer from "../components/footers/Footer";
-import { useRouterHistoryRecorder } from "../store/router";
 import { initMockServer, initMockWorker } from "../mocks";
+import { useRouterHistoryRecorder } from "../store/router";
 import { useSetIsMobile } from "../store/userAgent";
 
 const isMocking = process.env.NEXT_PUBLIC_API_MOCKING === "enabled";
@@ -33,7 +32,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       initMockWorker()?.then(() => void setIsMockWorkerRegistering(false));
     }
   });
-  
+
   useRouterHistoryRecorder();
 
   // フラグが登録中を示す(=== true)なら登録中の旨を表示する
@@ -45,7 +44,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   // 各ページでgetLayoutを定義することで、ページごとにレイアウトを変更できる
   const getLayout =
     Component.getLayout ??
-    ((page) => ((
+    ((page) => (
       <Layout>
         {page}
         <Footer />

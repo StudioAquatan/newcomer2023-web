@@ -1,6 +1,7 @@
 import { css, Theme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
+import imgixLoader from "../../image-loader";
 
 export type OrgCardProps = {
   orgName: string;
@@ -115,6 +116,7 @@ export default function OrgCard({
             alt={orgName}
             width={80}
             height={80}
+            loader={imgixLoader}
           />
           <div css={textBoxStyle}>
             <div css={textContentStyle}>

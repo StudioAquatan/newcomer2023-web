@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { cloneDeep } from "lodash";
 import React from "react";
-import { Recommendation } from "../../api/@types";
+import { Recommendation } from "../../api-client/@types";
 
 import { recommendationGetSuccessResponseJson } from "../../mocks/api/recommendation";
 import Card from "./StampCard";

@@ -1,8 +1,6 @@
 import { css, Theme } from "@emotion/react";
-import {
-  faSquareInstagram,
-  faSquareTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+import { faSquareInstagram } from "@fortawesome/free-brands-svg-icons/faSquareInstagram";
+import { faSquareTwitter } from "@fortawesome/free-brands-svg-icons/faSquareTwitter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const title = (theme: Theme) => css`

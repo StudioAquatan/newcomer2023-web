@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import { Recommendation } from "../../api/@types";
+import { Recommendation } from "../../api-client/@types";
 
 import FeatureStampRally from "./FeatureStampRally";
 
