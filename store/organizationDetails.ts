@@ -217,15 +217,14 @@ export function useDetailsPauseEvent() {
 // ここじゃない！！！！！！！！！！！
 export function useDetailsClose() {
   const urlHistory = useRouterHistory();
-  const { push } = useRouter();
+  const { push, back } = useRouter();
 
   const handleClose = () => {
-    const orgsIndex = urlHistory.findIndex((url) => url.endsWith("/orgs"));
-    const stampIndex = urlHistory.findIndex((url) =>
-      url.endsWith("/stampcard")
-    );
-    if (orgsIndex > stampIndex) {
-      push("/stampcard");
+    const historyCount = urlHistory.filter(
+      (url) => !url.includes("/orgs/details")
+    ).length;
+    if (historyCount > 0) {
+      back();
     } else {
       push("/orgs");
     }
