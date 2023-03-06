@@ -14,6 +14,16 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "*.r2.dev",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.workers.dev",
+        pathname: "/**",
+      },
     ],
     loader: "custom",
   },
