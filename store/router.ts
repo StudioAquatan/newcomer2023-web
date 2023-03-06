@@ -17,6 +17,9 @@ export function useRouterHistoryRecorder() {
       setRouterHistory((history) => [url, ...history]);
     };
 
+    // 最初の分だけ入れておく
+    setRouterHistory([router.pathname]);
+
     router.events.on("routeChangeStart", handleRouteChange);
 
     return () => {
