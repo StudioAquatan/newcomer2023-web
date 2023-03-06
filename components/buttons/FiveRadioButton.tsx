@@ -26,6 +26,11 @@ const itemConatiner = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
+`;
+
+const labelStyle = css`
+  text-align: center;
 `;
 
 export default function FiveRadioButton({ questionId }: FiveRadioButtonProps) {
@@ -41,7 +46,7 @@ export default function FiveRadioButton({ questionId }: FiveRadioButtonProps) {
                 name={"question_id_" + questionId}
               />
               {/* <label htmlFor={"question_id_" + questionId + "_" + index} /> */}
-              <div>{label}</div>
+              <p css={labelStyle}>{label}</p>
             </div>
           </li>
         );
