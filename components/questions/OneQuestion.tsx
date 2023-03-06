@@ -15,11 +15,18 @@ const container = css`
   border-width: 0;
 `;
 
+const questionText = css`
+  padding: 0;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+`;
+
 // TODO: ここで、question.questionTypeに応じて、適切なコンポーネントを呼び出す
 export default function OneQuestion({ question }: QuestionProps) {
   return (
     <fieldset css={container}>
-      <div>Q. {question.questionText}</div>
+      <p css={questionText}>Q. {question.questionText}</p>
       <FiveRadioButton questionId={question.id} />
     </fieldset>
   );
