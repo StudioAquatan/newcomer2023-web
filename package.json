@@ -17,7 +17,7 @@
     "chromatic": "npx chromatic --exit-zero-on-changes",
     "prepare": "husky install",
     "generate:aspida": "openapi2aspida",
-    "deploy-build": "rm public/mockServiceWorker.js && vercel build && npx @cloudflare/next-on-pages --experimental-minify --skip-build && next-export-optimize-images"
+    "deploy-build": "rm public/mockServiceWorker.js && vercel build && npx @cloudflare/next-on-pages --skip-build && next-export-optimize-images"
   },
   "dependencies": {
     "@aspida/fetch": "^1.11.0",
@@ -79,5 +79,8 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "resolutions": {
+    "esbuild": "^0.17.11"
   }
 }
