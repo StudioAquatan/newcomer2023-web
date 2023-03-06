@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { RecommendationItem } from "../../api-client/@types";
 import { useOrganizations } from "../../hooks/organizations";
+import imgixLoader from "../../image-loader";
 import Random from "../random";
 
 export type StampProps = {
@@ -100,6 +101,7 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
           alt="visited"
           width={32}
           height={32}
+          loader={imgixLoader}
         />
       ) : (
         ""
@@ -112,6 +114,7 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
           css={logoStyle}
           width={128}
           height={128}
+          loader={imgixLoader}
         />
         <div css={logoFilter}></div>
       </div>

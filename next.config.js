@@ -15,6 +15,7 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+    loader: "custom",
   },
   compiler: {
     emotion: true,

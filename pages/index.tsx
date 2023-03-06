@@ -13,6 +13,7 @@ import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
 import { OrganizationProvider } from "../hooks/organizations";
 import useUser from "../hooks/user";
+import imgixLoader from "../image-loader";
 import { useIsMobile } from "../store/userAgent";
 
 const diagnoseContentStyle = css`
@@ -27,6 +28,7 @@ const diagnoseContentNode = (
     css={diagnoseContentStyle}
     width={256}
     height={256}
+    loader={imgixLoader}
   />
 );
 

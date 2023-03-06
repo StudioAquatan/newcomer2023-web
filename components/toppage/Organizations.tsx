@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import imgixLoader from "../../image-loader";
 
 const base = css`
   margin-bottom: 4rem;
@@ -40,6 +41,7 @@ export default function Organizations() {
           css={logoStyle}
           width={64}
           height={64}
+          loader={imgixLoader}
         />
         irodori <FontAwesomeIcon css={xmarkStyle} icon={faXmark} />
         <Image
@@ -48,6 +50,7 @@ export default function Organizations() {
           css={logoStyle}
           width={64}
           height={64}
+          loader={imgixLoader}
         />
         あくあたん工房{" "}
       </p>
