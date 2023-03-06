@@ -1,54 +1,35 @@
+import React from "react";
 import useSWR from "swr";
+import { OrganizationFull } from "../api/@types";
 import { apiClient } from "../api/apiClient";
-import {
-  useOrganizationsMap as useOrganizationsMapJotai,
-  useSetOrganizationsMap,
-} from "../store/organizationsMap";
+
+const organizationsContext = React.createContext<OrganizationFull[]>([]);
 
 export function useOrganizations() {
-  return useSWR(
-    "/orgs",
-    async () => {
-      const res = await apiClient.orgs
-        .$get()
-        .then((res) => {
-          return res;
-        })
-        .catch((err) => {
-          throw new Error(err);
-        });
-
-      return res;
-    },
-    { revalidateOnFocus: false }
-  );
-}
-
-export function useOrganizationsMap() {
-  const { organizationsMap } = useOrganizationsMapJotai();
-  const { setOrganizationsMap } = useSetOrganizationsMap();
-  const { data: organizations, error } = useOrganizations();
-
-  if (organizationsMap.size > 0) {
-    // キャッシュで返す
-    return {
-      organizationsMap: organizationsMap,
-    };
-  } else {
-    if (error) {
-      throw new Error(error);
-    }
-
-    if (!organizations) {
+  const organizationsCache = React.useContext(organizationsContext);
+  return useSWR("/orgs", async () => {
+    if (organizationsCache.length > 0) {
       return {
-        organizationsMap: organizationsMap,
+        organizations: organizationsCache,
+        organizationsMap: new Map(
+          organizationsCache.map((org) => [org.id, org])
+        ),
       };
     }
+    const orgs = await apiClient.orgs
+      .$get()
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        throw new Error("Failed to fetch /orgs.", err);
+      });
 
-    const orgMap = new Map(organizations.map((org) => [org.id, org]));
-    setOrganizationsMap({ organizationsMap: orgMap });
     return {
-      organizationsMap: orgMap,
+      organizations: orgs,
+      organizationsMap: new Map(orgs.map((org) => [org.id, org])),
     };
-  }
+  });
 }
+
+export const OrganizationProvider = organizationsContext.Provider;

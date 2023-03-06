@@ -10,9 +10,11 @@ type GlowingPinkButtonProps = {
 const button = (theme: Theme) => {
   return css`
     padding: 1.6rem 4rem;
+    font-family: GenJyuuGothic-P, sans-serif;
     font-size: 2.5rem;
     text-decoration: none;
     text-transform: uppercase;
+    cursor: pointer;
     background-color: ${theme.colors.button.enable.backgroundColor};
     border: 0;
     border-radius: 4.8rem;
@@ -20,18 +22,12 @@ const button = (theme: Theme) => {
     transition: all 0.5s ease;
 
     &:hover {
-      letter-spacing: 0.5rem;
       background-color: #fff;
-
-      /* color: #ffc8df; */
       box-shadow: ${theme.colors.button.enable.backgroundColor} 0 0.5rem 3rem 0;
     }
 
     &:active {
-      letter-spacing: 0.5rem;
       background-color: ${theme.colors.button.enable.backgroundColor};
-
-      /* color: #ffc8df; */
       box-shadow: ${theme.colors.button.enable.backgroundColor} 0 0 0 0;
       transition: 100ms;
       transform: translateY(1rem);

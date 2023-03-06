@@ -1,4 +1,5 @@
 import { css, Theme } from "@emotion/react";
+import Image from "next/image";
 import Link from "next/link";
 
 export type OrgCardProps = {
@@ -11,6 +12,8 @@ export type OrgCardProps = {
 const buttonStyle = css`
   padding: 0;
   margin: 0;
+  font-family: GenJyuuGothic-P, sans-serif;
+  cursor: pointer;
   background: transparent;
   border: 0;
 `;
@@ -56,6 +59,7 @@ const orgImageStyle = css`
   height: 4.8rem;
   background-color: #eee;
   border-radius: 1.6rem;
+  object-fit: contain;
 `;
 
 const textBoxStyle = css`
@@ -81,10 +85,13 @@ const textContentH1Style = (theme: Theme) => css`
 
 const textContentPStyle = (theme: Theme) => css`
   display: -webkit-box;
+
+  /* 2行分で高さを固定にしてしまう */
+  height: 3.6rem;
   margin: 0;
   overflow: hidden;
+  font-family: GenShinGothicP, sans-serif;
   font-size: 1.2rem;
-  font-weight: lighter;
   color: ${theme.colors.orgCard.normalTextColor};
   text-align: left;
   word-break: break-all;
@@ -102,11 +109,13 @@ export default function OrgCard({
     <Link href={link}>
       <button css={buttonStyle}>
         <div css={container}>
-          <img
+          <Image
             css={orgImageStyle}
             src={orgImagePath}
-            alt="Studio Aquatan"
-          ></img>
+            alt={orgName}
+            width={80}
+            height={80}
+          />
           <div css={textBoxStyle}>
             <div css={textContentStyle}>
               <p css={textContentH1Style}>{orgName}</p>

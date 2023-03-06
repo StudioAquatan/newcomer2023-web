@@ -1,32 +1,51 @@
+import { Global, ThemeProvider } from "@emotion/react";
 import type { AppPropsWithLayout } from "next/app";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
 import Layout from "../components/Layout";
 import Footer from "../components/footers/Footer";
 import { useRouterHistoryRecorder } from "../store/router";
+import { initMockServer, initMockWorker } from "../mocks";
 import { useSetIsMobile } from "../store/userAgent";
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
-  console.log("API Mocking Enabled");
-  require("../mocks");
+const isMocking = process.env.NEXT_PUBLIC_API_MOCKING === "enabled";
+
+if (isMocking) {
+  initMockServer();
 }
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const { setIsMobile } = useSetIsMobile();
 
-  // 初回だけUserAgentを取得して、状態を保存する
+  // 初回だけ動かすやつ
   useEffect(() => {
+    // スマホ判定用にUserAgentを取得しておく
     const { isMobile } = getSelectorsByUserAgent(navigator.userAgent);
     setIsMobile({ isMobile: isMobile });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // モック用のService Workerが登録中かどうかのフラグ
+  const [isMockWorkerRegistering, setIsMockWorkerRegistering] =
+    useState(isMocking);
+  useEffect(() => {
+    // フラグが登録中を示す(=== true)なら実際に登録作業を行ってフラグをfalseにする
+    if (isMockWorkerRegistering) {
+      initMockWorker()?.then(() => void setIsMockWorkerRegistering(false));
+    }
+  });
+  
   useRouterHistoryRecorder();
+
+  // フラグが登録中を示す(=== true)なら登録中の旨を表示する
+  if (isMockWorkerRegistering) {
+    return <div>Mock worker has not registered yet.</div>;
+  }
 
   // デフォルトのレイアウトはFooter付き
   // 各ページでgetLayoutを定義することで、ページごとにレイアウトを変更できる
   const getLayout =
     Component.getLayout ??
-    ((page) => (
+    ((page) => ((
       <Layout>
         {page}
         <Footer />

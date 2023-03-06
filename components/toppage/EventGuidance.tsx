@@ -24,6 +24,7 @@ const contents = (theme: Theme) => css`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  font-family: GenShinGothic-P, sans-serif;
   font-size: 3.2rem;
   color: ${theme.colors.normalTextColor};
 

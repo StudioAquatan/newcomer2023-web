@@ -1,36 +1,60 @@
-import { css, useTheme } from "@emotion/react";
+import { css, Theme, useTheme } from "@emotion/react";
+import Image from "next/image";
+import Link from "next/link";
+import { RecommendationItem } from "../../api/@types";
+import { useOrganizations } from "../../hooks/organizations";
 import Random from "../random";
 
 export type StampProps = {
-  orgName: string;
-  backgroundColor?: string;
-  visited?: boolean;
+  recommendation: RecommendationItem;
   seed?: number;
 };
 
-const stampStyle = ({ backgroundColor }: { backgroundColor: string }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const theme = useTheme();
-
+const stampStyle = ({ theme }: { theme: Theme }) => {
   return css`
     position: relative;
     display: flex;
     align-items: center;
-    padding: 1rem;
     color: ${theme.colors.stamp.normalTextColor};
-    background: ${backgroundColor};
+    border: 3px solid ${theme.colors.stamp.backgroundColor};
   `;
 };
 
 const orgNameStyle = css`
+  z-index: 2;
   display: -webkit-box;
   width: 100%;
+  padding: 1rem;
   overflow: hidden;
   font-size: 1.6rem;
   text-align: center;
+  text-shadow: 2px 2px 2px #000, -2px 2px 2px #000, 2px -2px 2px #000,
+    -2px -2px 2px #000;
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+`;
+
+const logoContainer = css`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
+
+const logoFilter = css`
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 20%); /* 背景色 */
+`;
+
+const logoStyle = css`
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const markVisitedStyle = (seed: number) => {
@@ -44,34 +68,53 @@ const markVisitedStyle = (seed: number) => {
     position: absolute;
     right: calc(${maxMove} * ${random.nextNumber(0, 1)});
     bottom: calc(${maxMove} * ${random.nextNumber(0, 1)});
+    z-index: 2;
     width: 30%;
+    height: auto;
     transform: rotate(${rotate}turn);
   `;
 };
 
-export default function Stamp({
-  orgName,
-  backgroundColor,
-  visited = false,
-  seed = 0,
-}: StampProps) {
+export default function Stamp({ recommendation, seed = 0 }: StampProps) {
   const theme = useTheme();
+  const { data: organizations } = useOrganizations();
+
+  if (organizations === undefined) {
+    return <div>loading...</div>;
+  }
+
+  const { organizationsMap } = organizations;
+  const org = organizationsMap.get(recommendation.org.id);
+
   return (
-    <div
+    <Link
+      href={"/orgs/details/" + org?.id}
       css={stampStyle({
-        backgroundColor: backgroundColor ?? theme.colors.stamp.backgroundColor,
+        theme,
       })}
     >
-      {visited ? (
-        <img
+      {recommendation.isVisited ? (
+        <Image
           css={markVisitedStyle(seed)}
           src="/mark_visited.png"
           alt="visited"
+          width={32}
+          height={32}
         />
       ) : (
         ""
       )}
-      <div css={orgNameStyle}>{orgName}</div>
-    </div>
+      <div css={orgNameStyle}>{org?.shortName ?? ""}</div>
+      <div css={logoContainer}>
+        <Image
+          src={org?.logo?.src ?? ""}
+          alt="logo"
+          css={logoStyle}
+          width={128}
+          height={128}
+        />
+        <div css={logoFilter}></div>
+      </div>
+    </Link>
   );
 }

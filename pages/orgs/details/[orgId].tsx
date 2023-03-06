@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import React from "react";
 import { OrganizationFull } from "../../../api/@types";
-import { apiClient } from "../../../api/apiClient";
+import { getOrgs } from "../../../api/cached-response";
 import { ResourceBucketItem } from "../../../api/resource-bucket";
 import Layout from "../../../components/Layout";
 import FullscreenPager from "../../../components/orgs/FullscreenPager";
@@ -199,16 +199,16 @@ export default OrgDetail;
 
 // 各団体詳細ページの初期データを生成しておく
 export async function getStaticPaths() {
-  const orgs = await apiClient.orgs
-    .$get()
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      throw Error(error);
-    });
+  // getStaticPaths時、MSWを使ったモックが有効になる前にAPIにアクセスしてしまう
+  const orgs = await getOrgs();
 
-  const paths = orgs.map((org) => `/orgs/details/${org.id}`);
+  const paths = orgs.map((org, index) => {
+    if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+      // モック時の団体IDは0から始まる数字なので、代わりにそれを利用する
+      return `/orgs/details/${index}`;
+    }
+    return `/orgs/details/${org.id}`;
+  });
 
   return {
     paths,
@@ -225,20 +225,13 @@ export async function getStaticProps({
 
   // 全団体詳細ページの初期データを取得
   // 全団体のデータを返すAPIしかないので、団体数回、全団体のデータを取得するAPIリクエストが発生してしまう
-  const orgs = await apiClient.orgs
-    .$get()
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      throw Error(error);
-    });
+  const orgs = await getOrgs();
 
   const orgMap = new Map(orgs.map((org) => [org.id, org]));
   const org = orgMap.get(orgId);
 
   if (org === undefined) {
-    throw Error("団体が見つかりませんでした");
+    throw Error("団体が見つかりませんでした ID: " + orgId);
   }
 
   const imagesRes = await fetch(`${resourceRoot}/manifest.json`);

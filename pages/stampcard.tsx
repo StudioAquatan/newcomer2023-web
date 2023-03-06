@@ -2,54 +2,11 @@ import { css } from "@emotion/react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
+import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
-
-const card: StampCardProps = {
-  userId: 0,
-  stamps: [
-    {
-      orgName: "Org 1",
-      backgroundColor: "#00FF00",
-    },
-    {
-      orgName: "Org 2",
-      backgroundColor: "#FF0000",
-    },
-    {
-      orgName: "Org 3",
-      backgroundColor: "#00FF00",
-    },
-    {
-      orgName: "Org 4",
-      backgroundColor: "#FF0000",
-    },
-    {
-      orgName: "Org 5",
-      backgroundColor: "#00FF00",
-    },
-    {
-      orgName: "Org 6",
-      backgroundColor: "#FF0000",
-    },
-    {
-      orgName: "Org 7",
-      backgroundColor: "#00FF00",
-      visited: true,
-    },
-    {
-      orgName: "Org 8",
-      backgroundColor: "#FF0000",
-      visited: true,
-    },
-    {
-      orgName: "Org 9",
-      backgroundColor: "#00FF00",
-      visited: true,
-    },
-  ],
-};
-
-type StampCardPageProps = StampCardProps;
+import useStampCardSeed from "../hooks/cardSeed";
+import { useRecommendation } from "../hooks/recommendation";
+import useUser from "../hooks/user";
 
 const container = css`
   display: flex;
@@ -103,7 +60,33 @@ const otherOrgs = css`
   text-align: center;
 `;
 
-export default function StampCardPage(props: StampCardPageProps) {
+export default function StampCardPage() {
+  const { data: userData } = useUser();
+  const { data: recommendationData } = useRecommendation(userData?.token);
+  const { data: seedData } = useStampCardSeed();
+  const FALLBACKSEED = 0;
+  const seed = seedData?.seed ?? FALLBACKSEED;
+
+  if (!recommendationData) {
+    return <div>loading...</div>;
+  }
+
+  const recommendation = recommendationData.recommendation;
+
+  // TODO: 表示位置がつけられたもののみ使う
+  const stamps: StampProps[] = recommendation.orgs.map(
+    (recommendationItem, index) => {
+      return {
+        recommendation: recommendationItem,
+        seed: seed + index,
+      };
+    }
+  );
+
+  const props: StampCardProps = {
+    stamps: stamps,
+  };
+
   return (
     <div css={container}>
       <div css={stampCardHeader}>
@@ -123,12 +106,4 @@ export default function StampCardPage(props: StampCardPageProps) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      ...card,
-    },
-  };
 }
