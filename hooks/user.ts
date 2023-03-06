@@ -5,6 +5,9 @@ export default function useUser() {
   return useSWR(
     "/user",
     async () => {
+      if (typeof window === "undefined") {
+        return { token: "none", user: {} };
+      }
       const userToken = localStorage.getItem("userToken") ?? null;
       const userInfo = localStorage.getItem("userInfo") ?? null;
 
