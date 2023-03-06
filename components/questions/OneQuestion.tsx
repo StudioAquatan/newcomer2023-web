@@ -10,6 +10,9 @@ const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
+  margin: 0;
+  border-width: 0;
 `;
 
 // TODO: ここで、question.questionTypeに応じて、適切なコンポーネントを呼び出す
