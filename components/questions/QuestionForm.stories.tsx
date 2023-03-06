@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import { Question as QuestionType } from "../../api/@types";
+import { Question as QuestionType } from "../../api-client/@types";
 
 import QuestionForm from "./QuestionForm";
 

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { Question } from "../../api/@types";
+import { Question } from "../../api-client/@types";
 import OneQuestion from "../questions/OneQuestion";
 import Feature from "./Feature";
 

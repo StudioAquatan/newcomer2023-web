@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { Question as QuestionType } from "../../api/@types";
+import { Question as QuestionType } from "../../api-client/@types";
 import FiveRadioButton from "../buttons/FiveRadioButton";
 
 type QuestionProps = {

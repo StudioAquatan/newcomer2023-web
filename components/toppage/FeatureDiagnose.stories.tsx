@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import { Question } from "../../api/@types";
+import { Question } from "../../api-client/@types";
 
 import FeatureDiagnose from "./FeatureDiagnose";
 

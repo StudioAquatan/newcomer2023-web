@@ -1,4 +1,4 @@
-import { Question as QuestionType } from "../../api/@types";
+import { Question as QuestionType } from "../../api-client/@types";
 import OneQuestion from "./OneQuestion";
 
 type QuestionFormProps = {
