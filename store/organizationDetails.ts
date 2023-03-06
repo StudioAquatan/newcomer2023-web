@@ -41,8 +41,8 @@ export function useDetailsPages(orgImages: ResourceBucketItem[]) {
   // ページ情報はuseEffectで反映
   React.useEffect(() => {
     setPageList([
-      { autoNextTimer: isMobile, isMovie: false, duration: 15000 }, // 概要1
-      { autoNextTimer: isMobile, isMovie: false }, // 概要2
+      { autoNextTimer: true, isMovie: false, duration: 15000 }, // 概要1
+      { autoNextTimer: true, isMovie: false }, // 概要2
       ...orgImages.map(({ isMovie }) => ({
         autoNextTimer: !isMovie,
         isMovie,
