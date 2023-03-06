@@ -1,13 +1,12 @@
 import { Global, ThemeProvider } from "@emotion/react";
-import { AppProps } from "next/app";
+import type { AppPropsWithLayout } from "next/app";
 import { useEffect, useState } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
-// import { NextPageContext } from "next/types";
 import Layout from "../components/Layout";
+import Footer from "../components/footers/Footer";
+import { useRouterHistoryRecorder } from "../store/router";
 import { initMockServer, initMockWorker } from "../mocks";
 import { useSetIsMobile } from "../store/userAgent";
-import { globalStyles } from "../styles/globals";
-import { sakura } from "../themes/sakura";
 
 const isMocking = process.env.NEXT_PUBLIC_API_MOCKING === "enabled";
 
@@ -15,7 +14,7 @@ if (isMocking) {
   initMockServer();
 }
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const { setIsMobile } = useSetIsMobile();
 
   // 初回だけ動かすやつ
@@ -34,18 +33,23 @@ export default function App({ Component, pageProps }: AppProps) {
       initMockWorker()?.then(() => void setIsMockWorkerRegistering(false));
     }
   });
+  
+  useRouterHistoryRecorder();
 
   // フラグが登録中を示す(=== true)なら登録中の旨を表示する
   if (isMockWorkerRegistering) {
     return <div>Mock worker has not registered yet.</div>;
   }
 
-  return (
-    <ThemeProvider theme={sakura}>
+  // デフォルトのレイアウトはFooter付き
+  // 各ページでgetLayoutを定義することで、ページごとにレイアウトを変更できる
+  const getLayout =
+    Component.getLayout ??
+    ((page) => ((
       <Layout>
-        <Global styles={globalStyles} />
-        <Component {...pageProps} />
+        {page}
+        <Footer />
       </Layout>
-    </ThemeProvider>
-  );
+    ));
+  return getLayout(<Component {...pageProps} />);
 }

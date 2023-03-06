@@ -22,6 +22,15 @@ const defaultHandlers = Object.fromEntries(
   ])
 );
 
+import NextImage from "next/image";
+
+const OriginalNextImage = NextImage.default;
+
+Object.defineProperty(NextImage, "default", {
+  configurable: true,
+  value: (props) => <OriginalNextImage {...props} unoptimized />,
+});
+
 export const decorators = [
   (Story) => (
     <>
