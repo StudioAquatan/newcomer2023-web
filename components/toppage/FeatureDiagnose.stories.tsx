@@ -16,11 +16,18 @@ const Template: ComponentStory<typeof FeatureDiagnose> = (args) => (
   <FeatureDiagnose {...args} />
 );
 
-const question: Question = {
-  id: "1",
-  questionText: "あなたの性別は？",
-  questionType: "five",
-};
+const questions: Question[] = [
+  {
+    id: "1",
+    questionText: "あなたの性別は？",
+    questionType: "five",
+  },
+  {
+    id: "2",
+    questionText: "あなたの好きな食べ物は？",
+    questionType: "five",
+  },
+];
 
 export const Diagnose = Template.bind({});
 Diagnose.args = {
@@ -28,5 +35,5 @@ Diagnose.args = {
   description:
     "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
   inverse: false,
-  question: question,
+  questions: questions,
 };

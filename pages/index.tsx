@@ -56,14 +56,14 @@ type HomeProps = {
   showcase: OrgShowcaseProps;
   recommendation: Recommendation;
   orgs: OrganizationFull[];
-  question: Question;
+  questions: Question[];
 };
 
 export default function Home({
   showcase,
   recommendation,
   orgs,
-  question,
+  questions,
 }: HomeProps) {
   const { isMobile } = useIsMobile();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
@@ -81,7 +81,7 @@ export default function Home({
     description:
       "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
     inverse: false,
-    question: question,
+    questions: questions,
   };
 
   return (
@@ -128,12 +128,14 @@ export async function getServerSideProps() {
     renewRemains: 0,
   };
 
-  // ここでランダムに1つの質問を選んで相性診断の例にする
-  const question: Question = {
-    id: "example",
-    questionText: shuffle(exampleQuestions)[0],
-    questionType: "five",
-  };
+  // ここでランダムに2つの質問を選んで相性診断の例にする
+  const questions: Question[] = shuffle(exampleQuestions)
+    .slice(0, 2)
+    .map((question, index) => ({
+      id: "example" + index,
+      questionText: question,
+      questionType: "five",
+    }));
 
   return {
     props: {
@@ -142,7 +144,7 @@ export async function getServerSideProps() {
       },
       orgs,
       recommendation,
-      question,
+      questions,
     },
   };
 }

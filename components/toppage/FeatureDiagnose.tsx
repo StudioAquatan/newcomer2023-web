@@ -7,7 +7,7 @@ type FeatureDiagnoseProps = {
   title: string;
   description: string;
   inverse?: boolean;
-  question: Question;
+  questions: Question[];
 };
 
 const container = css`
@@ -17,6 +17,9 @@ const container = css`
 `;
 
 const questionPadding = css`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
   padding: 2.4rem;
 `;
 
@@ -24,12 +27,14 @@ export default function FeatureDiagnose({
   title,
   description,
   inverse = false,
-  question,
+  questions,
 }: FeatureDiagnoseProps) {
   const featureContentNode = (
     <div css={container}>
       <div css={questionPadding}>
-        <OneQuestion question={question} />
+        {questions.map((question, index) => (
+          <OneQuestion key={index} question={question} />
+        ))}
       </div>
     </div>
   );
