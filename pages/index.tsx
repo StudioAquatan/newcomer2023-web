@@ -74,6 +74,7 @@ export default function Home({
     description: "QRコードを読み込んで、景品を貰いに行こう！",
     inverse: true,
     recommendation: recommendation,
+    orgs: orgs,
   };
 
   const featureDiagnose = {

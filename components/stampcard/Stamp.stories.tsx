@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import { OrganizationFull } from "../../api-client/@types";
+import { OrganizationFull, OrganizationSimple } from "../../api-client/@types";
 
 import Stamp from "./Stamp";
 
@@ -14,7 +14,11 @@ export default {
 
 const Template: ComponentStory<typeof Stamp> = (args) => <Stamp {...args} />;
 
-const organizationFull: OrganizationFull = {
+const organizationSimple: OrganizationSimple = {
+  id: "1",
+};
+
+const organiationFull: OrganizationFull = {
   id: "1",
   fullName: "StudioAquatan",
   shortName: "StudioAquatan",
@@ -37,23 +41,25 @@ const organizationFull: OrganizationFull = {
 export const NotVisited = Template.bind({});
 NotVisited.args = {
   recommendation: {
-    org: organizationFull,
+    org: organizationSimple,
     coefficient: 1,
     isVisited: false,
     isExcluded: false,
     stampSlot: 0,
   },
+  orgInfo: organiationFull,
   seed: 0,
 };
 
 export const Visited = Template.bind({});
 Visited.args = {
   recommendation: {
-    org: organizationFull,
+    org: organizationSimple,
     coefficient: 1,
     isVisited: true,
     isExcluded: false,
     stampSlot: 0,
   },
+  orgInfo: organiationFull,
   seed: 0,
 };

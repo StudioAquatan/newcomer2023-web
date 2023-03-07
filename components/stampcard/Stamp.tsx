@@ -1,13 +1,13 @@
 import { css, Theme, useTheme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { RecommendationItem } from "../../api-client/@types";
-import { useOrganizations } from "../../hooks/organizations";
+import { OrganizationFull, RecommendationItem } from "../../api-client/@types";
 import imgixLoader from "../../image-loader";
 import Random from "../random";
 
 export type StampProps = {
   recommendation: RecommendationItem;
+  orgInfo: OrganizationFull;
   seed?: number;
 };
 
@@ -76,20 +76,16 @@ const markVisitedStyle = (seed: number) => {
   `;
 };
 
-export default function Stamp({ recommendation, seed = 0 }: StampProps) {
+export default function Stamp({
+  recommendation,
+  orgInfo,
+  seed = 0,
+}: StampProps) {
   const theme = useTheme();
-  const { data: organizations } = useOrganizations();
-
-  if (organizations === undefined) {
-    return <div>loading...</div>;
-  }
-
-  const { organizationsMap } = organizations;
-  const org = organizationsMap.get(recommendation.org.id);
 
   return (
     <Link
-      href={"/orgs/details/" + org?.id}
+      href={"/orgs/details/" + orgInfo.id}
       css={stampStyle({
         theme,
       })}
@@ -106,10 +102,10 @@ export default function Stamp({ recommendation, seed = 0 }: StampProps) {
       ) : (
         ""
       )}
-      <div css={orgNameStyle}>{org?.shortName ?? ""}</div>
+      <div css={orgNameStyle}>{orgInfo.shortName}</div>
       <div css={logoContainer}>
         <Image
-          src={org?.logo?.src ?? ""}
+          src={orgInfo.logo?.src ?? ""}
           alt="logo"
           css={logoStyle}
           width={128}
