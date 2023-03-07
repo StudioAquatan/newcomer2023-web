@@ -17,12 +17,12 @@ const questions: QuestionType[] = [
   {
     id: "0",
     questionText: "質問文 0",
-    questionType: "five",
+    questionType: "yesno",
   },
   {
     id: "1",
     questionText: "質問文 1",
-    questionType: "five",
+    questionType: "yesno",
   },
   {
     id: "2",
