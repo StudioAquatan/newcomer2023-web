@@ -1,44 +1,49 @@
 import { css } from "@emotion/react";
-import Image from "next/image";
-import { OrganizationFull, Recommendation } from "../api-client/@types";
+import {
+  OrganizationFull,
+  Question,
+  Recommendation,
+} from "../api-client/@types";
 import { getOrgs } from "../api-client/cached-response";
 import { OrgCardProps } from "../components/orgs/OrgCard";
 import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/OrgShowcase";
 import Random, { shuffle } from "../components/random";
 import EntryButton from "../components/toppage/EntryButton";
 import EventGuidance from "../components/toppage/EventGuidance";
-import Feature from "../components/toppage/Feature";
+import FeatureDiagnose from "../components/toppage/FeatureDiagnose";
 import FeatureStampRally from "../components/toppage/FeatureStampRally";
 import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
 import { OrganizationProvider } from "../hooks/organizations";
 import useUser from "../hooks/user";
-import imgixLoader from "../image-loader";
 import { useIsMobile } from "../store/userAgent";
 
-const diagnoseContentStyle = css`
-  width: 100%;
-  height: auto;
-`;
-
-const diagnoseContentNode = (
-  <Image
-    src="/toppage/diagnose.png"
-    alt="相性診断"
-    css={diagnoseContentStyle}
-    width={256}
-    height={256}
-    loader={imgixLoader}
-  />
-);
-
-const featureDiagnose = {
-  link: "/orgs/details/0",
-  title: "相性診断",
-  description:
-    "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
-  featureContentNode: diagnoseContentNode,
-};
+const exampleQuestions: Array<string> = [
+  "運動系の団体に興味がある",
+  "球技を行う団体に興味がある",
+  "ネット型競技を行う団体に興味がある",
+  "音楽系の団体に興味がある",
+  "ゲームをする団体に興味がある（アナログ、デジタルに拘らない）",
+  "厳しいか緩いかで言ったら緩い団体に興味がある",
+  "集団競技を行う団体に興味がある",
+  "週２回以上活動をしている団体に興味がある",
+  "頭より体を動かす団体に興味がある",
+  "「とりあえず何かに所属したい」と思っている新入生も歓迎する団体に興味がある",
+  "自分を表現する場所がある団体に興味がある",
+  "自然と触れ合える団体に興味がある",
+  "文化と触れ合える団体に興味がある",
+  "ウィンタースポーツを行う団体に興味がある",
+  "創作活動（絵を描く、作曲する、文章を書く）がある団体に興味がある",
+  "マネージャーなどを募集している団体に興味がある",
+  "人前に立つことが多い団体に興味がある",
+  "演技をする団体に興味がある",
+  "乗り物を操作する団体に興味がある",
+  "実際に物を作る（いわゆるものづくり）を行う団体に興味がある",
+  "「起業したい」と思っている新入生に入部して欲しい団体に興味がある",
+  "社会貢献ができる団体に興味がある",
+  "全員がアクティブに活動している団体に興味がある",
+  "長期休暇中も活動する団体に興味がある",
+];
 
 const container = css`
   display: flex;
@@ -51,9 +56,15 @@ type HomeProps = {
   showcase: OrgShowcaseProps;
   recommendation: Recommendation;
   orgs: OrganizationFull[];
+  questions: Question[];
 };
 
-export default function Home({ showcase, recommendation, orgs }: HomeProps) {
+export default function Home({
+  showcase,
+  recommendation,
+  orgs,
+  questions,
+}: HomeProps) {
   const { isMobile } = useIsMobile();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
   useUser();
@@ -65,13 +76,21 @@ export default function Home({ showcase, recommendation, orgs }: HomeProps) {
     recommendation: recommendation,
   };
 
+  const featureDiagnose = {
+    title: "相性診断",
+    description:
+      "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
+    inverse: false,
+    questions: questions,
+  };
+
   return (
     <OrganizationProvider value={orgs}>
       <Hero />
       <div css={container}>
         <OrgShowcase {...showcase} />
         <EntryButton isMobile={isMobile} />
-        <Feature {...featureDiagnose} />
+        <FeatureDiagnose {...featureDiagnose} />
         <FeatureStampRally {...featureStampRally} />
         <EventGuidance />
         <OrgList />
@@ -109,6 +128,15 @@ export async function getServerSideProps() {
     renewRemains: 0,
   };
 
+  // ここでランダムに2つの質問を選んで相性診断の例にする
+  const questions: Question[] = shuffle(exampleQuestions)
+    .slice(0, 2)
+    .map((question, index) => ({
+      id: "example" + index,
+      questionText: question,
+      questionType: "five",
+    }));
+
   return {
     props: {
       showcase: {
@@ -116,6 +144,7 @@ export async function getServerSideProps() {
       },
       orgs,
       recommendation,
+      questions,
     },
   };
 }

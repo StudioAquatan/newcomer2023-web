@@ -58,6 +58,8 @@ const featureDescriptionStyle = (theme: Theme) => css`
 `;
 
 const featureContentAreaStyle = css`
+  display: flex;
+  align-items: center;
   width: 48rem;
   max-width: 48rem;
 `;
