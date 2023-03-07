@@ -40,23 +40,18 @@ const contents = (theme: Theme) => css`
   } */
 `;
 
-const contentsDl = css`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-`;
-
-const contentsDt = css`
-  width: calc(40% - 1rem - 1px);
-  padding-right: 1rem;
-  text-align: right;
-  border-right: 1px solid #000;
-`;
-
-const contentsDd = css`
-  width: calc(60% - 1rem);
-  padding-left: 1rem;
+const datePadding = css`
+  padding: 0;
   margin: 0;
+`;
+
+const spanDt = css`
+  padding-right: 1rem;
+  border-right: 1px solid black;
+`;
+
+const spanDd = css`
+  padding-left: 1rem;
   word-break: keep-all;
   overflow-wrap: anywhere;
 `;
@@ -66,15 +61,10 @@ export default function EventGuidance() {
     <div css={container}>
       <p css={title}>イベント案内</p>
       <div css={contents}>
-        <dl css={contentsDl}>
-          <dt css={contentsDt}>開催日</dt>
-          <dd css={contentsDd}>2023年4月6日</dd>
-          <dt css={contentsDt}>場所</dt>
-          <dd css={contentsDd}>
-            京都工芸繊維大学 <wbr />
-            体育館
-          </dd>
-        </dl>
+        <p css={datePadding}>
+          <span css={spanDt}>開催日</span>
+          <span css={spanDd}>2023年4月18日〜21日</span>
+        </p>
       </div>
     </div>
   );
