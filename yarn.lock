@@ -1219,10 +1219,9 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cloudflare/next-on-pages@^0.3.0":
+"@cloudflare/next-on-pages@https://github.com/StudioAquatan/next-on-pages.git#75237d0f44afdee65231f31b7bb5fea91b799f48":
   version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@cloudflare/next-on-pages/-/next-on-pages-0.3.0.tgz#10fc1933ff4b84c4d54ed6902b2cb8e04e86bc30"
-  integrity sha512-ncrkskryB3qtrMlMjLTKY54e+TE0q2R0YJEZHFUzuNwHeagj6TlT0ByqcWltx4uYplE/HOhDtfbimDG1wGwbiQ==
+  resolved "https://github.com/StudioAquatan/next-on-pages.git#75237d0f44afdee65231f31b7bb5fea91b799f48"
   dependencies:
     acorn "^8.8.0"
     astring "^1.8.3"
