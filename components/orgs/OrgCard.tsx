@@ -93,6 +93,7 @@ const textContentPStyle = (theme: Theme) => css`
   overflow: hidden;
   font-family: GenShinGothicP, sans-serif;
   font-size: 1.2rem;
+  line-height: 1.8rem;
   color: ${theme.colors.orgCard.normalTextColor};
   text-align: left;
   word-break: break-all;
