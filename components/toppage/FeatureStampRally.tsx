@@ -1,4 +1,4 @@
-import { Recommendation } from "../../api-client/@types";
+import { OrganizationFull, Recommendation } from "../../api-client/@types";
 import { StampProps } from "../stampcard/Stamp";
 import StampCard, { StampCardProps } from "../stampcard/StampCard";
 import Feature from "./Feature";
@@ -8,6 +8,15 @@ type FeatureStampRallyProps = {
   description: string;
   inverse?: boolean;
   recommendation: Recommendation;
+  orgs: OrganizationFull[];
+};
+
+const fallbackOrg: OrganizationFull = {
+  id: "fallback",
+  fullName: "",
+  shortName: "",
+  shortDescription: "",
+  description: "",
 };
 
 export default function FeatureStampRally({
@@ -15,13 +24,16 @@ export default function FeatureStampRally({
   description,
   inverse = false,
   recommendation,
+  orgs,
 }: FeatureStampRallyProps) {
   const seed = 0;
+  const orgsMap = new Map(orgs.map((org) => [org.id, org]));
 
   const stamps: StampProps[] = recommendation.orgs.map(
     (recommendationItem, index) => {
       return {
         recommendation: recommendationItem,
+        orgInfo: orgsMap.get(recommendationItem.org.id) ?? fallbackOrg,
         seed: seed + index,
       };
     }

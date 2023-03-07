@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { Recommendation } from "../../api-client/@types";
+import { orgsGetSuccessResponseJson } from "../../mocks/api/orgs";
 
 import FeatureStampRally from "./FeatureStampRally";
 
@@ -16,12 +17,10 @@ const Template: ComponentStory<typeof FeatureStampRally> = (args) => (
   <FeatureStampRally {...args} />
 );
 
-const orgIds = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
-
 const recommendation: Recommendation = {
-  orgs: orgIds.map((org, index) => ({
+  orgs: orgsGetSuccessResponseJson.slice(0, 9).map((org, index) => ({
     org: {
-      id: org,
+      id: org.id,
     },
     coefficient: 0,
     isVisited: true,
@@ -37,5 +36,6 @@ StampRally.args = {
   title: "スタンプラリー",
   description: "QRコードを読み込んで、景品を貰いに行こう！",
   recommendation: recommendation,
+  orgs: orgsGetSuccessResponseJson,
   inverse: true,
 };

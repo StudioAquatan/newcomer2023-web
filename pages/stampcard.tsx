@@ -1,10 +1,12 @@
 import { css } from "@emotion/react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { OrganizationFull } from "../api-client/@types";
 import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
 import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
+import { useOrganizations } from "../hooks/organizations";
 import { useRecommendation } from "../hooks/recommendation";
 import useUser from "../hooks/user";
 
@@ -60,14 +62,23 @@ const otherOrgs = css`
   text-align: center;
 `;
 
+const fallbackOrg: OrganizationFull = {
+  id: "fallback",
+  fullName: "",
+  shortName: "",
+  shortDescription: "",
+  description: "",
+};
+
 export default function StampCardPage() {
   const { data: userData } = useUser();
+  const { data: orgsData } = useOrganizations();
   const { data: recommendationData } = useRecommendation(userData?.token);
   const { data: seedData } = useStampCardSeed();
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
 
-  if (!recommendationData) {
+  if (!recommendationData || !orgsData) {
     return <div>loading...</div>;
   }
 
@@ -78,6 +89,9 @@ export default function StampCardPage() {
     (recommendationItem, index) => {
       return {
         recommendation: recommendationItem,
+        orgInfo:
+          orgsData.organizationsMap.get(recommendationItem.org.id) ??
+          fallbackOrg,
         seed: seed + index,
       };
     }
