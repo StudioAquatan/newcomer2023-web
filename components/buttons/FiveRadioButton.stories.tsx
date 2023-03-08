@@ -4,7 +4,7 @@ import React from "react";
 import FiveRadioButton from "./FiveRadioButton";
 
 export default {
-  title: "Buttons/FiveRadioButton",
+  title: "Buttons/AnswerButton",
   component: FiveRadioButton,
 } as ComponentMeta<typeof FiveRadioButton>;
 
@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof FiveRadioButton> = (args) => (
   <FiveRadioButton {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Five = Template.bind({});
+Five.args = {
   questionId: "0",
 };

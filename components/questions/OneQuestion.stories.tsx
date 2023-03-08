@@ -13,13 +13,50 @@ const Template: ComponentStory<typeof OneQuestion> = (args) => (
   <OneQuestion {...args} />
 );
 
-const question: QuestionType = {
+const questionFive: QuestionType = {
   id: "0",
   questionText: "質問文",
   questionType: "five",
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  question: question,
+const questionYesNo: QuestionType = {
+  id: "0",
+  questionText: "質問文",
+  questionType: "yesno",
+};
+
+const questionChoice: QuestionType = {
+  id: "0",
+  questionText: "質問文",
+  questionType: "choice",
+
+  answers: [
+    {
+      id: 0,
+      text: "選択肢1",
+    },
+    {
+      id: 1,
+      text: "選択肢2",
+    },
+    {
+      id: 2,
+      text: "選択肢3",
+    },
+  ],
+};
+
+export const Five = Template.bind({});
+Five.args = {
+  question: questionFive,
+};
+
+export const YesNo = Template.bind({});
+YesNo.args = {
+  question: questionYesNo,
+};
+
+export const Choice = Template.bind({});
+Choice.args = {
+  question: questionChoice,
 };
