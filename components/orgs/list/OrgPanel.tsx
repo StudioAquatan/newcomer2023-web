@@ -7,6 +7,10 @@ import imgixLoader from "../../../image-loader";
 const linkStyle = css`
   color: inherit;
   text-decoration: inherit;
+
+  &:hover {
+    color: #1174ff;
+  }
 `;
 
 const orgPanelStyle = css`
