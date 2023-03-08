@@ -54,7 +54,7 @@ export default function OfficialAccounts() {
       <p css={title}>公式アカウント</p>
       <div css={contents}>
         <a
-          href="https://twitter.com/"
+          href="https://twitter.com/Shinkan_KIT2023"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -63,7 +63,7 @@ export default function OfficialAccounts() {
           </button>
         </a>
         <a
-          href="https://www.instagram.com/"
+          href="https://www.instagram.com/shinkan_kit2023"
           target="_blank"
           rel="noopener noreferrer"
         >
