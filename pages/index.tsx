@@ -6,7 +6,9 @@ import {
 } from "../api-client/@types";
 import { getOrgs } from "../api-client/cached-response";
 import { OrgCardProps } from "../components/orgs/showcase/OrgCard";
-import OrgShowcase, { OrgShowcaseProps } from "../components/orgs/showcase/OrgShowcase";
+import OrgShowcase, {
+  OrgShowcaseProps,
+} from "../components/orgs/showcase/OrgShowcase";
 import Random, { shuffle } from "../components/random";
 import EntryButton from "../components/toppage/EntryButton";
 import EventGuidance from "../components/toppage/EventGuidance";
