@@ -4,7 +4,7 @@ import React from "react";
 import YesNoButton from "./YesNoButton";
 
 export default {
-  title: "Buttons/YesNoButton",
+  title: "Buttons/AnswerButton",
   component: YesNoButton,
 } as ComponentMeta<typeof YesNoButton>;
 
@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof YesNoButton> = (args) => (
   <YesNoButton {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const YesNo = Template.bind({});
+YesNo.args = {
   questionId: "0",
 };
