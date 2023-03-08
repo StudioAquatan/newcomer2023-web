@@ -5,6 +5,7 @@ import {
   Recommendation,
 } from "../api-client/@types";
 import { getOrgs } from "../api-client/cached-response";
+import MetaHead from "../components/MetaHead";
 import { OrgCardProps } from "../components/orgs/showcase/OrgCard";
 import OrgShowcase, {
   OrgShowcaseProps,
@@ -89,6 +90,7 @@ export default function Home({
 
   return (
     <OrganizationProvider value={orgs}>
+      <MetaHead description="相性診断をして自分に合った部・サークルの説明を聞きに行こう！スタンプラリーも！" />
       <Hero />
       <div css={container}>
         <OrgShowcase {...showcase} />
