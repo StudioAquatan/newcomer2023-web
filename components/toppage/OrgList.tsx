@@ -23,7 +23,7 @@ export default function OrgList() {
   return (
     <div css={container}>
       <p css={title}>部活動一覧</p>
-      <GlowingPinkButton text="こちら" href="" />
+      <GlowingPinkButton text="こちら" href="/orgs/" />
     </div>
   );
 }

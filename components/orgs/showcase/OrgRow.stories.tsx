@@ -4,7 +4,7 @@ import React from "react";
 import OrgRow, { OrgRowProps } from "./OrgRow";
 
 export default {
-  title: "Orgs/OrgRow",
+  title: "Orgs/Showcase/OrgRow",
   component: OrgRow,
   argTypes: {
     orgs: { control: "object" },

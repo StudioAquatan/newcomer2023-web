@@ -4,7 +4,7 @@ import React from "react";
 import OrgCard from "./OrgCard";
 
 export default {
-  title: "Orgs/OrgCard",
+  title: "Orgs/Showcase/OrgCard",
   component: OrgCard,
 } as ComponentMeta<typeof OrgCard>;
 

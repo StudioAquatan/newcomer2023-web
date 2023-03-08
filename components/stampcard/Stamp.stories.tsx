@@ -28,6 +28,7 @@ const organiationFull: OrganizationFull = {
     width: 100,
     height: 100,
   },
+  logoFocus: false,
   stampBackground: {
     src: "/org_icons/default.png",
     width: 100,

@@ -46,6 +46,7 @@ export type OrganizationFull = OrganizationSimple & {
   /** 短い紹介文 */
   shortDescription: string;
   logo?: Image | undefined;
+  logoFocus?: boolean;
   stampBackground?: Image | undefined;
   /** スタンプの背景色 */
   stampColor?: string | undefined;

@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import { shuffle } from "../random";
+import { shuffle } from "../../random";
 import OrgShowcase, { OrgShowcaseProps } from "./OrgShowcase";
 
 export default {
-  title: "Orgs/OrgShowcase",
+  title: "Orgs/Showcase/OrgShowcase",
   component: OrgShowcase,
   argTypes: {
     orgs: { control: "object" },

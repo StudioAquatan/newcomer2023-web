@@ -1,18 +1,13 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React from "react";
-
-import OrgDetailsText from "./OrgDetailsText";
+import OrgPanel from "./OrgPanel";
 
 export default {
-  title: "Orgs/OrgDetailsText",
-  component: OrgDetailsText,
-  parameters: {
-    layout: "fullscreen",
-  },
-} as ComponentMeta<typeof OrgDetailsText>;
+  title: "Orgs/List/OrgPanel",
+  component: OrgPanel,
+} as ComponentMeta<typeof OrgPanel>;
 
-const Template: ComponentStory<typeof OrgDetailsText> = (args) => (
-  <OrgDetailsText {...args} />
+const Template: ComponentStory<typeof OrgPanel> = (args) => (
+  <OrgPanel {...args} />
 );
 
 export const Default = Template.bind({});
@@ -34,5 +29,4 @@ Default.args = {
     activeDays: "LT会/部会 毎月最終金曜日 18:00~",
     links: ["https://twitter.com/StudioAquatan", "https://www.aquatan.studio/"],
   },
-  type: "summary",
 };

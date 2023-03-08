@@ -1,7 +1,7 @@
 import { css, Theme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
-import imgixLoader from "../../image-loader";
+import imgixLoader from "../../../image-loader";
 
 export type OrgCardProps = {
   orgName: string;
