@@ -21,6 +21,10 @@ export default function MetaHead({
   smallImage,
   overrideSiteTitle,
 }: Props) {
+  const combinedTitle = [
+    title ? `${title} - ` : "",
+    overrideSiteTitle ? overrideSiteTitle : defaultSiteTitle,
+  ].join("");
   return (
     <Head>
       <meta property="og:type" content="website" />
@@ -58,10 +62,7 @@ export default function MetaHead({
           />
         </>
       )}
-      <title>
-        {title && `${title} - `}
-        {overrideSiteTitle ? overrideSiteTitle : defaultSiteTitle}
-      </title>
+      <title>{combinedTitle}</title>
     </Head>
   );
 }
