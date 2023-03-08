@@ -40,6 +40,7 @@ https://head.aquatan-newcomer2023-apidocs.pages.dev/#/
 
 - `NEXT_PUBLIC_API_URL` は API サーバへの URL をセットします。
 - MSW を使って API のモックを有効にする場合は `NEXT_PUBLIC_API_MOCKING` に `enabled` をセットします。それ以外の値の場合はモックは無効になります。
+- `NEXT_PUBLIC_PUBLIC_DOMAIN`に自サイトのドメイン(`irodori-newcomer-2023.pages.dev`)をセットします。
 
 ```env.local
 NEXT_PUBLIC_API_URL=https://api-server-host
