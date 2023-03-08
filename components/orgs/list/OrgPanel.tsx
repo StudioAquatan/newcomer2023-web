@@ -48,11 +48,15 @@ export default function OrgPanel({
 }) {
   return (
     <div css={orgPanelStyle}>
-      <Link css={linkStyle} href={`/orgs/details/${id}`}>
+      <Link
+        css={linkStyle}
+        as={`/orgs/details/${id}`}
+        href="/orgs/details/[orgId]"
+      >
         <div css={orgNameStyle}>{fullName}</div>
         <div css={descriptionContainerStyle}>
           <Image
-            css={logoStyle(logoFocus)}
+            css={logoStyle(logoFocus ?? false)}
             src={logo?.src ?? "/org_icons/default.png"}
             alt={fullName}
             width={100}
