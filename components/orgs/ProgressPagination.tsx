@@ -40,10 +40,6 @@ export default function ProgressPagination({
     throw new Error("Progress must be between 0 and 1");
   }
 
-  if (currentPage > numPages) {
-    throw new Error("Page number must be in page range");
-  }
-
   return (
     <div css={container}>
       {new Array(numPages).fill(null).map((_value, index) => {
