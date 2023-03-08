@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { Question as QuestionType } from "../../api-client/@types";
+import ChoiseButton from "../buttons/ChoiseButton";
 import FiveRadioButton from "../buttons/FiveRadioButton";
 import YesNoRadioButton from "../buttons/YesNoButton";
 
@@ -30,7 +31,14 @@ const AnswerButton = ({ question }: { question: QuestionType }) => {
     case "five":
       return <FiveRadioButton questionId={question.id} />;
     case "choice":
-      return <p>Not implemented</p>;
+      if (question.answers === undefined) {
+        throw new Error(
+          "選択肢が設定されていません: Question ID: " + question.id
+        );
+      }
+      return (
+        <ChoiseButton questionId={question.id} answers={question.answers} />
+      );
   }
 };
 
