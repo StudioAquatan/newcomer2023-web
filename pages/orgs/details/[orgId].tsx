@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Head from "next/head";
 import React from "react";
 import { OrganizationFull } from "../../../api-client/@types";
 import { getOrgs } from "../../../api-client/cached-response";
 import { ResourceBucketItem } from "../../../api-client/resource-bucket";
 import Layout from "../../../components/Layout";
+import MetaHead from "../../../components/MetaHead";
 import FullscreenPager from "../../../components/orgs/FullscreenPager";
 import ProgressPagination from "../../../components/orgs/ProgressPagination";
 import OrgDetailsText from "../../../components/orgs/details/OrgDetailsText";
@@ -149,9 +149,11 @@ const OrgDetail = ({ org, orgImage }: Props) => {
 
   return (
     <>
-      <Head>
-        <title>{org.fullName}</title>
-      </Head>
+      <MetaHead
+        title={org.fullName}
+        description={org.shortDescription ?? org.description}
+        smallImage={org.logo?.src}
+      />
       <StoryLikeContainer>
         <ContentPager currentPage={currentPage}>
           <ContentContainer>
