@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 
 type AnswerRadioButtonProps = {
   questionId: string;
@@ -13,74 +13,80 @@ const container = css`
   margin: 0;
 `;
 
-const item = css`
-  position: relative;
-  display: table-cell;
+const item = (theme: Theme) => {
+  return css`
+    position: relative;
+    display: table-cell;
 
-  /* ホバー時のラジオボタン下の文字色 */
-  &:hover label {
-    color: #ffc8df;
-  }
+    /* ホバー時のラジオボタン下の文字色 */
+    &:hover label {
+      color: ${theme.colors.radio.hover.color};
+    }
 
-  /* ホバー時のラジオボタンの色 */
-  &:hover > div > div {
-    border: 5px solid #ffc8df;
-  }
-`;
+    /* ホバー時のラジオボタンの色 */
+    &:hover > div > div {
+      border: 5px solid ${theme.colors.radio.hover.color};
+    }
+  `;
+};
 
-const itemConatiner = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 0.5rem;
+const itemConatiner = (theme: Theme) => {
+  return css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0.5rem;
 
-  /* チェック時のラジオボタン下の文字色 */
-  & > input[type="radio"]:checked + label {
-    color: #ff8dbd;
-  }
+    /* チェック時のラジオボタン下の文字色 */
+    & > input[type="radio"]:checked + label {
+      color: ${theme.colors.radio.checked.color};
+    }
 
-  /* チェック時のラジオボタンの色 */
-  & > input[type="radio"]:checked + label + div {
-    border: 5px solid #ff8dbd;
-  }
+    /* チェック時のラジオボタンの色 */
+    & > input[type="radio"]:checked + label + div {
+      border: 5px solid ${theme.colors.radio.checked.color};
+    }
 
-  /* チェック時のラジオボタンの中心の色 */
-  & > input[type="radio"]:checked + label + div::before {
-    background: #ff8dbd;
-  }
-`;
+    /* チェック時のラジオボタンの中心の色 */
+    & > input[type="radio"]:checked + label + div::before {
+      background: ${theme.colors.radio.checked.color};
+    }
+  `;
+};
 
 const hiddenRadioButton = css`
   height: 0;
   visibility: hidden;
 `;
 
-const checkedRadioButton = css`
-  position: absolute;
-  display: block;
-  width: 25px;
-  height: 25px;
-  border: 5px solid #555;
-  border-radius: 50%;
-  transition: border 0.1s linear;
+const checkedRadioButton = (theme: Theme) => {
+  return css`
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 25px;
+    border: 5px solid ${theme.colors.radio.checked.color};
+    border-radius: 50%;
+    transition: border 0.1s linear;
 
-  /*
+    /*
    * ラジオボタンの中心の点
    * ここをチェック時に色を変える
    */
-  &::before {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    display: block;
-    width: 15px;
-    height: 15px;
-    margin: auto;
-    content: "";
-    border-radius: 50%;
-    transition: background 0.1s linear;
-  }
-`;
+    &::before {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      display: block;
+      width: 15px;
+      height: 15px;
+      margin: auto;
+      content: "";
+      border-radius: 50%;
+      transition: background 0.1s linear;
+    }
+  `;
+};
 
 const labelStyle = (padding: string) => css`
   z-index: 1;

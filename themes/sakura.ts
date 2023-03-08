@@ -1,4 +1,5 @@
 import "@emotion/react";
+import { Theme } from "@emotion/react";
 
 declare module "@emotion/react" {
   export interface Theme {
@@ -39,11 +40,20 @@ declare module "@emotion/react" {
         backgroundColor: string;
         normalTextColor: string;
       };
+      radio: {
+        color: string;
+        checked: {
+          color: string;
+        };
+        hover: {
+          color: string;
+        };
+      };
     };
   }
 }
 
-export const sakura = {
+export const sakura: Theme = {
   colors: {
     backgroundColor: "#F7FFF5",
     normalTextColor: "#000000",
@@ -80,6 +90,15 @@ export const sakura = {
     storyLike: {
       backgroundColor: "#202020",
       normalTextColor: "#E6E6E6",
+    },
+    radio: {
+      color: "#555",
+      checked: {
+        color: "#ff8dbd",
+      },
+      hover: {
+        color: "#ffc8df",
+      },
     },
   },
 };
