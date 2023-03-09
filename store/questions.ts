@@ -1,12 +1,7 @@
 import { atom, useSetAtom, useAtomValue } from "jotai";
+import { QuestionResult } from "../api-client/@types";
 
-type AnswerType = {
-  id: string;
-  questionType: "five" | "yesno" | "choise";
-  answer: string;
-};
-
-type Answers = Map<string, AnswerType>;
+type Answers = Map<string, QuestionResult>;
 
 const answersAtom = atom<Answers>(new Map());
 

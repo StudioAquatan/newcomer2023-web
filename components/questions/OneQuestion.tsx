@@ -31,14 +31,7 @@ const AnswerButton = ({ question }: { question: QuestionType }) => {
     case "five":
       return <FiveRadioButton questionId={question.id} />;
     case "choice":
-      if (question.answers === undefined) {
-        throw new Error(
-          "選択肢が設定されていません: Question ID: " + question.id
-        );
-      }
-      return (
-        <ChoiseButton questionId={question.id} answers={question.answers} />
-      );
+      return <ChoiseButton question={question} />;
   }
 };
 

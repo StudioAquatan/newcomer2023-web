@@ -3,9 +3,14 @@ import { useAnswers, useSetAnswers } from "../../store/questions";
 
 type AnswerRadioButtonProps = {
   questionId: string;
-  labels: string[];
+  labels: Label[];
   direction?: Direction;
   padding?: string;
+};
+
+export type Label = {
+  id: number;
+  text: string;
 };
 
 type Direction = "vertical" | "horizontal";
@@ -197,9 +202,8 @@ export default function AnswerRadioButton({
                 onChange={() => {
                   const newAnswers = new Map(answers);
                   newAnswers.set(questionId, {
-                    id: questionId,
-                    questionType: "five",
-                    answer: label,
+                    questionId: questionId,
+                    answer: label.id,
                   });
                   setAnswers(newAnswers);
                 }}
@@ -208,7 +212,7 @@ export default function AnswerRadioButton({
                 htmlFor={"question_id_" + questionId + "_" + index}
                 css={labelStyle(direction, padding || "0px")}
               >
-                {label}
+                {label.text}
               </label>
               <div css={checkedRadioButton(direction)} />
             </div>
