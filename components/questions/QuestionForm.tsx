@@ -1,4 +1,5 @@
 import { Question as QuestionType } from "../../api-client/@types";
+import { useAnswers } from "../../store/questions";
 import OneQuestion from "./OneQuestion";
 
 type QuestionFormProps = {
@@ -6,11 +7,19 @@ type QuestionFormProps = {
 };
 
 export default function QuestionForm({ questions }: QuestionFormProps) {
+  const { answers } = useAnswers();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(answers);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {questions.map((question, index) => (
         <OneQuestion key={index} question={question} />
       ))}
+      <button type="submit">Submit</button>
     </form>
   );
 }
