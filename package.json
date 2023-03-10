@@ -69,6 +69,7 @@
     "openapi2aspida": "^0.21.0",
     "postcss-syntax": "^0.36.2",
     "sb": "^6.5.15",
+    "storybook-addon-next-router": "^4.0.2",
     "stylelint": "^14.16.1",
     "stylelint-config-idiomatic-order": "^9.0.0",
     "stylelint-config-prettier": "^9.0.4",
