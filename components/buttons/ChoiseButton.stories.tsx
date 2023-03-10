@@ -28,7 +28,12 @@ const question: Question = {
   answers: answers,
 };
 
+const onChange = (questionId: string, answerId: number) => {
+  console.log(`questionId: ${questionId}, answerId: ${answerId}`);
+};
+
 export const Choise = Template.bind({});
 Choise.args = {
   question: question,
+  onChange: onChange,
 };

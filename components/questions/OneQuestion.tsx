@@ -6,6 +6,7 @@ import YesNoRadioButton from "../buttons/YesNoButton";
 
 type QuestionProps = {
   question: QuestionType;
+  onChange?: (questionId: string, answerId: number) => void;
 };
 
 const container = css`
@@ -24,23 +25,24 @@ const questionText = css`
   font-weight: bold;
 `;
 
-const AnswerButton = ({ question }: { question: QuestionType }) => {
+const AnswerButton = ({ question, onChange }: QuestionProps) => {
   switch (question.questionType) {
     case "yesno":
-      return <YesNoRadioButton questionId={question.id} />;
+      return <YesNoRadioButton questionId={question.id} onChange={onChange} />;
     case "five":
-      return <FiveRadioButton questionId={question.id} />;
+      return <FiveRadioButton questionId={question.id} onChange={onChange} />;
     case "choice":
-      return <ChoiseButton question={question} />;
+      return <ChoiseButton question={question} onChange={onChange} />;
   }
 };
 
 // TODO: ここで、question.questionTypeに応じて、適切なコンポーネントを呼び出す
-export default function OneQuestion({ question }: QuestionProps) {
+export default function OneQuestion(props: QuestionProps) {
+  const { question } = props;
   return (
     <fieldset css={container}>
       <p css={questionText}>Q. {question.questionText}</p>
-      <AnswerButton question={question} />
+      <AnswerButton {...props} />
     </fieldset>
   );
 }

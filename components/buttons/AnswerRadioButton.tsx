@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
-import { useAnswers, useSetAnswers } from "../../store/questions";
 
 type AnswerRadioButtonProps = {
   questionId: string;
   labels: Label[];
+  onChange?: (questionId: string, answer: number) => void;
   direction?: Direction;
   padding?: string;
 };
@@ -182,12 +182,10 @@ const labelStyle = (direction: Direction, padding: string) => {
 export default function AnswerRadioButton({
   questionId,
   labels,
+  onChange,
   direction = "horizontal",
   padding = "0px",
 }: AnswerRadioButtonProps) {
-  const { answers } = useAnswers();
-  const { setAnswers } = useSetAnswers();
-
   return (
     <ul css={container(direction)}>
       {labels.map((label, index) => {
@@ -200,12 +198,7 @@ export default function AnswerRadioButton({
                 name={"question_id_" + questionId}
                 css={hiddenRadioButton}
                 onChange={() => {
-                  const newAnswers = new Map(answers);
-                  newAnswers.set(questionId, {
-                    questionId: questionId,
-                    answer: label.id,
-                  });
-                  setAnswers(newAnswers);
+                  onChange && onChange(questionId, label.id);
                 }}
               />
               <label

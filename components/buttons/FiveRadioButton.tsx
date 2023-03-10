@@ -2,6 +2,7 @@ import AnswerRadioButton, { Label } from "./AnswerRadioButton";
 
 type FiveRadioButtonProps = {
   questionId: string;
+  onChange?: (questionId: string, answer: number) => void;
 };
 
 const FiveRadioButtonLabels: Label[] = [
@@ -27,8 +28,15 @@ const FiveRadioButtonLabels: Label[] = [
   },
 ];
 
-export default function FiveRadioButton({ questionId }: FiveRadioButtonProps) {
+export default function FiveRadioButton({
+  questionId,
+  onChange,
+}: FiveRadioButtonProps) {
   return (
-    <AnswerRadioButton questionId={questionId} labels={FiveRadioButtonLabels} />
+    <AnswerRadioButton
+      questionId={questionId}
+      labels={FiveRadioButtonLabels}
+      onChange={onChange}
+    />
   );
 }

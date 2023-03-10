@@ -12,7 +12,12 @@ const Template: ComponentStory<typeof FiveRadioButton> = (args) => (
   <FiveRadioButton {...args} />
 );
 
+const onChange = (questionId: string, answerId: number) => {
+  console.log(`questionId: ${questionId}, answerId: ${answerId}`);
+};
+
 export const Five = Template.bind({});
 Five.args = {
   questionId: "0",
+  onChange: onChange,
 };
