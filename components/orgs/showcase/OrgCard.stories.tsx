@@ -14,23 +14,33 @@ const Template: ComponentStory<typeof OrgCard> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  orgName: "Default Org Name",
-  orgImagePath: "/org_icons/default.png",
+  id: "0",
+  fullName: "Default Org Name",
+  shortName: "Default Org Name",
+  shortDescription: "Default Description",
   description: "Default Description",
-  link: "/",
 };
 
 export const StudioAquatan = Template.bind({});
 StudioAquatan.args = {
-  orgName: "StudioAquatan",
-  orgImagePath: "/org_icons/studioaquatan.png",
+  id: "0",
+  fullName: "StudioAquatan",
+  shortName: "StudioAquatan",
+  shortDescription: "Make Aquatan Great Again",
   description: "Make Aquatan Great Again",
-  link: "/",
+  logo: {
+    src: "/org_icons/studioaquatan.png",
+    width: 500,
+    height: 500,
+  },
 };
 
 export const LongOrgName = Template.bind({});
 LongOrgName.args = {
-  orgName: "ToooooooooooLongOrgName",
+  id: "0",
+  fullName: "ToooooooooooLongOrgName",
+  shortName: "ToooooooooooLongOrgName",
+  shortDescription:
+    "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
   description: "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
-  link: "/",
 };
