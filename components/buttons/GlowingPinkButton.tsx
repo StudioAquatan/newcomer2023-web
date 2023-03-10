@@ -2,9 +2,10 @@ import { css, Theme } from "@emotion/react";
 import Link from "next/link";
 
 type GlowingPinkButtonProps = {
-  text: string;
-  href: string;
+  text?: string;
+  href?: string;
   query?: { [key: string]: string };
+  type?: string;
 };
 
 const button = (theme: Theme) => {
@@ -39,10 +40,19 @@ export default function GlowingPinkButton({
   text,
   href,
   query = {},
+  type,
 }: GlowingPinkButtonProps) {
-  return (
-    <Link href={{ pathname: href, query: query }}>
-      <button css={button}>{text}</button>
-    </Link>
-  );
+  if (type === "submit") {
+    return (
+      <button css={button} type="submit">
+        {text}
+      </button>
+    );
+  } else {
+    return (
+      <Link href={{ pathname: href, query: query }}>
+        <button css={button}>{text}</button>
+      </Link>
+    );
+  }
 }

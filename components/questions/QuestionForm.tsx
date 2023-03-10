@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 import {
   Question as QuestionType,
@@ -5,6 +6,7 @@ import {
 } from "../../api-client/@types";
 import { apiClient } from "../../api-client/apiClient";
 import useUser from "../../hooks/user";
+import GlowingPinkButton from "../buttons/GlowingPinkButton";
 import OneQuestion from "./OneQuestion";
 
 type QuestionFormProps = {
@@ -21,6 +23,12 @@ const putRecommendation = async (token: string, answers: QuestionResult[]) => {
     },
   });
 };
+
+const container = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default function QuestionForm({ questions }: QuestionFormProps) {
   const router = useRouter();
@@ -57,12 +65,14 @@ export default function QuestionForm({ questions }: QuestionFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {questions.map((question, index) => {
-        return (
-          <OneQuestion key={index} question={question} onChange={onChange} />
-        );
-      })}
-      <button type="submit">Submit</button>
+      <div css={container}>
+        {questions.map((question, index) => {
+          return (
+            <OneQuestion key={index} question={question} onChange={onChange} />
+          );
+        })}
+        <GlowingPinkButton type="submit" text="診断する" />
+      </div>
     </form>
   );
 }
