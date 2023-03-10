@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Question } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import ProgressBar from "../components/questions/ProgressBar";
+import QuestionForm from "../components/questions/QuestionForm";
 
 type DiagnoseProps = {
   questions: Array<Question>;
@@ -14,6 +15,7 @@ export default function Diagnose({ questions, initialCurrent }: DiagnoseProps) {
   return (
     <div>
       <ProgressBar progress={current / questions.length} />
+      <QuestionForm questions={questions} />
     </div>
   );
 }
