@@ -44,6 +44,28 @@ const headersData: HeaderData[] = [
   // },
 ];
 
+const headerStyle = (isScroll: boolean) => {
+  const scroll = css`
+    background-color: #f7fff5;
+    box-shadow: 0 5px 5px rgb(0 0 0 / 10%);
+  `;
+  return css`
+    /* スクロールに追従したい場合は fixed にする */
+    position: fixed;
+
+    /* 追従しない場合は absolute にする */
+
+    /* position: absolute; */
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    background-color: transparent;
+    transition: all 0.5s ease-out;
+    ${isScroll ? scroll : ""}
+  `;
+};
+
 const desktopContainer = (theme: Theme) => css`
   display: flex;
   align-items: center;
@@ -189,10 +211,11 @@ const DrawerContent = ({
 
 export default function Header({ isMobile }: { isMobile: boolean }) {
   const [state, setState] = useState({
+    isScroll: false,
     mobileView: false,
     drawerOpen: false,
   });
-  const { mobileView, drawerOpen } = state;
+  const { isScroll, mobileView, drawerOpen } = state;
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -207,6 +230,20 @@ export default function Header({ isMobile }: { isMobile: boolean }) {
 
     return () => {
       window.removeEventListener("resize", () => setResponsiveness());
+    };
+  }, []);
+
+  useEffect(() => {
+    const setIsScroll = () => {
+      return window.scrollY > 0
+        ? setState((prevState) => ({ ...prevState, isScroll: true }))
+        : setState((prevState) => ({ ...prevState, isScroll: false }));
+    };
+
+    window.addEventListener("scroll", () => setIsScroll());
+
+    return () => {
+      window.removeEventListener("scroll", () => setIsScroll());
     };
   }, []);
 
@@ -239,5 +276,9 @@ export default function Header({ isMobile }: { isMobile: boolean }) {
     );
   };
 
-  return <header>{mobileView ? displayMobile() : displayDesktop()}</header>;
+  return (
+    <header css={headerStyle(isScroll)}>
+      {mobileView ? displayMobile() : displayDesktop()}
+    </header>
+  );
 }
