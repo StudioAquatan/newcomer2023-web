@@ -1,9 +1,11 @@
 import { css } from "@emotion/react";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
+import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type HamburgerProps = {
-  onClick: () => void;
+  onClick?: () => void;
+  isOpen?: boolean;
 };
 
 const hamburgerButtonStyle = () => css`
@@ -25,10 +27,14 @@ const hamburgerIconStyle = () => css`
   }
 `;
 
-export default function Hamburger({ onClick }: HamburgerProps) {
+export default function Hamburger({ onClick, isOpen }: HamburgerProps) {
   return (
     <button css={hamburgerButtonStyle} onClick={onClick}>
-      <FontAwesomeIcon icon={faBars} css={hamburgerIconStyle} />
+      {isOpen ? (
+        <FontAwesomeIcon icon={faXmark} css={hamburgerIconStyle} />
+      ) : (
+        <FontAwesomeIcon icon={faBars} css={hamburgerIconStyle} />
+      )}
     </button>
   );
 }
