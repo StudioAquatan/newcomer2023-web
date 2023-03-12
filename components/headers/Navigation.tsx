@@ -39,6 +39,43 @@ const navMenuItemsStyle = (theme: Theme) => css`
   }
 `;
 
+const navColumnMenuItemsStyle = (theme: Theme) => css`
+  ul {
+    display: block;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  li {
+    display: list-item;
+    padding: 0;
+    margin: 0 3rem;
+    font-size: 2rem;
+    border-bottom: 1px solid ${theme.colors.normalTextColor};
+
+    &:hover {
+      background-color: #eee;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  a {
+    display: block;
+    padding: 2rem 0;
+    color: ${theme.colors.normalTextColor};
+    text-decoration: none;
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+`;
+
 export type LinkItemProps = {
   headerData: HeaderData;
   isMobile: boolean;
@@ -80,6 +117,21 @@ type MenuButtonsProps = {
 export const MenuButtons = ({ headersData, isMobile }: MenuButtonsProps) => {
   return (
     <nav css={navMenuItemsStyle}>
+      <ul>
+        {headersData.map((data, index) => {
+          return <LinkItem key={index} headerData={data} isMobile={isMobile} />;
+        })}
+      </ul>
+    </nav>
+  );
+};
+
+export const ColumnMenuButtons = ({
+  headersData,
+  isMobile,
+}: MenuButtonsProps) => {
+  return (
+    <nav css={navColumnMenuItemsStyle}>
       <ul>
         {headersData.map((data, index) => {
           return <LinkItem key={index} headerData={data} isMobile={isMobile} />;
