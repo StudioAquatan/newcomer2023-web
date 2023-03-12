@@ -11,6 +11,6 @@ export default {
   },
 } as ComponentMeta<typeof Header>;
 
-const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
+const Template: ComponentStory<typeof Header> = () => <Header />;
 
 export const Default = Template.bind({});
