@@ -6,6 +6,12 @@ import { ColumnMenuButtons, HeaderData, MenuButtons } from "./Navigation";
 
 const headersData: HeaderData[] = [
   {
+    label: "トップページ",
+    link: {
+      href: "/",
+    },
+  },
+  {
     label: "新歓について",
     link: {
       href: "",
