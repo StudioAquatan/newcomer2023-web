@@ -1,6 +1,5 @@
 import { css, Theme } from "@emotion/react";
 import Link from "next/link";
-import { useIsMobile } from "../../store/userAgent";
 
 export type LinkData = {
   href: string;
@@ -40,8 +39,14 @@ const navMenuItemsStyle = (theme: Theme) => css`
   }
 `;
 
-export const LinkItem = ({ label, targetDevice, link }: HeaderData) => {
-  const { isMobile } = useIsMobile();
+export type LinkItemProps = {
+  headerData: HeaderData;
+  isMobile: boolean;
+};
+
+export const LinkItem = ({ headerData, isMobile }: LinkItemProps) => {
+  const { label, targetDevice, link } = headerData;
+
   if (targetDevice === "mobile" && !isMobile) {
     return null;
   }
@@ -69,14 +74,15 @@ export const LinkItem = ({ label, targetDevice, link }: HeaderData) => {
 
 type MenuButtonsProps = {
   headersData: HeaderData[];
+  isMobile: boolean;
 };
 
-export const MenuButtons = ({ headersData }: MenuButtonsProps) => {
+export const MenuButtons = ({ headersData, isMobile }: MenuButtonsProps) => {
   return (
     <nav css={navMenuItemsStyle}>
       <ul>
         {headersData.map((data, index) => {
-          return <LinkItem key={index} {...data} />;
+          return <LinkItem key={index} headerData={data} isMobile={isMobile} />;
         })}
       </ul>
     </nav>
