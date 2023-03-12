@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useIsMobile } from "../../store/userAgent";
+import Header from "../headers/Header";
 
 import Organizations from "./Organizations";
 
@@ -43,8 +45,10 @@ const contentPStyle = css`
 `;
 
 export default function Hero() {
+  const { isMobile } = useIsMobile();
   return (
     <div css={heroStyle}>
+      <Header isMobile={isMobile} />
       <Organizations />
       <div css={heroContentStyle}>
         <p css={contentPStyle}>部活動相性診断</p>

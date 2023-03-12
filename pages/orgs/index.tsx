@@ -1,7 +1,9 @@
 import { css } from "@emotion/react";
 import { OrganizationFull } from "../../api-client/@types";
 import { getOrgs } from "../../api-client/cached-response";
+import Header from "../../components/headers/Header";
 import OrgPanel from "../../components/orgs/list/OrgPanel";
+import { useIsMobile } from "../../store/userAgent";
 
 type OrgListPageProps = {
   organizations: OrganizationFull[];
@@ -10,7 +12,12 @@ type OrgListPageProps = {
 const orgListPageStyle = css`
   width: 100%;
   max-width: 1400px;
+  padding-top: 5rem;
   margin: 0 auto;
+
+  @media screen and (max-width: 800px) {
+    padding-top: 8rem;
+  }
 `;
 
 const orgListStyle = css`
@@ -22,14 +29,18 @@ const orgListStyle = css`
 `;
 
 export default function OrgListPage({ organizations }: OrgListPageProps) {
+  const { isMobile } = useIsMobile();
   return (
-    <div css={orgListPageStyle}>
-      <div css={orgListStyle}>
-        {organizations.map((org) => {
-          return <OrgPanel org={org} key={org.id} />;
-        })}
+    <>
+      <Header isMobile={isMobile} />
+      <div css={orgListPageStyle}>
+        <div css={orgListStyle}>
+          {organizations.map((org) => {
+            return <OrgPanel org={org} key={org.id} />;
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

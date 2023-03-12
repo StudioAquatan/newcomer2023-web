@@ -1,21 +1,35 @@
 import { css } from "@emotion/react";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OrganizationFull } from "../api-client/@types";
 import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
+import Header from "../components/headers/Header";
 import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
 import { useOrganizations } from "../hooks/organizations";
 import { useRecommendation } from "../hooks/recommendation";
 import useUser from "../hooks/user";
+import { useIsMobile } from "../store/userAgent";
+
+const headerPadding = css`
+  height: 2rem;
+`;
 
 const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
   height: 100svh;
+`;
+
+const content = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
 `;
 
 const stampCardHeader = css`
@@ -55,12 +69,12 @@ const stampCardBottom = css`
   margin: 0 3.2rem;
 `;
 
-const otherOrgs = css`
-  padding: 0;
-  margin: 0;
-  font-size: 2rem;
-  text-align: center;
-`;
+// const otherOrgs = css`
+//   padding: 0;
+//   margin: 0;
+//   font-size: 2rem;
+//   text-align: center;
+// `;
 
 const fallbackOrg: OrganizationFull = {
   id: "fallback",
@@ -71,6 +85,7 @@ const fallbackOrg: OrganizationFull = {
 };
 
 export default function StampCardPage() {
+  const { isMobile } = useIsMobile();
   const { data: userData } = useUser();
   const { data: orgsData } = useOrganizations();
   const { data: recommendationData } = useRecommendation(userData?.token);
@@ -103,20 +118,25 @@ export default function StampCardPage() {
 
   return (
     <div css={container}>
-      <div css={stampCardHeader}>
-        <p css={stampCardTitle}>スタンプラリー</p>
-        <p css={stampCardDescription}>ブースを回ってスタンプを集めよう！</p>
+      <div css={headerPadding}>
+        <Header isMobile={isMobile} />
       </div>
-      <div css={stampCardContainer}>
-        <StampCard {...props} />
-      </div>
-      <div css={stampCardBottom}>
-        <GlowingPinkButton text="シェアしてみよう!" href="/" />
-        <p css={otherOrgs}>
+      <div css={content}>
+        <div css={stampCardHeader}>
+          <p css={stampCardTitle}>スタンプラリー</p>
+          <p css={stampCardDescription}>ブースを回ってスタンプを集めよう！</p>
+        </div>
+        <div css={stampCardContainer}>
+          <StampCard {...props} />
+        </div>
+        <div css={stampCardBottom}>
+          <GlowingPinkButton text="シェアしてみよう!" href="/" />
+          {/* <p css={otherOrgs}>
           他の部活を見る
           <br />
           <FontAwesomeIcon icon={faChevronDown} />
-        </p>
+        </p> */}
+        </div>
       </div>
     </div>
   );
