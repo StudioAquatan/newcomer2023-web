@@ -1,7 +1,8 @@
 import { css, Theme } from "@emotion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { HeaderData, MenuButtons } from "./Navigation";
+import Hamburger from "../buttons/Hamburger";
+import { ColumnMenuButtons, HeaderData, MenuButtons } from "./Navigation";
 
 const headersData: HeaderData[] = [
   {
@@ -37,10 +38,18 @@ const headersData: HeaderData[] = [
   // },
 ];
 
-const container = (theme: Theme) => css`
+const desktopContainer = (theme: Theme) => css`
   display: flex;
   align-items: center;
   padding: 1rem 2rem;
+  color: ${theme.colors.normalTextColor};
+  background-color: transparent;
+`;
+
+const mobileContainer = (theme: Theme) => css`
+  display: flex;
+  align-items: center;
+  padding: 1rem;
   color: ${theme.colors.normalTextColor};
   background-color: transparent;
 `;
@@ -54,23 +63,130 @@ const SiteName = () => {
     a {
       color: ${theme.colors.normalTextColor};
       text-decoration: none;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
     }
   `;
 
   return (
     <h1 css={siteNameStyle}>
-      <Link href="/">京都工芸繊維大学 新歓サイト</Link>
+      <Link href="/">
+        京都工芸繊維大学
+        <wbr /> 新歓サイト
+      </Link>
     </h1>
   );
 };
 
-export default function Header() {
+const Mask = ({
+  isOpen,
+  onClick,
+}: {
+  isOpen: boolean;
+  onClick: () => void;
+}) => {
+  const opened = css`
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    visibility: visible;
+    background-color: rgb(0 0 0 / 50%);
+  `;
+
+  const container = css`
+    visibility: hidden;
+    transition: all 0.5s ease-out;
+    ${isOpen ? opened : ""}
+  `;
+
+  return <div css={container} onClick={onClick} />;
+};
+
+const drawerBase = (isOpen: boolean) => {
+  return css`
+    position: fixed;
+    top: 0;
+    left: ${isOpen ? "0" : "-100%"};
+    width: 70%;
+    height: 100vh;
+    overflow-x: hidden;
+
+    /* background-color: rgb(0 0 0 / 50%); */
+    background-color: transparent;
+    transition: all 0.5s ease-in-out;
+
+    @media screen and (max-width: 300px) {
+      width: 100%;
+    }
+  `;
+};
+
+const Drawer = ({
+  isOpen,
+  onClick,
+  children,
+}: {
+  isOpen: boolean;
+  onClick?: () => void;
+  children?: React.ReactNode;
+}) => {
+  return (
+    <div css={[drawerBase(isOpen)]} onClick={onClick}>
+      {children}
+    </div>
+  );
+};
+
+const DrawerContent = ({
+  headersData,
+  isMobile,
+  onClick,
+}: {
+  headersData: HeaderData[];
+  isMobile: boolean;
+  onClick?: () => void;
+}) => {
+  const container = css`
+    height: 100%;
+    padding: 0 1rem;
+    background-color: white;
+  `;
+
+  const contents = css`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
+  `;
+
+  const siteNamePadding = css`
+    margin: 0 3rem;
+  `;
+
+  return (
+    <div css={container}>
+      <div css={contents}>
+        <div>
+          <Hamburger isOpen={true} onClick={onClick} />
+        </div>
+        <div css={siteNamePadding}>
+          <SiteName />
+        </div>
+        <ColumnMenuButtons headersData={headersData} isMobile={isMobile} />
+      </div>
+    </div>
+  );
+};
+
+export default function Header({ isMobile }: { isMobile: boolean }) {
   const [state, setState] = useState({
     mobileView: false,
     drawerOpen: false,
   });
-  // TODO: drawerOpen を使う
-  const { mobileView } = state;
+  const { mobileView, drawerOpen } = state;
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -90,19 +206,30 @@ export default function Header() {
 
   const displayDesktop = () => {
     return (
-      <div css={container}>
+      <div css={desktopContainer}>
         <SiteName />
-        <MenuButtons headersData={headersData} />
+        <MenuButtons headersData={headersData} isMobile={isMobile} />
       </div>
     );
   };
 
   const displayMobile = () => {
+    const handleDrawerOpen = () =>
+      setState((prevState) => ({ ...prevState, drawerOpen: true }));
+    const handleDrawerClose = () =>
+      setState((prevState) => ({ ...prevState, drawerOpen: false }));
     return (
-      <>
-        <SiteName />
-        <MenuButtons headersData={headersData} />
-      </>
+      <div css={mobileContainer}>
+        <Hamburger onClick={handleDrawerOpen} />
+        <Mask isOpen={drawerOpen} onClick={handleDrawerClose} />
+        <Drawer isOpen={drawerOpen}>
+          <DrawerContent
+            headersData={headersData}
+            isMobile={isMobile}
+            onClick={handleDrawerClose}
+          />
+        </Drawer>
+      </div>
     );
   };
 
