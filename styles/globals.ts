@@ -16,14 +16,15 @@ export const globalStyles = (theme: Theme) => css`
     background-color: ${theme.colors.backgroundColor};
   }
 
-  main {
-    flex-grow: 1;
-    min-height: 100vh;
-  }
   /* stylelint-disable selector-id-pattern */
   #__next {
     display: flex;
     flex-direction: column;
   }
   /* stylelint-enable selector-id-pattern */
+
+  main {
+    flex-grow: 1; /* 親要素にflexが必要なのでmainを用意している */
+    min-height: 100svh;
+  }
 `;
