@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { OrganizationFull } from "../../../api-client/@types";

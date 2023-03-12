@@ -1,10 +1,8 @@
 import { css } from "@emotion/react";
-import {
-  faCirclePlay,
-  faVolumeMute,
-  faVolumeDown,
-  faCirclePause,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCirclePause } from "@fortawesome/free-solid-svg-icons/faCirclePause";
+import { faCirclePlay } from "@fortawesome/free-solid-svg-icons/faCirclePlay";
+import { faVolumeDown } from "@fortawesome/free-solid-svg-icons/faVolumeDown";
+import { faVolumeMute } from "@fortawesome/free-solid-svg-icons/faVolumeMute";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React from "react";
