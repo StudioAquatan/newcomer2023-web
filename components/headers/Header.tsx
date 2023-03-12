@@ -45,16 +45,24 @@ const container = (theme: Theme) => css`
   background-color: transparent;
 `;
 
-const siteNameStyle = (theme: Theme) => css`
-  padding: 0;
-  margin: 0;
-  font-size: 2rem;
+const SiteName = () => {
+  const siteNameStyle = (theme: Theme) => css`
+    padding: 0;
+    margin: 0;
+    font-size: 2rem;
 
-  a {
-    color: ${theme.colors.normalTextColor};
-    text-decoration: none;
-  }
-`;
+    a {
+      color: ${theme.colors.normalTextColor};
+      text-decoration: none;
+    }
+  `;
+
+  return (
+    <h1 css={siteNameStyle}>
+      <Link href="/">京都工芸繊維大学 新歓サイト</Link>
+    </h1>
+  );
+};
 
 export default function Header() {
   const [state, setState] = useState({
@@ -79,14 +87,6 @@ export default function Header() {
       window.removeEventListener("resize", () => setResponsiveness());
     };
   }, []);
-
-  const SiteName = () => {
-    return (
-      <h1 css={siteNameStyle}>
-        <Link href="/">京都工芸繊維大学 新歓サイト</Link>
-      </h1>
-    );
-  };
 
   const displayDesktop = () => {
     return (
