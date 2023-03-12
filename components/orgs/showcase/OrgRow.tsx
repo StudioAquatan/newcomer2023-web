@@ -1,9 +1,9 @@
 import { css, keyframes } from "@emotion/react";
+import { OrganizationFull } from "../../../api-client/@types";
 import OrgCard from "./OrgCard";
-import { OrgCardProps } from "./OrgCard";
 
 export type OrgRowProps = {
-  cards: OrgCardProps[];
+  cards: OrganizationFull[];
   inverse: boolean;
 };
 

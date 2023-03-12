@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
+import { OrganizationFull } from "../../../api-client/@types";
 
 import OrgRow, { OrgRowProps } from "./OrgRow";
 
@@ -16,16 +17,21 @@ export default {
 
 const Template: ComponentStory<typeof OrgRow> = (args) => <OrgRow {...args} />;
 
-const studioaquatan = {
-  orgName: "StudioAquatan",
+const studioaquatan: OrganizationFull = {
+  id: "0",
+  fullName: "StudioAquatan",
+  shortName: "StudioAquatan",
+  shortDescription: "Make Aquatan Great Again",
   description: "Make Aquatan Great Again",
-  link: "/",
 };
 
 const tooLongName = {
-  orgName: "ToooooooooooLongOrgName",
+  id: "0",
+  fullName: "ToooooooooooLongOrgName",
+  shortName: "ToooooooooooLongOrgName",
+  shortDescription:
+    "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
   description: "TooooooooooooooooooooooooooooooooooooooooooooLongDescription",
-  link: "/",
 };
 
 const orgs = (inverse: boolean) => {
