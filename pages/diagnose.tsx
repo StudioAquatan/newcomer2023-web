@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Question } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
+import Layout from "../components/Layout";
 import ProgressBar from "../components/questions/ProgressBar";
 import QuestionForm from "../components/questions/QuestionForm";
 
@@ -37,3 +38,7 @@ export async function getStaticProps() {
     },
   };
 }
+
+Diagnose.getLayout = function getLayout(page: React.ReactNode) {
+  return <Layout>{page}</Layout>;
+};
