@@ -1,6 +1,7 @@
 import { css, Theme } from "@emotion/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useIntersection } from "use-intersection";
 import Hamburger from "../buttons/Hamburger";
 import { ColumnMenuButtons, HeaderData, MenuButtons } from "./Navigation";
 
@@ -210,12 +211,14 @@ const DrawerContent = ({
 };
 
 export default function Header({ isMobile }: { isMobile: boolean }) {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const headerIntersecting = useIntersection(headerRef);
+
   const [state, setState] = useState({
-    isScroll: false,
     mobileView: false,
     drawerOpen: false,
   });
-  const { isScroll, mobileView, drawerOpen } = state;
+  const { mobileView, drawerOpen } = state;
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -230,20 +233,6 @@ export default function Header({ isMobile }: { isMobile: boolean }) {
 
     return () => {
       window.removeEventListener("resize", () => setResponsiveness());
-    };
-  }, []);
-
-  useEffect(() => {
-    const setIsScroll = () => {
-      return window.scrollY > 0
-        ? setState((prevState) => ({ ...prevState, isScroll: true }))
-        : setState((prevState) => ({ ...prevState, isScroll: false }));
-    };
-
-    window.addEventListener("scroll", () => setIsScroll());
-
-    return () => {
-      window.removeEventListener("scroll", () => setIsScroll());
     };
   }, []);
 
@@ -277,8 +266,11 @@ export default function Header({ isMobile }: { isMobile: boolean }) {
   };
 
   return (
-    <header css={headerStyle(isScroll)}>
-      {mobileView ? displayMobile() : displayDesktop()}
-    </header>
+    <>
+      <div ref={headerRef} />
+      <header css={headerStyle(!headerIntersecting)}>
+        {mobileView ? displayMobile() : displayDesktop()}
+      </header>
+    </>
   );
 }
