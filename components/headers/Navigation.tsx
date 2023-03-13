@@ -94,7 +94,7 @@ export const LinkItem = ({ headerData, isMobile, children }: LinkItemProps) => {
   }
 
   return (
-    <li key={label}>
+    <li>
       {link ? (
         link.external ? (
           <a href={link.href} target="_blank" rel="noopener noreferrer">
