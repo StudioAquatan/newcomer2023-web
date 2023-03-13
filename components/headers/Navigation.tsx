@@ -1,5 +1,6 @@
 import { css, Theme } from "@emotion/react";
 import Link from "next/link";
+import UnderlineButton from "../buttons/UnderlineButton";
 
 export type LinkData = {
   href: string;
@@ -79,9 +80,10 @@ const navColumnMenuItemsStyle = (theme: Theme) => css`
 export type LinkItemProps = {
   headerData: HeaderData;
   isMobile: boolean;
+  children: React.ReactNode;
 };
 
-export const LinkItem = ({ headerData, isMobile }: LinkItemProps) => {
+export const LinkItem = ({ headerData, isMobile, children }: LinkItemProps) => {
   const { label, targetDevice, link } = headerData;
 
   if (targetDevice === "mobile" && !isMobile) {
@@ -96,10 +98,10 @@ export const LinkItem = ({ headerData, isMobile }: LinkItemProps) => {
       {link ? (
         link.external ? (
           <a href={link.href} target="_blank" rel="noopener noreferrer">
-            {label}
+            {children}
           </a>
         ) : (
-          <Link href={link.href}>{label}</Link>
+          <Link href={link.href}>{children}</Link>
         )
       ) : (
         // リンク先がない場合は、pタグでラベルを表示する
@@ -119,7 +121,11 @@ export const MenuButtons = ({ headersData, isMobile }: MenuButtonsProps) => {
     <nav css={navMenuItemsStyle}>
       <ul>
         {headersData.map((data, index) => {
-          return <LinkItem key={index} headerData={data} isMobile={isMobile} />;
+          return (
+            <LinkItem key={index} headerData={data} isMobile={isMobile}>
+              <UnderlineButton label={data.label} fontSize="1.6rem" />
+            </LinkItem>
+          );
         })}
       </ul>
     </nav>
@@ -134,7 +140,11 @@ export const ColumnMenuButtons = ({
     <nav css={navColumnMenuItemsStyle}>
       <ul>
         {headersData.map((data, index) => {
-          return <LinkItem key={index} headerData={data} isMobile={isMobile} />;
+          return (
+            <LinkItem key={index} headerData={data} isMobile={isMobile}>
+              {data.label}
+            </LinkItem>
+          );
         })}
       </ul>
     </nav>

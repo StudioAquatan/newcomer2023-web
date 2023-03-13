@@ -1,18 +1,16 @@
 import { css } from "@emotion/react";
-import Link from "next/link";
 
 type UnderlineButtonProps = {
-  text: string;
-  href: string;
-  query?: { [key: string]: string };
+  label: string;
+  fontSize?: string;
 };
 
-const button = () => {
+const button = (fontSize?: string) => {
   return css`
     position: relative;
     padding: 0;
     font-family: GenJyuuGothic-P, sans-serif;
-    font-size: 2.5rem;
+    font-size: ${fontSize ?? "2.5rem"};
     text-decoration: none;
     cursor: pointer;
     background: none;
@@ -49,13 +47,8 @@ const button = () => {
 };
 
 export default function UnderlineButton({
-  text,
-  href,
-  query = {},
+  label,
+  fontSize,
 }: UnderlineButtonProps) {
-  return (
-    <Link href={{ pathname: href, query: query }}>
-      <button css={button}>{text}</button>
-    </Link>
-  );
+  return <button css={button(fontSize)}>{label}</button>;
 }
