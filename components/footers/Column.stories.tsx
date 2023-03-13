@@ -13,14 +13,26 @@ const Template: ComponentStory<typeof Column> = (args) => <Column {...args} />;
 export const Providers = Template.bind({});
 Providers.args = {
   title: "提供",
-  links: [
-    { text: "あくあたん工房", href: "" },
-    { text: "企画部irodori", href: "" },
+  items: [
+    {
+      label: "あくあたん工房",
+      link: {
+        href: "https://www.aquatan.studio/",
+        external: true,
+      },
+    },
+    {
+      label: "企画部irodori",
+      link: {
+        href: "https://sites.google.com/view/kit-irodori/%E3%83%9B%E3%83%BC%E3%83%A0",
+        external: true,
+      },
+    },
   ],
 };
 
 export const Others = Template.bind({});
 Others.args = {
   title: "その他",
-  links: [{ text: "プライバシーポリシー", href: "" }],
+  items: [{ label: "プライバシーポリシー", link: { href: "/privacy-policy" } }],
 };
