@@ -33,7 +33,7 @@ export default function ProgressBar({ progress }: ProgressBarProps) {
 
   return (
     <div css={container}>
-      <p css={progressBar(progress)}></p>
+      <span css={progressBar(progress)} />
     </div>
   );
 }
