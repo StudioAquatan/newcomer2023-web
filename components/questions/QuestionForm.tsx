@@ -4,24 +4,12 @@ import {
   Question as QuestionType,
   QuestionResult,
 } from "../../api-client/@types";
-import { apiClient } from "../../api-client/apiClient";
-import useUser from "../../hooks/user";
-import GlowingPinkButton from "../buttons/GlowingPinkButton";
+import { usePutRecommendation } from "../../hooks/recommendation";
 import OneQuestion from "./OneQuestion";
 
 type QuestionFormProps = {
   questions: QuestionType[];
-};
-
-const putRecommendation = async (token: string, answers: QuestionResult[]) => {
-  return await apiClient.recommendation.put({
-    body: answers,
-    config: {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    },
-  });
+  currentQuestion: number;
 };
 
 const container = css`
@@ -30,21 +18,18 @@ const container = css`
   align-items: center;
 `;
 
-export default function QuestionForm({ questions }: QuestionFormProps) {
+export default function QuestionForm({
+  questions,
+  currentQuestion,
+}: QuestionFormProps) {
   const router = useRouter();
-  const { data: userData } = useUser();
-  if (!userData) {
-    return <div>Loading...</div>;
-  }
 
   const answers = new Map<string, QuestionResult>();
+  const putRecommendation = usePutRecommendation();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const res = await putRecommendation(
-      userData.token,
-      Array.from(answers.values())
-    );
+    const res = await putRecommendation(answers);
     if (res.status == 200) {
       // 正しく診断を終えたらスタンプカードに遷移する
       router.push("/stampcard");
@@ -66,12 +51,10 @@ export default function QuestionForm({ questions }: QuestionFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       <div css={container}>
-        {questions.map((question, index) => {
-          return (
-            <OneQuestion key={index} question={question} onChange={onChange} />
-          );
-        })}
-        <GlowingPinkButton type="submit" text="診断する" />
+        <OneQuestion
+          question={questions[currentQuestion]}
+          onChange={onChange}
+        />
       </div>
     </form>
   );
