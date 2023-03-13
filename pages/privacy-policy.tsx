@@ -42,6 +42,7 @@ const container = css`
     padding: 0;
     margin: 0;
     margin-bottom: 1rem;
+    font-family: GenShinGothic-P, sans-serif;
     font-size: 1.6rem;
   }
 
