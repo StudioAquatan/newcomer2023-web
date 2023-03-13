@@ -45,7 +45,13 @@ const headersData: HeaderData[] = [
   // },
 ];
 
+const targetIntersectionPosition = css`
+  position: absolute;
+  top: 0;
+`;
+
 const headerStyle = (isScroll: boolean) => {
+  // console.log(isScroll);
   const scroll = css`
     background-color: #f7fff5;
     box-shadow: 0 5px 5px rgb(0 0 0 / 10%);
@@ -211,8 +217,8 @@ const DrawerContent = ({
 };
 
 export default function Header({ isMobile }: { isMobile: boolean }) {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const headerIntersecting = useIntersection(headerRef);
+  const targetIntersecting = useRef<HTMLDivElement>(null);
+  const intersecting = useIntersection(targetIntersecting);
 
   const [state, setState] = useState({
     mobileView: false,
@@ -267,8 +273,11 @@ export default function Header({ isMobile }: { isMobile: boolean }) {
 
   return (
     <>
-      <div ref={headerRef} />
-      <header css={headerStyle(!headerIntersecting)}>
+      <div css={targetIntersectionPosition} ref={targetIntersecting} />
+      <header
+        // 初回マウント時はDOMへのRefがnullのためアニメーションが入ってしまうのを防ぐ
+        css={headerStyle(targetIntersecting.current ? !intersecting : false)}
+      >
         {mobileView ? displayMobile() : displayDesktop()}
       </header>
     </>
