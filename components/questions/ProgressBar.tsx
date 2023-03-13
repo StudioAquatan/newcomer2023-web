@@ -23,17 +23,17 @@ const progressBar = (progress: number) => {
 };
 
 type ProgressBarProps = {
-  progress: number;
+  total: number;
+  passed: number;
 };
 
-export default function ProgressBar({ progress }: ProgressBarProps) {
-  if (progress < 0 || progress > 1) {
-    throw new Error("Progress must be between 0 and 1");
+export default function ProgressBar({ total, passed }: ProgressBarProps) {
+  if (total === 0) {
+    throw new Error("Total pages must be greater than 0");
   }
-
   return (
     <div css={container}>
-      <span css={progressBar(progress)} />
+      <span css={progressBar(passed / total)} />
     </div>
   );
 }
