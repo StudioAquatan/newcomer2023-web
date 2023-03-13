@@ -39,18 +39,27 @@ const copyright = (theme: Theme) => css`
 
 const providerColumn = {
   title: "提供",
-  links: [
-    { text: "あくあたん工房", href: "https://www.aquatan.studio/" },
+  items: [
     {
-      text: "企画部irodori",
-      href: "https://sites.google.com/view/kit-irodori/%E3%83%9B%E3%83%BC%E3%83%A0",
+      label: "あくあたん工房",
+      link: {
+        href: "https://www.aquatan.studio/",
+        external: true,
+      },
+    },
+    {
+      label: "企画部irodori",
+      link: {
+        href: "https://sites.google.com/view/kit-irodori/%E3%83%9B%E3%83%BC%E3%83%A0",
+        external: true,
+      },
     },
   ],
 };
 
 const otherColumn = {
   title: "その他",
-  links: [{ text: "プライバシーポリシー", href: "" }],
+  items: [{ label: "プライバシーポリシー", link: { href: "/privacy-policy" } }],
 };
 
 export default function Footer() {

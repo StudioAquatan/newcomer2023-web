@@ -1,8 +1,19 @@
 import { css, Theme } from "@emotion/react";
+import Link from "next/link";
+
+export type LinkData = {
+  href: string;
+  external?: boolean;
+};
+
+export type ColumnItemType = {
+  label: string;
+  link: LinkData;
+};
 
 type ColumnProps = {
   title: string;
-  links: { text: string; href: string }[];
+  items: ColumnItemType[];
 };
 
 const titleStyle = (theme: Theme) => css`
@@ -33,18 +44,28 @@ const linkStyle = css`
   font-family: GenShinGothic-P, sans-serif;
 `;
 
-export default function Column({ title, links }: ColumnProps) {
+const ColumnItem = ({ label, link }: ColumnItemType) => {
+  return (
+    <li css={linkStyle}>
+      {link.external ? (
+        <a href={link.href} target="_blank" rel="noopener noreferrer">
+          {label}
+        </a>
+      ) : (
+        <Link href={link.href}>{label}</Link>
+      )}
+    </li>
+  );
+};
+
+export default function Column({ title, items }: ColumnProps) {
   return (
     <div>
       <p css={titleStyle}>{title}</p>
       <div css={contents}>
         <ul css={linkListStyle}>
-          {links.map((link, index) => (
-            <li key={index} css={linkStyle}>
-              <a href={link.href} target="_blank" rel="noopener noreferrer">
-                {link.text}
-              </a>
-            </li>
+          {items.map((item, index) => (
+            <ColumnItem key={index} {...item} />
           ))}
         </ul>
       </div>
