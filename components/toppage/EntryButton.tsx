@@ -34,7 +34,7 @@ const notice = css`
 
 const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {
   if (isMobile) {
-    return <GlowingPinkButton text="診断する" href="" />;
+    return <GlowingPinkButton text="診断する" href="/diagnose" />;
   } else {
     return (
       <>

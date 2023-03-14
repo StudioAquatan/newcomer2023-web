@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { Question } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
@@ -38,12 +39,14 @@ function SubmitButton() {
   const isReady = useIsAnswerReady();
   const putRecommend = usePutRecommendation();
   const answers = useQuestionResultMap();
+  const { push } = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
     await putRecommend(answers);
+    await push("/stampcard");
   };
 
   return (
