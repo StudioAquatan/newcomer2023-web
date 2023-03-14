@@ -15,6 +15,7 @@ const Template: ComponentStory<typeof ColorBorderButton> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   label: "団体一覧を見る",
-  color: "#FFC8DF",
+  textColor: "#FFC8DF",
+  borderColor: "#FFC8DF",
   fontSize: "2.4rem",
 };

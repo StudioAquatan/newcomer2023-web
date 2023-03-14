@@ -2,21 +2,29 @@ import { css } from "@emotion/react";
 
 type ColorBorderButtonProps = {
   label: string;
-  color: string;
+  textColor: string;
+  borderColor: string;
   fontSize?: string;
 };
 
-const button = (fontSize?: string, color?: string) => {
+const button = (
+  fontSize?: string,
+  textColor?: string,
+  borderColor?: string
+) => {
   return css`
-    padding: 0.4rem 1.6rem;
+    padding: 1.6rem 4rem;
+    font-family: GenJyuuGothic-P, sans-serif;
     font-size: ${fontSize ?? "2.5rem"};
     font-weight: bold;
-    color: ${color ?? "#000"};
+    color: ${textColor ?? "#000"};
     text-align: center;
     cursor: pointer;
     background-color: white;
-    border: 2px ${color ?? "#000"} solid;
-    border-radius: 0.8rem;
+    border: 3px ${borderColor ?? "#000"} solid;
+
+    /* border-radius: 0.8rem; */
+    border-radius: 4.8rem;
     transition: all 100ms ease-out 0s;
 
     &:hover {
@@ -32,8 +40,11 @@ const button = (fontSize?: string, color?: string) => {
 
 export default function ColorBorderButton({
   label,
-  color,
+  textColor,
+  borderColor,
   fontSize,
 }: ColorBorderButtonProps) {
-  return <button css={button(fontSize, color)}>{label}</button>;
+  return (
+    <button css={button(fontSize, textColor, borderColor)}>{label}</button>
+  );
 }
