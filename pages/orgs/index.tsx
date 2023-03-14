@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { OrganizationFull } from "../../api-client/@types";
 import { getOrgs } from "../../api-client/cached-response";
+import MetaHead from "../../components/MetaHead";
 import Header from "../../components/headers/Header";
 import OrgPanel from "../../components/orgs/list/OrgPanel";
 import { useIsMobile } from "../../store/userAgent";
@@ -50,6 +51,10 @@ export default function OrgListPage({ organizations }: OrgListPageProps) {
   const { isMobile } = useIsMobile();
   return (
     <>
+      <MetaHead
+        title="団体一覧"
+        description="京都工芸繊維大学の部活動・サークル一覧をチェック"
+      />
       <div css={heroStyle}>
         <Header isMobile={isMobile} />
         <h1 css={pageTitle}>団体一覧</h1>
