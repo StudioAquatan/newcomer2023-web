@@ -4,18 +4,37 @@ import { apiClient } from "../api-client/apiClient";
 import Layout from "../components/Layout";
 import ProgressBar from "../components/questions/ProgressBar";
 import QuestionForm from "../components/questions/QuestionForm";
+import {
+  useQuestionList,
+  useQuestionListSetter,
+  useQuestionResultMap,
+} from "../store/question";
 
 type DiagnoseProps = {
   questions: Array<Question>;
-  initialCurrent: number;
 };
 
-export default function Diagnose({ questions, initialCurrent }: DiagnoseProps) {
+function Progress() {
+  const questionsLength = Math.max(useQuestionList().length, 1);
+  const answeredLength = useQuestionResultMap().size;
+  return (
+    <ProgressBar total={questionsLength} passed={answeredLength + 1} text />
+  );
+}
+
+export default function Diagnose({ questions }: DiagnoseProps) {
   // TODO: 質問を答えるとcurrentが1ずつ増えるようにsetStateする
-  const [current] = useState(initialCurrent);
+  const [current] = useState(0);
+
+  const isReady = useQuestionListSetter(questions);
+
+  if (!isReady) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div>
-      <ProgressBar total={questions.length} passed={current + 1} text />
+      <Progress />
       <QuestionForm questions={questions} currentQuestion={current} />
     </div>
   );
@@ -34,7 +53,6 @@ export async function getStaticProps() {
   return {
     props: {
       questions: questions,
-      initialCurrent: 0,
     },
   };
 }

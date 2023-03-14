@@ -1,4 +1,4 @@
-import { atom, PrimitiveAtom, useAtomValue, useSetAtom } from "jotai";
+import { atom, PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { atomFamily } from "jotai/utils";
 import React from "react";
 import { Question, QuestionResult } from "../api-client/@types";
@@ -23,7 +23,7 @@ const combinedAnswersAtom = atom((get) => {
 });
 
 export function useQuestionListSetter(list: Question[]) {
-  const setQuestions = useSetAtom(questionsAtom);
+  const [questions, setQuestions] = useAtom(questionsAtom);
   React.useEffect(() => {
     // Object.keysの都合もありstringにしておく
     const mapBySort = list.reduce(
@@ -38,16 +38,15 @@ export function useQuestionListSetter(list: Question[]) {
     );
 
     const random = new Random();
-    const randomQuestions = Object.keys(mapBySort).flatMap((sortKey) => {
-      // 負数は全部出す(暫定)
-      if (Number(sortKey) <= 0) {
-        return mapBySort[sortKey];
-      } else {
-        return [shuffle(mapBySort[sortKey], random.next())[0]];
-      }
-    });
+    const randomQuestions = Object.keys(mapBySort)
+      .map((sortKey) => {
+        return shuffle(mapBySort[sortKey], random.next())[0];
+      })
+      .sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
     setQuestions(randomQuestions);
   }, [list, setQuestions]);
+
+  return questions.length > 0;
 }
 
 export function useQuestionList() {
