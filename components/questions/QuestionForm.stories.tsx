@@ -16,4 +16,5 @@ const Template: ComponentStory<typeof QuestionForm> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   questions: questionsGetSuccessResponseJson,
+  currentQuestion: 0,
 };
