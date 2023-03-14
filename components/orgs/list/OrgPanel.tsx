@@ -20,7 +20,7 @@ const orgPanelStyle = css`
 const orgNameStyle = css`
   width: 100%;
   margin-bottom: 0.5em;
-  font-size: 2.5em;
+  font-size: 2rem;
   font-weight: 500;
 `;
 
