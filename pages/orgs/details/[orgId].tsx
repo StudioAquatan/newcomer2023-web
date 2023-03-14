@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { OrganizationFull } from "../../../api-client/@types";
@@ -194,7 +194,11 @@ const OrgDetail = ({ org, orgImage }: Props) => {
 
 // 団体詳細ページはfooter無しで表示する
 OrgDetail.getLayout = function getLayout(page: React.ReactNode) {
-  return <Layout>{page}</Layout>;
+  return (
+    <Layout>
+      <main>{page}</main>
+    </Layout>
+  );
 };
 
 export default OrgDetail;

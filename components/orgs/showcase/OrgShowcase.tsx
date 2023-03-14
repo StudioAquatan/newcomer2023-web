@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
-import { OrgCardProps } from "./OrgCard";
+import { OrganizationFull } from "../../../api-client/@types";
 import OrgRow from "./OrgRow";
 
 export type OrgShowcaseProps = {
-  orgs: OrgCardProps[];
+  orgs: OrganizationFull[];
 };
 
 const base = css`

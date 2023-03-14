@@ -1,14 +1,8 @@
 import { css, Theme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { OrganizationFull } from "../../../api-client/@types";
 import imgixLoader from "../../../image-loader";
-
-export type OrgCardProps = {
-  orgName: string;
-  orgImagePath?: string;
-  description: string;
-  link: string;
-};
 
 const buttonStyle = css`
   padding: 0;
@@ -55,12 +49,12 @@ const container = (theme: Theme) => css`
   }
 `;
 
-const orgImageStyle = css`
+const orgImageStyle = (logoFocus: boolean) => css`
   width: 4.8rem;
   height: 4.8rem;
   background-color: #eee;
   border-radius: 1.6rem;
-  object-fit: contain;
+  object-fit: ${logoFocus ? "cover" : "contain"};
 `;
 
 const textBoxStyle = css`
@@ -102,28 +96,29 @@ const textContentPStyle = (theme: Theme) => css`
 `;
 
 export default function OrgCard({
-  orgName,
-  orgImagePath = "/org_icons/default.png",
-  description,
-  link,
-}: OrgCardProps) {
+  id,
+  fullName,
+  shortDescription,
+  logo,
+  logoFocus,
+}: OrganizationFull) {
   return (
-    <Link href={link}>
+    <Link as={`/orgs/details/${id}`} href="/orgs/details/[orgId]">
       <button css={buttonStyle}>
         <div css={container}>
           <Image
-            css={orgImageStyle}
-            src={orgImagePath}
-            alt={orgName}
+            css={orgImageStyle(logoFocus ?? false)}
+            src={logo?.src ?? "/org_icons/default.png"}
+            alt={fullName}
             width={80}
             height={80}
             loader={imgixLoader}
           />
           <div css={textBoxStyle}>
             <div css={textContentStyle}>
-              <p css={textContentH1Style}>{orgName}</p>
+              <p css={textContentH1Style}>{fullName}</p>
             </div>
-            <p css={textContentPStyle}>{description}</p>
+            <p css={textContentPStyle}>{shortDescription}</p>
           </div>
         </div>
       </button>

@@ -14,9 +14,5 @@ const Template: ComponentStory<typeof UnderlineButton> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  text: "こちら",
-  href: "/",
-  query: {
-    path: "/story/buttons-underlinebutton--default",
-  },
+  label: "こちら",
 };

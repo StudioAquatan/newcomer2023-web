@@ -6,7 +6,6 @@ import {
 } from "../api-client/@types";
 import { getOrgs } from "../api-client/cached-response";
 import MetaHead from "../components/MetaHead";
-import { OrgCardProps } from "../components/orgs/showcase/OrgCard";
 import OrgShowcase, {
   OrgShowcaseProps,
 } from "../components/orgs/showcase/OrgShowcase";
@@ -107,13 +106,6 @@ export default function Home({
 export async function getServerSideProps() {
   const orgs = await getOrgs();
 
-  const orgCards: OrgCardProps[] = orgs.map((org) => ({
-    orgName: org.fullName,
-    orgImagePath: org.logo?.src ?? "/org_icons/default.png",
-    description: org.shortDescription,
-    link: "/orgs/details/" + org.id,
-  }));
-
   const random = new Random();
 
   // ここでランダムに9つの組織を選んでスタンプカードの例にする
@@ -145,7 +137,7 @@ export async function getServerSideProps() {
   return {
     props: {
       showcase: {
-        orgs: shuffle(orgCards),
+        orgs: shuffle(orgs),
       },
       orgs,
       recommendation,

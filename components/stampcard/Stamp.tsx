@@ -50,12 +50,12 @@ const logoFilter = css`
   background-color: rgb(0 0 0 / 20%); /* 背景色 */
 `;
 
-const logoStyle = css`
+const logoStyle = (logoFocus: boolean) => css`
   position: absolute;
   z-index: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: ${logoFocus ? "cover" : "contain"};
 `;
 
 const markVisitedStyle = (seed: number) => {
@@ -107,7 +107,7 @@ export default function Stamp({
         <Image
           src={orgInfo.logo?.src ?? ""}
           alt="logo"
-          css={logoStyle}
+          css={logoStyle(orgInfo.logoFocus ?? false)}
           width={128}
           height={128}
           loader={imgixLoader}
