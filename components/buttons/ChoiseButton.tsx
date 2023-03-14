@@ -1,28 +1,31 @@
+import { Question } from "../../api-client/@types";
 import AnswerRadioButton from "./AnswerRadioButton";
 
-type Answers = {
-  /** 一意な管理番号 */
-  id: number;
-  /** 選択肢 */
-  text: string;
-};
-
 type ChoiseButtonProps = {
-  questionId: string;
-  answers: Answers[];
+  question: Question;
+  answerId?: number;
+  onChange?: (answerId: number) => void;
 };
 
 export default function ChoiseButton({
-  questionId,
-  answers,
+  question,
+  onChange,
+  answerId,
 }: ChoiseButtonProps) {
-  const answerLabels = answers.map((answer) => answer.text);
-  // TODO: answerのidを使って、選択肢を管理する
+  if (question.answers === undefined) {
+    throw new Error("選択肢が設定されていません: Question ID: " + question.id);
+  }
+
+  const answerLabels = question.answers.map((answer) => {
+    return { id: answer.id, text: answer.text };
+  });
+
   return (
     <AnswerRadioButton
-      questionId={questionId}
       labels={answerLabels}
+      onChange={onChange}
       direction="vertical"
+      answer={answerId}
     />
   );
 }

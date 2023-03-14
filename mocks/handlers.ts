@@ -1,7 +1,10 @@
 import { rest } from "msw";
 import { mockOrgsPostSuccess, mockOrgsPostInvalid } from "./api/orgs";
 import { mockQuestionsGetSuccess } from "./api/questions";
-import { mockRecommendationGetSuccess } from "./api/recommendation";
+import {
+  mockRecommendationGetSuccess,
+  mockRecommendationPutSuccess,
+} from "./api/recommendation";
 import { mockUserPostInvalid, mockUserPostSuccess } from "./api/user";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4041";
@@ -22,6 +25,12 @@ export const handlers = {
     success: rest.get(
       API_URL + "/recommendation",
       mockRecommendationGetSuccess
+    ),
+  },
+  recommendationPut: {
+    success: rest.put(
+      API_URL + "/recommendation",
+      mockRecommendationPutSuccess
     ),
   },
 };

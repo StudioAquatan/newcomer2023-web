@@ -13,6 +13,3 @@ const Template: ComponentStory<typeof YesNoButton> = (args) => (
 );
 
 export const YesNo = Template.bind({});
-YesNo.args = {
-  questionId: "0",
-};

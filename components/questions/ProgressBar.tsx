@@ -1,6 +1,12 @@
 import { css, useTheme } from "@emotion/react";
 
-const container = () => {
+const container = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const progress = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const theme = useTheme();
   return css`
@@ -17,23 +23,38 @@ const progressBar = (progress: number) => {
   return css`
     width: ${progress * 100}%;
     height: 100%;
+    margin: 0;
     background-color: ${theme.colors.progressBar.progressColor};
     border-radius: 8px;
+    transition: width 0.4s linear;
   `;
 };
 
+const progressText = css`
+  margin: 0.4rem;
+  font-size: 2rem;
+`;
+
 type ProgressBarProps = {
-  progress: number;
+  total: number;
+  passed: number;
+  text?: boolean;
 };
 
-export default function ProgressBar({ progress }: ProgressBarProps) {
-  if (progress < 0 || progress > 1) {
-    throw new Error("Progress must be between 0 and 1");
+export default function ProgressBar({ total, passed, text }: ProgressBarProps) {
+  if (total === 0) {
+    throw new Error("Total pages must be greater than 0");
   }
-
   return (
     <div css={container}>
-      <p css={progressBar(progress)}></p>
+      <div css={progress}>
+        <p css={progressBar(passed / total)} />
+      </div>
+      {text && (
+        <p css={progressText}>
+          {passed} / {total}
+        </p>
+      )}
     </div>
   );
 }

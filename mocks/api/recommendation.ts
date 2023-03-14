@@ -283,7 +283,21 @@ export const mockRecommendationGetSuccess: ResponseResolver<
   return res(ctx.status(200), ctx.json(recommendationGetSuccessResponseJson));
 };
 
-export const mockOrgsPostInvalid: ResponseResolver<
+export const mockRecommendationPostInvalid: ResponseResolver<
+  MockedRequest,
+  typeof restContext
+> = async (req, res, ctx) => {
+  return res(ctx.status(400));
+};
+
+export const mockRecommendationPutSuccess: ResponseResolver<
+  MockedRequest,
+  typeof restContext
+> = async (req, res, ctx) => {
+  return res(ctx.status(200), ctx.json(recommendationGetSuccessResponseJson));
+};
+
+export const mockRecommendationPutInvalid: ResponseResolver<
   MockedRequest,
   typeof restContext
 > = async (req, res, ctx) => {

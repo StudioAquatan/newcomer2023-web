@@ -20,13 +20,13 @@ const questionFive: QuestionType = {
 };
 
 const questionYesNo: QuestionType = {
-  id: "0",
+  id: "1",
   questionText: "質問文",
   questionType: "yesno",
 };
 
 const questionChoice: QuestionType = {
-  id: "0",
+  id: "2",
   questionText: "質問文",
   questionType: "choice",
 

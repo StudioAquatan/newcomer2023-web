@@ -3,6 +3,7 @@ import { Global, ThemeProvider } from "@emotion/react";
 import { sakura } from "../themes/sakura";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 import { handlers } from "../mocks/handlers";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 
 import NextImage from "next/image";
 
@@ -48,5 +49,8 @@ export const parameters = {
     // 対応するキーにハンドラーを設定する
     // https://github.com/mswjs/msw-storybook-addon#advanced-usage
     handlers: defaultHandlers,
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
   },
 };

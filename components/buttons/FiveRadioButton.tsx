@@ -1,19 +1,42 @@
-import AnswerRadioButton from "./AnswerRadioButton";
+import AnswerRadioButton, { Label } from "./AnswerRadioButton";
 
 type FiveRadioButtonProps = {
-  questionId: string;
+  answerId?: number;
+  onChange?: (answer: number) => void;
 };
 
-const FiveRadioButtonLabels = [
-  "とても当てはまる",
-  "やや当てはまる",
-  "どちらとも言えない",
-  "あまり当てはまらない",
-  "全く当てはまらない",
+const FiveRadioButtonLabels: Label[] = [
+  {
+    id: 1,
+    text: "とても当てはまる",
+  },
+  {
+    id: 2,
+    text: "やや当てはまる",
+  },
+  {
+    id: 3,
+    text: "どちらとも言えない",
+  },
+  {
+    id: 4,
+    text: "あまり当てはまらない",
+  },
+  {
+    id: 5,
+    text: "全く当てはまらない",
+  },
 ];
 
-export default function FiveRadioButton({ questionId }: FiveRadioButtonProps) {
+export default function FiveRadioButton({
+  onChange,
+  answerId,
+}: FiveRadioButtonProps) {
   return (
-    <AnswerRadioButton questionId={questionId} labels={FiveRadioButtonLabels} />
+    <AnswerRadioButton
+      labels={FiveRadioButtonLabels}
+      onChange={onChange}
+      answer={answerId}
+    />
   );
 }

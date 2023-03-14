@@ -33,5 +33,5 @@ export default class Random {
 
 export function shuffle<T>(list: Array<T>, seed?: number) {
   const random = new Random(seed);
-  return list.slice().sort(() => random.nextNumber(0, 1) - 0.5);
+  return list.slice().sort(() => random.nextNumber(0, 10) * 0.1 - 0.5);
 }

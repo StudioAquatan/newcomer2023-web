@@ -13,6 +13,3 @@ const Template: ComponentStory<typeof FiveRadioButton> = (args) => (
 );
 
 export const Five = Template.bind({});
-Five.args = {
-  questionId: "0",
-};
