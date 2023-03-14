@@ -5,6 +5,7 @@ type ColorBorderButtonProps = {
   textColor: string;
   borderColor: string;
   fontSize?: string;
+  type?: string;
 };
 
 const button = (
@@ -43,8 +44,17 @@ export default function ColorBorderButton({
   textColor,
   borderColor,
   fontSize,
+  type,
 }: ColorBorderButtonProps) {
-  return (
-    <button css={button(fontSize, textColor, borderColor)}>{label}</button>
-  );
+  if (type === "submit") {
+    return (
+      <button css={button(fontSize, textColor, borderColor)} type="submit">
+        {label}
+      </button>
+    );
+  } else {
+    return (
+      <button css={button(fontSize, textColor, borderColor)}>{label}</button>
+    );
+  }
 }

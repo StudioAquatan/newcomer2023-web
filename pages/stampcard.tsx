@@ -1,8 +1,8 @@
-import { css } from "@emotion/react";
+import { css, useTheme } from "@emotion/react";
 // import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OrganizationFull } from "../api-client/@types";
-import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
+import ColorBorderButton from "../components/buttons/ColorBorderButton";
 import Header from "../components/headers/Header";
 import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
@@ -85,6 +85,7 @@ const fallbackOrg: OrganizationFull = {
 };
 
 export default function StampCardPage() {
+  const theme = useTheme();
   const { isMobile } = useIsMobile();
   const { data: userData } = useUser();
   const { data: orgsData } = useOrganizations();
@@ -130,7 +131,13 @@ export default function StampCardPage() {
           <StampCard {...props} />
         </div>
         <div css={stampCardBottom}>
-          <GlowingPinkButton text="シェアしてみよう!" href="/" />
+          {/* <GlowingPinkButton text="シェアしてみよう!" href="/" /> */}
+          <ColorBorderButton
+            label="シェアしてみよう！"
+            textColor={theme.colors.button.enable.backgroundColor}
+            borderColor={theme.colors.button.enable.backgroundColor}
+            fontSize="2.4rem"
+          />
           {/* <p css={otherOrgs}>
           他の部活を見る
           <br />
