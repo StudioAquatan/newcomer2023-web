@@ -84,6 +84,7 @@ export type Question = {
    * choice: 選択肢
    */
   questionType: "yesno" | "five" | "choice";
+  sort?: number;
   /** 選択肢での回答リスト */
   answers?:
     | {
