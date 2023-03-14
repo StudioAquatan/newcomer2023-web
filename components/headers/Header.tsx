@@ -79,6 +79,11 @@ const desktopContainer = (theme: Theme) => css`
   padding: 1rem 2rem;
   color: ${theme.colors.normalTextColor};
   background-color: transparent;
+
+  /* スマホで見た時に、表示が崩れているのをこれで隠す */
+  @media screen and (max-width: 799px) {
+    display: none;
+  }
 `;
 
 const mobileContainer = (theme: Theme) => css`
