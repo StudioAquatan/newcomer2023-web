@@ -100,8 +100,9 @@ export default function StampCardPage() {
   const recommendation = recommendationData.recommendation;
 
   // TODO: 表示位置がつけられたもののみ使う
-  const stamps: StampProps[] = recommendation.orgs.map(
-    (recommendationItem, index) => {
+  const stamps: StampProps[] = recommendation.orgs
+    .slice(0, 9)
+    .map((recommendationItem, index) => {
       return {
         recommendation: recommendationItem,
         orgInfo:
@@ -109,8 +110,7 @@ export default function StampCardPage() {
           fallbackOrg,
         seed: seed + index,
       };
-    }
-  );
+    });
 
   const props: StampCardProps = {
     stamps: stamps,
