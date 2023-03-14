@@ -1,6 +1,7 @@
 import { Question } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import Layout from "../components/Layout";
+import MetaHead from "../components/MetaHead";
 import ProgressBar from "../components/questions/ProgressBar";
 import QuestionForm from "../components/questions/QuestionForm";
 import { useCurrentQuestion, useQuestionListSetter } from "../store/question";
@@ -24,6 +25,10 @@ export default function Diagnose({ questions }: DiagnoseProps) {
 
   return (
     <div>
+      <MetaHead
+        title="部活動相性診断"
+        description="いくつかの質問で、あなたにぴったりの部活動を診断"
+      />
       <Progress />
       <QuestionForm question={question} />
     </div>
