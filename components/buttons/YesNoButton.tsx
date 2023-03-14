@@ -1,8 +1,8 @@
 import AnswerRadioButton, { Label } from "./AnswerRadioButton";
 
 type YesNoButtonProps = {
-  questionId: string;
-  onChange?: (questionId: string, answer: number) => void;
+  answerId?: number;
+  onChange?: (answer: number) => void;
 };
 
 const YesNoButtonLabels: Label[] = [
@@ -11,12 +11,12 @@ const YesNoButtonLabels: Label[] = [
 ];
 
 export default function YesNoRadioButton({
-  questionId,
+  answerId,
   onChange,
 }: YesNoButtonProps) {
   return (
     <AnswerRadioButton
-      questionId={questionId}
+      answer={answerId}
       labels={YesNoButtonLabels}
       onChange={onChange}
       padding={"5vw"}

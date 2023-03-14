@@ -3,12 +3,14 @@ import AnswerRadioButton from "./AnswerRadioButton";
 
 type ChoiseButtonProps = {
   question: Question;
-  onChange?: (questionId: string, answerId: number) => void;
+  answerId?: number;
+  onChange?: (answerId: number) => void;
 };
 
 export default function ChoiseButton({
   question,
   onChange,
+  answerId,
 }: ChoiseButtonProps) {
   if (question.answers === undefined) {
     throw new Error("選択肢が設定されていません: Question ID: " + question.id);
@@ -20,10 +22,10 @@ export default function ChoiseButton({
 
   return (
     <AnswerRadioButton
-      questionId={question.id}
       labels={answerLabels}
       onChange={onChange}
       direction="vertical"
+      answer={answerId}
     />
   );
 }

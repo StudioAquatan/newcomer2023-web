@@ -6,7 +6,8 @@ import YesNoRadioButton from "../buttons/YesNoButton";
 
 type QuestionProps = {
   question: QuestionType;
-  onChange?: (questionId: string, answerId: number) => void;
+  answerId?: number;
+  onChange?: (answerId: number) => void;
 };
 
 const container = css`
@@ -25,14 +26,20 @@ const questionText = css`
   font-weight: bold;
 `;
 
-const AnswerButton = ({ question, onChange }: QuestionProps) => {
+const AnswerButton = ({ question, onChange, answerId }: QuestionProps) => {
   switch (question.questionType) {
     case "yesno":
-      return <YesNoRadioButton questionId={question.id} onChange={onChange} />;
+      return <YesNoRadioButton answerId={answerId} onChange={onChange} />;
     case "five":
-      return <FiveRadioButton questionId={question.id} onChange={onChange} />;
+      return <FiveRadioButton answerId={answerId} onChange={onChange} />;
     case "choice":
-      return <ChoiseButton question={question} onChange={onChange} />;
+      return (
+        <ChoiseButton
+          answerId={answerId}
+          question={question}
+          onChange={onChange}
+        />
+      );
   }
 };
 

@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
 
 type AnswerRadioButtonProps = {
-  questionId: string;
   labels: Label[];
-  onChange?: (questionId: string, answer: number) => void;
+  answer?: number;
+  onChange?: (answer: number) => void;
   direction?: Direction;
   padding?: string;
 };
@@ -180,11 +180,11 @@ const labelStyle = (direction: Direction, padding: string) => {
 };
 
 export default function AnswerRadioButton({
-  questionId,
   labels,
   onChange,
   direction = "horizontal",
   padding = "0px",
+  answer,
 }: AnswerRadioButtonProps) {
   return (
     <ul css={container(direction)}>
@@ -193,16 +193,17 @@ export default function AnswerRadioButton({
           <li key={index} css={item(direction)}>
             <div css={itemConatiner(direction)}>
               <input
-                id={"question_id_" + questionId + "_" + index}
+                id={"question_" + index}
                 type="radio"
-                name={"question_id_" + questionId}
+                name={"question_" + index}
                 css={hiddenRadioButton}
                 onChange={() => {
-                  onChange && onChange(questionId, label.id);
+                  onChange && onChange(label.id);
                 }}
+                checked={label.id === answer}
               />
               <label
-                htmlFor={"question_id_" + questionId + "_" + index}
+                htmlFor={"question_" + index}
                 css={labelStyle(direction, padding || "0px")}
               >
                 {label.text}

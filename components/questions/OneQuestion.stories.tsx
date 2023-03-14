@@ -13,10 +13,6 @@ const Template: ComponentStory<typeof OneQuestion> = (args) => (
   <OneQuestion {...args} />
 );
 
-const onChange = (questionId: string, answerId: number) => {
-  console.log(`questionId: ${questionId}, answerId: ${answerId}`);
-};
-
 const questionFive: QuestionType = {
   id: "0",
   questionText: "質問文",
@@ -53,17 +49,14 @@ const questionChoice: QuestionType = {
 export const Five = Template.bind({});
 Five.args = {
   question: questionFive,
-  onChange: onChange,
 };
 
 export const YesNo = Template.bind({});
 YesNo.args = {
   question: questionYesNo,
-  onChange: onChange,
 };
 
 export const Choice = Template.bind({});
 Choice.args = {
   question: questionChoice,
-  onChange: onChange,
 };

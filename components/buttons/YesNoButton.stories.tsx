@@ -12,12 +12,4 @@ const Template: ComponentStory<typeof YesNoButton> = (args) => (
   <YesNoButton {...args} />
 );
 
-const onChange = (questionId: string, answerId: number) => {
-  console.log(`questionId: ${questionId}, answerId: ${answerId}`);
-};
-
 export const YesNo = Template.bind({});
-YesNo.args = {
-  questionId: "0",
-  onChange: onChange,
-};
