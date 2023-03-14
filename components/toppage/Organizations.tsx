@@ -9,6 +9,9 @@ const base = css`
 `;
 
 const contentPStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   font-size: calc(1.6rem + 1vw);
   color: #333;
@@ -26,6 +29,8 @@ const logoStyle = css`
 
 const xmarkStyle = css`
   height: 1em;
+  padding: 0 calc(0.4rem + 0.5vw);
+  margin-left: calc(0.4rem + 0.5vw);
   filter: drop-shadow(1px 1px 1px #fff) drop-shadow(-1px 1px 1px #fff)
     drop-shadow(1px -1px 1px #fff) drop-shadow(-1px -1px 1px #fff);
 `;
@@ -52,7 +57,7 @@ export default function Organizations() {
           height={64}
           loader={imgixLoader}
         />
-        あくあたん工房{" "}
+        あくあたん工房
       </p>
     </div>
   );
