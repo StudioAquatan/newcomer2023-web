@@ -5,14 +5,18 @@ import { Question, QuestionResult } from "../api-client/@types";
 import Random, { shuffle } from "../components/random";
 
 const questionsAtom = atom<Question[]>([]);
-const eachAnswerAtom = atomFamily<string, PrimitiveAtom<number>>(() => atom(0));
+const eachAnswerAtom = atomFamily<string, PrimitiveAtom<number>>(() =>
+  atom(-1)
+);
 const combinedAnswersAtom = atom((get) => {
   const questions = get(questionsAtom);
   const answers = new Map(
-    questions.map(({ id }): [string, QuestionResult] => {
-      const answer = get(eachAnswerAtom(id));
-      return [id, { questionId: id, answer }];
-    })
+    questions
+      .map(({ id }): [string, QuestionResult] => {
+        const answer = get(eachAnswerAtom(id));
+        return [id, { questionId: id, answer }];
+      })
+      .filter(([, { answer }]) => answer >= 0)
   );
 
   return answers;
