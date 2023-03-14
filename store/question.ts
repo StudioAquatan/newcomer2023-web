@@ -50,6 +50,10 @@ export function useQuestionList() {
   return useAtomValue(questionsAtom);
 }
 
-export function useQuestion() {
-  return "";
+export function useSetAnswer(questionId: string) {
+  return useSetAtom(eachAnswerAtom(questionId));
+}
+
+export function useQuestionResultMap() {
+  return useAtomValue(combinedAnswersAtom);
 }
