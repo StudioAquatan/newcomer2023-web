@@ -23,6 +23,7 @@ const container = (transition: boolean) => css`
 `;
 
 const questionText = css`
+  max-width: 90vw;
   padding: 0;
   margin: 0;
   font-size: 2rem;

@@ -1,4 +1,4 @@
-import { atom, PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from "jotai";
+import { atom, PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { atomFamily } from "jotai/utils";
 import React from "react";
 import { Question, QuestionResult } from "../api-client/@types";
@@ -63,21 +63,15 @@ export function useQuestionResultMap() {
 }
 
 export function useCurrentQuestion() {
-  const current = useAtomValue(currentQuestionAtom);
+  const [current, setCurrent] = useAtom(currentQuestionAtom);
   const questions = useAtomValue(questionsAtom);
+
+  const isLastQuestion = current === questions.length - 1;
   return {
     current,
     question: (questions[current] ?? null) as Question | null,
     total: questions.length,
-    isLastQuestion: current === questions.length - 1,
-  };
-}
-
-export function useCurrentPager() {
-  const setCurrent = useSetAtom(currentQuestionAtom);
-  const { isLastQuestion } = useCurrentQuestion();
-
-  return {
+    isLastQuestion,
     next() {
       if (isLastQuestion) return;
       setCurrent((current) => current + 1);
