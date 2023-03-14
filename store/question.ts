@@ -21,6 +21,7 @@ const combinedAnswersAtom = atom((get) => {
 
   return answers;
 });
+const currentQuestionAtom = atom(0);
 
 export function useQuestionListSetter(list: Question[]) {
   const [questions, setQuestions] = useAtom(questionsAtom);
@@ -53,10 +54,33 @@ export function useQuestionList() {
   return useAtomValue(questionsAtom);
 }
 
-export function useSetAnswer(questionId: string) {
-  return useSetAtom(eachAnswerAtom(questionId));
+export function useAnswer(questionId: string) {
+  return useAtom(eachAnswerAtom(questionId));
 }
 
 export function useQuestionResultMap() {
   return useAtomValue(combinedAnswersAtom);
+}
+
+export function useCurrentQuestion() {
+  const current = useAtomValue(currentQuestionAtom);
+  const questions = useAtomValue(questionsAtom);
+  return {
+    current,
+    question: (questions[current] ?? null) as Question | null,
+    total: questions.length,
+    isLastQuestion: current === questions.length - 1,
+  };
+}
+
+export function useCurrentPager() {
+  const setCurrent = useSetAtom(currentQuestionAtom);
+  const { isLastQuestion } = useCurrentQuestion();
+
+  return {
+    next() {
+      if (isLastQuestion) return;
+      setCurrent((current) => current + 1);
+    },
+  };
 }
