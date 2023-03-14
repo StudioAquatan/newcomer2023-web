@@ -16,7 +16,7 @@ export default function Diagnose({ questions, initialCurrent }: DiagnoseProps) {
   return (
     <div>
       <ProgressBar total={questions.length} passed={current + 1} text />
-      <QuestionForm questions={questions} />
+      <QuestionForm questions={questions} currentQuestion={current} />
     </div>
   );
 }
