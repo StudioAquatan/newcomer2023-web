@@ -22,6 +22,16 @@ const combinedAnswersAtom = atom((get) => {
   return answers;
 });
 const currentQuestionAtom = atom(0);
+const isAnswerReadyAtom = atom((get) => {
+  const questions = get(questionsAtom);
+  const current = get(currentQuestionAtom);
+
+  const last = questions.length - 1;
+
+  if (last < 0) return false;
+
+  return last == current && get(eachAnswerAtom(questions[last].id)) >= 0;
+});
 
 export function useQuestionListSetter(list: Question[]) {
   const [questions, setQuestions] = useAtom(questionsAtom);
@@ -77,4 +87,8 @@ export function useCurrentQuestion() {
       setCurrent((current) => current + 1);
     },
   };
+}
+
+export function useIsAnswerReady() {
+  return useAtomValue(isAnswerReadyAtom);
 }

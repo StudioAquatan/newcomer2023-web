@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 import { useState } from "react";
 import { Question } from "../../api-client/@types";
 import { useCurrentQuestion, useAnswer } from "../../store/question";
-import GlowingPinkButton from "../buttons/GlowingPinkButton";
 import OneQuestion from "./OneQuestion";
 
 type QuestionFormProps = {
@@ -12,17 +11,8 @@ type QuestionFormProps = {
 const container = css`
   display: flex;
   flex-direction: column;
-  gap: 10vh;
   align-items: center;
-  margin-top: 5vh;
 `;
-
-const buttonContainer = (show: boolean) => {
-  return css`
-    opacity: ${show ? 1.0 : 0.0};
-    transition: opacity 0.2s linear;
-  `;
-};
 
 export default function QuestionForm({ question }: QuestionFormProps) {
   const [answerId, setAnswer] = useAnswer(question.id);
@@ -53,9 +43,6 @@ export default function QuestionForm({ question }: QuestionFormProps) {
         onChange={handleChange}
         transition={isInTransition}
       />
-      <div css={buttonContainer(isLastQuestion && answerId >= 0)}>
-        <GlowingPinkButton type="submit" text="診断結果を見る！" />
-      </div>
     </div>
   );
 }

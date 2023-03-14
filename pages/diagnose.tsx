@@ -1,10 +1,19 @@
+import { css } from "@emotion/react";
+import React from "react";
 import { Question } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import Layout from "../components/Layout";
 import MetaHead from "../components/MetaHead";
+import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
 import ProgressBar from "../components/questions/ProgressBar";
 import QuestionForm from "../components/questions/QuestionForm";
-import { useCurrentQuestion, useQuestionListSetter } from "../store/question";
+import { usePutRecommendation } from "../hooks/recommendation";
+import {
+  useCurrentQuestion,
+  useIsAnswerReady,
+  useQuestionListSetter,
+  useQuestionResultMap,
+} from "../store/question";
 
 type DiagnoseProps = {
   questions: Array<Question>;
@@ -13,6 +22,37 @@ type DiagnoseProps = {
 function Progress() {
   const { total, current } = useCurrentQuestion();
   return <ProgressBar total={total} passed={current + 1} text />;
+}
+
+const buttonContainer = (show: boolean) => {
+  return css`
+    display: flex;
+    justify-content: center;
+    margin: 10vh 0;
+    opacity: ${show ? 1.0 : 0.0};
+    transition: opacity 0.2s linear;
+  `;
+};
+
+function SubmitButton() {
+  const isReady = useIsAnswerReady();
+  const putRecommend = usePutRecommendation();
+  const answers = useQuestionResultMap();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    await putRecommend(answers);
+  };
+
+  return (
+    <div css={buttonContainer(isReady)}>
+      <form onSubmit={handleSubmit}>
+        <GlowingPinkButton type="submit" text="診断結果を見る！" />
+      </form>
+    </div>
+  );
 }
 
 export default function Diagnose({ questions }: DiagnoseProps) {
@@ -31,6 +71,7 @@ export default function Diagnose({ questions }: DiagnoseProps) {
       />
       <Progress />
       <QuestionForm question={question} />
+      <SubmitButton />
     </div>
   );
 }
