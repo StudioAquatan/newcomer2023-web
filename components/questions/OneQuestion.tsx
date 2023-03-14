@@ -8,15 +8,18 @@ type QuestionProps = {
   question: QuestionType;
   answerId?: number;
   onChange?: (answerId: number) => void;
+  transition?: boolean;
 };
 
-const container = css`
+const container = (transition: boolean) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0;
   margin: 0;
   border-width: 0;
+  opacity: ${transition ? 0.0 : 1.0};
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const questionText = css`
@@ -45,9 +48,9 @@ const AnswerButton = ({ question, onChange, answerId }: QuestionProps) => {
 
 // TODO: ここで、question.questionTypeに応じて、適切なコンポーネントを呼び出す
 export default function OneQuestion(props: QuestionProps) {
-  const { question } = props;
+  const { question, transition = false } = props;
   return (
-    <fieldset css={container}>
+    <fieldset css={container(transition)}>
       <p css={questionText}>Q. {question.questionText}</p>
       <AnswerButton {...props} />
     </fieldset>

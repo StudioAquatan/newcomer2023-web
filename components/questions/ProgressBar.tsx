@@ -26,7 +26,7 @@ const progressBar = (progress: number) => {
     margin: 0;
     background-color: ${theme.colors.progressBar.progressColor};
     border-radius: 8px;
-    transition: width 0.2s linear;
+    transition: width 0.4s linear;
   `;
 };
 
