@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +8,7 @@ type HamburgerProps = {
   isOpen?: boolean;
 };
 
-const hamburgerButtonStyle = () => css`
+const hamburgerButtonStyle = (theme: Theme) => css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +16,10 @@ const hamburgerButtonStyle = () => css`
   cursor: pointer;
   background-color: transparent;
   border: none;
+
+  svg {
+    color: ${theme.colors.normalTextColor};
+  }
 `;
 
 const hamburgerIconStyle = () => css`

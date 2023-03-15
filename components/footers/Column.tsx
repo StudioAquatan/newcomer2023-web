@@ -39,9 +39,14 @@ const linkListStyle = css`
   list-style: none;
 `;
 
-const linkStyle = css`
+const linkStyle = (theme: Theme) => css`
   margin-bottom: 1rem;
   font-family: GenShinGothic-P, sans-serif;
+
+  a {
+    color: ${theme.colors.normalTextColor};
+    text-decoration: underline;
+  }
 `;
 
 const ColumnItem = ({ label, link }: ColumnItemType) => {
