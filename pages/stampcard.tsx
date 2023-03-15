@@ -1,14 +1,17 @@
 import { css, useTheme } from "@emotion/react";
+import { useRouter } from "next/router";
+import React from "react";
 // import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OrganizationFull } from "../api-client/@types";
+import MetaHead from "../components/MetaHead";
 import ColorBorderButton from "../components/buttons/ColorBorderButton";
 import Header from "../components/headers/Header";
 import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
 import { useOrganizations } from "../hooks/organizations";
-import { useRecommendation } from "../hooks/recommendation";
+import { NoRecommendation, useRecommendation } from "../hooks/recommendation";
 import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
 
@@ -93,9 +96,20 @@ export default function StampCardPage() {
   const { data: seedData } = useStampCardSeed();
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
+  const { push } = useRouter();
+
+  React.useEffect(() => {
+    if (recommendationData === NoRecommendation) {
+      push("/");
+    }
+  }, [recommendationData, push]);
 
   if (!recommendationData || !orgsData) {
     return <div>loading...</div>;
+  }
+
+  if (typeof recommendationData === "symbol") {
+    return null;
   }
 
   const recommendation = recommendationData.recommendation;
@@ -119,6 +133,10 @@ export default function StampCardPage() {
 
   return (
     <div css={container}>
+      <MetaHead
+        title="あなたのスタンプカード"
+        description="スタンプカードをもって部活動紹介を回ろう"
+      />
       <div css={headerPadding}>
         <Header isMobile={isMobile} />
       </div>

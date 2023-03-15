@@ -4,6 +4,7 @@ import ColorBorderButton from "../buttons/ColorBorderButton";
 
 type EntryButtonProps = {
   isMobile: boolean;
+  hasStampCard: boolean;
 };
 
 const container = css`
@@ -26,18 +27,31 @@ const notice = css`
   text-align: center;
 `;
 
-const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {
+const ActivateButton = ({ isMobile, hasStampCard }: EntryButtonProps) => {
   const theme = useTheme();
+
   if (isMobile) {
-    return (
-      <Link href="/diagnose">
-        <ColorBorderButton
-          label="診断する"
-          textColor={theme.colors.button.enable.backgroundColor}
-          borderColor={theme.colors.button.enable.backgroundColor}
-        />
-      </Link>
-    );
+    if (hasStampCard) {
+      return (
+        <Link href="/stampcard">
+          <ColorBorderButton
+            label="スタンプカードを表示"
+            textColor={theme.colors.button.enable.backgroundColor}
+            borderColor={theme.colors.button.enable.backgroundColor}
+          />
+        </Link>
+      );
+    } else {
+      return (
+        <Link href="/diagnose">
+          <ColorBorderButton
+            label="診断する"
+            textColor={theme.colors.button.enable.backgroundColor}
+            borderColor={theme.colors.button.enable.backgroundColor}
+          />
+        </Link>
+      );
+    }
   } else {
     return (
       <>
@@ -48,10 +62,10 @@ const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {
   }
 };
 
-export default function EntryButton({ isMobile }: EntryButtonProps) {
+export default function EntryButton(props: EntryButtonProps) {
   return (
     <div css={container}>
-      <ActivateButton isMobile={isMobile} />
+      <ActivateButton {...props} />
     </div>
   );
 }
