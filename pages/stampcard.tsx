@@ -4,6 +4,7 @@ import React from "react";
 // import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OrganizationFull } from "../api-client/@types";
+import MetaHead from "../components/MetaHead";
 import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
 import Header from "../components/headers/Header";
 import { StampProps } from "../components/stampcard/Stamp";
@@ -131,6 +132,10 @@ export default function StampCardPage() {
 
   return (
     <div css={container}>
+      <MetaHead
+        title="あなたのスタンプカード"
+        description="スタンプカードをもって部活動紹介を回ろう"
+      />
       <div css={headerPadding}>
         <Header isMobile={isMobile} />
       </div>
