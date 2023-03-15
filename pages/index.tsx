@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { useMemo } from "react";
 import {
   OrganizationFull,
   Question,
@@ -6,9 +7,7 @@ import {
 } from "../api-client/@types";
 import { getOrgs } from "../api-client/cached-response";
 import MetaHead from "../components/MetaHead";
-import OrgShowcase, {
-  OrgShowcaseProps,
-} from "../components/orgs/showcase/OrgShowcase";
+import OrgShowcase from "../components/orgs/showcase/OrgShowcase";
 import Random, { shuffle } from "../components/random";
 import EntryButton from "../components/toppage/EntryButton";
 import EventGuidance from "../components/toppage/EventGuidance";
@@ -55,14 +54,14 @@ const container = css`
 `;
 
 type HomeProps = {
-  showcase: OrgShowcaseProps;
+  showcaseIds: string[];
   recommendation: Recommendation;
   orgs: OrganizationFull[];
   questions: Question[];
 };
 
 export default function Home({
-  showcase,
+  showcaseIds,
   recommendation,
   orgs,
   questions,
@@ -87,12 +86,17 @@ export default function Home({
     questions: questions,
   };
 
+  const showcaseOrgs = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return showcaseIds.map((orgId) => orgs.find(({ id }) => orgId === id)!);
+  }, [orgs, showcaseIds]);
+
   return (
     <OrganizationProvider value={orgs}>
       <MetaHead description="相性診断をして自分に合った部・サークルの説明を聞きに行こう！スタンプラリーも！" />
       <Hero />
       <div css={container}>
-        <OrgShowcase {...showcase} />
+        <OrgShowcase orgs={showcaseOrgs} />
         <EntryButton isMobile={isMobile} />
         <FeatureDiagnose {...featureDiagnose} />
         <FeatureStampRally {...featureStampRally} />
@@ -136,9 +140,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      showcase: {
-        orgs: shuffle(orgs),
-      },
+      showcaseIds: shuffle(orgs.map(({ id }) => id)).slice(0, 30),
       orgs,
       recommendation,
       questions,
