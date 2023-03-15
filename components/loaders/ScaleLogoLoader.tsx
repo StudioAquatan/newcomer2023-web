@@ -65,6 +65,7 @@ const loaderLabel = css`
   font-size: 2rem;
   font-weight: 700;
   color: #333;
+  text-align: center;
 `;
 
 const Irodukun = () => {
