@@ -72,7 +72,19 @@ export default function Home({
 
   const featureStampRally = {
     title: "スタンプラリー",
-    description: "QRコードを読み込んで、景品を貰いに行こう！",
+    description: (
+      <>
+        各団体の説明を聞いて
+        <wbr />
+        QRコードを読み込み、
+        <wbr />
+        景品をもらいに行こう！
+        <wbr />
+        景品は新歓委員会の本部で
+        <wbr />
+        交換できるよ！
+      </>
+    ),
     inverse: true,
     recommendation: recommendation,
     orgs: orgs,
@@ -80,8 +92,17 @@ export default function Home({
 
   const featureDiagnose = {
     title: "相性診断",
-    description:
-      "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
+    description: (
+      <>
+        スタンプラリーのために
+        <wbr />
+        相性診断をして自分に
+        <wbr />
+        合った部・サークルの
+        <wbr />
+        説明を聞きに行こう！
+      </>
+    ),
     inverse: false,
     questions: questions,
   };
