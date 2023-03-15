@@ -81,6 +81,8 @@ export default function Stamp({
   orgInfo,
   seed = 0,
 }: StampProps) {
+  const random = new Random(seed);
+  const secret = random.nextNumber(0, 2000);
   const theme = useTheme();
 
   return (
@@ -93,7 +95,9 @@ export default function Stamp({
       {recommendation.isVisited ? (
         <Image
           css={markVisitedStyle(seed)}
-          src="/mark_visited.png"
+          src={
+            secret === 224 ? "/mark_visited_aquatan.png" : "/mark_visited.png"
+          }
           alt="visited"
           width={32}
           height={32}
