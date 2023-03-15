@@ -34,7 +34,19 @@ const recommendation: Recommendation = {
 export const StampRally = Template.bind({});
 StampRally.args = {
   title: "スタンプラリー",
-  description: "QRコードを読み込んで、景品を貰いに行こう！",
+  description: (
+    <>
+      各団体の説明を聞いて
+      <wbr />
+      QRコードを読み込み、
+      <wbr />
+      景品をもらいに行こう！
+      <wbr />
+      景品は新歓委員会の本部で
+      <wbr />
+      交換できるよ！
+    </>
+  ),
   recommendation: recommendation,
   orgs: orgsGetSuccessResponseJson,
   inverse: true,

@@ -5,7 +5,7 @@ import Feature from "./Feature";
 
 type FeatureStampRallyProps = {
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   inverse?: boolean;
   recommendation: Recommendation;
   orgs: OrganizationFull[];

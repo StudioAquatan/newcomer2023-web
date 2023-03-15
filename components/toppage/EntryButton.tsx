@@ -1,5 +1,6 @@
-import { css, Theme } from "@emotion/react";
-import GlowingPinkButton from "../buttons/GlowingPinkButton";
+import { css, useTheme } from "@emotion/react";
+import Link from "next/link";
+import ColorBorderButton from "../buttons/ColorBorderButton";
 
 type EntryButtonProps = {
   isMobile: boolean;
@@ -10,17 +11,10 @@ const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
 
-const disabledButton = (theme: Theme) => css`
-  padding: 1.6rem 4rem;
-  font-family: GenJyuuGothic-P, sans-serif;
-  font-size: 2.5rem;
-  text-decoration: none;
-  background-color: ${theme.colors.button.disable.backgroundColor};
-  border: 0;
-  border-radius: 4.8rem;
-  box-shadow: rgb(0 0 0 / 5%) 0 0 1rem;
+  a {
+    text-decoration: none;
+  }
 `;
 
 const notice = css`
@@ -34,18 +28,34 @@ const notice = css`
 `;
 
 const ActivateButton = ({ isMobile, hasStampCard }: EntryButtonProps) => {
+  const theme = useTheme();
+
   if (isMobile) {
     if (hasStampCard) {
       return (
-        <GlowingPinkButton text="スタンプカードを表示" href="/stampcard" />
+        <Link href="/stampcard">
+          <ColorBorderButton
+            label="スタンプカードを表示"
+            textColor={theme.colors.button.enable.backgroundColor}
+            borderColor={theme.colors.button.enable.backgroundColor}
+          />
+        </Link>
       );
     } else {
-      return <GlowingPinkButton text="診断する" href="/diagnose" />;
+      return (
+        <Link href="/diagnose">
+          <ColorBorderButton
+            label="診断する"
+            textColor={theme.colors.button.enable.backgroundColor}
+            borderColor={theme.colors.button.enable.backgroundColor}
+          />
+        </Link>
+      );
     }
   } else {
     return (
       <>
-        <button css={disabledButton}>診断する</button>
+        <ColorBorderButton label="診断する" disabled={true} />
         <p css={notice}>診断するにはスマートフォンからアクセスしてください。</p>
       </>
     );

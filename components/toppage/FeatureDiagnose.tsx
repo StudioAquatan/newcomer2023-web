@@ -5,7 +5,7 @@ import Feature from "./Feature";
 
 type FeatureDiagnoseProps = {
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   inverse?: boolean;
   questions: Question[];
 };

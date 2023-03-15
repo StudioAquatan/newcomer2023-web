@@ -1,11 +1,11 @@
-import { css } from "@emotion/react";
+import { css, useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { Question } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import Layout from "../components/Layout";
 import MetaHead from "../components/MetaHead";
-import GlowingPinkButton from "../components/buttons/GlowingPinkButton";
+import ColorBorderButton from "../components/buttons/ColorBorderButton";
 import ProgressBar from "../components/questions/ProgressBar";
 import QuestionForm from "../components/questions/QuestionForm";
 import { usePutRecommendation } from "../hooks/recommendation";
@@ -36,6 +36,7 @@ const buttonContainer = (show: boolean) => {
 };
 
 function SubmitButton() {
+  const theme = useTheme();
   const isReady = useIsAnswerReady();
   const putRecommend = usePutRecommendation();
   const answers = useQuestionResultMap();
@@ -52,7 +53,12 @@ function SubmitButton() {
   return (
     <div css={buttonContainer(isReady)}>
       <form onSubmit={handleSubmit}>
-        <GlowingPinkButton type="submit" text="診断結果を見る！" />
+        <ColorBorderButton
+          label="診断結果を見る"
+          textColor={theme.colors.button.enable.backgroundColor}
+          borderColor={theme.colors.button.enable.backgroundColor}
+          fontSize="2.4rem"
+        />
       </form>
     </div>
   );

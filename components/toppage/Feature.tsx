@@ -2,7 +2,7 @@ import { css, Theme } from "@emotion/react";
 
 type FeatureProps = {
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   featureContentNode: React.ReactNode;
   inverse?: boolean;
 };
@@ -50,6 +50,8 @@ const featureDescriptionStyle = (theme: Theme) => css`
   font-family: GenShinGothic-P, sans-serif;
   font-size: 3.2rem;
   color: ${theme.colors.normalTextColor};
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 
   @media screen and (max-width: 1080px) {
     font-size: 2.8rem;
