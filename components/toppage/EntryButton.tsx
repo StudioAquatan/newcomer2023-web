@@ -3,6 +3,7 @@ import GlowingPinkButton from "../buttons/GlowingPinkButton";
 
 type EntryButtonProps = {
   isMobile: boolean;
+  hasStampCard: boolean;
 };
 
 const container = css`
@@ -32,9 +33,15 @@ const notice = css`
   text-align: center;
 `;
 
-const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {
+const ActivateButton = ({ isMobile, hasStampCard }: EntryButtonProps) => {
   if (isMobile) {
-    return <GlowingPinkButton text="診断する" href="/diagnose" />;
+    if (hasStampCard) {
+      return (
+        <GlowingPinkButton text="スタンプカードを表示" href="/stampcard" />
+      );
+    } else {
+      return <GlowingPinkButton text="診断する" href="/diagnose" />;
+    }
   } else {
     return (
       <>
@@ -45,10 +52,10 @@ const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {
   }
 };
 
-export default function EntryButton({ isMobile }: EntryButtonProps) {
+export default function EntryButton(props: EntryButtonProps) {
   return (
     <div css={container}>
-      <ActivateButton isMobile={isMobile} />
+      <ActivateButton {...props} />
     </div>
   );
 }

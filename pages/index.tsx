@@ -15,7 +15,8 @@ import FeatureDiagnose from "../components/toppage/FeatureDiagnose";
 import FeatureStampRally from "../components/toppage/FeatureStampRally";
 import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
-import { OrganizationProvider } from "../hooks/organizations";
+import { OrganizationProvider, useOrganizations } from "../hooks/organizations";
+import { useRecommendation } from "../hooks/recommendation";
 import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
 
@@ -55,26 +56,28 @@ const container = css`
 
 type HomeProps = {
   showcaseIds: string[];
-  recommendation: Recommendation;
+  showcaseRecommendation: Recommendation;
   orgs: OrganizationFull[];
   questions: Question[];
 };
 
 export default function Home({
   showcaseIds,
-  recommendation,
+  showcaseRecommendation,
   orgs,
   questions,
 }: HomeProps) {
   const { isMobile } = useIsMobile();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
-  useUser();
+  const { data: user } = useUser();
+  const { data: recommendation } = useRecommendation(user?.token);
+  useOrganizations();
 
   const featureStampRally = {
     title: "スタンプラリー",
     description: "QRコードを読み込んで、景品を貰いに行こう！",
     inverse: true,
-    recommendation: recommendation,
+    recommendation: showcaseRecommendation,
     orgs: orgs,
   };
 
@@ -97,7 +100,10 @@ export default function Home({
       <Hero />
       <div css={container}>
         <OrgShowcase orgs={showcaseOrgs} />
-        <EntryButton isMobile={isMobile} />
+        <EntryButton
+          isMobile={isMobile}
+          hasStampCard={typeof recommendation === "object"}
+        />
         <FeatureDiagnose {...featureDiagnose} />
         <FeatureStampRally {...featureStampRally} />
         <EventGuidance />
@@ -142,7 +148,7 @@ export async function getServerSideProps() {
     props: {
       showcaseIds: shuffle(orgs.map(({ id }) => id)).slice(0, 30),
       orgs,
-      recommendation,
+      showcaseRecommendation: recommendation,
       questions,
     },
   };
