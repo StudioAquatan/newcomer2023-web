@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme, useTheme } from "@emotion/react";
 
 type ColorBorderButtonProps = {
   label: string;
@@ -6,9 +6,11 @@ type ColorBorderButtonProps = {
   borderColor: string;
   fontSize?: string;
   type?: string;
+  disabled?: boolean;
 };
 
 const button = (
+  theme: Theme,
   fontSize?: string,
   textColor?: string,
   borderColor?: string
@@ -36,6 +38,13 @@ const button = (
       transition: 100ms;
       transform: translateY(1rem);
     }
+
+    &:disabled {
+      color: ${theme.colors.button.disable.backgroundColor};
+      border: 3px ${theme.colors.button.disable.backgroundColor} solid;
+      transition: none;
+      transform: none;
+    }
   `;
 };
 
@@ -45,16 +54,29 @@ export default function ColorBorderButton({
   borderColor,
   fontSize,
   type,
+  disabled = false,
 }: ColorBorderButtonProps) {
-  if (type === "submit") {
+  const theme = useTheme();
+  if (disabled)
     return (
-      <button css={button(fontSize, textColor, borderColor)} type="submit">
+      <button css={button(theme, fontSize, textColor, borderColor)} disabled>
+        {label}
+      </button>
+    );
+  else if (type === "submit") {
+    return (
+      <button
+        css={button(theme, fontSize, textColor, borderColor)}
+        type="submit"
+      >
         {label}
       </button>
     );
   } else {
     return (
-      <button css={button(fontSize, textColor, borderColor)}>{label}</button>
+      <button css={button(theme, fontSize, textColor, borderColor)}>
+        {label}
+      </button>
     );
   }
 }
