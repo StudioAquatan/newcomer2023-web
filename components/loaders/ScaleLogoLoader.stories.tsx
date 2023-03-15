@@ -6,6 +6,9 @@ import ScaleLogoLoader from "./ScaleLogoLoader";
 export default {
   title: "Loaders/ScaleLogoLoader",
   component: ScaleLogoLoader,
+  parameters: {
+    layout: "fullscreen",
+  },
 } as ComponentMeta<typeof ScaleLogoLoader>;
 
 const Template: ComponentStory<typeof ScaleLogoLoader> = (args) => (

@@ -2,10 +2,13 @@ import { css, keyframes } from "@emotion/react";
 import Image from "next/image";
 import imgixLoader from "../../image-loader";
 
-const container = css`
+const container = (pageMode: boolean) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: ${pageMode ? "100svh" : "100%"};
 `;
 
 const loader = css`
@@ -90,9 +93,15 @@ const Aquatan = () => {
   );
 };
 
-export default function ScaleLogoLoader({ label }: { label: string }) {
+export default function ScaleLogoLoader({
+  label,
+  pageMode = false,
+}: {
+  label: string;
+  pageMode?: boolean;
+}) {
   return (
-    <div css={container}>
+    <div css={container(pageMode)}>
       <div css={loader}>
         <Aquatan />
         <Irodukun />

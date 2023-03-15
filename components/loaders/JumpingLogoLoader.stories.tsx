@@ -6,6 +6,9 @@ import JumpingLogoLoader from "./JumpingLogoLoader";
 export default {
   title: "Loaders/JumpingLogoLoader",
   component: JumpingLogoLoader,
+  parameters: {
+    layout: "fullscreen",
+  },
 } as ComponentMeta<typeof JumpingLogoLoader>;
 
 const Template: ComponentStory<typeof JumpingLogoLoader> = (args) => (
