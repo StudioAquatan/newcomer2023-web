@@ -2,48 +2,58 @@ import { css, Theme } from "@emotion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useIntersection } from "use-intersection";
+import { useRecommendation } from "../../hooks/recommendation";
+import useUser from "../../hooks/user";
 import Hamburger from "../buttons/Hamburger";
 import { ColumnMenuButtons, HeaderData, MenuButtons } from "./Navigation";
 
-const headersData: HeaderData[] = [
-  {
-    label: "トップページ",
-    link: {
-      href: "/",
+const getHeaderData = (hasStampCard: boolean) => {
+  const commons: HeaderData[] = [
+    {
+      label: "トップページ",
+      link: {
+        href: "/",
+      },
     },
-  },
-  {
-    label: "新歓について",
-    link: {
-      href: "",
-      external: true,
+    {
+      label: "新歓について",
+      link: {
+        href: "",
+        external: true,
+      },
     },
-  },
-  {
-    label: "団体一覧",
-    link: {
-      href: "/orgs",
+    {
+      label: "団体一覧",
+      link: {
+        href: "/orgs",
+      },
     },
-  },
-  {
-    label: "スタンプカード",
-    targetDevice: "mobile",
-    link: {
-      href: "/stampcard",
-    },
-  },
-  {
-    label: "診断を始める",
-    targetDevice: "mobile",
-    link: {
-      href: "/diagnose",
-    },
-  },
-  // {
-  //   label: "スマホからアクセスして診断を始めてみよう！",
-  //   targetDevice: "desktop",
-  // },
-];
+    // {
+    //   label: "スマホからアクセスして診断を始めてみよう！",
+    //   targetDevice: "desktop",
+    // },
+  ];
+
+  if (hasStampCard) {
+    commons.push({
+      label: "スタンプカード",
+      targetDevice: "mobile",
+      link: {
+        href: "/stampcard",
+      },
+    });
+  } else {
+    commons.push({
+      label: "診断を始める",
+      targetDevice: "mobile",
+      link: {
+        href: "/diagnose",
+      },
+    });
+  }
+
+  return commons;
+};
 
 const targetIntersectionPosition = css`
   position: absolute;
@@ -222,6 +232,8 @@ const DrawerContent = ({
 };
 
 export default function Header({ isMobile }: { isMobile: boolean }) {
+  const { data: user } = useUser();
+  const { data: recommendation } = useRecommendation(user?.token);
   const targetIntersecting = useRef<HTMLDivElement>(null);
   const intersecting = useIntersection(targetIntersecting);
 
@@ -251,7 +263,10 @@ export default function Header({ isMobile }: { isMobile: boolean }) {
     return (
       <div css={desktopContainer}>
         <SiteName />
-        <MenuButtons headersData={headersData} isMobile={isMobile} />
+        <MenuButtons
+          headersData={getHeaderData(typeof recommendation === "object")}
+          isMobile={isMobile}
+        />
       </div>
     );
   };
@@ -267,7 +282,7 @@ export default function Header({ isMobile }: { isMobile: boolean }) {
         <Mask isOpen={drawerOpen} onClick={handleDrawerClose} />
         <Drawer isOpen={drawerOpen}>
           <DrawerContent
-            headersData={headersData}
+            headersData={getHeaderData(typeof recommendation === "object")}
             isMobile={isMobile}
             onClick={handleDrawerClose}
           />
