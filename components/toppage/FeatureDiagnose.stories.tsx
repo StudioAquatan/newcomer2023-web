@@ -32,8 +32,17 @@ const questions: Question[] = [
 export const Diagnose = Template.bind({});
 Diagnose.args = {
   title: "相性診断",
-  description:
-    "BINGOスタンプラリーのために相性診断をして自分に合った部・サークルの説明を聞きに行こう！",
+  description: (
+    <>
+      スタンプラリーのために
+      <wbr />
+      相性診断をして自分に
+      <wbr />
+      合った部・サークルの
+      <wbr />
+      説明を聞きに行こう！
+    </>
+  ),
   inverse: false,
   questions: questions,
 };
