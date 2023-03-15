@@ -1,6 +1,6 @@
 import { css, useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Question } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import Layout from "../components/Layout";
@@ -43,7 +43,7 @@ const buttonContainer = (show: boolean) => {
   `;
 };
 
-function SubmitButton() {
+function SubmitButton({ onClick }: { onClick: () => void }) {
   const theme = useTheme();
   const isReady = useIsAnswerReady();
   const putRecommend = usePutRecommendation();
@@ -54,8 +54,14 @@ function SubmitButton() {
     e.preventDefault();
     e.stopPropagation();
 
+    // 診断結果待ち
+    onClick();
+
     await putRecommend(answers);
-    await push("/stampcard");
+
+    setTimeout(() => {
+      push("/stampcard");
+    }, 3000);
   };
 
   return (
@@ -73,11 +79,23 @@ function SubmitButton() {
 }
 
 export default function Diagnose({ questions }: DiagnoseProps) {
+  const [diagnoseLoading, setDiagnoseLoading] = useState(false);
+  const [stampCardLoading, setStampCardLoading] = useState(false);
   const isReady = useQuestionListSetter(questions);
   const { question } = useCurrentQuestion();
 
-  if (!isReady || !question) {
+  useEffect(() => {
+    setTimeout(() => {
+      setDiagnoseLoading(true);
+    }, 3000);
+  }, []);
+
+  if (!isReady || !question || !diagnoseLoading) {
     return <JumpingLogoLoader label="診断を準備中..." pageMode />;
+  }
+
+  if (stampCardLoading) {
+    return <JumpingLogoLoader label="診断中..." pageMode />;
   }
 
   return (
@@ -88,7 +106,11 @@ export default function Diagnose({ questions }: DiagnoseProps) {
       />
       <Progress />
       <QuestionForm question={question} />
-      <SubmitButton />
+      <SubmitButton
+        onClick={() => {
+          setStampCardLoading(true);
+        }}
+      />
     </div>
   );
 }
