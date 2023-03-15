@@ -1,5 +1,7 @@
-import { css, Theme } from "@emotion/react";
-import GlowingPinkButton from "../buttons/GlowingPinkButton";
+import { css, Theme, useTheme } from "@emotion/react";
+import Link from "next/link";
+import ColorBorderButton from "../buttons/ColorBorderButton";
+// import GlowingPinkButton from "../buttons/GlowingPinkButton";
 
 const container = css`
   display: flex;
@@ -20,10 +22,18 @@ const title = (theme: Theme) => css`
 `;
 
 export default function OrgList() {
+  const theme = useTheme();
   return (
     <div css={container}>
       <p css={title}>部活動一覧</p>
-      <GlowingPinkButton text="こちら" href="/orgs/" />
+      <Link href="/orgs/">
+        <ColorBorderButton
+          label="こちら"
+          textColor={theme.colors.button.enable.backgroundColor}
+          borderColor={theme.colors.button.enable.backgroundColor}
+          fontSize="2.4rem"
+        />
+      </Link>
     </div>
   );
 }
