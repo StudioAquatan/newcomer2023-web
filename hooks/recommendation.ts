@@ -3,25 +3,33 @@ import { QuestionResult } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import useUser from "./user";
 
-export function useRecommendation(token: string | undefined) {
-  return useSWR(token ? ["/recommendation", token] : null, async () => {
-    const recommendations = await apiClient.recommendation
-      .$get({
-        config: {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((error) => {
-        throw new Error("Failed to fetch /recommendation.", error);
-      });
+export const NoRecommendation = Symbol.for("NoRecommendation");
 
-    return recommendations;
-  });
+export function useRecommendation(token: string | undefined) {
+  return useSWR(
+    token ? ["/recommendation", token] : null,
+    async () => {
+      const recommendations = await apiClient.recommendation
+        .$get({
+          config: {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          },
+        })
+        .then((res) => {
+          return res;
+        })
+        .catch((error) => {
+          console.warn("Failed to fetch /recommendation.", error);
+
+          return NoRecommendation;
+        });
+
+      return recommendations;
+    },
+    { revalidateOnFocus: true, errorRetryCount: 1 }
+  );
 }
 
 export function usePutRecommendation() {

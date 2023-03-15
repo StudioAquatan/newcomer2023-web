@@ -1,4 +1,6 @@
 import { css } from "@emotion/react";
+import { useRouter } from "next/router";
+import React from "react";
 // import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OrganizationFull } from "../api-client/@types";
@@ -8,7 +10,7 @@ import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
 import { useOrganizations } from "../hooks/organizations";
-import { useRecommendation } from "../hooks/recommendation";
+import { NoRecommendation, useRecommendation } from "../hooks/recommendation";
 import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
 
@@ -92,9 +94,20 @@ export default function StampCardPage() {
   const { data: seedData } = useStampCardSeed();
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
+  const { push } = useRouter();
+
+  React.useEffect(() => {
+    if (recommendationData === NoRecommendation) {
+      push("/");
+    }
+  }, [recommendationData, push]);
 
   if (!recommendationData || !orgsData) {
     return <div>loading...</div>;
+  }
+
+  if (typeof recommendationData === "symbol") {
+    return null;
   }
 
   const recommendation = recommendationData.recommendation;
