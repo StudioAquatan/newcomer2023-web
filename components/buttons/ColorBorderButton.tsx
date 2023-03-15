@@ -2,8 +2,8 @@ import { css, Theme, useTheme } from "@emotion/react";
 
 type ColorBorderButtonProps = {
   label: string;
-  textColor: string;
-  borderColor: string;
+  textColor?: string;
+  borderColor?: string;
   fontSize?: string;
   type?: string;
   disabled?: boolean;

@@ -1,5 +1,5 @@
-import { css, Theme } from "@emotion/react";
-import GlowingPinkButton from "../buttons/GlowingPinkButton";
+import { css, useTheme } from "@emotion/react";
+import ColorBorderButton from "../buttons/ColorBorderButton";
 
 type EntryButtonProps = {
   isMobile: boolean;
@@ -9,17 +9,6 @@ const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const disabledButton = (theme: Theme) => css`
-  padding: 1.6rem 4rem;
-  font-family: GenJyuuGothic-P, sans-serif;
-  font-size: 2.5rem;
-  text-decoration: none;
-  background-color: ${theme.colors.button.disable.backgroundColor};
-  border: 0;
-  border-radius: 4.8rem;
-  box-shadow: rgb(0 0 0 / 5%) 0 0 1rem;
 `;
 
 const notice = css`
@@ -33,12 +22,19 @@ const notice = css`
 `;
 
 const ActivateButton = ({ isMobile }: { isMobile: boolean }) => {
+  const theme = useTheme();
   if (isMobile) {
-    return <GlowingPinkButton text="診断する" href="/diagnose" />;
+    return (
+      <ColorBorderButton
+        label="診断する"
+        textColor={theme.colors.button.enable.backgroundColor}
+        borderColor={theme.colors.button.enable.backgroundColor}
+      />
+    );
   } else {
     return (
       <>
-        <button css={disabledButton}>診断する</button>
+        <ColorBorderButton label="診断する" disabled={true} />
         <p css={notice}>診断するにはスマートフォンからアクセスしてください。</p>
       </>
     );
