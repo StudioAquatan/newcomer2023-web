@@ -9,6 +9,8 @@ export function useRecommendation(token: string | undefined) {
   return useSWR(
     token ? ["/recommendation", token] : null,
     async () => {
+      if (typeof window === "undefined") return NoRecommendation;
+
       const recommendations = await apiClient.recommendation
         .$get({
           config: {
@@ -28,25 +30,30 @@ export function useRecommendation(token: string | undefined) {
 
       return recommendations;
     },
-    { revalidateOnFocus: true, errorRetryCount: 1 }
+    { revalidateOnFocus: false, errorRetryCount: 0, revalidateIfStale: false }
   );
 }
 
 export function usePutRecommendation() {
   const { data: userData } = useUser();
+  const { mutate } = useRecommendation(userData?.token);
 
   return async (answers: Map<string, QuestionResult>) => {
     if (!userData?.token) {
       throw new Error("No token provided");
     }
 
-    return apiClient.recommendation.put({
+    const response = await apiClient.recommendation.put({
       body: Array.from(answers.values()),
       config: {
         headers: {
-          Authorization: "Bearer " + userData?.token,
+          Authorization: "Bearer " + userData.token,
         },
       },
     });
+
+    await mutate(response.body, { revalidate: false });
+
+    return response;
   };
 }

@@ -61,6 +61,11 @@ type HomeProps = {
   questions: Question[];
 };
 
+function OrgsCache() {
+  useOrganizations();
+
+  return null;
+}
 export default function Home({
   showcaseIds,
   showcaseRecommendation,
@@ -71,7 +76,6 @@ export default function Home({
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
   const { data: user } = useUser();
   const { data: recommendation } = useRecommendation(user?.token);
-  useOrganizations();
 
   const featureStampRally = {
     title: "スタンプラリー",
@@ -109,6 +113,7 @@ export default function Home({
         <EventGuidance />
         <OrgList />
       </div>
+      <OrgsCache />
     </OrganizationProvider>
   );
 }
