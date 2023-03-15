@@ -7,6 +7,7 @@ import { OrganizationFull } from "../api-client/@types";
 import MetaHead from "../components/MetaHead";
 import ColorBorderButton from "../components/buttons/ColorBorderButton";
 import Header from "../components/headers/Header";
+import JumpingLogoLoader from "../components/loaders/JumpingLogoLoader";
 import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
@@ -105,7 +106,7 @@ export default function StampCardPage() {
   }, [recommendationData, push]);
 
   if (!recommendationData || !orgsData) {
-    return <div>loading...</div>;
+    return <JumpingLogoLoader label="スタンプカードを読み込み中..." pageMode />;
   }
 
   if (typeof recommendationData === "symbol") {

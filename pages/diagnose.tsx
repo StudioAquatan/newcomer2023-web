@@ -6,6 +6,7 @@ import { apiClient } from "../api-client/apiClient";
 import Layout from "../components/Layout";
 import MetaHead from "../components/MetaHead";
 import ColorBorderButton from "../components/buttons/ColorBorderButton";
+import JumpingLogoLoader from "../components/loaders/JumpingLogoLoader";
 import ProgressBar from "../components/questions/ProgressBar";
 import QuestionForm from "../components/questions/QuestionForm";
 import { usePutRecommendation } from "../hooks/recommendation";
@@ -76,7 +77,7 @@ export default function Diagnose({ questions }: DiagnoseProps) {
   const { question } = useCurrentQuestion();
 
   if (!isReady || !question) {
-    return <div>loading...</div>;
+    return <JumpingLogoLoader label="診断を準備中..." pageMode />;
   }
 
   return (

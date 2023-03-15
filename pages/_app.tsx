@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
 import Layout from "../components/Layout";
 import Footer from "../components/footers/Footer";
+import JumpingLogoLoader from "../components/loaders/JumpingLogoLoader";
 import { initMockServer, initMockWorker } from "../mocks";
 import { useRouterHistoryRecorder } from "../store/router";
 import { useSetIsMobile } from "../store/userAgent";
@@ -37,7 +38,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   // フラグが登録中を示す(=== true)なら登録中の旨を表示する
   if (isMockWorkerRegistering) {
-    return <div>Mock worker has not registered yet.</div>;
+    return <JumpingLogoLoader label="Mock worker is registering..." pageMode />;
   }
 
   // デフォルトのレイアウトはFooter付き
