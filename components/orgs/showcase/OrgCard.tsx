@@ -27,6 +27,9 @@ const container = (theme: Theme) => css`
   border-radius: 1.6rem;
   backdrop-filter: blur(10px);
 
+  /* Safariでアニメーション時にborder-radiusが消える問題を修正するため */
+  will-change: transform;
+
   &::before {
     position: absolute;
     top: 0;
