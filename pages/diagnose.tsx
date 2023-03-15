@@ -26,12 +26,19 @@ function Progress() {
 }
 
 const buttonContainer = (show: boolean) => {
+  const showStyle = css`
+    visibility: visible;
+    opacity: 1;
+  `;
+
   return css`
     display: flex;
     justify-content: center;
     margin: 10vh 0;
-    opacity: ${show ? 1.0 : 0.0};
+    visibility: hidden;
+    opacity: 0;
     transition: opacity 0.2s linear;
+    ${show ? showStyle : ""}
   `;
 };
 

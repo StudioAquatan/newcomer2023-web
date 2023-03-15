@@ -26,6 +26,8 @@ const heroStyle = css`
 
 const pageTitle = css`
   font-size: 3.5rem;
+  text-shadow: 2px 2px 2px #fff, -2px 2px 2px #fff, 2px -2px 2px #fff,
+    -2px -2px 2px #fff;
 `;
 
 const orgListPageStyle = css`
