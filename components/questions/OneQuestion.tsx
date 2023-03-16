@@ -14,6 +14,7 @@ type QuestionProps = {
 const container = (transition: boolean) => css`
   display: flex;
   flex-direction: column;
+  gap: 2rem;
   align-items: center;
   padding: 0;
   margin: 0;
