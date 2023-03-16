@@ -27,8 +27,7 @@ export default function LimitNotice({ remain, back, close }: Props) {
       <ModalContent>
         <p css={textStyle}>
           診断できる回数には制限があります． <wbr />
-          あと
-          <span css={remainStyle}>{remain}回</span>
+          <span css={remainStyle}>残り{remain}回</span>
           診断できます．
           <wbr />
         </p>
