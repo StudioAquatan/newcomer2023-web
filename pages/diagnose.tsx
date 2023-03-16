@@ -1,11 +1,12 @@
 import { css } from "@emotion/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { Question } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import Layout from "../components/Layout";
 import MetaHead from "../components/MetaHead";
 import ColorBorderButton from "../components/buttons/ColorBorderButton";
+import JumpingLogoLoader from "../components/loaders/JumpingLogoLoader";
 import { useModal } from "../components/modal";
 import LimitNotice from "../components/questions/LimitNotice";
 import ProgressBar from "../components/questions/ProgressBar";
@@ -49,7 +50,7 @@ const buttonContainer = (show: boolean) => {
   `;
 };
 
-function SubmitButton() {
+function SubmitButton({ onClick }: { onClick: () => void }) {
   const isReady = useIsAnswerReady();
   const putRecommend = usePutRecommendation();
   const answers = useQuestionResultMap();
@@ -60,10 +61,15 @@ function SubmitButton() {
     e.preventDefault();
     e.stopPropagation();
 
-    await putRecommend(answers);
-    await push("/stampcard");
+    // 診断結果待ち
+    onClick();
 
-    reset();
+    await putRecommend(answers);
+
+    setTimeout(() => {
+      push("/stampcard");
+      reset();
+    }, 3000);
   };
 
   return (
@@ -80,11 +86,19 @@ function SubmitButton() {
 }
 
 export default function Diagnose({ questions }: DiagnoseProps) {
+  const [diagnoseLoading, setDiagnoseLoading] = useState(false);
+  const [stampCardLoading, setStampCardLoading] = useState(false);
   const { data: recommendation } = useRecommendation();
   const isReady = useQuestionListSetter(questions);
   const { question, current } = useCurrentQuestion();
   const { ModalWrapper, open, close } = useModal();
   const { push } = useRouter();
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setDiagnoseLoading(true);
+    }, 3000);
+  }, []);
 
   React.useEffect(() => {
     if (current === 0 && isRecommendationReady(recommendation)) {
@@ -97,8 +111,12 @@ export default function Diagnose({ questions }: DiagnoseProps) {
     push("/stampcard");
   };
 
-  if (!isReady || !question || !recommendation) {
-    return <div>loading...</div>;
+  if (!isReady || !question || !recommendation || !diagnoseLoading) {
+    return <JumpingLogoLoader label="診断を準備中..." pageMode />;
+  }
+
+  if (stampCardLoading) {
+    return <JumpingLogoLoader label="診断中..." pageMode />;
   }
 
   return (
@@ -109,7 +127,11 @@ export default function Diagnose({ questions }: DiagnoseProps) {
       />
       <Progress />
       <QuestionForm question={question} />
-      <SubmitButton />
+      <SubmitButton
+        onClick={() => {
+          setStampCardLoading(true);
+        }}
+      />
       <ModalWrapper>
         {isRecommendationReady(recommendation) && (
           <LimitNotice

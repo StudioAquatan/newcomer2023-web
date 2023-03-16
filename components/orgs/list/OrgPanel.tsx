@@ -20,9 +20,9 @@ const orgPanelStyle = css`
 const orgNameStyle = (name: string) => css`
   width: 100%;
   height: 40px;
-  line-height: 40px;
   font-size: ${name.length > 17 ? 1.6 : 1.9}rem;
   font-weight: 500;
+  line-height: 40px;
 `;
 
 const descriptionContainerStyle = css`
