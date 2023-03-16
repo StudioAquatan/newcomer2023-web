@@ -61,8 +61,9 @@ function SubmitButton() {
     e.stopPropagation();
 
     await putRecommend(answers);
-    reset();
     await push("/stampcard");
+
+    reset();
   };
 
   return (
