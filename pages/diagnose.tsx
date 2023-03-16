@@ -19,6 +19,7 @@ import {
   useCurrentQuestion,
   useIsAnswerReady,
   useQuestionListSetter,
+  useQuestionReset,
   useQuestionResultMap,
 } from "../store/question";
 
@@ -53,12 +54,14 @@ function SubmitButton() {
   const putRecommend = usePutRecommendation();
   const answers = useQuestionResultMap();
   const { push } = useRouter();
+  const reset = useQuestionReset();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
     await putRecommend(answers);
+    reset();
     await push("/stampcard");
   };
 
