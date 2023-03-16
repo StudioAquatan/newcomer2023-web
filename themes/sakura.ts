@@ -50,7 +50,7 @@ export const sakura = {
     subTextColor: "#797979",
     button: {
       enable: {
-        backgroundColor: "#FFC8DF",
+        backgroundColor: "#FF8DBD",
         textColor: "#000000",
       },
       disable: {

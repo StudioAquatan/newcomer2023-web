@@ -1,4 +1,4 @@
-import { css, Theme, useTheme } from "@emotion/react";
+import { css, Theme, useTheme, Interpolation } from "@emotion/react";
 
 type ColorBorderButtonProps = {
   label: string;
@@ -7,7 +7,8 @@ type ColorBorderButtonProps = {
   fontSize?: string;
   type?: string;
   disabled?: boolean;
-};
+  css?: Interpolation<Theme>;
+} & React.HTMLProps<HTMLButtonElement>;
 
 const button = (
   theme: Theme,
@@ -55,26 +56,52 @@ export default function ColorBorderButton({
   fontSize,
   type,
   disabled = false,
+  ...rest
 }: ColorBorderButtonProps) {
   const theme = useTheme();
   if (disabled)
     return (
-      <button css={button(theme, fontSize, textColor, borderColor)} disabled>
+      <button
+        css={[
+          button(
+            theme,
+            fontSize,
+            textColor ?? theme.colors.button.disable.backgroundColor,
+            borderColor ?? theme.colors.button.disable.backgroundColor
+          ),
+        ]}
+        disabled
+        {...rest}
+      >
         {label}
       </button>
     );
   else if (type === "submit") {
     return (
       <button
-        css={button(theme, fontSize, textColor, borderColor)}
+        css={button(
+          theme,
+          fontSize,
+          textColor ?? theme.colors.button.enable.backgroundColor,
+          borderColor ?? theme.colors.button.enable.backgroundColor
+        )}
         type="submit"
+        {...rest}
       >
         {label}
       </button>
     );
   } else {
     return (
-      <button css={button(theme, fontSize, textColor, borderColor)}>
+      <button
+        css={button(
+          theme,
+          fontSize,
+          textColor ?? theme.colors.button.enable.backgroundColor,
+          borderColor ?? theme.colors.button.enable.backgroundColor
+        )}
+        {...rest}
+      >
         {label}
       </button>
     );

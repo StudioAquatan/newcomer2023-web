@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useIntersection } from "use-intersection";
 import { useRecommendation } from "../../hooks/recommendation";
-import useUser from "../../hooks/user";
 import Hamburger from "../buttons/Hamburger";
 import { ColumnMenuButtons, HeaderData, MenuButtons } from "./Navigation";
 
@@ -232,8 +231,7 @@ const DrawerContent = ({
 };
 
 export default function Header({ isMobile }: { isMobile: boolean }) {
-  const { data: user } = useUser();
-  const { data: recommendation } = useRecommendation(user?.token);
+  const { data: recommendation } = useRecommendation();
   const targetIntersecting = useRef<HTMLDivElement>(null);
   const intersecting = useIntersection(targetIntersecting);
 

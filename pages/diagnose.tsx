@@ -1,4 +1,4 @@
-import { css, useTheme } from "@emotion/react";
+import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { Question } from "../api-client/@types";
@@ -6,13 +6,20 @@ import { apiClient } from "../api-client/apiClient";
 import Layout from "../components/Layout";
 import MetaHead from "../components/MetaHead";
 import ColorBorderButton from "../components/buttons/ColorBorderButton";
+import { useModal } from "../components/modal";
+import LimitNotice from "../components/questions/LimitNotice";
 import ProgressBar from "../components/questions/ProgressBar";
 import QuestionForm from "../components/questions/QuestionForm";
-import { usePutRecommendation } from "../hooks/recommendation";
+import {
+  isRecommendationReady,
+  usePutRecommendation,
+  useRecommendation,
+} from "../hooks/recommendation";
 import {
   useCurrentQuestion,
   useIsAnswerReady,
   useQuestionListSetter,
+  useQuestionReset,
   useQuestionResultMap,
 } from "../store/question";
 
@@ -43,17 +50,18 @@ const buttonContainer = (show: boolean) => {
 };
 
 function SubmitButton() {
-  const theme = useTheme();
   const isReady = useIsAnswerReady();
   const putRecommend = usePutRecommendation();
   const answers = useQuestionResultMap();
   const { push } = useRouter();
+  const reset = useQuestionReset();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
     await putRecommend(answers);
+    reset();
     await push("/stampcard");
   };
 
@@ -62,9 +70,8 @@ function SubmitButton() {
       <form onSubmit={handleSubmit}>
         <ColorBorderButton
           label="診断結果を見る"
-          textColor={theme.colors.button.enable.backgroundColor}
-          borderColor={theme.colors.button.enable.backgroundColor}
           fontSize="2.4rem"
+          disabled={!isReady}
         />
       </form>
     </div>
@@ -72,10 +79,24 @@ function SubmitButton() {
 }
 
 export default function Diagnose({ questions }: DiagnoseProps) {
+  const { data: recommendation } = useRecommendation();
   const isReady = useQuestionListSetter(questions);
-  const { question } = useCurrentQuestion();
+  const { question, current } = useCurrentQuestion();
+  const { ModalWrapper, open, close } = useModal();
+  const { push } = useRouter();
 
-  if (!isReady || !question) {
+  React.useEffect(() => {
+    if (current === 0 && isRecommendationReady(recommendation)) {
+      open();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recommendation, current]);
+
+  const handleBack = () => {
+    push("/stampcard");
+  };
+
+  if (!isReady || !question || !recommendation) {
     return <div>loading...</div>;
   }
 
@@ -88,6 +109,15 @@ export default function Diagnose({ questions }: DiagnoseProps) {
       <Progress />
       <QuestionForm question={question} />
       <SubmitButton />
+      <ModalWrapper>
+        {isRecommendationReady(recommendation) && (
+          <LimitNotice
+            close={close}
+            back={handleBack}
+            remain={recommendation.recommendation.renewRemains}
+          />
+        )}
+      </ModalWrapper>
     </div>
   );
 }
