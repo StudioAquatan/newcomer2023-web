@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import { QuestionResult } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
+import { Methods } from "../api-client/recommendation";
 import useUser from "./user";
 
 export const NoRecommendation = Symbol.for("NoRecommendation");
@@ -34,6 +35,12 @@ export function useRecommendation() {
     },
     { revalidateOnFocus: false, errorRetryCount: 0, revalidateIfStale: false }
   );
+}
+
+export function isRecommendationReady(
+  recommendation?: Methods["get"]["resBody"] | symbol
+): recommendation is Methods["get"]["resBody"] {
+  return typeof recommendation === "object";
 }
 
 export function usePutRecommendation() {

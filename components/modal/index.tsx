@@ -16,3 +16,10 @@ export function useModal() {
 
   return { open, close, ModalWrapper };
 }
+
+export {
+  ModalButton,
+  ModalButtonContainer,
+  ModalContent,
+  ModalTitle,
+} from "./Modal";
