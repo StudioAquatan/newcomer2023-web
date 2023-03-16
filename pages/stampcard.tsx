@@ -1,4 +1,7 @@
 import { css, useTheme } from "@emotion/react";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 // import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
@@ -13,7 +16,6 @@ import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
 import { useOrganizations } from "../hooks/organizations";
 import { NoRecommendation, useRecommendation } from "../hooks/recommendation";
-import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
 
 const headerPadding = css`
@@ -24,7 +26,6 @@ const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100svh;
 `;
 
 const content = css`
@@ -33,7 +34,7 @@ const content = css`
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 `;
 
 const stampCardHeader = css`
@@ -73,12 +74,18 @@ const stampCardBottom = css`
   margin: 0 3.2rem;
 `;
 
-// const otherOrgs = css`
-//   padding: 0;
-//   margin: 0;
-//   font-size: 2rem;
-//   text-align: center;
-// `;
+const otherLinks = css`
+  padding: 0;
+  margin-block: 1.5rem;
+  margin-inline: 0;
+  font-size: 2rem;
+  color: rgba(0 0 0 / 95%);
+  text-align: center;
+`;
+
+const renewLinks = css`
+  padding: 1.5rem;
+`;
 
 const fallbackOrg: OrganizationFull = {
   id: "fallback",
@@ -91,9 +98,8 @@ const fallbackOrg: OrganizationFull = {
 export default function StampCardPage() {
   const theme = useTheme();
   const { isMobile } = useIsMobile();
-  const { data: userData } = useUser();
   const { data: orgsData } = useOrganizations();
-  const { data: recommendationData } = useRecommendation(userData?.token);
+  const { data: recommendationData } = useRecommendation();
   const { data: seedData } = useStampCardSeed();
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
@@ -157,13 +163,18 @@ export default function StampCardPage() {
             borderColor={theme.colors.button.enable.backgroundColor}
             fontSize="2.4rem"
           />
-          {/* <p css={otherOrgs}>
-          他の部活を見る
-          <br />
-          <FontAwesomeIcon icon={faChevronDown} />
-        </p> */}
+          <Link href="/orgs" css={otherLinks}>
+            他の部活を見る
+            <FontAwesomeIcon icon={faChevronRight} />
+          </Link>
         </div>
       </div>
+      {recommendation.renewRemains > 0 && (
+        <Link css={[otherLinks, renewLinks]} href="/diagnose">
+          診断をやり直す
+          <FontAwesomeIcon icon={faChevronRight} />
+        </Link>
+      )}
     </div>
   );
 }

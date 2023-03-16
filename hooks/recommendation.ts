@@ -1,11 +1,14 @@
 import useSWR from "swr";
 import { QuestionResult } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
+import { Methods } from "../api-client/recommendation";
 import useUser from "./user";
 
 export const NoRecommendation = Symbol.for("NoRecommendation");
 
-export function useRecommendation(token: string | undefined) {
+export function useRecommendation() {
+  const { data: user } = useUser();
+  const token = user?.token;
   return useSWR(
     token ? ["/recommendation", token] : null,
     async () => {
@@ -34,9 +37,15 @@ export function useRecommendation(token: string | undefined) {
   );
 }
 
+export function isRecommendationReady(
+  recommendation?: Methods["get"]["resBody"] | symbol
+): recommendation is Methods["get"]["resBody"] {
+  return typeof recommendation === "object";
+}
+
 export function usePutRecommendation() {
   const { data: userData } = useUser();
-  const { mutate } = useRecommendation(userData?.token);
+  const { mutate } = useRecommendation();
 
   return async (answers: Map<string, QuestionResult>) => {
     if (!userData?.token) {

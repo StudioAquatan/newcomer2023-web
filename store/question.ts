@@ -1,4 +1,4 @@
-import { atom, PrimitiveAtom, useAtom, useAtomValue } from "jotai";
+import { atom, PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { atomFamily } from "jotai/utils";
 import React from "react";
 import { Question, QuestionResult } from "../api-client/@types";
@@ -91,4 +91,11 @@ export function useCurrentQuestion() {
 
 export function useIsAnswerReady() {
   return useAtomValue(isAnswerReadyAtom);
+}
+
+export function useQuestionReset() {
+  const setCurrent = useSetAtom(currentQuestionAtom);
+  return () => {
+    setCurrent(0);
+  };
 }
