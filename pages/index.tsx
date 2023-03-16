@@ -74,8 +74,8 @@ export default function Home({
 }: HomeProps) {
   const { isMobile } = useIsMobile();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
-  const { data: user } = useUser();
-  const { data: recommendation } = useRecommendation(user?.token);
+  useUser();
+  const { data: recommendation } = useRecommendation();
 
   const featureStampRally = {
     title: "スタンプラリー",

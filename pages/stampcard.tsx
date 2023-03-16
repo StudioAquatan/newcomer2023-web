@@ -12,7 +12,6 @@ import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
 import useStampCardSeed from "../hooks/cardSeed";
 import { useOrganizations } from "../hooks/organizations";
 import { NoRecommendation, useRecommendation } from "../hooks/recommendation";
-import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
 
 const headerPadding = css`
@@ -90,9 +89,8 @@ const fallbackOrg: OrganizationFull = {
 export default function StampCardPage() {
   const theme = useTheme();
   const { isMobile } = useIsMobile();
-  const { data: userData } = useUser();
   const { data: orgsData } = useOrganizations();
-  const { data: recommendationData } = useRecommendation(userData?.token);
+  const { data: recommendationData } = useRecommendation();
   const { data: seedData } = useStampCardSeed();
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;

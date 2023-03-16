@@ -5,7 +5,9 @@ import useUser from "./user";
 
 export const NoRecommendation = Symbol.for("NoRecommendation");
 
-export function useRecommendation(token: string | undefined) {
+export function useRecommendation() {
+  const { data: user } = useUser();
+  const token = user?.token;
   return useSWR(
     token ? ["/recommendation", token] : null,
     async () => {
@@ -36,7 +38,7 @@ export function useRecommendation(token: string | undefined) {
 
 export function usePutRecommendation() {
   const { data: userData } = useUser();
-  const { mutate } = useRecommendation(userData?.token);
+  const { mutate } = useRecommendation();
 
   return async (answers: Map<string, QuestionResult>) => {
     if (!userData?.token) {
