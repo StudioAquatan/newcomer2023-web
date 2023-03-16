@@ -8,7 +8,7 @@ type ColorBorderButtonProps = {
   type?: string;
   disabled?: boolean;
   css?: Interpolation<Theme>;
-};
+} & React.HTMLProps<HTMLButtonElement>;
 
 const button = (
   theme: Theme,
@@ -62,7 +62,14 @@ export default function ColorBorderButton({
   if (disabled)
     return (
       <button
-        css={[button(theme, fontSize, textColor, borderColor)]}
+        css={[
+          button(
+            theme,
+            fontSize,
+            textColor ?? theme.colors.button.disable.backgroundColor,
+            borderColor ?? theme.colors.button.disable.backgroundColor
+          ),
+        ]}
         disabled
         {...rest}
       >
@@ -72,7 +79,12 @@ export default function ColorBorderButton({
   else if (type === "submit") {
     return (
       <button
-        css={button(theme, fontSize, textColor, borderColor)}
+        css={button(
+          theme,
+          fontSize,
+          textColor ?? theme.colors.button.enable.backgroundColor,
+          borderColor ?? theme.colors.button.enable.backgroundColor
+        )}
         type="submit"
         {...rest}
       >
@@ -81,7 +93,15 @@ export default function ColorBorderButton({
     );
   } else {
     return (
-      <button css={button(theme, fontSize, textColor, borderColor)} {...rest}>
+      <button
+        css={button(
+          theme,
+          fontSize,
+          textColor ?? theme.colors.button.enable.backgroundColor,
+          borderColor ?? theme.colors.button.enable.backgroundColor
+        )}
+        {...rest}
+      >
         {label}
       </button>
     );
