@@ -17,10 +17,11 @@ const orgPanelStyle = css`
   width: 100%;
 `;
 
-const orgNameStyle = css`
+const orgNameStyle = (name: string) => css`
   width: 100%;
-  margin-bottom: 0.5em;
-  font-size: 2rem;
+  height: 40px;
+  line-height: 40px;
+  font-size: ${name.length > 17 ? 1.6 : 1.9}rem;
   font-weight: 500;
 `;
 
@@ -57,7 +58,7 @@ export default function OrgPanel({
         as={`/orgs/details/${id}`}
         href="/orgs/details/[orgId]"
       >
-        <div css={orgNameStyle}>{fullName}</div>
+        <div css={orgNameStyle(fullName)}>{fullName}</div>
         <div css={descriptionContainerStyle}>
           <Image
             css={logoStyle(logoFocus ?? false)}
