@@ -56,14 +56,15 @@ export default function ColorBorderButton({
   fontSize,
   type,
   disabled = false,
-  css,
+  ...rest
 }: ColorBorderButtonProps) {
   const theme = useTheme();
   if (disabled)
     return (
       <button
-        css={[css, button(theme, fontSize, textColor, borderColor)]}
+        css={[button(theme, fontSize, textColor, borderColor)]}
         disabled
+        {...rest}
       >
         {label}
       </button>
@@ -71,15 +72,16 @@ export default function ColorBorderButton({
   else if (type === "submit") {
     return (
       <button
-        css={[css, button(theme, fontSize, textColor, borderColor)]}
+        css={button(theme, fontSize, textColor, borderColor)}
         type="submit"
+        {...rest}
       >
         {label}
       </button>
     );
   } else {
     return (
-      <button css={[css, button(theme, fontSize, textColor, borderColor)]}>
+      <button css={button(theme, fontSize, textColor, borderColor)} {...rest}>
         {label}
       </button>
     );
