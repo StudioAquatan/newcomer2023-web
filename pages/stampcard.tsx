@@ -34,7 +34,7 @@ const content = css`
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  height: 100vh;
+  height: calc(100svh - 2rem);
 `;
 
 const stampCardHeader = css`
@@ -75,16 +75,21 @@ const stampCardBottom = css`
 `;
 
 const otherLinks = css`
-  padding: 0;
-  margin-block: 1.5rem;
-  margin-inline: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
   font-size: 2rem;
-  color: rgba(0 0 0 / 95%);
   text-align: center;
+
+  a {
+    padding: 1rem 0;
+    color: rgba(0 0 0 / 95%);
+  }
 `;
 
-const renewLinks = css`
-  padding: 1.5rem;
+const iconMargin = css`
+  margin-left: 1rem;
 `;
 
 const fallbackOrg: OrganizationFull = {
@@ -156,25 +161,26 @@ export default function StampCardPage() {
           <StampCard {...props} />
         </div>
         <div css={stampCardBottom}>
-          {/* <GlowingPinkButton text="シェアしてみよう!" href="/" /> */}
           <ColorBorderButton
             label="シェアしてみよう！"
             textColor={theme.colors.button.enable.backgroundColor}
             borderColor={theme.colors.button.enable.backgroundColor}
             fontSize="2.4rem"
           />
-          <Link href="/orgs" css={otherLinks}>
-            他の部活を見る
-            <FontAwesomeIcon icon={faChevronRight} />
-          </Link>
         </div>
       </div>
-      {recommendation.renewRemains > 0 && (
-        <Link css={[otherLinks, renewLinks]} href="/diagnose">
-          診断をやり直す
-          <FontAwesomeIcon icon={faChevronRight} />
+      <div css={otherLinks}>
+        <Link href="/orgs">
+          他の部活を見る
+          <FontAwesomeIcon icon={faChevronRight} css={iconMargin} />
         </Link>
-      )}
+        {recommendation.renewRemains > 0 && (
+          <Link href="/diagnose">
+            診断をやり直す
+            <FontAwesomeIcon icon={faChevronRight} css={iconMargin} />
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
