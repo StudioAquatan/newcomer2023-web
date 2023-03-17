@@ -66,3 +66,37 @@ export function usePutRecommendation() {
     return response;
   };
 }
+
+export function useExcludeRecommendation() {
+  const { data: userData } = useUser();
+  const { mutate } = useRecommendation();
+
+  return async (op: "add" | "remove", orgId: string) => {
+    if (!userData?.token) {
+      throw new Error("No token provided");
+    }
+
+    let response;
+    if (op === "add") {
+      response = await apiClient.recommendation._orgId(orgId).$delete({
+        config: {
+          headers: {
+            Authorization: "Bearer " + userData.token,
+          },
+        },
+      });
+    } else {
+      response = await apiClient.recommendation._orgId(orgId).$patch({
+        config: {
+          headers: {
+            Authorization: "Bearer " + userData.token,
+          },
+        },
+      });
+    }
+
+    await mutate(response, { revalidate: false });
+
+    return response;
+  };
+}

@@ -23,6 +23,7 @@ import StoryLikeContainer, {
 } from "../../../components/orgs/details/StoryLikeContainer";
 import {
   isRecommendationReady,
+  useExcludeRecommendation,
   useRecommendation,
 } from "../../../hooks/recommendation";
 import {
@@ -138,6 +139,7 @@ const excludeContainer = css`
 
 function ExcludeButton({ orgId }: { orgId: string }) {
   const { data: recommendation } = useRecommendation();
+  const exclude = useExcludeRecommendation();
 
   if (!isRecommendationReady(recommendation)) return null;
 
@@ -148,11 +150,20 @@ function ExcludeButton({ orgId }: { orgId: string }) {
   if (!pageOrg) return null;
   if (pageOrg.stampSlot < 0 && !pageOrg.isExcluded) return null;
 
+  const handleButton = () => {
+    if (pageOrg.isExcluded) {
+      exclude("remove", orgId);
+    } else {
+      exclude("add", orgId);
+    }
+  };
+
   return (
     <div css={excludeContainer}>
       <ColorBorderButton
         textColor="#aaa"
         borderColor="#aaa"
+        onClick={handleButton}
         label={
           <FontAwesomeIcon icon={pageOrg.isExcluded ? faEye : faEyeSlash} />
         }
