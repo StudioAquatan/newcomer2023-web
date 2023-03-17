@@ -86,6 +86,9 @@ export function useCurrentQuestion() {
       if (isLastQuestion) return;
       setCurrent((current) => current + 1);
     },
+    back() {
+      if (current > 0) setCurrent((current) => current - 1);
+    },
   };
 }
 

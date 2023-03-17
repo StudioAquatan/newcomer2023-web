@@ -16,7 +16,7 @@ const container = css`
 
 export default function QuestionForm({ question }: QuestionFormProps) {
   const [answerId, setAnswer] = useAnswer(question.id);
-  const { next, isLastQuestion } = useCurrentQuestion();
+  const { next, back, isLastQuestion, current } = useCurrentQuestion();
   const [isInTransition, setTransition] = useState(false);
 
   const handleChange = (answerId: number) => {
@@ -33,6 +33,19 @@ export default function QuestionForm({ question }: QuestionFormProps) {
     }
   };
 
+  const handleBack = () => {
+    // 今の質問を無効化
+    setAnswer(-1);
+
+    setTimeout(() => {
+      setTransition(true);
+    }, 50);
+    setTimeout(() => {
+      back();
+      setTransition(false);
+    }, 600);
+  };
+
   if (!question) return null;
 
   return (
@@ -43,6 +56,9 @@ export default function QuestionForm({ question }: QuestionFormProps) {
         onChange={handleChange}
         transition={isInTransition}
       />
+      <button onClick={handleBack} disabled={current === 0}>
+        もどる
+      </button>
     </div>
   );
 }

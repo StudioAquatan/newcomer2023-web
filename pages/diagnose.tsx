@@ -116,7 +116,7 @@ export default function Diagnose({ questions }: DiagnoseProps) {
       setConfirmWait(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recommendation, current]);
+  }, [recommendation]);
 
   const handleBack = () => {
     push("/stampcard");
