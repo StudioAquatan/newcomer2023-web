@@ -93,16 +93,21 @@ export default function Diagnose({ questions }: DiagnoseProps) {
   const { question, current } = useCurrentQuestion();
   const { ModalWrapper, open, close } = useModal();
   const { push } = useRouter();
+  const [isConfirmWait, setConfirmWait] = useState(false);
 
   React.useEffect(() => {
-    setTimeout(() => {
-      setDiagnoseLoading(true);
-    }, 3000);
-  }, []);
+    if (!isConfirmWait) {
+      const timer = setTimeout(() => {
+        setDiagnoseLoading(true);
+      }, 2000);
+      return () => clearInterval(timer);
+    }
+  }, [isConfirmWait]);
 
   React.useEffect(() => {
     if (current === 0 && isRecommendationReady(recommendation)) {
       open();
+      setConfirmWait(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recommendation, current]);
@@ -111,8 +116,34 @@ export default function Diagnose({ questions }: DiagnoseProps) {
     push("/stampcard");
   };
 
-  if (!isReady || !question || !recommendation || !diagnoseLoading) {
-    return <JumpingLogoLoader label="診断を準備中..." pageMode />;
+  const handleContinue = () => {
+    setConfirmWait(false);
+    close();
+  };
+
+  const ConfirmDialog = () => (
+    <ModalWrapper>
+      {isRecommendationReady(recommendation) && (
+        <LimitNotice
+          close={handleContinue}
+          back={handleBack}
+          remain={recommendation.recommendation.renewRemains}
+        />
+      )}
+    </ModalWrapper>
+  );
+
+  if (!isReady || !question || !recommendation) {
+    return <JumpingLogoLoader label="読み込み中..." pageMode />;
+  }
+
+  if (!diagnoseLoading) {
+    return (
+      <>
+        <JumpingLogoLoader label="診断を準備中..." pageMode />
+        <ConfirmDialog />
+      </>
+    );
   }
 
   if (stampCardLoading) {
@@ -132,15 +163,7 @@ export default function Diagnose({ questions }: DiagnoseProps) {
           setStampCardLoading(true);
         }}
       />
-      <ModalWrapper>
-        {isRecommendationReady(recommendation) && (
-          <LimitNotice
-            close={close}
-            back={handleBack}
-            remain={recommendation.recommendation.renewRemains}
-          />
-        )}
-      </ModalWrapper>
+      <ConfirmDialog />
     </div>
   );
 }
