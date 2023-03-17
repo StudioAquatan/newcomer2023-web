@@ -1,7 +1,10 @@
 import { css } from "@emotion/react";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Question } from "../../api-client/@types";
 import { useCurrentQuestion, useAnswer } from "../../store/question";
+import ColorBorderButton from "../buttons/ColorBorderButton";
 import OneQuestion from "./OneQuestion";
 
 type QuestionFormProps = {
@@ -14,6 +17,9 @@ const container = css`
   align-items: center;
 `;
 
+const backButton = css`
+  margin-top: 10rem;
+`;
 export default function QuestionForm({ question }: QuestionFormProps) {
   const [answerId, setAnswer] = useAnswer(question.id);
   const { next, back, isLastQuestion, current } = useCurrentQuestion();
@@ -56,9 +62,13 @@ export default function QuestionForm({ question }: QuestionFormProps) {
         onChange={handleChange}
         transition={isInTransition}
       />
-      <button onClick={handleBack} disabled={current === 0}>
-        もどる
-      </button>
+      {current > 0 && (
+        <ColorBorderButton
+          label={<FontAwesomeIcon icon={faChevronLeft} />}
+          onClick={handleBack}
+          css={backButton}
+        />
+      )}
     </div>
   );
 }
