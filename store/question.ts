@@ -40,6 +40,7 @@ const isAnswerReadyAtom = atom((get) => {
 
   return last == current && get(eachAnswerAtom(questions[last].id)) >= 0;
 });
+const transitionAtom = atom(false);
 
 export function useQuestionListSetter(list: Question[]) {
   const [questions, setQuestions] = useAtom(questionsAtom);
@@ -84,23 +85,54 @@ export function useCurrentQuestion() {
   const [current, setCurrent] = useAtom(currentQuestionAtom);
   const questions = useAtomValue(questionsAtom);
   const clearQuestion = useSetAtom(combinedAnswersAtom);
+  const [isInTransition, setTransition] = useAtom(transitionAtom);
 
   const isLastQuestion = current === questions.length - 1;
+
+  const next = () => {
+    if (isLastQuestion) return;
+    setCurrent((current) => current + 1);
+  };
+  const back = () => {
+    if (current > 0) {
+      clearQuestion(current);
+      clearQuestion(current - 1);
+      setCurrent((current) => current - 1);
+    }
+  };
   return {
     current,
     question: (questions[current] ?? null) as Question | null,
     total: questions.length,
     isLastQuestion,
-    next() {
+    isInTransition,
+    next,
+    back,
+    // TODO きたない
+    nextWithTransition() {
       if (isLastQuestion) return;
-      setCurrent((current) => current + 1);
+
+      setTimeout(() => {
+        setTransition(true);
+      }, 50);
+      setTimeout(() => {
+        next();
+        setTransition(false);
+      }, 600);
     },
-    back() {
-      if (current > 0) {
-        clearQuestion(current);
-        clearQuestion(current - 1);
-        setCurrent((current) => current - 1);
-      }
+    backWithTransition() {
+      if (current === 0) return;
+
+      // 先に消しておく -> 最終質問でボタンがバグらない
+      clearQuestion(current);
+
+      setTimeout(() => {
+        setTransition(true);
+      }, 50);
+      setTimeout(() => {
+        back();
+        setTransition(false);
+      }, 600);
     },
   };
 }
