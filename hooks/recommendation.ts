@@ -90,13 +90,6 @@ export function useSortedOrgs(orgs: OrganizationFull[] = []) {
     // 全部そろった
     return {
       orgs: recommendation.recommendation.orgs
-        .slice()
-        .sort((a, b) => {
-          if (a.isExcluded && b.isExcluded) return 0;
-          if (a.isExcluded) return 1;
-          if (b.isExcluded) return -1;
-          return a.coefficient - b.coefficient;
-        })
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         .map(({ org }) => orgs.find(({ id }) => id === org.id)!),
       renderReady: true,
