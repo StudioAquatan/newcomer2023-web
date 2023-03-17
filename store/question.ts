@@ -8,19 +8,27 @@ const questionsAtom = atom<Question[]>([]);
 const eachAnswerAtom = atomFamily<string, PrimitiveAtom<number>>(() =>
   atom(-1)
 );
-const combinedAnswersAtom = atom((get) => {
-  const questions = get(questionsAtom);
-  const answers = new Map(
-    questions
-      .map(({ id }): [string, QuestionResult] => {
-        const answer = get(eachAnswerAtom(id));
-        return [id, { questionId: id, answer }];
-      })
-      .filter(([, { answer }]) => answer >= 0)
-  );
+const combinedAnswersAtom = atom(
+  (get) => {
+    const questions = get(questionsAtom);
+    const answers = new Map(
+      questions
+        .map(({ id }): [string, QuestionResult] => {
+          const answer = get(eachAnswerAtom(id));
+          return [id, { questionId: id, answer }];
+        })
+        .filter(([, { answer }]) => answer >= 0)
+    );
 
-  return answers;
-});
+    return answers;
+  },
+  (get, set, num: number) => {
+    const questions = get(questionsAtom);
+    questions.forEach(({ id }, index) => {
+      if (index === num || num < 0) set(eachAnswerAtom(id), -1);
+    });
+  }
+);
 const currentQuestionAtom = atom(0);
 const isAnswerReadyAtom = atom((get) => {
   const questions = get(questionsAtom);
@@ -75,6 +83,7 @@ export function useQuestionResultMap() {
 export function useCurrentQuestion() {
   const [current, setCurrent] = useAtom(currentQuestionAtom);
   const questions = useAtomValue(questionsAtom);
+  const clearQuestion = useSetAtom(combinedAnswersAtom);
 
   const isLastQuestion = current === questions.length - 1;
   return {
@@ -87,7 +96,11 @@ export function useCurrentQuestion() {
       setCurrent((current) => current + 1);
     },
     back() {
-      if (current > 0) setCurrent((current) => current - 1);
+      if (current > 0) {
+        clearQuestion(current);
+        clearQuestion(current - 1);
+        setCurrent((current) => current - 1);
+      }
     },
   };
 }
@@ -98,7 +111,9 @@ export function useIsAnswerReady() {
 
 export function useQuestionReset() {
   const setCurrent = useSetAtom(currentQuestionAtom);
+  const clearQuestion = useSetAtom(combinedAnswersAtom);
   return () => {
     setCurrent(0);
+    clearQuestion(-1);
   };
 }
