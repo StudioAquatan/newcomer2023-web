@@ -1,5 +1,7 @@
 import { css } from "@emotion/react";
 import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
+import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { OrganizationFull } from "../../../api-client/@types";
@@ -7,6 +9,7 @@ import { getOrgs } from "../../../api-client/cached-response";
 import { ResourceBucketItem } from "../../../api-client/resource-bucket";
 import Layout from "../../../components/Layout";
 import MetaHead from "../../../components/MetaHead";
+import ColorBorderButton from "../../../components/buttons/ColorBorderButton";
 import FullscreenPager from "../../../components/orgs/FullscreenPager";
 import ProgressPagination from "../../../components/orgs/ProgressPagination";
 import OrgDetailsText from "../../../components/orgs/details/OrgDetailsText";
@@ -18,6 +21,10 @@ import StoryLikeContainer, {
   ContentPager,
   PaddedContainer,
 } from "../../../components/orgs/details/StoryLikeContainer";
+import {
+  isRecommendationReady,
+  useRecommendation,
+} from "../../../hooks/recommendation";
 import {
   useDetailsAutoTimer,
   useDetailsClose,
@@ -123,6 +130,37 @@ function Progress({ numPages }: { numPages: number }) {
   );
 }
 
+const excludeContainer = css`
+  position: absolute;
+  right: 5vw;
+  bottom: 5vw;
+`;
+
+function ExcludeButton({ orgId }: { orgId: string }) {
+  const { data: recommendation } = useRecommendation();
+
+  if (!isRecommendationReady(recommendation)) return null;
+
+  const pageOrg = recommendation.recommendation.orgs.find(
+    ({ org }) => org.id === orgId
+  );
+
+  if (!pageOrg) return null;
+  if (pageOrg.stampSlot < 0 && !pageOrg.isExcluded) return null;
+
+  return (
+    <div css={excludeContainer}>
+      <ColorBorderButton
+        textColor="#aaa"
+        borderColor="#aaa"
+        label={
+          <FontAwesomeIcon icon={pageOrg.isExcluded ? faEye : faEyeSlash} />
+        }
+      />
+    </div>
+  );
+}
+
 type Props = {
   org: OrganizationFull;
   orgImage: Array<ResourceBucketItem>;
@@ -187,6 +225,7 @@ const OrgDetail = ({ org, orgImage }: Props) => {
         <Progress numPages={numPages} />
         {isMovie && <OrgMovieControl />}
         {isEnd && <LastCloseButton />}
+        <ExcludeButton orgId={org.id} />
       </StoryLikeContainer>
     </>
   );
