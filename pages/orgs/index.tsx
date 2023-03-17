@@ -1,9 +1,11 @@
 import { css } from "@emotion/react";
+import { useState } from "react";
 import { OrganizationFull } from "../../api-client/@types";
 import { getOrgs } from "../../api-client/cached-response";
 import MetaHead from "../../components/MetaHead";
 import Header from "../../components/headers/Header";
 import OrgPanel from "../../components/orgs/list/OrgPanel";
+import { useSortedOrgs } from "../../hooks/recommendation";
 import { useIsMobile } from "../../store/userAgent";
 
 type OrgListPageProps = {
@@ -51,6 +53,8 @@ const orgListStyle = css`
 
 export default function OrgListPage({ organizations }: OrgListPageProps) {
   const { isMobile } = useIsMobile();
+  const { orgs, renderReady, available } = useSortedOrgs(organizations);
+  const [sortChecked, setSortChecked] = useState(false);
   return (
     <>
       <MetaHead
@@ -61,9 +65,24 @@ export default function OrgListPage({ organizations }: OrgListPageProps) {
         <Header isMobile={isMobile} />
         <h1 css={pageTitle}>団体一覧</h1>
       </div>
+      <div>
+        <label>
+          {renderReady
+            ? available
+              ? "おすすめ順で表示"
+              : "診断するとおすすめ順表示ができます"
+            : "読み込み中"}
+        </label>
+        <input
+          type="checkbox"
+          checked={sortChecked}
+          onChange={(e) => setSortChecked(e.target.checked)}
+          disabled={!available}
+        />
+      </div>
       <div css={orgListPageStyle}>
         <div css={orgListStyle}>
-          {organizations.map((org) => {
+          {(sortChecked ? orgs : organizations).map((org) => {
             return <OrgPanel org={org} key={org.id} />;
           })}
         </div>
