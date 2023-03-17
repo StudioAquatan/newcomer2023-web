@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { useState } from "react";
 import { Question } from "../../api-client/@types";
 import { useCurrentQuestion, useAnswer } from "../../store/question";
 import OneQuestion from "./OneQuestion";
@@ -16,21 +15,11 @@ const container = css`
 
 export default function QuestionForm({ question }: QuestionFormProps) {
   const [answerId, setAnswer] = useAnswer(question.id);
-  const { next, isLastQuestion } = useCurrentQuestion();
-  const [isInTransition, setTransition] = useState(false);
+  const { nextWithTransition, isInTransition } = useCurrentQuestion();
 
   const handleChange = (answerId: number) => {
     setAnswer(answerId);
-
-    if (!isLastQuestion) {
-      setTimeout(() => {
-        setTransition(true);
-      }, 50);
-      setTimeout(() => {
-        next();
-        setTransition(false);
-      }, 600);
-    }
+    nextWithTransition();
   };
 
   if (!question) return null;
