@@ -33,6 +33,12 @@ function Progress() {
   return <ProgressBar total={total} passed={current + 1} text />;
 }
 
+const container = css`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
 const buttonContainer = (show: boolean) => {
   const showStyle = css`
     visibility: visible;
@@ -151,7 +157,7 @@ export default function Diagnose({ questions }: DiagnoseProps) {
   }
 
   return (
-    <div>
+    <div css={container}>
       <MetaHead
         title="部活動相性診断"
         description="いくつかの質問で、あなたにぴったりの部活動を診断"
