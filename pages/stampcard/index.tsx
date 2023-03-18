@@ -6,17 +6,22 @@ import { useRouter } from "next/router";
 import React from "react";
 // import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { OrganizationFull } from "../api-client/@types";
-import MetaHead from "../components/MetaHead";
-import ColorBorderButton from "../components/buttons/ColorBorderButton";
-import Header from "../components/headers/Header";
-import JumpingLogoLoader from "../components/loaders/JumpingLogoLoader";
-import { StampProps } from "../components/stampcard/Stamp";
-import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
-import useStampCardSeed from "../hooks/cardSeed";
-import { useOrganizations } from "../hooks/organizations";
-import { NoRecommendation, useRecommendation } from "../hooks/recommendation";
-import { useIsMobile } from "../store/userAgent";
+import { OrganizationFull } from "../../api-client/@types";
+import MetaHead from "../../components/MetaHead";
+import ColorBorderButton from "../../components/buttons/ColorBorderButton";
+import Header from "../../components/headers/Header";
+import JumpingLogoLoader from "../../components/loaders/JumpingLogoLoader";
+import { StampProps } from "../../components/stampcard/Stamp";
+import StampCard, {
+  StampCardProps,
+} from "../../components/stampcard/StampCard";
+import useStampCardSeed from "../../hooks/cardSeed";
+import { useOrganizations } from "../../hooks/organizations";
+import {
+  NoRecommendation,
+  useRecommendation,
+} from "../../hooks/recommendation";
+import { useIsMobile } from "../../store/userAgent";
 
 const headerPadding = css`
   height: 2rem;
@@ -183,11 +188,9 @@ export default function StampCardPage() {
           <FontAwesomeIcon icon={faChevronRight} css={iconMargin} />
         </Link>
         {recommendation.renewRemains > 0 && (
-          <Link href="/diagnose">
-            診断をやり直す
-            <FontAwesomeIcon icon={faChevronRight} css={iconMargin} />
-          </Link>
+          <Link href="/diagnose">診断をやり直す</Link>
         )}
+        <Link href="/stampcard/exclusion">除外する団体を設定</Link>
       </div>
     </div>
   );
