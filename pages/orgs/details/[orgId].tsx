@@ -158,7 +158,7 @@ const loadingAnimation = keyframes`
 `;
 
 const loadingStyle = css`
-  animation: ${loadingAnimation} 0.5s linear;
+  animation: ${loadingAnimation} 0.5s linear 0s infinite;
 `;
 
 const excludeMessageStyle = (show: boolean) => css`
