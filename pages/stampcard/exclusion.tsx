@@ -22,6 +22,7 @@ const headerContainer = css`
   font-size: 1.6rem;
 
   p {
+    max-width: 90vw;
     margin: 0;
   }
 `;
