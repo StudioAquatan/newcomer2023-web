@@ -117,7 +117,15 @@ export default function StampCardPage() {
   }, [recommendationData, push]);
 
   if (!recommendationData || !orgsData) {
-    return <JumpingLogoLoader label="スタンプカードを読み込み中..." pageMode />;
+    return (
+      <>
+        <MetaHead
+          title="あなたのスタンプカード"
+          description="スタンプカードをもって部活動紹介を回ろう"
+        />
+        <JumpingLogoLoader label="スタンプカードを読み込み中..." pageMode />
+      </>
+    );
   }
 
   if (typeof recommendationData === "symbol") {
