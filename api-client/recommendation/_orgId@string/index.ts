@@ -6,13 +6,19 @@ export type Methods = {
   delete: {
     status: 200;
     /** OK */
-    resBody: Types.Recommendation;
+    resBody: {
+      recommendation: Types.Recommendation;
+      questions?: Types.QuestionResult[] | undefined;
+    };
   };
 
   /** 特定団体のスタンプを除外したのを削除し，補欠されたスタンプカードを返します */
   patch: {
     status: 200;
     /** OK */
-    resBody: Types.Recommendation;
+    resBody: {
+      recommendation: Types.Recommendation;
+      questions?: Types.QuestionResult[] | undefined;
+    };
   };
 };
