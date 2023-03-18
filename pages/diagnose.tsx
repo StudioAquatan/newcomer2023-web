@@ -162,6 +162,7 @@ export default function Diagnose({ questions }: DiagnoseProps) {
           close={handleContinue}
           back={handleBack}
           remain={recommendation.recommendation.renewRemains}
+          type="rediag"
         />
       )}
     </ModalWrapper>
