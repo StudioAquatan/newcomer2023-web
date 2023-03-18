@@ -30,7 +30,9 @@ export default function LimitNotice({ remain, back, close, type }: Props) {
   return (
     <>
       <ModalTitle css={titleStyle}>
-        {remain > 0 ? "再診断の確認" : "おっと？"}
+        {remain > 0
+          ? `${type === "rediag" ? "再診断" : "除外"}の確認`
+          : "おっと？"}
       </ModalTitle>
       <ModalContent>
         {remain > 0 ? (
