@@ -138,6 +138,12 @@ const excludeContainer = css`
   bottom: 5vw;
 `;
 
+const excludeButton = css`
+  width: 8rem;
+  height: 8rem;
+  padding: 0;
+`;
+
 const loadingAnimation = keyframes`
   0% {
     transform: rotate(0);
@@ -181,6 +187,7 @@ function ExcludeButton({ orgId }: { orgId: string }) {
         textColor="#aaa"
         borderColor="#aaa"
         onClick={handleButton}
+        css={excludeButton}
         label={
           <FontAwesomeIcon
             css={loading ? loadingStyle : null}
