@@ -50,7 +50,7 @@ const buttonContainer = (show: boolean) => {
   return css`
     display: flex;
     justify-content: center;
-    margin: 10vh 0;
+    margin: 6vh 0;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.2s linear;
@@ -94,7 +94,7 @@ function SubmitButton({ onClick }: { onClick: () => void }) {
 }
 
 const backButton = css`
-  margin-top: 10rem;
+  margin-top: 5vh;
 `;
 
 function ReturnButton() {
