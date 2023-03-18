@@ -51,11 +51,11 @@ export const sakura = {
     button: {
       enable: {
         backgroundColor: "#FF8DBD",
-        textColor: "#000000",
+        textColor: "#FF8DBD",
       },
       disable: {
         backgroundColor: "#AAAAAA",
-        textColor: "#000000",
+        textColor: "#AAAAAA",
       },
       active: {
         textColor: "#512C3C",
