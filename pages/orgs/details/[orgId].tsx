@@ -1,4 +1,5 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons/faCircleNotch";
 import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
 import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
@@ -137,6 +138,19 @@ const excludeContainer = css`
   bottom: 5vw;
 `;
 
+const loadingAnimation = keyframes`
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const loadingStyle = css`
+  animation: ${loadingAnimation} 0.5s linear;
+`;
+
 function ExcludeButton({ orgId }: { orgId: string }) {
   const { data: recommendation } = useRecommendation();
   const exclude = useExcludeRecommendation();
@@ -164,11 +178,16 @@ function ExcludeButton({ orgId }: { orgId: string }) {
   return (
     <div css={excludeContainer}>
       <ColorBorderButton
-        textColor={loading ? "#FF8DBD" : "#aaa"}
+        textColor="#aaa"
         borderColor="#aaa"
         onClick={handleButton}
         label={
-          <FontAwesomeIcon icon={pageOrg.isExcluded ? faEye : faEyeSlash} />
+          <FontAwesomeIcon
+            css={loading ? loadingStyle : null}
+            icon={
+              loading ? faCircleNotch : pageOrg.isExcluded ? faEye : faEyeSlash
+            }
+          />
         }
       />
     </div>
