@@ -157,7 +157,13 @@ const loadingStyle = css`
   animation: ${loadingAnimation} 0.5s linear;
 `;
 
-function ExcludeButton({ orgId }: { orgId: string }) {
+function ExcludeButton({
+  orgId,
+  currentPage,
+}: {
+  orgId: string;
+  currentPage: number;
+}) {
   const { data: recommendation } = useRecommendation();
   const exclude = useExcludeRecommendation();
   const [loading, setLoading] = React.useState(false);
@@ -170,6 +176,8 @@ function ExcludeButton({ orgId }: { orgId: string }) {
 
   if (!pageOrg) return null;
   if (pageOrg.stampSlot < 0 && !pageOrg.isExcluded) return null;
+
+  if (currentPage > 1) return null;
 
   const handleButton = async () => {
     setLoading(true);
@@ -265,7 +273,7 @@ const OrgDetail = ({ org, orgImage }: Props) => {
         <Progress numPages={numPages} />
         {isMovie && <OrgMovieControl />}
         {isEnd && <LastCloseButton />}
-        <ExcludeButton orgId={org.id} />
+        <ExcludeButton orgId={org.id} currentPage={currentPage} />
       </StoryLikeContainer>
     </>
   );
