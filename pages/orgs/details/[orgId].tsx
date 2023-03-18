@@ -140,6 +140,7 @@ const excludeContainer = css`
 function ExcludeButton({ orgId }: { orgId: string }) {
   const { data: recommendation } = useRecommendation();
   const exclude = useExcludeRecommendation();
+  const [loading, setLoading] = React.useState(false);
 
   if (!isRecommendationReady(recommendation)) return null;
 
@@ -150,18 +151,20 @@ function ExcludeButton({ orgId }: { orgId: string }) {
   if (!pageOrg) return null;
   if (pageOrg.stampSlot < 0 && !pageOrg.isExcluded) return null;
 
-  const handleButton = () => {
+  const handleButton = async () => {
+    setLoading(true);
     if (pageOrg.isExcluded) {
-      exclude("remove", orgId);
+      await exclude("remove", orgId);
     } else {
-      exclude("add", orgId);
+      await exclude("add", orgId);
     }
+    setLoading(false);
   };
 
   return (
     <div css={excludeContainer}>
       <ColorBorderButton
-        textColor="#aaa"
+        textColor={loading ? "#FF8DBD" : "#aaa"}
         borderColor="#aaa"
         onClick={handleButton}
         label={

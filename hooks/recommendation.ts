@@ -78,7 +78,7 @@ export function useExcludeRecommendation() {
 
     let response;
     if (op === "add") {
-      response = await apiClient.recommendation._orgId(orgId).$delete({
+      response = apiClient.recommendation._orgId(orgId).$delete({
         config: {
           headers: {
             Authorization: "Bearer " + userData.token,
@@ -86,7 +86,7 @@ export function useExcludeRecommendation() {
         },
       });
     } else {
-      response = await apiClient.recommendation._orgId(orgId).$patch({
+      response = apiClient.recommendation._orgId(orgId).$patch({
         config: {
           headers: {
             Authorization: "Bearer " + userData.token,
