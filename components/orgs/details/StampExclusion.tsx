@@ -12,6 +12,8 @@ import {
   useRecommendation,
 } from "../../../hooks/recommendation";
 import ColorBorderButton from "../../buttons/ColorBorderButton";
+import { useModal } from "../../modal";
+import LimitNotice from "../../questions/LimitNotice";
 import Balloon from "../../tutorial/Balloon";
 
 const excludeContainer = css`
@@ -58,6 +60,7 @@ export default function ExcludeButton({
   const [loading, setLoading] = React.useState(false);
   const [tutorialShow, setTutorial] = React.useState(true);
 
+  // 表示している団体のおすすめ情報を取ってくる
   const pageOrg = React.useMemo(() => {
     if (!isRecommendationReady(recommendation)) return null;
 
@@ -66,48 +69,78 @@ export default function ExcludeButton({
     );
   }, [orgId, recommendation]);
 
+  // 除外判定変わったら吹き出し
   React.useEffect(() => {
     setTutorial(true);
     const timer = setTimeout(() => setTutorial(false), 1500);
     return () => clearTimeout(timer);
   }, [pageOrg?.isExcluded]);
 
+  // 確認用modal
+  const { ModalWrapper, open, close } = useModal();
+
+  if (!isRecommendationReady(recommendation)) return null;
+
   if (!pageOrg) return null;
   if (pageOrg.stampSlot < 0 && !pageOrg.isExcluded) return null;
 
   if (currentPage > 1) return null;
 
+  // トグル
   const handleButton = async () => {
-    setLoading(true);
     if (pageOrg.isExcluded) {
+      setLoading(true);
       await exclude("remove", orgId);
     } else {
-      await exclude("add", orgId);
+      // 確認を開く
+      open();
     }
     setLoading(false);
   };
 
+  // 確認OK
+  const handleAdd = async () => {
+    setLoading(true);
+    close();
+    await exclude("add", orgId);
+    setLoading(false);
+  };
+
   return (
-    <div css={excludeContainer}>
-      <Balloon css={excludeMessageStyle(tutorialShow)}>
-        {pageOrg.isExcluded
-          ? "スタンプから除外中"
-          : "ここをクリックしスタンプから除外"}
-      </Balloon>
-      <ColorBorderButton
-        textColor="#aaa"
-        borderColor="#aaa"
-        onClick={handleButton}
-        css={excludeButton}
-        label={
-          <FontAwesomeIcon
-            css={loading ? loadingStyle : null}
-            icon={
-              loading ? faCircleNotch : pageOrg.isExcluded ? faEye : faEyeSlash
-            }
-          />
-        }
-      />
-    </div>
+    <>
+      <ModalWrapper>
+        <LimitNotice
+          type="exclusion"
+          remain={recommendation.recommendation.ignoreRemains}
+          close={handleAdd}
+          back={close}
+        />
+      </ModalWrapper>
+      <div css={excludeContainer}>
+        <Balloon css={excludeMessageStyle(tutorialShow)}>
+          {pageOrg.isExcluded
+            ? "スタンプから除外中"
+            : "ここをクリックしスタンプから除外"}
+        </Balloon>
+        <ColorBorderButton
+          textColor="#aaa"
+          borderColor="#aaa"
+          onClick={handleButton}
+          css={excludeButton}
+          label={
+            <FontAwesomeIcon
+              css={loading ? loadingStyle : null}
+              icon={
+                loading
+                  ? faCircleNotch
+                  : pageOrg.isExcluded
+                  ? faEye
+                  : faEyeSlash
+              }
+            />
+          }
+        />
+      </div>
+    </>
   );
 }
