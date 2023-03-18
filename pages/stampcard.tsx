@@ -1,7 +1,6 @@
 import { css, useTheme } from "@emotion/react";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -117,13 +116,6 @@ export default function StampCardPage({ uid }: { uid: string }) {
     }
   }, [recommendationData, push]);
 
-  React.useEffect(() => {
-    // uidのクエリパラメータ付きはOGP用URLなので、ホームにリダイレクトする
-    if (uid) {
-      push("/");
-    }
-  }, [uid, push]);
-
   if (!recommendationData || !orgsData) {
     return (
       <>
@@ -199,13 +191,4 @@ export default function StampCardPage({ uid }: { uid: string }) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-  const uid = query.uid as string;
-  return {
-    props: {
-      uid: uid ?? null,
-    },
-  };
 }
