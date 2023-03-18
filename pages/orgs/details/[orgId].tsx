@@ -22,6 +22,7 @@ import StoryLikeContainer, {
   ContentPager,
   PaddedContainer,
 } from "../../../components/orgs/details/StoryLikeContainer";
+import Balloon from "../../../components/tutorial/Balloon";
 import {
   isRecommendationReady,
   useExcludeRecommendation,
@@ -136,11 +137,14 @@ const excludeContainer = css`
   position: absolute;
   right: 5vw;
   bottom: 5vw;
+  display: flex;
+  align-items: center;
+  max-width: 80vw;
 `;
 
 const excludeButton = css`
-  width: 8rem;
-  height: 8rem;
+  min-width: 8rem;
+  min-height: 8rem;
   padding: 0;
 `;
 
@@ -157,6 +161,10 @@ const loadingStyle = css`
   animation: ${loadingAnimation} 0.5s linear;
 `;
 
+const excludeMessageStyle = (show: boolean) => css`
+  opacity: ${show ? 1 : 0};
+`;
+
 function ExcludeButton({
   orgId,
   currentPage,
@@ -167,12 +175,21 @@ function ExcludeButton({
   const { data: recommendation } = useRecommendation();
   const exclude = useExcludeRecommendation();
   const [loading, setLoading] = React.useState(false);
+  const [tutorialShow, setTutorial] = React.useState(true);
 
-  if (!isRecommendationReady(recommendation)) return null;
+  const pageOrg = React.useMemo(() => {
+    if (!isRecommendationReady(recommendation)) return null;
 
-  const pageOrg = recommendation.recommendation.orgs.find(
-    ({ org }) => org.id === orgId
-  );
+    return recommendation.recommendation.orgs.find(
+      ({ org }) => org.id === orgId
+    );
+  }, [orgId, recommendation]);
+
+  React.useEffect(() => {
+    setTutorial(true);
+    const timer = setTimeout(() => setTutorial(false), 1500);
+    return () => clearTimeout(timer);
+  }, [pageOrg?.isExcluded]);
 
   if (!pageOrg) return null;
   if (pageOrg.stampSlot < 0 && !pageOrg.isExcluded) return null;
@@ -191,6 +208,11 @@ function ExcludeButton({
 
   return (
     <div css={excludeContainer}>
+      <Balloon css={excludeMessageStyle(tutorialShow)}>
+        {pageOrg.isExcluded
+          ? "スタンプから除外中"
+          : "ここをクリックしスタンプから除外"}
+      </Balloon>
       <ColorBorderButton
         textColor="#aaa"
         borderColor="#aaa"
