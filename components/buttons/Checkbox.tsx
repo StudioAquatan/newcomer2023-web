@@ -75,7 +75,13 @@ type Props = {
   labelProps?: React.HTMLProps<HTMLLabelElement>;
   containerProps?: React.HTMLProps<HTMLDivElement>;
   disabled?: boolean;
-} & Omit<React.HTMLProps<HTMLInputElement>, "type" | "id" | "label">;
+} & Omit<
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >,
+  "type" | "id" | "label"
+>;
 export default function Checkbox({
   id,
   label,
