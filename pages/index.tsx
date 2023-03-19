@@ -23,6 +23,8 @@ import { useRecommendation } from "../hooks/recommendation";
 import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
 
+const OGP_URL = process.env.NEXT_PUBLIC_OGP_URL ?? "http://localhost:8787";
+
 const exampleQuestions: Array<string> = [
   "運動系の団体に興味がある",
   "球技を行う団体に興味がある",
@@ -139,7 +141,10 @@ export default function Home({
 
   return (
     <OrganizationProvider value={orgs}>
-      <MetaHead description="相性診断をして自分に合った部・サークルの説明を聞きに行こう！スタンプラリーも！" />
+      <MetaHead
+        description="相性診断をして自分に合った部・サークルの説明を聞きに行こう！スタンプラリーも！"
+        largeImage={uid ? `${OGP_URL}?uid=${uid}` : undefined}
+      />
       <Hero />
       <div css={container}>
         <OrgShowcase orgs={showcaseOrgs} />
