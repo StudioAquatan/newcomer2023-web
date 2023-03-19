@@ -7,6 +7,8 @@ import { Methods } from "../api-client/recommendation";
 import useWrapError from "../store/error";
 import useUser from "./user";
 
+const OGP_URL = process.env.NEXT_PUBLIC_OGP_URL ?? "http://localhost:8787";
+
 export const NoRecommendation = Symbol.for("NoRecommendation");
 
 export function useRecommendation() {
@@ -72,7 +74,7 @@ export function usePutRecommendation() {
       throw new Error("No token provided");
     }
 
-    const response = apiClient.recommendation.$put({
+    const apiResponse = await apiClient.recommendation.$put({
       body: Array.from(answers.values()),
       config: {
         headers: {
@@ -81,9 +83,13 @@ export function usePutRecommendation() {
       },
     });
 
-    await wrap(mutate(response, { revalidate: false }));
+    await wrap(mutate(apiResponse, { revalidate: false }));
+    // OGP画像を非同期で生成
+    const ogpResponse = await fetch(`${OGP_URL}?uid=${userData.user.id}`, {
+      method: "POST",
+    });
 
-    return response;
+    return [apiResponse, ogpResponse];
   };
 }
 
