@@ -3,6 +3,7 @@ import { useState } from "react";
 import { OrganizationFull } from "../../api-client/@types";
 import { getOrgs } from "../../api-client/cached-response";
 import MetaHead from "../../components/MetaHead";
+import Checkbox from "../../components/buttons/Checkbox";
 import Header from "../../components/headers/Header";
 import OrgPanel from "../../components/orgs/list/OrgPanel";
 import { useSortedOrgs } from "../../hooks/recommendation";
@@ -65,21 +66,20 @@ export default function OrgListPage({ organizations }: OrgListPageProps) {
         <Header isMobile={isMobile} />
         <h1 css={pageTitle}>団体一覧</h1>
       </div>
-      <div>
-        <label>
-          {renderReady
+      <Checkbox
+        id="sortByRecommendation"
+        label={
+          renderReady
             ? available
               ? "おすすめ順で表示"
               : "診断するとおすすめ順表示ができます"
-            : "読み込み中"}
-        </label>
-        <input
-          type="checkbox"
-          checked={sortChecked}
-          onChange={(e) => setSortChecked(e.target.checked)}
-          disabled={!available}
-        />
-      </div>
+            : "読み込み中"
+        }
+        checked={sortChecked}
+        onChange={(e) => setSortChecked(e.target.checked)}
+        disabled={!available}
+      />
+
       <div css={orgListPageStyle}>
         <div css={orgListStyle}>
           {(sortChecked ? orgs : organizations).map((org) => {
