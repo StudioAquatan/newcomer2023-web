@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { OrganizationFull, QuestionResult } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import { Methods } from "../api-client/recommendation";
+import useWrapError from "../store/error";
 import useUser from "./user";
 
 export const NoRecommendation = Symbol.for("NoRecommendation");
@@ -64,6 +65,7 @@ export function isRecommendationReady(
 export function usePutRecommendation() {
   const { data: userData } = useUser();
   const { mutate } = useRecommendation();
+  const wrap = useWrapError();
 
   return async (answers: Map<string, QuestionResult>) => {
     if (!userData?.token) {
@@ -79,7 +81,7 @@ export function usePutRecommendation() {
       },
     });
 
-    await mutate(response, { revalidate: false });
+    await wrap(mutate(response, { revalidate: false }));
 
     return response;
   };
@@ -118,6 +120,7 @@ export function useSortedOrgs(orgs: OrganizationFull[] = []) {
 export function useExcludeRecommendation() {
   const { data: userData } = useUser();
   const { mutate } = useRecommendation();
+  const wrap = useWrapError();
 
   return async (op: "add" | "remove", orgId: string) => {
     if (!userData?.token) {
@@ -143,7 +146,7 @@ export function useExcludeRecommendation() {
       });
     }
 
-    await mutate(response, { revalidate: false });
+    await wrap(mutate(response, { revalidate: false }));
 
     return response;
   };

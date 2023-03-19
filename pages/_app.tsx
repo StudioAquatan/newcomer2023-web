@@ -2,6 +2,7 @@ import type { AppPropsWithLayout } from "next/app";
 import { useEffect, useState } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
 import Layout from "../components/Layout";
+import ErrorModal from "../components/error/ErrorModal";
 import Footer from "../components/footers/Footer";
 import JumpingLogoLoader from "../components/loaders/JumpingLogoLoader";
 import { initMockServer, initMockWorker } from "../mocks";
@@ -51,10 +52,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout =
     Component.getLayout ??
     ((page) => (
-      <Layout>
+      <>
         <main>{page}</main>
         <Footer />
-      </Layout>
+      </>
     ));
-  return getLayout(<Component {...pageProps} />);
+  return (
+    <Layout>
+      {getLayout(<Component {...pageProps} />)}
+      <ErrorModal />
+    </Layout>
+  );
 }
