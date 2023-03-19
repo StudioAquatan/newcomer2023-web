@@ -77,7 +77,7 @@ export default function Home({
   orgs,
   questions,
 }: HomeProps) {
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const { isMobile } = useIsMobile();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
   useUser();
@@ -128,9 +128,14 @@ export default function Home({
   React.useEffect(() => {
     // uidのクエリパラメータ付きはOGP用URLなので、ホームにリダイレクトする
     if (uid) {
-      push("/");
+      // pushだとquery parameter付きURLが履歴に残るので、replaceを使う
+      replace(
+        "/",
+        undefined,
+        { shallow: true } // URLだけ変更してページ内容は更新しない
+      );
     }
-  }, [uid, push]);
+  }, [uid, replace]);
 
   return (
     <OrganizationProvider value={orgs}>
