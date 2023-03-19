@@ -1,4 +1,7 @@
 import { css } from "@emotion/react";
+import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
+import React from "react";
 import { useMemo } from "react";
 import {
   OrganizationFull,
@@ -19,6 +22,8 @@ import { OrganizationProvider, useOrganizations } from "../hooks/organizations";
 import { useRecommendation } from "../hooks/recommendation";
 import useUser from "../hooks/user";
 import { useIsMobile } from "../store/userAgent";
+
+const OGP_URL = process.env.NEXT_PUBLIC_OGP_URL ?? "http://localhost:8787";
 
 const exampleQuestions: Array<string> = [
   "運動系の団体に興味がある",
@@ -55,6 +60,7 @@ const container = css`
 `;
 
 type HomeProps = {
+  uid: string | null;
   showcaseIds: string[];
   showcaseRecommendation: Recommendation;
   orgs: OrganizationFull[];
@@ -67,11 +73,13 @@ function OrgsCache() {
   return null;
 }
 export default function Home({
+  uid,
   showcaseIds,
   showcaseRecommendation,
   orgs,
   questions,
 }: HomeProps) {
+  const { replace } = useRouter();
   const { isMobile } = useIsMobile();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
   useUser();
@@ -119,9 +127,24 @@ export default function Home({
     return showcaseIds.map((orgId) => orgs.find(({ id }) => orgId === id)!);
   }, [orgs, showcaseIds]);
 
+  React.useEffect(() => {
+    // uidのクエリパラメータ付きはOGP用URLなので、ホームにリダイレクトする
+    if (uid) {
+      // pushだとquery parameter付きURLが履歴に残るので、replaceを使う
+      replace(
+        "/",
+        undefined,
+        { shallow: true } // URLだけ変更してページ内容は更新しない
+      );
+    }
+  }, [uid, replace]);
+
   return (
     <OrganizationProvider value={orgs}>
-      <MetaHead description="相性診断をして自分に合った部・サークルの説明を聞きに行こう！スタンプラリーも！" />
+      <MetaHead
+        description="相性診断をして自分に合った部・サークルの説明を聞きに行こう！スタンプラリーも！"
+        largeImage={uid ? `${OGP_URL}?uid=${uid}` : undefined}
+      />
       <Hero />
       <div css={container}>
         <OrgShowcase orgs={showcaseOrgs} />
@@ -139,7 +162,8 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+  const uid = query.uid as string; // OGP画像用のユーザID
   const orgs = await getOrgs();
 
   const random = new Random();
@@ -172,6 +196,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
+      uid: uid ?? null,
       showcaseIds: shuffle(orgs.map(({ id }) => id)).slice(0, 30),
       orgs,
       showcaseRecommendation: recommendation,
