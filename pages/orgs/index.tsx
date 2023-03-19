@@ -34,8 +34,7 @@ const pageTitle = css`
 `;
 
 const orgListPageStyle = css`
-  width: 100%;
-  max-width: 1400px;
+  width: min(90vw, 1400px);
   padding-top: 3rem;
   margin: 0 auto;
 
@@ -66,21 +65,21 @@ export default function OrgListPage({ organizations }: OrgListPageProps) {
         <Header isMobile={isMobile} />
         <h1 css={pageTitle}>団体一覧</h1>
       </div>
-      <Checkbox
-        id="sortByRecommendation"
-        label={
-          renderReady
-            ? available
-              ? "おすすめ順で表示"
-              : "診断するとおすすめ順表示ができます"
-            : "読み込み中"
-        }
-        checked={sortChecked}
-        onChange={(e) => setSortChecked(e.target.checked)}
-        disabled={!available}
-      />
 
       <div css={orgListPageStyle}>
+        <Checkbox
+          id="sortByRecommendation"
+          label={
+            renderReady
+              ? available
+                ? "おすすめ順で表示"
+                : "診断しておすすめ順表示を使う"
+              : "読み込み中"
+          }
+          checked={sortChecked}
+          onChange={(e) => setSortChecked(e.target.checked)}
+          disabled={!available}
+        />
         <div css={orgListStyle}>
           {(sortChecked ? orgs : organizations).map((org) => {
             return <OrgPanel org={org} key={org.id} />;
