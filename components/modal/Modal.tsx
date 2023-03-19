@@ -62,16 +62,37 @@ export function ModalButton(
   return <ColorBorderButton css={modalButtonOverride} {...props} />;
 }
 
-export function ModalTitle({ children }: React.PropsWithChildren) {
-  return <p css={modalTitle}>{children}</p>;
+export function ModalTitle({
+  children,
+  ...props
+}: React.PropsWithChildren<React.HTMLProps<HTMLParagraphElement>>) {
+  return (
+    <p css={modalTitle} {...props}>
+      {children}
+    </p>
+  );
 }
 
-export function ModalContent({ children }: React.PropsWithChildren) {
-  return <div css={modalContent}>{children}</div>;
+export function ModalContent({
+  children,
+  ...props
+}: React.PropsWithChildren<React.HTMLProps<HTMLDivElement>>) {
+  return (
+    <div css={modalContent} {...props}>
+      {children}
+    </div>
+  );
 }
 
-export function ModalButtonContainer({ children }: React.PropsWithChildren) {
-  return <div css={modalButtons}>{children}</div>;
+export function ModalButtonContainer({
+  children,
+  ...props
+}: React.PropsWithChildren<React.HTMLProps<HTMLDivElement>>) {
+  return (
+    <div css={modalButtons} {...props}>
+      {children}
+    </div>
+  );
 }
 
 export default function Modal({ children }: React.PropsWithChildren) {

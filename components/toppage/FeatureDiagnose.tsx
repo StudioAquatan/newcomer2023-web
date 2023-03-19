@@ -20,7 +20,7 @@ const questionPadding = css`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-  padding: 2.4rem;
+  padding: 2rem;
 `;
 
 export default function FeatureDiagnose({

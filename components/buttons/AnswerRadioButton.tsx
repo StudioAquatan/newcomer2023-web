@@ -173,7 +173,7 @@ const labelStyle = (direction: Direction, padding: string) => {
     z-index: 1;
     ${paddingStyle()}
 
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     cursor: pointer;
     transition: all 0.1s linear;
   `;
