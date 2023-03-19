@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import { useEffect } from "react";
 import { useError } from "../../store/error";
 import {
@@ -7,6 +8,17 @@ import {
   ModalTitle,
   useModal,
 } from "../modal";
+
+const textStyle = css`
+  font-size: 1.8rem;
+`;
+
+const errorStyle = css`
+  padding-left: 1rem;
+  font-size: 1.2rem;
+  color: #aaa;
+  border-left: 2px solid #aaa;
+`;
 
 export default function ErrorModal() {
   const { error, reset } = useError();
@@ -26,8 +38,8 @@ export default function ErrorModal() {
     <ModalWrapper>
       <ModalTitle>おや？</ModalTitle>
       <ModalContent>
-        <p>想定されていないエラーが発生しました</p>
-        <p>{error?.message ?? "不明"}</p>
+        <p css={textStyle}>想定されていないエラーが発生しました</p>
+        <p css={errorStyle}>{error?.message ?? "不明"}</p>
       </ModalContent>
       <ModalButtonContainer>
         <ModalButton label="閉じる" onClick={handleClose} />
