@@ -57,7 +57,6 @@ const textBoxStyle = css`
 `;
 
 const fullNameStyle = (theme: Theme) => css`
-  margin: 0;
   overflow: hidden;
   font-size: 1.6rem;
   font-weight: bold;
@@ -71,7 +70,6 @@ const descriptionStyle = (theme: Theme) => css`
 
   /* 2行分で高さを固定にしてしまう */
   height: 3.6rem;
-  margin: 0;
   overflow: hidden;
   font-family: GenShinGothicP, sans-serif;
   font-size: 1.2rem;
