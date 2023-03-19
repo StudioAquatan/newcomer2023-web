@@ -8,6 +8,11 @@ import { initMockServer, initMockWorker } from "../mocks";
 import { useRouterHistoryRecorder } from "../store/router";
 import { useSetIsMobile } from "../store/userAgent";
 
+import "../styles/GenJyuuGothic-P-Bold.css";
+import "../styles/GenJyuuGothic-P-Normal.css";
+import "../styles/GenShinGothic-P-Bold.css";
+import "../styles/GenShinGothic-P-Normal.css";
+
 const isMocking = process.env.NEXT_PUBLIC_API_MOCKING === "enabled";
 
 if (isMocking) {
