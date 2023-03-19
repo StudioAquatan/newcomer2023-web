@@ -3,7 +3,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 // import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OrganizationFull } from "../../api-client/@types";
@@ -21,7 +21,12 @@ import {
   NoRecommendation,
   useRecommendation,
 } from "../../hooks/recommendation";
+import useUser from "../../hooks/user";
 import { useIsMobile } from "../../store/userAgent";
+
+const SELF_URL = process.env.NEXT_PUBLIC_PUBLIC_DOMAIN
+  ? `https://${process.env.NEXT_PUBLIC_PUBLIC_DOMAIN}`
+  : "http://localhost:3000";
 
 const headerPadding = css`
   height: 2rem;
@@ -108,9 +113,12 @@ const fallbackOrg: OrganizationFull = {
 export default function StampCardPage() {
   const theme = useTheme();
   const { isMobile } = useIsMobile();
+  const { data: userData } = useUser();
   const { data: orgsData } = useOrganizations();
   const { data: recommendationData } = useRecommendation();
   const { data: seedData } = useStampCardSeed();
+  const [shareButtonLabel, setShareButtonLabel] =
+    useState("シェアしてみよう！");
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
   const { push } = useRouter();
@@ -156,6 +164,31 @@ export default function StampCardPage() {
     stamps: stamps,
   };
 
+  const share = () => {
+    const shareText =
+      "相性診断をしてスタンプカードを作りました！みんなも診断してみてね\n#工繊50団体相性診断\n";
+    const shareUrl = `${SELF_URL}?uid=${userData?.user.id}`;
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "相性診断をしてスタンプカードを作りました！",
+          text: shareText,
+          url: shareUrl,
+        })
+        .catch((error) => console.log("リンクの共有に失敗しました", error));
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+      setShareButtonLabel("URLをコピーしました！");
+      setTimeout(() => {
+        setShareButtonLabel("シェアしてみよう！");
+      }, 5000);
+    } else {
+      console.log("リンクの共有方法がありません");
+      console.log("以下のリンクをコピーして共有してください");
+      console.log(`${shareText}\n${shareUrl}`);
+    }
+  };
+
   return (
     <div css={container}>
       <MetaHead
@@ -175,10 +208,11 @@ export default function StampCardPage() {
         </div>
         <div css={stampCardBottom}>
           <ColorBorderButton
-            label="シェアしてみよう！"
+            label={shareButtonLabel}
             textColor={theme.colors.button.enable.backgroundColor}
             borderColor={theme.colors.button.enable.backgroundColor}
             fontSize="2.4rem"
+            onClick={() => share()}
           />
         </div>
       </div>
