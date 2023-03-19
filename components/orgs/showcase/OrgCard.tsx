@@ -4,15 +4,6 @@ import Link from "next/link";
 import { OrganizationFull } from "../../../api-client/@types";
 import imgixLoader from "../../../image-loader";
 
-const buttonStyle = css`
-  padding: 0;
-  margin: 0;
-  font-family: GenJyuuGothic-P, sans-serif;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-`;
-
 const container = (theme: Theme) => css`
   display: flex;
   align-items: center;
@@ -106,25 +97,21 @@ export default function OrgCard({
   logoFocus,
 }: OrganizationFull) {
   return (
-    <Link as={`/orgs/details/${id}`} href="/orgs/details/[orgId]">
-      <button css={buttonStyle}>
-        <div css={container}>
-          <Image
-            css={orgImageStyle(logoFocus ?? false)}
-            src={logo?.src ?? "/org_icons/default.png"}
-            alt={fullName}
-            width={80}
-            height={80}
-            loader={imgixLoader}
-          />
-          <div css={textBoxStyle}>
-            <div css={textContentStyle}>
-              <p css={textContentH1Style}>{fullName}</p>
-            </div>
-            <p css={textContentPStyle}>{shortDescription}</p>
-          </div>
+    <Link css={container} as={`/orgs/details/${id}`} href="/orgs/details/[orgId]">
+      <Image
+        css={orgImageStyle(logoFocus ?? false)}
+        src={logo?.src ?? "/org_icons/default.png"}
+        alt={fullName}
+        width={80}
+        height={80}
+        loader={imgixLoader}
+      />
+      <div css={textBoxStyle}>
+        <div css={textContentStyle}>
+          <p css={textContentH1Style}>{fullName}</p>
         </div>
-      </button>
+        <p css={textContentPStyle}>{shortDescription}</p>
+      </div>
     </Link>
   );
 }
