@@ -38,7 +38,9 @@ export default function ErrorModal() {
     <ModalWrapper>
       <ModalTitle>おや？</ModalTitle>
       <ModalContent>
-        <p css={textStyle}>想定されていないエラーが発生しました</p>
+        <p css={textStyle}>
+          想定されていないエラーが発生しました．再読み込みしてみてください．
+        </p>
         <p css={errorStyle}>{error?.message ?? "不明"}</p>
       </ModalContent>
       <ModalButtonContainer>
