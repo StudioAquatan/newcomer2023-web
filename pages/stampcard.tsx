@@ -100,7 +100,7 @@ const fallbackOrg: OrganizationFull = {
   description: "",
 };
 
-export default function StampCardPage({ uid }: { uid: string }) {
+export default function StampCardPage() {
   const theme = useTheme();
   const { isMobile } = useIsMobile();
   const { data: orgsData } = useOrganizations();
