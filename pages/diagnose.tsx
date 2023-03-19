@@ -50,7 +50,7 @@ const buttonContainer = (show: boolean) => {
   return css`
     display: flex;
     justify-content: center;
-    margin: 6vh 0;
+    margin: 6rem 0;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.2s linear;
@@ -93,10 +93,6 @@ function SubmitButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-const backButton = css`
-  margin-top: 5vh;
-`;
-
 function ReturnButton() {
   const { backWithTransition, current } = useCurrentQuestion();
 
@@ -106,7 +102,6 @@ function ReturnButton() {
       <ColorBorderButton
         label={<FontAwesomeIcon icon={faChevronLeft} />}
         onClick={backWithTransition}
-        css={backButton}
       />
     </div>
   );

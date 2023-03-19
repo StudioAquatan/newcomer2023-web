@@ -9,6 +9,7 @@ export type OrgRowProps = {
 
 const base = css`
   display: flex;
+  flex-shrink: 0;
   flex-direction: row;
   width: 100%;
   overflow-x: hidden;
@@ -26,19 +27,19 @@ const rowStyle = css`
 
 const scroll = keyframes`
   0% {
-    transform: translateX(0%);
+    transform: translate(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translate(-100%, 0);
   }
 `;
 
 const scrollInverse = keyframes`
   0% {
-    transform: translateX(-100%);
+    transform: translate(-100%, 0);
   }
   100% {
-    transform: translateX(0%);
+    transform: translate(0);
   }
 `;
 
