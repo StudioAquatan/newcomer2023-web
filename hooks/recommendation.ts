@@ -1,5 +1,6 @@
+import React from "react";
 import useSWR from "swr";
-import { QuestionResult } from "../api-client/@types";
+import { OrganizationFull, QuestionResult } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import { Methods } from "../api-client/recommendation";
 import useUser from "./user";
@@ -65,6 +66,36 @@ export function usePutRecommendation() {
 
     return response;
   };
+}
+
+export function useSortedOrgs(orgs: OrganizationFull[] = []) {
+  const { data: userData, isLoading: userLoading } = useUser();
+  const { data: recommendation, isLoading: recommendationLoading } =
+    useRecommendation();
+
+  return React.useMemo(() => {
+    if (typeof window === "undefined")
+      return {
+        orgs: [],
+        renderReady: false,
+        available: false,
+      };
+    if (!userData || !isRecommendationReady(recommendation) || !orgs)
+      return {
+        orgs: orgs ?? [],
+        renderReady: !userLoading && (!userData || !recommendationLoading),
+        available: isRecommendationReady(recommendation),
+      };
+
+    // 全部そろった
+    return {
+      orgs: recommendation.recommendation.orgs
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        .map(({ org }) => orgs.find(({ id }) => id === org.id)!),
+      renderReady: true,
+      available: true,
+    };
+  }, [orgs, recommendation, recommendationLoading, userData, userLoading]);
 }
 
 export function useExcludeRecommendation() {
