@@ -1,3 +1,4 @@
+import { HTTPError } from "@aspida/fetch";
 import React from "react";
 import useSWR from "swr";
 import { OrganizationFull, QuestionResult } from "../api-client/@types";
@@ -27,9 +28,25 @@ export function useRecommendation() {
           return res;
         })
         .catch((error) => {
-          console.warn("Failed to fetch /recommendation.", error);
+          if (error instanceof HTTPError) {
+            if (error.response.status === 404) {
+              return NoRecommendation;
+            } else {
+              console.warn(
+                "Unknown status code from /recommendation.",
+                error.response.status
+              );
+              throw new Error("Unknown error code from recommendation", {
+                cause: error,
+              });
+            }
+          } else {
+            console.error("Failed to fetch /recommendation.", error);
+          }
 
-          return NoRecommendation;
+          throw new Error("Unknown error while getting recommendation", {
+            cause: error,
+          });
         });
 
       return recommendations;
@@ -53,7 +70,7 @@ export function usePutRecommendation() {
       throw new Error("No token provided");
     }
 
-    const response = await apiClient.recommendation.put({
+    const response = apiClient.recommendation.$put({
       body: Array.from(answers.values()),
       config: {
         headers: {
@@ -62,7 +79,7 @@ export function usePutRecommendation() {
       },
     });
 
-    await mutate(response.body, { revalidate: false });
+    await mutate(response, { revalidate: false });
 
     return response;
   };
