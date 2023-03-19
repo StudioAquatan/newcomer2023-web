@@ -1,8 +1,10 @@
+import { HTTPError } from "@aspida/fetch";
 import React from "react";
 import useSWR from "swr";
 import { OrganizationFull, QuestionResult } from "../api-client/@types";
 import { apiClient } from "../api-client/apiClient";
 import { Methods } from "../api-client/recommendation";
+import useWrapError from "../store/error";
 import useUser from "./user";
 
 export const NoRecommendation = Symbol.for("NoRecommendation");
@@ -27,9 +29,25 @@ export function useRecommendation() {
           return res;
         })
         .catch((error) => {
-          console.warn("Failed to fetch /recommendation.", error);
+          if (error instanceof HTTPError) {
+            if (error.response.status === 404) {
+              return NoRecommendation;
+            } else {
+              console.warn(
+                "Unknown status code from /recommendation.",
+                error.response.status
+              );
+              throw new Error("Unknown error code from recommendation", {
+                cause: error,
+              });
+            }
+          } else {
+            console.error("Failed to fetch /recommendation.", error);
+          }
 
-          return NoRecommendation;
+          throw new Error("Unknown error while getting recommendation", {
+            cause: error,
+          });
         });
 
       return recommendations;
@@ -47,13 +65,14 @@ export function isRecommendationReady(
 export function usePutRecommendation() {
   const { data: userData } = useUser();
   const { mutate } = useRecommendation();
+  const wrap = useWrapError();
 
   return async (answers: Map<string, QuestionResult>) => {
     if (!userData?.token) {
       throw new Error("No token provided");
     }
 
-    const response = await apiClient.recommendation.put({
+    const response = apiClient.recommendation.$put({
       body: Array.from(answers.values()),
       config: {
         headers: {
@@ -62,7 +81,7 @@ export function usePutRecommendation() {
       },
     });
 
-    await mutate(response.body, { revalidate: false });
+    await wrap(mutate(response, { revalidate: false }));
 
     return response;
   };
@@ -101,6 +120,7 @@ export function useSortedOrgs(orgs: OrganizationFull[] = []) {
 export function useExcludeRecommendation() {
   const { data: userData } = useUser();
   const { mutate } = useRecommendation();
+  const wrap = useWrapError();
 
   return async (op: "add" | "remove", orgId: string) => {
     if (!userData?.token) {
@@ -126,7 +146,7 @@ export function useExcludeRecommendation() {
       });
     }
 
-    await mutate(response, { revalidate: false });
+    await wrap(mutate(response, { revalidate: false }));
 
     return response;
   };
