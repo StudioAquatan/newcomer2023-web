@@ -56,13 +56,7 @@ const textBoxStyle = css`
   margin-left: 1.6rem;
 `;
 
-const textContentStyle = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const textContentH1Style = (theme: Theme) => css`
+const fullNameStyle = (theme: Theme) => css`
   margin: 0;
   overflow: hidden;
   font-size: 1.6rem;
@@ -72,7 +66,7 @@ const textContentH1Style = (theme: Theme) => css`
   white-space: nowrap;
 `;
 
-const textContentPStyle = (theme: Theme) => css`
+const descriptionStyle = (theme: Theme) => css`
   display: -webkit-box;
 
   /* 2行分で高さを固定にしてしまう */
@@ -107,10 +101,8 @@ export default function OrgCard({
         loader={imgixLoader}
       />
       <div css={textBoxStyle}>
-        <div css={textContentStyle}>
-          <p css={textContentH1Style}>{fullName}</p>
-        </div>
-        <p css={textContentPStyle}>{shortDescription}</p>
+        <div css={fullNameStyle}>{fullName}</div>
+        <div css={descriptionStyle}>{shortDescription}</div>
       </div>
     </Link>
   );
