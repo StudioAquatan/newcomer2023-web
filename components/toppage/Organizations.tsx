@@ -3,6 +3,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import imgixLoader from "../../image-loader";
+import { irodori, studioaquatan } from "../../styles/images";
 
 const base = css`
   margin-bottom: 4rem;
@@ -41,7 +42,7 @@ export default function Organizations() {
       <p css={contentPStyle}>新歓委員会 with</p>
       <p css={contentPStyle}>
         <Image
-          src="/toppage/irodori.png"
+          src={irodori}
           alt="irodori"
           css={logoStyle}
           width={64}
@@ -50,7 +51,7 @@ export default function Organizations() {
         />
         irodori <FontAwesomeIcon css={xmarkStyle} icon={faXmark} />
         <Image
-          src="/toppage/studioaquatan.png"
+          src={studioaquatan}
           alt="あくあたん工房"
           css={logoStyle}
           width={64}

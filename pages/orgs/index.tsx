@@ -8,7 +8,9 @@ import Checkbox from "../../components/buttons/Checkbox";
 import Header from "../../components/headers/Header";
 import OrgPanel from "../../components/orgs/list/OrgPanel";
 import { useSortedOrgs } from "../../hooks/recommendation";
+import imgixLoader from "../../image-loader";
 import { useIsMobile } from "../../store/userAgent";
+import { heroUrl } from "../../styles/images";
 
 type OrgListPageProps = {
   organizations: OrganizationFull[];
@@ -21,7 +23,7 @@ const heroStyle = css`
   justify-content: center;
   height: 20vh;
   background-color: rgb(0 0 0 / 10%);
-  background-image: url("/toppage/hero.jpg");
+  background-image: url(${imgixLoader({ src: heroUrl, width: 1200 })});
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;

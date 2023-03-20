@@ -1,7 +1,9 @@
 import { css } from "@emotion/react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import imgixLoader from "../../image-loader";
 import { useIsMobile } from "../../store/userAgent";
+import { heroUrl } from "../../styles/images";
 import Header from "../headers/Header";
 
 import Organizations from "./Organizations";
@@ -13,7 +15,7 @@ const heroStyle = css`
   justify-content: center;
   height: 80vh;
   background-color: rgb(0 0 0 / 10%);
-  background-image: url("/toppage/hero.jpg");
+  background-image: url(${imgixLoader({ src: heroUrl, width: 1200 })});
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
