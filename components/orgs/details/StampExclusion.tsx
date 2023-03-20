@@ -117,7 +117,7 @@ export default function ExcludeButton({
         />
       </ModalWrapper>
       <div css={excludeContainer}>
-        <Balloon css={excludeMessageStyle(tutorialShow)}>
+        <Balloon css={excludeMessageStyle(tutorialShow)} direction="right">
           {pageOrg.isExcluded
             ? "スタンプから除外中"
             : "ここをクリックしスタンプから除外"}

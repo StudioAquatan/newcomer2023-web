@@ -1,6 +1,10 @@
 import { css, Theme } from "@emotion/react";
 import React from "react";
 
+type Props = {
+  direction: "right" | "bottom";
+};
+
 const balloonStyle = (theme: Theme) => css`
   position: relative;
   display: inline-block;
@@ -15,21 +19,39 @@ const balloonStyle = (theme: Theme) => css`
 
   &::before {
     position: absolute;
+    content: "";
+    border: 12px solid transparent;
+  }
+`;
+
+const rightStyle = (theme: Theme) => css`
+  &::before {
     top: 50%;
     left: 100%;
     margin-top: -12px;
-    content: "";
-    border: 12px solid transparent;
     border-left: 12px solid ${theme.colors.backgroundColor};
+  }
+`;
+
+const bottomStyle = (theme: Theme) => css`
+  &::before {
+    top: 100%;
+    left: 50%;
+    margin-left: -12px;
+    border-top: 12px solid ${theme.colors.backgroundColor};
   }
 `;
 
 export default function Balloon({
   children,
+  direction,
   ...props
-}: React.PropsWithChildren<React.HTMLProps<HTMLDivElement>>) {
+}: React.PropsWithChildren<React.HTMLProps<HTMLDivElement> & Props>) {
   return (
-    <div css={balloonStyle} {...props}>
+    <div
+      css={[balloonStyle, direction === "bottom" ? bottomStyle : rightStyle]}
+      {...props}
+    >
       {children}
     </div>
   );
