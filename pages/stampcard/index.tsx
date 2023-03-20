@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-// import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useInView } from "react-intersection-observer";
 import { OrganizationFull } from "../../api-client/@types";
 import MetaHead from "../../components/MetaHead";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
@@ -134,6 +133,15 @@ export default function StampCardPage() {
 
   const { done, close } = useStampcardTutorial();
 
+  const { ref, inView } = useInView();
+  React.useEffect(() => {
+    if (inView) {
+      setTimeout(() => {
+        close();
+      }, 5000);
+    }
+  }, [close, inView]);
+
   if (!recommendationData || !orgsData) {
     return (
       <>
@@ -229,21 +237,20 @@ export default function StampCardPage() {
         {recommendation.renewRemains > 0 && (
           <BalloonContainer
             direction="bottom"
+            animated
             balloonContent={
-              done || (
+              done ? null : (
                 <>
                   質問は診断毎に変わるので
                   <br />
                   やり直すとより良い結果になるかも
-                  <br />
-                  <a href="#" onClick={close}>
-                    Tipsを閉じる
-                  </a>
                 </>
               )
             }
           >
-            <Link href="/diagnose">診断をやり直す</Link>
+            <Link href="/diagnose" ref={ref}>
+              診断をやり直す
+            </Link>
           </BalloonContainer>
         )}
         <Link href="/stampcard/exclusion">除外する団体を設定</Link>

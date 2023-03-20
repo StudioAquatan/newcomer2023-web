@@ -72,6 +72,7 @@
     "msw-storybook-addon": "^1.7.0",
     "openapi2aspida": "^0.21.0",
     "postcss-syntax": "^0.36.2",
+    "react-intersection-observer": "^9.4.3",
     "sb": "^6.5.15",
     "storybook-addon-next-router": "^4.0.2",
     "stylelint": "^14.16.1",
