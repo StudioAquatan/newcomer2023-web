@@ -39,6 +39,10 @@ declare module "@emotion/react" {
         backgroundColor: string;
         normalTextColor: string;
       };
+      balloon: {
+        backgroundColor: string;
+        textColor: string;
+      };
     };
   }
 }
@@ -51,11 +55,11 @@ export const sakura = {
     button: {
       enable: {
         backgroundColor: "#FF8DBD",
-        textColor: "#000000",
+        textColor: "#FF8DBD",
       },
       disable: {
         backgroundColor: "#AAAAAA",
-        textColor: "#000000",
+        textColor: "#AAAAAA",
       },
       active: {
         textColor: "#512C3C",
@@ -80,6 +84,10 @@ export const sakura = {
     storyLike: {
       backgroundColor: "#202020",
       normalTextColor: "#E6E6E6",
+    },
+    balloon: {
+      backgroundColor: "#bcffab",
+      textColor: "#333333",
     },
   },
 };

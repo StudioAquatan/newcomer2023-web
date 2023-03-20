@@ -13,6 +13,7 @@ import OrgDetailsText from "../../../components/orgs/details/OrgDetailsText";
 import OrgPicture, {
   OrgMovieControl,
 } from "../../../components/orgs/details/OrgPicture";
+import ExcludeButton from "../../../components/orgs/details/StampExclusion";
 import StoryLikeContainer, {
   ContentContainer,
   ContentPager,
@@ -187,6 +188,7 @@ const OrgDetail = ({ org, orgImage }: Props) => {
         <Progress numPages={numPages} />
         {isMovie && <OrgMovieControl />}
         {isEnd && <LastCloseButton />}
+        <ExcludeButton orgId={org.id} currentPage={currentPage} />
       </StoryLikeContainer>
     </>
   );

@@ -35,19 +35,19 @@ const logo = css`
   background-color: transparent;
   animation: ${jumpingAnimation} 1s ease-in-out infinite;
 
-  &:nth-child(1) {
+  &:nth-of-type(1) {
     animation-delay: 0.2s;
   }
 
-  &:nth-child(2) {
+  &:nth-of-type(2) {
     animation-delay: 0.4s;
   }
 
-  &:nth-child(3) {
+  &:nth-of-type(3) {
     animation-delay: 0.6s;
   }
 
-  &:nth-child(4) {
+  &:nth-of-type(4) {
     animation-delay: 0.8s;
   }
 `;

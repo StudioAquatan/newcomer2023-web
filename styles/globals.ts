@@ -1,10 +1,6 @@
 import { css, Theme } from "@emotion/react";
-import { GenJyuuGothicP } from "./fonts/GenJyuuGoithcP";
-import { GenShinGothicP } from "./fonts/GenShinGoithcP";
 
 export const globalStyles = (theme: Theme) => css`
-  ${GenJyuuGothicP}
-  ${GenShinGothicP}
   html,
   body {
     padding: 0;

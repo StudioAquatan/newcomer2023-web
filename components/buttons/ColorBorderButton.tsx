@@ -1,14 +1,14 @@
 import { css, Theme, useTheme, Interpolation } from "@emotion/react";
 
 type ColorBorderButtonProps = {
-  label: string;
+  label?: React.ReactNode;
   textColor?: string;
   borderColor?: string;
   fontSize?: string;
   type?: string;
   disabled?: boolean;
   css?: Interpolation<Theme>;
-} & React.HTMLProps<HTMLButtonElement>;
+} & Omit<React.HTMLProps<HTMLButtonElement>, "label">;
 
 const button = (
   theme: Theme,

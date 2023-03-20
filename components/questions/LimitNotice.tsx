@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 import {
   ModalButton,
   ModalButtonContainer,
@@ -6,8 +6,12 @@ import {
   ModalTitle,
 } from "../modal";
 
-const textStyle = css`
+const titleStyle = (theme: Theme) => css`
+  color: ${theme.colors.normalTextColor};
+`;
+const textStyle = (theme: Theme) => css`
   font-size: 1.5rem;
+  color: ${theme.colors.normalTextColor};
 `;
 
 const remainStyle = css`
@@ -19,24 +23,31 @@ type Props = {
   remain: number;
   back: () => void;
   close: () => void;
+  type: "rediag" | "exclusion";
 };
-export default function LimitNotice({ remain, back, close }: Props) {
+
+export default function LimitNotice({ remain, back, close, type }: Props) {
   return (
     <>
-      <ModalTitle>{remain > 0 ? "再診断の確認" : "おっと？"}</ModalTitle>
+      <ModalTitle css={titleStyle}>
+        {remain > 0
+          ? `${type === "rediag" ? "再診断" : "除外"}の確認`
+          : "おっと？"}
+      </ModalTitle>
       <ModalContent>
         {remain > 0 ? (
           <>
             <p css={textStyle}>
-              診断できる回数には制限があります． <wbr />
+              {type === "rediag" ? "診断" : "団体を除外"}
+              できる回数には制限があります． <wbr />
               <span css={remainStyle}>残り{remain}回</span>
-              診断できます．
             </p>
             <p css={textStyle}>続けますか？</p>
           </>
         ) : (
           <p css={textStyle}>
-            診断できる回数を越えたため、もう診断することができません
+            {type === "rediag" ? "診断" : "団体を除外"}できる回数を越えたため、
+            もう{type === "rediag" ? "診断" : "除外"}することができません
           </p>
         )}
       </ModalContent>

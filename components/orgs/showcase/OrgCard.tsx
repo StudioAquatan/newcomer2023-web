@@ -4,15 +4,6 @@ import Link from "next/link";
 import { OrganizationFull } from "../../../api-client/@types";
 import imgixLoader from "../../../image-loader";
 
-const buttonStyle = css`
-  padding: 0;
-  margin: 0;
-  font-family: GenJyuuGothic-P, sans-serif;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-`;
-
 const container = (theme: Theme) => css`
   display: flex;
   align-items: center;
@@ -65,14 +56,7 @@ const textBoxStyle = css`
   margin-left: 1.6rem;
 `;
 
-const textContentStyle = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const textContentH1Style = (theme: Theme) => css`
-  margin: 0;
+const fullNameStyle = (theme: Theme) => css`
   overflow: hidden;
   font-size: 1.6rem;
   font-weight: bold;
@@ -81,12 +65,11 @@ const textContentH1Style = (theme: Theme) => css`
   white-space: nowrap;
 `;
 
-const textContentPStyle = (theme: Theme) => css`
+const descriptionStyle = (theme: Theme) => css`
   display: -webkit-box;
 
   /* 2行分で高さを固定にしてしまう */
   height: 3.6rem;
-  margin: 0;
   overflow: hidden;
   font-family: GenShinGothicP, sans-serif;
   font-size: 1.2rem;
@@ -106,25 +89,23 @@ export default function OrgCard({
   logoFocus,
 }: OrganizationFull) {
   return (
-    <Link as={`/orgs/details/${id}`} href="/orgs/details/[orgId]">
-      <button css={buttonStyle}>
-        <div css={container}>
-          <Image
-            css={orgImageStyle(logoFocus ?? false)}
-            src={logo?.src ?? "/org_icons/default.png"}
-            alt={fullName}
-            width={80}
-            height={80}
-            loader={imgixLoader}
-          />
-          <div css={textBoxStyle}>
-            <div css={textContentStyle}>
-              <p css={textContentH1Style}>{fullName}</p>
-            </div>
-            <p css={textContentPStyle}>{shortDescription}</p>
-          </div>
-        </div>
-      </button>
+    <Link
+      css={container}
+      as={`/orgs/details/${id}`}
+      href="/orgs/details/[orgId]"
+    >
+      <Image
+        css={orgImageStyle(logoFocus ?? false)}
+        src={logo?.src ?? "/org_icons/default.png"}
+        alt={fullName}
+        width={80}
+        height={80}
+        loader={imgixLoader}
+      />
+      <div css={textBoxStyle}>
+        <div css={fullNameStyle}>{fullName}</div>
+        <div css={descriptionStyle}>{shortDescription}</div>
+      </div>
     </Link>
   );
 }

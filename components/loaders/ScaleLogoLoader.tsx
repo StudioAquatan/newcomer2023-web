@@ -41,19 +41,19 @@ const logo = css`
   background-color: transparent;
   animation: ${scaleAnimation} 1s ease-in-out infinite;
 
-  &:nth-child(2) {
+  &:nth-of-type(2) {
     animation-delay: 0.2s;
   }
 
-  &:nth-child(3) {
+  &:nth-of-type(3) {
     animation-delay: 0.4s;
   }
 
-  &:nth-child(4) {
+  &:nth-of-type(4) {
     animation-delay: 0.6s;
   }
 
-  &:nth-child(5) {
+  &:nth-of-type(5) {
     animation-delay: 0.8s;
   }
 `;

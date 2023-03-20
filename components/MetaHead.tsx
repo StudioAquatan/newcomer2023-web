@@ -25,6 +25,12 @@ export default function MetaHead({
     title ? `${title} - ` : "",
     overrideSiteTitle ? overrideSiteTitle : defaultSiteTitle,
   ].join("");
+
+  // 指定がなければデフォルトのOGP画像を使う
+  if (!largeImage && !smallImage) {
+    largeImage = "/ogp.png";
+  }
+
   return (
     <Head>
       <meta property="og:type" content="website" />

@@ -1,4 +1,6 @@
 import { css } from "@emotion/react";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Question } from "../api-client/@types";
@@ -48,7 +50,7 @@ const buttonContainer = (show: boolean) => {
   return css`
     display: flex;
     justify-content: center;
-    margin: 10vh 0;
+    margin: 6rem 0;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.2s linear;
@@ -91,6 +93,27 @@ function SubmitButton({ onClick }: { onClick: () => void }) {
   );
 }
 
+function ReturnButton() {
+  const { backWithTransition, current } = useCurrentQuestion();
+
+  if (current === 0) return null;
+  return (
+    <div css={buttonContainer(true)}>
+      <ColorBorderButton
+        label={<FontAwesomeIcon icon={faChevronLeft} />}
+        onClick={backWithTransition}
+      />
+    </div>
+  );
+}
+
+const Header = () => (
+  <MetaHead
+    title="部活動相性診断"
+    description="いくつかの質問で、あなたにぴったりの部活動を診断"
+  />
+);
+
 export default function Diagnose({ questions }: DiagnoseProps) {
   const [diagnoseLoading, setDiagnoseLoading] = useState(false);
   const [stampCardLoading, setStampCardLoading] = useState(false);
@@ -116,7 +139,7 @@ export default function Diagnose({ questions }: DiagnoseProps) {
       setConfirmWait(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recommendation, current]);
+  }, [recommendation]);
 
   const handleBack = () => {
     push("/stampcard");
@@ -134,18 +157,25 @@ export default function Diagnose({ questions }: DiagnoseProps) {
           close={handleContinue}
           back={handleBack}
           remain={recommendation.recommendation.renewRemains}
+          type="rediag"
         />
       )}
     </ModalWrapper>
   );
 
   if (!isReady || !question || !recommendation) {
-    return <JumpingLogoLoader label="読み込み中..." pageMode />;
+    return (
+      <>
+        <Header />
+        <JumpingLogoLoader label="読み込み中..." pageMode />
+      </>
+    );
   }
 
   if (!diagnoseLoading) {
     return (
       <>
+        <Header />
         <JumpingLogoLoader label="診断を準備中..." pageMode />
         <ConfirmDialog />
       </>
@@ -153,15 +183,17 @@ export default function Diagnose({ questions }: DiagnoseProps) {
   }
 
   if (stampCardLoading) {
-    return <JumpingLogoLoader label="診断中..." pageMode />;
+    return (
+      <>
+        <Header />
+        <JumpingLogoLoader label="診断中..." pageMode />
+      </>
+    );
   }
 
   return (
     <div css={container}>
-      <MetaHead
-        title="部活動相性診断"
-        description="いくつかの質問で、あなたにぴったりの部活動を診断"
-      />
+      <Header />
       <Progress />
       <QuestionForm question={question} />
       <SubmitButton
@@ -169,6 +201,7 @@ export default function Diagnose({ questions }: DiagnoseProps) {
           setStampCardLoading(true);
         }}
       />
+      <ReturnButton />
       <ConfirmDialog />
     </div>
   );

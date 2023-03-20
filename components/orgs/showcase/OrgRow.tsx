@@ -10,6 +10,7 @@ export type OrgRowProps = {
 const base = css`
   display: flex;
   flex-direction: row;
+  flex-shrink: 0;
   width: 100%;
   overflow-x: hidden;
 
@@ -29,13 +30,13 @@ const scroll = keyframes`
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100%));
   }
 `;
 
 const scrollInverse = keyframes`
   0% {
-    transform: translateX(-100%);
+    transform: translateX((-100%));
   }
   100% {
     transform: translateX(0);
@@ -45,6 +46,7 @@ const scrollInverse = keyframes`
 const rowAnimation = (inverse: boolean) => {
   const animation = inverse ? scrollInverse : scroll;
   return css`
+    transform: translateX(${inverse ? "-100%" : "0"});
     animation: ${animation} 50s linear infinite;
   `;
 };
@@ -52,16 +54,13 @@ const rowAnimation = (inverse: boolean) => {
 export default function OrgRow({ cards, inverse }: OrgRowProps) {
   return (
     <div css={base}>
-      <div css={[rowStyle, rowAnimation(inverse)]}>
-        {cards.map((card, index) => {
-          return <OrgCard key={index} {...card} />;
-        })}
-      </div>
-      <div css={[rowStyle, rowAnimation(inverse)]}>
-        {cards.map((card, index) => {
-          return <OrgCard key={index} {...card} />;
-        })}
-      </div>
+      {[...Array(2)].map((_, i) => (
+        <div css={[rowStyle, rowAnimation(inverse)]} key={i}>
+          {cards.map((card) => {
+            return <OrgCard key={card.id} {...card} />;
+          })}
+        </div>
+      ))}
     </div>
   );
 }
