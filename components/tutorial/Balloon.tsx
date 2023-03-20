@@ -9,8 +9,8 @@ const balloonStyle = (theme: Theme) => css`
   position: relative;
   display: inline-block;
   min-width: 120px;
+  max-width: 80vw;
   padding: 1rem;
-  margin-right: 12px;
   font-size: 1.8rem;
   color: ${theme.colors.balloon.textColor};
   background: ${theme.colors.balloon.backgroundColor};
@@ -25,6 +25,8 @@ const balloonStyle = (theme: Theme) => css`
 `;
 
 const rightStyle = (theme: Theme) => css`
+  margin-right: 12px;
+
   &::before {
     top: 50%;
     left: 100%;
@@ -34,6 +36,8 @@ const rightStyle = (theme: Theme) => css`
 `;
 
 const bottomStyle = (theme: Theme) => css`
+  margin-bottom: 12px;
+
   &::before {
     top: 100%;
     left: 50%;
@@ -64,6 +68,7 @@ const balloonWrapper = css`
 const balloonContainer = css`
   position: absolute;
   bottom: 100%;
+  width: 100%;
 `;
 
 type ContainerProps = { balloonContent?: React.ReactNode } & Props;
