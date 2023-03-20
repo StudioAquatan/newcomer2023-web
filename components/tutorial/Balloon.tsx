@@ -1,4 +1,4 @@
-import { css, Theme } from "@emotion/react";
+import { css, keyframes, Theme } from "@emotion/react";
 import React from "react";
 
 type Props = {
@@ -65,22 +65,47 @@ const balloonWrapper = css`
   position: relative;
 `;
 
+const balloonAnimation = keyframes`
+  0% {
+    bottom: 100%;
+  }
+
+  40% {
+    bottom: calc(100% - 0.5rem);
+  }
+
+  100% {
+    bottom: 100%;
+  }
+`;
+
 const balloonContainer = css`
   position: absolute;
   bottom: 100%;
   width: 100%;
 `;
 
-type ContainerProps = { balloonContent?: React.ReactNode } & Props;
+const balloonContainerAnimated = css`
+  animation: ${balloonAnimation} 0.5s linear infinite;
+`;
+
+type ContainerProps = {
+  balloonContent?: React.ReactNode;
+  animated?: boolean;
+} & Props;
+
 export function BalloonContainer({
   balloonContent,
   direction,
+  animated,
   children,
 }: React.PropsWithChildren<ContainerProps>) {
   return (
     <div css={balloonWrapper}>
       {balloonContent && (
-        <div css={balloonContainer}>
+        <div
+          css={[balloonContainer, animated ? balloonContainerAnimated : null]}
+        >
           <Balloon direction={direction}>{balloonContent}</Balloon>
         </div>
       )}

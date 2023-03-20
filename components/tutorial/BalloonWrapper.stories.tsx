@@ -19,7 +19,11 @@ const Template: ComponentStory<typeof BalloonContainer> = (args) => (
     <p>Paragraph 1</p>
     <p>Paragraph 2</p>
     <p>Paragraph 3</p>
-    <BalloonContainer balloonContent={"Balloon"} direction={args.direction}>
+    <BalloonContainer
+      balloonContent={"Balloon"}
+      direction={args.direction}
+      animated={args.animated}
+    >
       <p>Target</p>
     </BalloonContainer>
   </div>
