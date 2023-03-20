@@ -1,5 +1,9 @@
 import { ImageLoaderProps } from "next/image";
-export default function imgixLoader({ src, width, quality }: ImageLoaderProps) {
+export default function imgixLoader({
+  src,
+  width,
+  quality = 75,
+}: ImageLoaderProps) {
   const newtPrefix = process.env.NEXT_PUBLIC_NEWT_ROOT ?? "newt/";
   const assetsPrefix = process.env.NEXT_PUBLIC_RESOURCE_URL ?? "assets/";
   if (src.startsWith(newtPrefix)) {
