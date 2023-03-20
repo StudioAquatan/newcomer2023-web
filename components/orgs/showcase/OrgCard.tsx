@@ -89,7 +89,11 @@ export default function OrgCard({
   logoFocus,
 }: OrganizationFull) {
   return (
-    <Link css={container} as={`/orgs/details/${id}`} href="/orgs/details/[orgId]">
+    <Link
+      css={container}
+      as={`/orgs/details/${id}`}
+      href="/orgs/details/[orgId]"
+    >
       <Image
         css={orgImageStyle(logoFocus ?? false)}
         src={logo?.src ?? "/org_icons/default.png"}
