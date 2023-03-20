@@ -14,11 +14,11 @@ const base = css`
   width: 100%;
   overflow-x: hidden;
 
-  &:hover {
+  /* &:hover {
     & > div {
       animation-play-state: paused;
     }
-  }
+  } */
 `;
 
 const rowStyle = css`
