@@ -27,19 +27,19 @@ const rowStyle = css`
 
 const scroll = keyframes`
   0% {
-    transform: translate(0);
+    transform: translateX(0);
   }
   100% {
-    transform: translate(-100%, 0);
+    transform: translateX(calc(-100%));
   }
 `;
 
 const scrollInverse = keyframes`
   0% {
-    transform: translate(-100%, 0);
+    transform: translateX((-100%));
   }
   100% {
-    transform: translate(0);
+    transform: translateX(0);
   }
 `;
 
@@ -54,16 +54,13 @@ const rowAnimation = (inverse: boolean) => {
 export default function OrgRow({ cards, inverse }: OrgRowProps) {
   return (
     <div css={base}>
-      <div css={[rowStyle, rowAnimation(inverse)]}>
-        {cards.map((card, index) => {
-          return <OrgCard key={index} {...card} />;
-        })}
-      </div>
-      <div css={[rowStyle, rowAnimation(inverse)]}>
-        {cards.map((card, index) => {
-          return <OrgCard key={index} {...card} />;
-        })}
-      </div>
+      {[...Array(2)].map((_, i) => (
+        <div css={[rowStyle, rowAnimation(inverse)]} key={i}>
+          {cards.map((card) => {
+            return <OrgCard key={card.id} {...card} />;
+          })}
+        </div>
+      ))}
     </div>
   );
 }
