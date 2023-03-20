@@ -12,8 +12,8 @@ const balloonStyle = (theme: Theme) => css`
   padding: 1rem;
   margin-right: 12px;
   font-size: 1.8rem;
-  color: ${theme.colors.normalTextColor};
-  background: ${theme.colors.backgroundColor};
+  color: ${theme.colors.balloon.textColor};
+  background: ${theme.colors.balloon.backgroundColor};
   border-radius: 4px;
   transition: opacity 0.4s linear;
 
@@ -29,7 +29,7 @@ const rightStyle = (theme: Theme) => css`
     top: 50%;
     left: 100%;
     margin-top: -12px;
-    border-left: 12px solid ${theme.colors.backgroundColor};
+    border-left: 12px solid ${theme.colors.balloon.backgroundColor};
   }
 `;
 
@@ -38,7 +38,7 @@ const bottomStyle = (theme: Theme) => css`
     top: 100%;
     left: 50%;
     margin-left: -12px;
-    border-top: 12px solid ${theme.colors.backgroundColor};
+    border-top: 12px solid ${theme.colors.balloon.backgroundColor};
   }
 `;
 

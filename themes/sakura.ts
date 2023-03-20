@@ -39,6 +39,10 @@ declare module "@emotion/react" {
         backgroundColor: string;
         normalTextColor: string;
       };
+      balloon: {
+        backgroundColor: string;
+        textColor: string;
+      };
     };
   }
 }
@@ -80,6 +84,10 @@ export const sakura = {
     storyLike: {
       backgroundColor: "#202020",
       normalTextColor: "#E6E6E6",
+    },
+    balloon: {
+      backgroundColor: "#bcffab",
+      textColor: "#333333",
     },
   },
 };
