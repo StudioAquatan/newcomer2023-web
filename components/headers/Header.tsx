@@ -14,13 +14,13 @@ const getHeaderData = (hasStampCard: boolean) => {
         href: "/",
       },
     },
-    {
-      label: "新歓について",
-      link: {
-        href: "",
-        external: true,
-      },
-    },
+    // {
+    //   label: "新歓について",
+    //   link: {
+    //     href: "",
+    //     external: true,
+    //   },
+    // },
     {
       label: "団体一覧",
       link: {
