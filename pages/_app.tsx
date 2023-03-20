@@ -1,6 +1,7 @@
 import type { AppPropsWithLayout } from "next/app";
 import { useEffect } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect";
+import Gtag from "../components/Gtag";
 import Layout from "../components/Layout";
 import ErrorModal from "../components/error/ErrorModal";
 import Footer from "../components/footers/Footer";
@@ -36,6 +37,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     ));
   return (
     <Layout>
+      <Gtag />
       {getLayout(<Component {...pageProps} />)}
       <ErrorModal />
     </Layout>

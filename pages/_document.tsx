@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Newrelic from "../components/Newrelic";
 
 export default function Document() {
   return (
@@ -34,6 +35,7 @@ export default function Document() {
           content="/favicons/browserconfig.xml"
         />
         <meta name="theme-color" content="#ffffff" />
+        <Newrelic />
       </Head>
       <body>
         <Main />
