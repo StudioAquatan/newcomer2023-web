@@ -52,18 +52,15 @@ const rowAnimation = (inverse: boolean) => {
 };
 
 export default function OrgRow({ cards, inverse }: OrgRowProps) {
-  const row = (
-    <div css={[rowStyle, rowAnimation(inverse)]}>
-      {cards.map((card, index) => {
-        return <OrgCard key={index} {...card} />;
-      })}
-    </div>
-  );
-
   return (
     <div css={base}>
-      {row}
-      {row}
+      {[...Array(2)].map((_, i) => (
+        <div css={[rowStyle, rowAnimation(inverse)]} key={i}>
+          {cards.map((card) => {
+            return <OrgCard key={card.id} {...card} />;
+          })}
+        </div>
+      ))}
     </div>
   );
 }
