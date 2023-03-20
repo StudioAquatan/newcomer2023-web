@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { OrganizationFull } from "../../../api-client/@types";
 import imgixLoader from "../../../image-loader";
-import { defaultLogo } from "../../../styles/images";
 
 const linkStyle = css`
   color: inherit;
@@ -63,7 +62,7 @@ export default function OrgPanel({
         <div css={descriptionContainerStyle}>
           <Image
             css={logoStyle(logoFocus ?? false)}
-            src={logo?.src ?? defaultLogo}
+            src={logo?.src ?? "/org_icons/default.png"}
             alt={fullName}
             width={100}
             height={100}

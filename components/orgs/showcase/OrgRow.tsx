@@ -9,8 +9,8 @@ export type OrgRowProps = {
 
 const base = css`
   display: flex;
-  flex-direction: row;
   flex-shrink: 0;
+  flex-direction: row;
   width: 100%;
   overflow-x: hidden;
 

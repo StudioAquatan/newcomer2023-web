@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { OrganizationFull } from "../../../api-client/@types";
 import imgixLoader from "../../../image-loader";
-import { defaultLogo } from "../../../styles/images";
 
 const container = (theme: Theme) => css`
   display: flex;
@@ -90,14 +89,10 @@ export default function OrgCard({
   logoFocus,
 }: OrganizationFull) {
   return (
-    <Link
-      css={container}
-      as={`/orgs/details/${id}`}
-      href="/orgs/details/[orgId]"
-    >
+    <Link css={container} as={`/orgs/details/${id}`} href="/orgs/details/[orgId]">
       <Image
         css={orgImageStyle(logoFocus ?? false)}
-        src={logo?.src ?? defaultLogo}
+        src={logo?.src ?? "/org_icons/default.png"}
         alt={fullName}
         width={80}
         height={80}

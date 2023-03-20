@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { OrganizationFull, RecommendationItem } from "../../api-client/@types";
 import imgixLoader from "../../image-loader";
-import { markVisited, markVisitedAquatan } from "../../styles/images";
 import Random from "../random";
 
 export type StampProps = {
@@ -96,7 +95,9 @@ export default function Stamp({
       {recommendation.isVisited ? (
         <Image
           css={markVisitedStyle(seed)}
-          src={secret === 224 ? markVisitedAquatan : markVisited}
+          src={
+            secret === 224 ? "/mark_visited_aquatan.png" : "/mark_visited.png"
+          }
           alt="visited"
           width={32}
           height={32}

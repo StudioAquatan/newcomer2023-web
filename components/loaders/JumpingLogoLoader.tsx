@@ -1,7 +1,6 @@
 import { css, keyframes } from "@emotion/react";
 import Image from "next/image";
 import imgixLoader from "../../image-loader";
-import { aquatanBlack, irodoriLogo } from "../../styles/images";
 
 const container = (pageMode: boolean) => css`
   display: flex;
@@ -66,7 +65,7 @@ const loaderLabel = css`
 const Irodukun = () => {
   return (
     <Image
-      src={irodoriLogo}
+      src="/org_icons/irodori_logo.png"
       alt="irodori"
       width={64}
       height={64}
@@ -79,7 +78,7 @@ const Irodukun = () => {
 const Aquatan = () => {
   return (
     <Image
-      src={aquatanBlack}
+      src="/org_icons/aquatan-black.png"
       alt="あくあたん工房"
       width={64}
       height={64}
