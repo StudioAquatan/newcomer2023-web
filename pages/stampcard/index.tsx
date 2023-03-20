@@ -166,7 +166,7 @@ export default function StampCardPage() {
 
   const share = () => {
     const shareText =
-      "相性診断をしてスタンプカードを作りました！みんなも診断してみてね\n#工繊50団体相性診断\n";
+      "相性診断をしてスタンプカードを作りました！みんなも診断してみてね\n#工繊53団体相性診断\n";
     const shareUrl = `${SELF_URL}?uid=${userData?.user.id}`;
     if (navigator.share) {
       navigator
