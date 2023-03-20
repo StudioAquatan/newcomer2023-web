@@ -27,19 +27,19 @@ const rowStyle = css`
 
 const scroll = keyframes`
   0% {
-    transform: translate(0);
+    transform: translateX(0);
   }
   100% {
-    transform: translate(-100%, 0);
+    transform: translateX(calc(-100%));
   }
 `;
 
 const scrollInverse = keyframes`
   0% {
-    transform: translate(-100%, 0);
+    transform: translateX((-100%));
   }
   100% {
-    transform: translate(0);
+    transform: translateX(0);
   }
 `;
 
