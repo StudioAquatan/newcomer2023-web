@@ -101,7 +101,6 @@ export default function OrgCard({
         width={80}
         height={80}
         loader={imgixLoader}
-        loading='eager'
       />
       <div css={textBoxStyle}>
         <div css={fullNameStyle}>{fullName}</div>
