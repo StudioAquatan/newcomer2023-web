@@ -54,8 +54,9 @@ const rowAnimation = (inverse: boolean) => {
 export default function OrgRow({ cards, inverse }: OrgRowProps) {
   const animation = rowAnimation(inverse);
   const onLoad = () => {
-    document.querySelectorAll(`.${rowStyle}`)
-      .forEach(row => row.classList.add(`${animation}`))
+    document
+      .querySelectorAll(`.${rowStyle}`)
+      .forEach((row) => row.classList.add(`${animation}`));
   };
 
   return (
