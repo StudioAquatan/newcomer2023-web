@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-// import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useInView } from "react-intersection-observer";
 import { OrganizationFull } from "../../api-client/@types";
 import MetaHead from "../../components/MetaHead";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
@@ -15,6 +14,7 @@ import { StampProps } from "../../components/stampcard/Stamp";
 import StampCard, {
   StampCardProps,
 } from "../../components/stampcard/StampCard";
+import { BalloonContainer } from "../../components/tutorial/Balloon";
 import useStampCardSeed from "../../hooks/cardSeed";
 import { useOrganizations } from "../../hooks/organizations";
 import {
@@ -22,6 +22,7 @@ import {
   useRecommendation,
 } from "../../hooks/recommendation";
 import useUser from "../../hooks/user";
+import { useStampcardTutorial } from "../../store/tutorial";
 import { useIsMobile } from "../../store/userAgent";
 
 const SELF_URL = process.env.NEXT_PUBLIC_PUBLIC_DOMAIN
@@ -93,6 +94,7 @@ const otherLinks = css`
   text-align: center;
 
   a {
+    width: 80vw;
     padding: 1rem 0;
     color: rgba(0 0 0 / 95%);
   }
@@ -128,6 +130,17 @@ export default function StampCardPage() {
       push("/");
     }
   }, [recommendationData, push]);
+
+  const { done, close } = useStampcardTutorial();
+
+  const { ref, inView } = useInView();
+  React.useEffect(() => {
+    if (inView) {
+      setTimeout(() => {
+        close();
+      }, 5000);
+    }
+  }, [close, inView]);
 
   if (!recommendationData || !orgsData) {
     return (
@@ -222,7 +235,23 @@ export default function StampCardPage() {
           <FontAwesomeIcon icon={faChevronRight} css={iconMargin} />
         </Link>
         {recommendation.renewRemains > 0 && (
-          <Link href="/diagnose">診断をやり直す</Link>
+          <BalloonContainer
+            direction="bottom"
+            animated
+            balloonContent={
+              done ? null : (
+                <>
+                  質問は診断毎に変わるので
+                  <br />
+                  やり直すとより良い結果になるかも
+                </>
+              )
+            }
+          >
+            <Link href="/diagnose" ref={ref}>
+              診断をやり直す
+            </Link>
+          </BalloonContainer>
         )}
         <Link href="/stampcard/exclusion">除外する団体を設定</Link>
       </div>
