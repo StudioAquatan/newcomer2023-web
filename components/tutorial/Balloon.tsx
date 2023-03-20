@@ -56,3 +56,30 @@ export default function Balloon({
     </div>
   );
 }
+
+const balloonWrapper = css`
+  position: relative;
+`;
+
+const balloonContainer = css`
+  position: absolute;
+  bottom: 100%;
+`;
+
+type ContainerProps = { balloonContent?: React.ReactNode } & Props;
+export function BalloonContainer({
+  balloonContent,
+  direction,
+  children,
+}: React.PropsWithChildren<ContainerProps>) {
+  return (
+    <div css={balloonWrapper}>
+      {balloonContent && (
+        <div css={balloonContainer}>
+          <Balloon direction={direction}>{balloonContent}</Balloon>
+        </div>
+      )}
+      {children}
+    </div>
+  );
+}
