@@ -1,4 +1,6 @@
 import { css, keyframes } from "@emotion/react";
+import React from "react";
+import Random from "../random";
 import Piece from "./Piece";
 
 const base = css`
@@ -26,20 +28,55 @@ const fall = keyframes`
   }
 `;
 
-const piece = css`
+const piece = ({
+  margin,
+  delay,
+  duration,
+}: {
+  margin: string;
+  delay: string;
+  duration: string;
+}) => css`
   position: absolute;
   height: 100%;
-  margin-left: 50%; /* 画面中央に配置する */
+  margin-left: ${margin};
   animation: ${fall} linear infinite;
-  animation-duration: 2s;
+  animation-duration: ${duration};
+  animation-delay: ${delay};
 `;
 
-export default function Confetti() {
-  return (
-    <div css={base}>
-      <div css={piece}>
-        <Piece color="#ff0000" width="10px" height="10px" />
-      </div>
-    </div>
-  );
+type ConfettiProps = {
+  count: number;
+  duration: {
+    min: number;
+    max: number;
+  };
+  delay: number;
+};
+
+export default function Confetti({ count, duration, delay }: ConfettiProps) {
+  const pieces = React.useMemo(() => {
+    const SEED = 0;
+    const r = new Random(SEED);
+    return (
+      <>
+        {[...Array(count)].map((_, i) => {
+          return (
+            <div
+              key={i}
+              css={piece({
+                margin: `${r.nextNumber(0, 100)}%`,
+                duration: `${r.nextNumber(duration.min, duration.max) * 0.1}s`,
+                delay: `-${r.nextNumber(0, delay) * 0.1}s`,
+              })}
+            >
+              <Piece color="#ff0000" width="10px" height="10px" />
+            </div>
+          );
+        })}
+      </>
+    );
+  }, [count, delay, duration]);
+
+  return <div css={base}>{pieces}</div>;
 }

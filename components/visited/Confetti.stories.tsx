@@ -7,16 +7,30 @@ import Confetti from "./Confetti";
 export default {
   title: "Visited/Confetti",
   component: Confetti,
+  argTypes: {
+    count: { control: { type: "range", min: 0, max: 100, step: 1 } },
+  },
 } as ComponentMeta<typeof Confetti>;
 
-const Template: ComponentStory<typeof Confetti> = () => (
+const Template: ComponentStory<typeof Confetti> = (args) => (
   <div
     css={css`
-      height: 100vh;
+      position: absolute;
+      top: -50vh;
+      width: 100vw;
+      height: 150vh;
     `}
   >
-    <Confetti />
+    <Confetti {...args} />
   </div>
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  count: 50,
+  duration: {
+    min: 30,
+    max: 80,
+  },
+  delay: 10,
+};
