@@ -3,6 +3,8 @@ import React from "react";
 import Random from "../random";
 import Piece from "./Piece";
 
+const colorPalette = ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"];
+
 const base = css`
   position: relative;
   width: 100%;
@@ -139,7 +141,7 @@ export default function Confetti({ count, fall, piece }: ConfettiProps) {
                 overrideCss={overrideCss(
                   r.nextNumber(piece.duration.min, piece.duration.max) * 0.1
                 )}
-                color="#ff0000"
+                color={colorPalette[r.nextNumber(0, colorPalette.length - 1)]}
                 width="10px"
                 height="10px"
               />

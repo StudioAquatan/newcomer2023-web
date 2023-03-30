@@ -44,7 +44,7 @@ const back = css`
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #fffc;
+  background-color: #fff9;
   backface-visibility: hidden;
 `;
 
@@ -56,8 +56,8 @@ export default function Piece({
 }: PieceProps) {
   return (
     <div css={[base({ width, height }), overrideCss]}>
-      <div css={front(color)} />
       <div css={back} />
+      <div css={front(color)} />
     </div>
   );
 }
