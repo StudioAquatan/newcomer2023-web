@@ -1,4 +1,4 @@
-import { css, keyframes } from "@emotion/react";
+import { css, Keyframes, keyframes } from "@emotion/react";
 import React from "react";
 import Random from "../random";
 import Piece from "./Piece";
@@ -64,7 +64,7 @@ const fallC = keyframes`
   }
 `;
 
-const piece = ({
+const pieceContainer = ({
   margin,
   delay,
   duration,
@@ -85,14 +85,25 @@ const piece = ({
 
 type ConfettiProps = {
   count: number;
-  duration: {
-    min: number;
-    max: number;
+  fall: {
+    duration: {
+      min: number;
+      max: number;
+    };
+    delay: {
+      min: number;
+      max: number;
+    };
   };
-  delay: number;
+  piece: {
+    duration: {
+      min: number;
+      max: number;
+    };
+  };
 };
 
-export default function Confetti({ count, duration, delay }: ConfettiProps) {
+export default function Confetti({ count, fall, piece }: ConfettiProps) {
   const pieces = React.useMemo(() => {
     const SEED = 0;
     const r = new Random(SEED);
@@ -104,27 +115,40 @@ export default function Confetti({ count, duration, delay }: ConfettiProps) {
           const selectedKeyframe =
             keyframes[r.nextNumber(0, keyframes.length - 1)];
 
+          const overrideCss = (duration: number) => css`
+            animation-duration: ${duration}s;
+          `;
+
           return (
             <div
               key={i}
               css={[
-                piece({
+                pieceContainer({
                   margin: `${r.nextNumber(0, 100)}%`,
                   duration: `${
-                    r.nextNumber(duration.min, duration.max) * 0.1
+                    r.nextNumber(fall.duration.min, fall.duration.max) * 0.1
                   }s`,
-                  delay: `-${r.nextNumber(0, delay) * 0.1}s`,
+                  delay: `-${
+                    r.nextNumber(fall.delay.min, fall.delay.max) * 0.1
+                  }s`,
                   keyframe: selectedKeyframe,
                 }),
               ]}
             >
-              <Piece color="#ff0000" width="10px" height="10px" />
+              <Piece
+                overrideCss={overrideCss(
+                  r.nextNumber(piece.duration.min, piece.duration.max) * 0.1
+                )}
+                color="#ff0000"
+                width="10px"
+                height="10px"
+              />
             </div>
           );
         })}
       </>
     );
-  }, [count, delay, duration]);
+  }, [count, fall, piece]);
 
   return <div css={base}>{pieces}</div>;
 }

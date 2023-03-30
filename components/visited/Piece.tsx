@@ -1,6 +1,7 @@
-import { css, keyframes } from "@emotion/react";
+import { css, keyframes, SerializedStyles } from "@emotion/react";
 
 export type PieceProps = {
+  overrideCss?: SerializedStyles;
   color: string;
   width: string;
   height: string;
@@ -47,9 +48,14 @@ const back = css`
   backface-visibility: hidden;
 `;
 
-export default function Piece({ color, width, height }: PieceProps) {
+export default function Piece({
+  overrideCss,
+  color,
+  width,
+  height,
+}: PieceProps) {
   return (
-    <div css={base({ width, height })}>
+    <div css={[base({ width, height }), overrideCss]}>
       <div css={front(color)} />
       <div css={back} />
     </div>

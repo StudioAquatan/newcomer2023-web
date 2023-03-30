@@ -7,9 +7,7 @@ import Confetti from "./Confetti";
 export default {
   title: "Visited/Confetti",
   component: Confetti,
-  argTypes: {
-    count: { control: { type: "range", min: 0, max: 100, step: 1 } },
-  },
+  argTypes: {},
 } as ComponentMeta<typeof Confetti>;
 
 const Template: ComponentStory<typeof Confetti> = (args) => (
@@ -28,9 +26,20 @@ const Template: ComponentStory<typeof Confetti> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   count: 50,
-  duration: {
-    min: 30,
-    max: 80,
+  fall: {
+    duration: {
+      min: 30,
+      max: 80,
+    },
+    delay: {
+      min: 0,
+      max: 100,
+    },
   },
-  delay: 10,
+  piece: {
+    duration: {
+      min: 10,
+      max: 20,
+    },
+  },
 };
