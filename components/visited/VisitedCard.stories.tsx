@@ -22,4 +22,3 @@ StudioAquatan.args = {
   logo: "/org_icons/studioaquatan.png",
   logoFocus: false,
 };
-

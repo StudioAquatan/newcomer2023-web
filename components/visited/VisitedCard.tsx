@@ -37,13 +37,25 @@ const orgInfo = css`
   flex-direction: column;
   align-items: center;
   width: 100%;
-`;
 
-const orgName = css`
-  padding: 0;
-  margin: 0;
-  margin-top: 1.8rem;
-  font-size: 3.2rem;
+  h2 {
+    padding: 0;
+    margin: 0;
+    margin-top: 1.8rem;
+    margin-bottom: 0.4rem;
+    font-size: 3.2rem;
+    font-weight: normal;
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+    font-family: GenShinGothic-P, sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
 `;
 
 const logoContainer = (logoFocus: boolean) => css`
@@ -100,15 +112,19 @@ export default function VisitedCard({
             loader={imgixLoader}
           />
         </div>
-        <p css={orgName}>{fullName}</p>
-      </div>
-      <div css={description}>
+        <h2>{fullName}</h2>
         <p>
           の説明会に
           <wbr />
           参加しました
         </p>
-        <p>9個中3個目のスタンプを獲得！</p>
+      </div>
+      <div css={description}>
+        <p>
+          9個中3個目の
+          <wbr />
+          スタンプを獲得！
+        </p>
       </div>
     </div>
   );
