@@ -49,9 +49,6 @@ const confettiContainer = css`
 `;
 
 const buttonContainer = css`
-  /* position: absolute; */
-
-  /* top: 80vh; */
   z-index: 1;
   display: flex;
   align-items: center;
