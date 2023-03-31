@@ -99,8 +99,6 @@ export default function OrgListPage({ organizations }: OrgListPageProps) {
 }
 
 export async function getStaticProps() {
-  // 全団体詳細ページの初期データを取得
-  // 全団体のデータを返すAPIしかないので、団体数回、全団体のデータを取得するAPIリクエストが発生してしまう
   const orgs = await getOrgs();
 
   return {
