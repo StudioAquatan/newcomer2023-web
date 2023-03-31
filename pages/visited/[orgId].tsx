@@ -74,7 +74,7 @@ export default function Visited({ org }: VisitedProps) {
       </div>
       <div css={visitedCardContainer}>
         <VisitedCard
-          fullName={org.fullName}
+          orgName={org.shortName}
           logo={org.logo?.src || "/org_icons/default.png"}
           logoFocus={org.logoFocus ?? false}
         />

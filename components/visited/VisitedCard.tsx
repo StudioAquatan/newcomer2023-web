@@ -3,7 +3,7 @@ import Image from "next/image";
 import imgixLoader from "../../image-loader";
 
 type VisitedCardProps = {
-  fullName: string;
+  orgName: string;
   logo: string;
   logoFocus?: boolean;
 };
@@ -93,7 +93,7 @@ const description = css`
 `;
 
 export default function VisitedCard({
-  fullName,
+  orgName,
   logo,
   logoFocus = false,
 }: VisitedCardProps) {
@@ -108,13 +108,13 @@ export default function VisitedCard({
         <div css={logoContainer(logoFocus)}>
           <Image
             src={logo}
-            alt={fullName}
+            alt={orgName}
             width={300}
             height={300}
             loader={imgixLoader}
           />
         </div>
-        <h2>{fullName}</h2>
+        <h2>{orgName}</h2>
         <p>
           の説明会に
           <wbr />
