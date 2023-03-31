@@ -1,10 +1,12 @@
 import { css, useTheme } from "@emotion/react";
+import { useRouter } from "next/router";
 import { OrganizationFull } from "../../api-client/@types";
 import { getOrgs } from "../../api-client/cached-response";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
 import Header from "../../components/headers/Header";
 import Confetti, { ConfettiProps } from "../../components/visited/Confetti";
 import VisitedCard from "../../components/visited/VisitedCard";
+import { useVisits } from "../../hooks/visits";
 import { useIsMobile } from "../../store/userAgent";
 
 const confettiProps: ConfettiProps = {
@@ -66,6 +68,10 @@ type VisitedProps = {
 export default function Visited({ org }: VisitedProps) {
   const theme = useTheme();
   const { isMobile } = useIsMobile();
+  const router = useRouter();
+  const { token: visitsToken } = router.query;
+
+  useVisits(visitsToken as string);
 
   return (
     <div css={container}>
