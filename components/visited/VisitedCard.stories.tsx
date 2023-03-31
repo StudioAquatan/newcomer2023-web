@@ -17,7 +17,6 @@ const Template: ComponentStory<typeof VisitedCard> = (args) => (
 
 export const StudioAquatan = Template.bind({});
 StudioAquatan.args = {
-  orgId: "1",
   fullName: "Studio Aquatan",
   logo: "/org_icons/studioaquatan.png",
   logoFocus: false,

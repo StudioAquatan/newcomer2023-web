@@ -1,4 +1,6 @@
 import { css, useTheme } from "@emotion/react";
+import { OrganizationFull } from "../../api-client/@types";
+import { getOrgs } from "../../api-client/cached-response";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
 import Header from "../../components/headers/Header";
 import Confetti, { ConfettiProps } from "../../components/visited/Confetti";
@@ -55,7 +57,11 @@ const buttonContainer = css`
   justify-content: center;
 `;
 
-export default function Visited() {
+type VisitedProps = {
+  org: OrganizationFull;
+};
+
+export default function Visited({ org }: VisitedProps) {
   const theme = useTheme();
   const { isMobile } = useIsMobile();
 
@@ -66,10 +72,9 @@ export default function Visited() {
       </div>
       <div css={visitedCardContainer}>
         <VisitedCard
-          orgId="1"
-          fullName="StudioAquatan"
-          logo="/org_icons/studioaquatan.png"
-          logoFocus={false}
+          fullName={org.fullName}
+          logo={org.logo?.src || "/org_icons/default.png"}
+          logoFocus={org.logoFocus ?? false}
         />
       </div>
       <div css={buttonContainer}>
@@ -84,4 +89,35 @@ export default function Visited() {
       </div>
     </div>
   );
+}
+
+export async function getStaticPaths() {
+  const orgs = await getOrgs();
+
+  const paths = orgs.map((org) => `/visited/${org.id}`);
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({
+  params,
+}: {
+  params: { orgId: string };
+}) {
+  const { orgId } = params;
+  const orgs = await getOrgs();
+  const org = orgs.find((e) => e.id === orgId);
+
+  if (org === undefined) {
+    throw Error("団体が見つかりませんでした ID: " + orgId);
+  }
+
+  return {
+    props: {
+      org,
+    },
+  };
 }

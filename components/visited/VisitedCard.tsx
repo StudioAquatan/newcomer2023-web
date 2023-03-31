@@ -3,7 +3,6 @@ import Image from "next/image";
 import imgixLoader from "../../image-loader";
 
 type VisitedCardProps = {
-  orgId: string;
   fullName: string;
   logo: string;
   logoFocus?: boolean;
