@@ -44,6 +44,7 @@ const orgInfo = css`
     margin-bottom: 0.4rem;
     font-size: 3.2rem;
     font-weight: normal;
+    text-align: center;
     word-break: keep-all;
     overflow-wrap: anywhere;
   }
