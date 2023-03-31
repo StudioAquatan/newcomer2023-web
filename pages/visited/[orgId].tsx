@@ -38,9 +38,11 @@ const headerPadding = css`
 `;
 
 const visitedCardContainer = css`
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
-  margin: 1.8rem;
+  width: 100%;
+  padding: 1.8rem;
 `;
 
 const confettiContainer = css`
