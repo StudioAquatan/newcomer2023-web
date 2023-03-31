@@ -14,10 +14,10 @@ const container = css`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  width: 100%;
   max-width: 600px;
-  min-height: 70svh;
+  height: 60vh;
   padding: 3.2rem;
-  margin: 2rem;
   background-color: #fff;
   border-radius: 0.8rem;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
@@ -45,6 +45,8 @@ const orgInfo = css`
     margin-bottom: 0.4rem;
     font-size: 3.2rem;
     font-weight: normal;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
 
   p {
@@ -60,8 +62,8 @@ const orgInfo = css`
 
 const logoContainer = (logoFocus: boolean) => css`
   position: relative;
-  width: 60%;
-  padding-bottom: 60%;
+  width: 40%;
+  padding-bottom: 40%;
   border: 1px solid #e5e5e5;
   border-radius: 10px;
 

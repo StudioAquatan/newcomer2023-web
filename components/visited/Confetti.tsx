@@ -85,7 +85,7 @@ const pieceContainer = ({
   animation-delay: ${delay};
 `;
 
-type ConfettiProps = {
+export type ConfettiProps = {
   count: number;
   fall: {
     duration: {
