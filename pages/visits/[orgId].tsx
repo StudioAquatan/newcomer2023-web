@@ -71,7 +71,7 @@ export default function Visited({ org }: VisitedProps) {
   const router = useRouter();
   const { token: visitsToken } = router.query;
 
-  useVisits(visitsToken as string);
+  const { data: visitsData } = useVisits(visitsToken as string);
 
   return (
     <div css={container}>
@@ -83,6 +83,7 @@ export default function Visited({ org }: VisitedProps) {
           orgName={org.shortName}
           logo={org.logo?.src || "/org_icons/default.png"}
           logoFocus={org.logoFocus ?? false}
+          cardStatus={visitsData ? visitsData.status : "loading"}
         />
       </div>
       <div css={buttonContainer}>
@@ -92,9 +93,12 @@ export default function Visited({ org }: VisitedProps) {
           borderColor={theme.colors.button.enable.backgroundColor}
         />
       </div>
-      <div css={confettiContainer}>
-        <Confetti {...confettiProps} />
-      </div>
+      {/* アニメーションは初めてスタンプを取得した時のみ */}
+      {visitsData?.status === "success" && (
+        <div css={confettiContainer}>
+          <Confetti {...confettiProps} />
+        </div>
+      )}
     </div>
   );
 }

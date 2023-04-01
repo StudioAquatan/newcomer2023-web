@@ -21,3 +21,11 @@ StudioAquatan.args = {
   logo: "/org_icons/studioaquatan.png",
   logoFocus: false,
 };
+
+export const AlreadyVisited = Template.bind({});
+AlreadyVisited.args = {
+  orgName: "Studio Aquatan",
+  logo: "/org_icons/studioaquatan.png",
+  logoFocus: false,
+  cardStatus: "conflict",
+};

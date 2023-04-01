@@ -8,7 +8,7 @@ export function useVisits(visitsToken: string) {
   const token = userData?.token;
 
   return useSWR(
-    token ? ["/visits", token, visitsToken] : null,
+    token && visitsToken ? ["/visits", token, visitsToken] : null,
     async () => {
       if (typeof window === "undefined") return null;
       const response = await apiClient.visits
@@ -21,7 +21,7 @@ export function useVisits(visitsToken: string) {
           },
         })
         .then((res) => {
-          return res;
+          return { status: "success", response: res };
         })
         .catch((error) => {
           if (error instanceof HTTPError) {
@@ -34,8 +34,7 @@ export function useVisits(visitsToken: string) {
                 cause: error,
               });
             } else if (error.response.status === 409) {
-              // VisitedCardを既に訪問済みのメッセージ表示に変更してあげたい
-              console.warn("既に訪問済みです", error);
+              return { status: "conflict", response: error.response };
             } else if (error.response.status === 412) {
               throw new Error("まだ訪問記録ができません", {
                 cause: error,
@@ -54,6 +53,6 @@ export function useVisits(visitsToken: string) {
 
       return response;
     },
-    { revalidateOnFocus: false }
+    { revalidateOnFocus: false, errorRetryCount: 0 }
   );
 }
