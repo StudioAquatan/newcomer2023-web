@@ -75,6 +75,10 @@ export default function Visited({ org }: VisitedProps) {
   const { data: visitsRecordData } = useRecordVisits(visitsToken as string);
   const { data: visitsData } = useGetVisits();
 
+  const showStampcard = () => {
+    router.push("/stampcard/");
+  };
+
   return (
     <div css={container}>
       <div css={headerPadding}>
@@ -91,9 +95,11 @@ export default function Visited({ org }: VisitedProps) {
       </div>
       <div css={buttonContainer}>
         <ColorBorderButton
-          label="閉じる"
+          label="スタンプカードを表示"
           textColor={theme.colors.button.enable.backgroundColor}
           borderColor={theme.colors.button.enable.backgroundColor}
+          fontSize="2.4rem"
+          onClick={() => showStampcard()}
         />
       </div>
       {/* アニメーションは初めてスタンプを取得した時のみ */}
