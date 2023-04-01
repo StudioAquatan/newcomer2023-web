@@ -26,6 +26,7 @@ const Template: ComponentStory<typeof Confetti> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   count: 50,
+  size: 15,
   fall: {
     duration: {
       min: 30,

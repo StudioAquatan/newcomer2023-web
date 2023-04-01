@@ -87,6 +87,7 @@ const pieceContainer = ({
 
 export type ConfettiProps = {
   count: number;
+  size: number;
   fall: {
     duration: {
       min: number;
@@ -105,7 +106,7 @@ export type ConfettiProps = {
   };
 };
 
-export default function Confetti({ count, fall, piece }: ConfettiProps) {
+export default function Confetti({ count, size, fall, piece }: ConfettiProps) {
   const pieces = React.useMemo(() => {
     const SEED = 0;
     const r = new Random(SEED);
@@ -142,15 +143,15 @@ export default function Confetti({ count, fall, piece }: ConfettiProps) {
                   r.nextNumber(piece.duration.min, piece.duration.max) * 0.1
                 )}
                 color={colorPalette[r.nextNumber(0, colorPalette.length - 1)]}
-                width="10px"
-                height="10px"
+                width={`${size}px`}
+                height={`${size}px`}
               />
             </div>
           );
         })}
       </>
     );
-  }, [count, fall, piece]);
+  }, [count, size, fall, piece]);
 
   return <div css={base}>{pieces}</div>;
 }

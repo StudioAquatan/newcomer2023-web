@@ -11,6 +11,7 @@ import { useIsMobile } from "../../store/userAgent";
 
 const confettiProps: ConfettiProps = {
   count: 50,
+  size: 15,
   fall: {
     duration: {
       min: 30,
