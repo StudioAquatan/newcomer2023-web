@@ -102,7 +102,7 @@ export default function Visited({ org }: VisitedProps) {
 export async function getStaticPaths() {
   const orgs = await getOrgs();
 
-  const paths = orgs.map((org) => `/visited/${org.id}`);
+  const paths = orgs.map((org) => `/visits/${org.id}`);
 
   return {
     paths,
