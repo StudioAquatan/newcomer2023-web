@@ -6,6 +6,7 @@ type VisitedCardProps = {
   orgName: string;
   logo: string;
   logoFocus?: boolean;
+  alreadyVisited?: boolean;
 };
 
 const container = css`
@@ -96,38 +97,62 @@ export default function VisitedCard({
   orgName,
   logo,
   logoFocus = false,
+  alreadyVisited = false,
 }: VisitedCardProps) {
-  return (
-    <div css={container}>
-      <h1>
-        スタンプ
-        <wbr />
-        獲得！
-      </h1>
-      <div css={orgInfo}>
-        <div css={logoContainer(logoFocus)}>
-          <Image
-            src={logo}
-            alt={orgName}
-            width={300}
-            height={300}
-            loader={imgixLoader}
-          />
+  if (alreadyVisited) {
+    return (
+      <div css={container}>
+        <h1>訪問済みです</h1>
+        <div css={orgInfo}>
+          <div css={logoContainer(logoFocus)}>
+            <Image
+              src={logo}
+              alt={orgName}
+              width={300}
+              height={300}
+              loader={imgixLoader}
+            />
+          </div>
+          <h2>{orgName}</h2>
         </div>
-        <h2>{orgName}</h2>
-        <p>
-          の説明会に
-          <wbr />
-          参加しました
-        </p>
+        <div css={description}>
+          <p>他の団体の説明を聞きに行ってみよう！</p>
+        </div>
       </div>
-      <div css={description}>
-        <p>
-          9個中3個目の
+    );
+  } else {
+    return (
+      <div css={container}>
+        <h1>
+          スタンプ
           <wbr />
-          スタンプを獲得！
-        </p>
+          獲得！
+        </h1>
+        <div css={orgInfo}>
+          <div css={logoContainer(logoFocus)}>
+            <Image
+              src={logo}
+              alt={orgName}
+              width={300}
+              height={300}
+              loader={imgixLoader}
+            />
+          </div>
+          <h2>{orgName}</h2>
+          <p>
+            の説明会に
+            <wbr />
+            参加しました
+          </p>
+        </div>
+        <div css={description}>
+          <p>
+            9個中3個目の
+            <wbr />
+            スタンプを獲得！
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
