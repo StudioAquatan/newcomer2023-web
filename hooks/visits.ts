@@ -3,8 +3,39 @@ import useSWR from "swr";
 import { apiClient } from "../api-client/apiClient";
 import useUser from "./user";
 
-export function useVisits(visitsToken: string) {
+export function useGetVisits() {
   const { data: userData } = useUser();
+  const token = userData?.token;
+
+  return useSWR(
+    token ? ["/visits", token] : null,
+    async () => {
+      if (typeof window === "undefined") return null;
+      const response = await apiClient.visits
+        .$get({
+          config: {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          },
+        })
+        .then((res) => {
+          return res;
+        });
+
+      return response;
+    },
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    }
+  );
+}
+
+export function useRecordVisits(visitsToken: string) {
+  const { data: userData } = useUser();
+  const { mutate } = useGetVisits();
   const token = userData?.token;
 
   return useSWR(
@@ -21,6 +52,7 @@ export function useVisits(visitsToken: string) {
           },
         })
         .then((res) => {
+          mutate();
           return { status: "success", response: res };
         })
         .catch((error) => {

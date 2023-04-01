@@ -7,6 +7,7 @@ type VisitedCardProps = {
   logo: string;
   logoFocus?: boolean;
   cardStatus: string;
+  visitsCount?: number;
 };
 
 const container = css`
@@ -98,6 +99,7 @@ export default function VisitedCard({
   logo,
   logoFocus = false,
   cardStatus,
+  visitsCount = 1,
 }: VisitedCardProps) {
   if (cardStatus === "loading") {
     return (
@@ -171,7 +173,7 @@ export default function VisitedCard({
         </div>
         <div css={description}>
           <p>
-            9個中3個目の
+            9個中{visitsCount}個目の
             <wbr />
             スタンプを獲得！
           </p>

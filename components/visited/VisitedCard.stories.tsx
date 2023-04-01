@@ -20,6 +20,7 @@ StudioAquatan.args = {
   orgName: "Studio Aquatan",
   logo: "/org_icons/studioaquatan.png",
   logoFocus: false,
+  visitsCount: 1,
 };
 
 export const AlreadyVisited = Template.bind({});

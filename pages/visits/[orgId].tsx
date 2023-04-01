@@ -6,7 +6,7 @@ import ColorBorderButton from "../../components/buttons/ColorBorderButton";
 import Header from "../../components/headers/Header";
 import Confetti, { ConfettiProps } from "../../components/visited/Confetti";
 import VisitedCard from "../../components/visited/VisitedCard";
-import { useVisits } from "../../hooks/visits";
+import { useGetVisits, useRecordVisits } from "../../hooks/visits";
 import { useIsMobile } from "../../store/userAgent";
 
 const confettiProps: ConfettiProps = {
@@ -71,7 +71,8 @@ export default function Visited({ org }: VisitedProps) {
   const router = useRouter();
   const { token: visitsToken } = router.query;
 
-  const { data: visitsData } = useVisits(visitsToken as string);
+  const { data: visitsRecordData } = useRecordVisits(visitsToken as string);
+  const { data: visitsData } = useGetVisits();
 
   return (
     <div css={container}>
@@ -83,7 +84,8 @@ export default function Visited({ org }: VisitedProps) {
           orgName={org.shortName}
           logo={org.logo?.src || "/org_icons/default.png"}
           logoFocus={org.logoFocus ?? false}
-          cardStatus={visitsData ? visitsData.status : "loading"}
+          visitsCount={visitsData?.length ?? 1}
+          cardStatus={visitsRecordData ? visitsRecordData.status : "loading"}
         />
       </div>
       <div css={buttonContainer}>
@@ -94,7 +96,7 @@ export default function Visited({ org }: VisitedProps) {
         />
       </div>
       {/* アニメーションは初めてスタンプを取得した時のみ */}
-      {visitsData?.status === "success" && (
+      {visitsRecordData?.status === "success" && (
         <div css={confettiContainer}>
           <Confetti {...confettiProps} />
         </div>
