@@ -8,7 +8,7 @@ export function useVisits(visitsToken: string) {
   const token = userData?.token;
 
   return useSWR(
-    token && visitsToken ? ["/visits", token, visitsToken] : null,
+    token ? ["/visits", token, visitsToken] : null,
     async () => {
       if (typeof window === "undefined") return null;
       const response = await apiClient.visits
