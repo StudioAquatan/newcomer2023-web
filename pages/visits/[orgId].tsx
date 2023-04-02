@@ -1,6 +1,10 @@
 import { css, useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
-import { OrganizationFull } from "../../api-client/@types";
+import {
+  OrganizationFull,
+  RecommendationItem,
+  Visit,
+} from "../../api-client/@types";
 import { getOrgs } from "../../api-client/cached-response";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
 import Header from "../../components/headers/Header";
@@ -106,6 +110,17 @@ const CloseButton = ({
   );
 };
 
+const countStamp = (recommedations: RecommendationItem[], visits: Visit[]) => {
+  const orgsOnStampcard = recommedations.slice(0, 9);
+
+  const count = orgsOnStampcard.reduce((acc, org) => {
+    const isVisited = visits.some((visit) => visit.orgId === org.org.id);
+    return acc + (isVisited ? 1 : 0);
+  }, 0);
+
+  return count;
+};
+
 type VisitedProps = {
   org: OrganizationFull;
 };
@@ -118,6 +133,23 @@ export default function Visited({ org }: VisitedProps) {
   const { data: recommendationData } = useRecommendation();
   const { data: visitsRecordData } = useRecordVisits(visitsToken as string);
   const { data: visitsData } = useGetVisits();
+
+  const visitsCount = () => {
+    if (
+      visitsData === undefined ||
+      recommendationData === undefined ||
+      typeof recommendationData === "symbol"
+    ) {
+      return 0;
+    } else if (visitsRecordData?.status === "success") {
+      return countStamp(
+        recommendationData.recommendation.orgs,
+        visitsData ?? []
+      );
+    } else {
+      return 0;
+    }
+  };
 
   const cardStatus = () => {
     if (visitsRecordData === undefined) {
@@ -175,7 +207,7 @@ export default function Visited({ org }: VisitedProps) {
           orgName={org.shortName}
           logo={org.logo?.src || "/org_icons/default.png"}
           logoFocus={org.logoFocus ?? false}
-          visitsCount={visitsData?.length ?? 1}
+          visitsCount={visitsCount()}
           cardStatus={cardStatus()}
         />
       </div>

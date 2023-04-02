@@ -179,9 +179,9 @@ export default function VisitedCard({
         {cardStatus === "success" && (
           <div css={description}>
             <p>
-              9個中{visitsCount}個目の
+              9個中{visitsCount}個の
               <wbr />
-              スタンプを獲得！
+              スタンプを獲得しています！
             </p>
           </div>
         )}
