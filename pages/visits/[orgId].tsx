@@ -119,6 +119,20 @@ export default function Visited({ org }: VisitedProps) {
   const { data: visitsRecordData } = useRecordVisits(visitsToken as string);
   const { data: visitsData } = useGetVisits();
 
+  const cardStatus = () => {
+    if (visitsRecordData === undefined) {
+      return "loading";
+    } else if (visitsRecordData?.status === "success") {
+      if (recommendationData === NoRecommendation) {
+        return "no-stampcard";
+      } else {
+        return "success";
+      }
+    } else {
+      return visitsRecordData?.status ?? "error";
+    }
+  };
+
   const showStampcard = () => {
     router.push("/stampcard/");
   };
@@ -162,7 +176,7 @@ export default function Visited({ org }: VisitedProps) {
           logo={org.logo?.src || "/org_icons/default.png"}
           logoFocus={org.logoFocus ?? false}
           visitsCount={visitsData?.length ?? 1}
-          cardStatus={visitsRecordData ? visitsRecordData.status : "loading"}
+          cardStatus={cardStatus()}
         />
       </div>
       <CloseButtonContainer>{closeButtonContents()}</CloseButtonContainer>

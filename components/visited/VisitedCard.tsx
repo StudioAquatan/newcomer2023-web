@@ -175,13 +175,16 @@ export default function VisitedCard({
             参加しました
           </p>
         </div>
-        <div css={description}>
-          <p>
-            9個中{visitsCount}個目の
-            <wbr />
-            スタンプを獲得！
-          </p>
-        </div>
+        {/* スタンプカードを持っている時だけ */}
+        {cardStatus === "success" && (
+          <div css={description}>
+            <p>
+              9個中{visitsCount}個目の
+              <wbr />
+              スタンプを獲得！
+            </p>
+          </div>
+        )}
       </div>
     );
   }
