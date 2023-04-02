@@ -142,7 +142,11 @@ export default function VisitedCard({
           <h2>{orgName}</h2>
         </div>
         <div css={description}>
-          <p>他の団体の説明を聞きに行ってみよう！</p>
+          <p>
+            他の団体の説明を
+            <wbr />
+            聞きに行ってみよう！
+          </p>
         </div>
       </div>
     );
