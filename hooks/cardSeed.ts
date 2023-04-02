@@ -12,7 +12,7 @@ export default function useStampCardSeed() {
       } else {
         const random = new Random();
         const seed = random.next();
-
+        localStorage.setItem("seed", seed.toString());
         return { seed: seed };
       }
     },
