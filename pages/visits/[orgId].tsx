@@ -7,6 +7,7 @@ import {
   Visit,
 } from "../../api-client/@types";
 import { getOrgs } from "../../api-client/cached-response";
+import MetaHead from "../../components/MetaHead";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
 import Header from "../../components/headers/Header";
 import Confetti, { ConfettiProps } from "../../components/visited/Confetti";
@@ -222,6 +223,11 @@ export default function Visited({ org }: VisitedProps) {
 
   return (
     <div css={container}>
+      <MetaHead
+        title={`${org.shortName}のスタンプを取得！`}
+        description="説明会に参加してスタンプを集めよう！"
+      />
+
       <div css={headerPadding}>
         <Header isMobile={isMobile} />
       </div>
