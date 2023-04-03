@@ -1,5 +1,6 @@
 import { css, useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 import {
   OrganizationFull,
   RecommendationItem,
@@ -126,12 +127,19 @@ type VisitedProps = {
 };
 
 export default function Visited({ org }: VisitedProps) {
-  const { isMobile } = useIsMobile();
   const router = useRouter();
+  const { replace } = router;
+  const { isMobile } = useIsMobile();
   const { token: visitsToken } = router.query;
 
+  // stateにtokenが入っていて見えちゃうのは良くないけど...。
+  const [savedVisitsToken, setSavedVisitsToken] = useState<string>(
+    visitsToken as string
+  );
+
   const { data: recommendationData } = useRecommendation();
-  const { data: visitsRecordData } = useRecordVisits(visitsToken as string);
+  // useRecordVisitsはSWRを使わないと、エラーモーダル表示ができない(?)
+  const { data: visitsRecordData } = useRecordVisits(savedVisitsToken);
   const { data: visitsData } = useGetVisits();
 
   const visitsCount = () => {
@@ -196,6 +204,21 @@ export default function Visited({ org }: VisitedProps) {
       return <></>;
     }
   };
+
+  // visitsTokenにアクセス可能になった時に、stateに値を保持しつつ
+  // URLから表示を消しておく
+  if (visitsToken !== undefined && savedVisitsToken === undefined) {
+    setSavedVisitsToken(visitsToken as string);
+    // tokenは履歴には残さない
+    replace(
+      {
+        pathname: "/visits/[orgId]",
+        query: { orgId: org.id },
+      },
+      undefined,
+      { shallow: true }
+    );
+  }
 
   return (
     <div css={container}>
