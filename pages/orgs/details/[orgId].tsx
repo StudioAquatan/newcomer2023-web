@@ -207,7 +207,6 @@ export default OrgDetail;
 
 // 各団体詳細ページの初期データを生成しておく
 export async function getStaticPaths() {
-  // getStaticPaths時、MSWを使ったモックが有効になる前にAPIにアクセスしてしまう
   const orgs = await getOrgs();
 
   const paths = orgs.map((org) => `/orgs/details/${org.id}`);
@@ -224,9 +223,6 @@ export async function getStaticProps({
   params: { orgId: string };
 }) {
   const { orgId } = params;
-
-  // 全団体詳細ページの初期データを取得
-  // 全団体のデータを返すAPIしかないので、団体数回、全団体のデータを取得するAPIリクエストが発生してしまう
   const orgs = await getOrgs();
   const org = orgs.find((e) => e.id === orgId);
 

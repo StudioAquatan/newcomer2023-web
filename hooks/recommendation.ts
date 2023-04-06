@@ -52,7 +52,7 @@ export function useRecommendation() {
 
       return recommendations;
     },
-    { revalidateOnFocus: false, errorRetryCount: 0, revalidateIfStale: false }
+    { revalidateOnFocus: true, errorRetryCount: 0, revalidateIfStale: false }
   );
 }
 
