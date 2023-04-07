@@ -54,7 +54,8 @@ const orgListStyle = css`
 
 export default function OrgListPage({ organizations }: OrgListPageProps) {
   const { isMobile } = useIsMobile();
-  const { orgs, renderReady, available } = useSortedOrgs(organizations);
+  const { orgs, renderReady, available, visitedList } =
+    useSortedOrgs(organizations);
   const [sortChecked, setSortChecked] = useState(false);
 
   return (
@@ -90,7 +91,13 @@ export default function OrgListPage({ organizations }: OrgListPageProps) {
         )}
         <div css={orgListStyle}>
           {(sortChecked ? orgs : organizations).map((org) => {
-            return <OrgPanel org={org} key={org.id} isVisited={false} />;
+            return (
+              <OrgPanel
+                org={org}
+                key={org.id}
+                isVisited={visitedList.includes(org.id)}
+              />
+            );
           })}
         </div>
       </div>

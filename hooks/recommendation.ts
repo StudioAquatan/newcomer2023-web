@@ -98,12 +98,14 @@ export function useSortedOrgs(orgs: OrganizationFull[] = []) {
         orgs: [],
         renderReady: false,
         available: false,
+        visitedList: [],
       };
     if (!userData || !isRecommendationReady(recommendation) || !orgs)
       return {
         orgs: orgs ?? [],
         renderReady: !userLoading && (!userData || !recommendationLoading),
         available: isRecommendationReady(recommendation),
+        visitedList: [],
       };
 
     // 全部そろった
@@ -111,6 +113,9 @@ export function useSortedOrgs(orgs: OrganizationFull[] = []) {
       orgs: recommendation.recommendation.orgs
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         .map(({ org }) => orgs.find(({ id }) => id === org.id)!),
+      visitedList: recommendation.recommendation.orgs
+        .filter(({ isVisited }) => isVisited)
+        .map(({ org }) => org.id),
       renderReady: true,
       available: true,
     };
