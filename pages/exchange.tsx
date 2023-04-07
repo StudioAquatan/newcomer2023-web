@@ -1,22 +1,13 @@
 import { css } from "@emotion/react";
-import { useRouter } from "next/router";
-import {
-  OrganizationFull,
-  RecommendationItem,
-  Visit,
-} from "../api-client/@types";
+import { RecommendationItem, Visit } from "../api-client/@types";
 import MetaHead from "../components/MetaHead";
-import ColorBorderButton from "../components/buttons/ColorBorderButton";
 import {
   ExchangeDescription,
   ExchangeSection,
   ExchangeTitle,
 } from "../components/exchange/Exchange";
+import ExchangeStampCard from "../components/exchange/StampCard";
 import Header from "../components/headers/Header";
-import { StampProps } from "../components/stampcard/Stamp";
-import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
-import useStampCardSeed from "../hooks/cardSeed";
-import { useOrganizations } from "../hooks/organizations";
 import { useRecommendation } from "../hooks/recommendation";
 import { useGetVisits } from "../hooks/visits";
 import { useIsMobile } from "../store/userAgent";
@@ -73,14 +64,6 @@ const stampCountStyle = css`
   }
 `;
 
-const createStampCardContent = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-`;
-
 const countStamp = (recommedations: RecommendationItem[], visits: Visit[]) => {
   const orgsOnStampcard = recommedations.slice(0, 9);
 
@@ -110,77 +93,6 @@ const StampCount = () => {
   );
 
   return <p css={stampCountStyle}>{count}個</p>;
-};
-
-const SmallStampCard = () => {
-  const router = useRouter();
-  const { data: orgsData } = useOrganizations();
-  const { data: recommendationData } = useRecommendation();
-  const { data: seedData } = useStampCardSeed();
-  const FALLBACKSEED = 0;
-  const seed = seedData?.seed ?? FALLBACKSEED;
-
-  const fallbackOrg: OrganizationFull = {
-    id: "fallback",
-    fullName: "",
-    shortName: "",
-    shortDescription: "",
-    description: "",
-  };
-
-  const stampCardContainer = css`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  `;
-
-  const onClick = () => {
-    router.push("/diagnose");
-  };
-
-  if (
-    !recommendationData ||
-    !orgsData ||
-    typeof recommendationData === "symbol"
-  ) {
-    return (
-      <div css={createStampCardContent}>
-        <h2>スタンプカード</h2>
-        <p>
-          相性診断結果から作成されたスタンプカードを持ってスタンプラリーに参加しよう！
-        </p>
-        <ColorBorderButton label="診断する" onClick={() => onClick()} />
-      </div>
-    );
-  }
-
-  const recommendation = recommendationData.recommendation;
-
-  // TODO: 表示位置がつけられたもののみ使う
-  const stamps: StampProps[] = recommendation.orgs
-    .slice(0, 9)
-    .map((recommendationItem, index) => {
-      return {
-        recommendation: recommendationItem,
-        orgInfo:
-          orgsData.organizationsMap.get(recommendationItem.org.id) ??
-          fallbackOrg,
-        seed: seed + index,
-      };
-    });
-
-  const props: StampCardProps = {
-    stamps: stamps,
-    // size: { maxWidth: "30rem", maxHeight: "50vw" },
-  };
-
-  return (
-    <div css={stampCardContainer}>
-      <StampCard {...props} />
-    </div>
-  );
 };
 
 export default function Exchange() {
@@ -226,26 +138,16 @@ export default function Exchange() {
             </ExchangeDescription>
           </ExchangeSection>
           <ExchangeSection>
-            {isMobile ? (
+            {isMobile && (
               <>
                 <p>あなたは現在スタンプを</p>
                 <div css={stampCountStyle}>
                   <StampCount />
                 </div>
                 <p>獲得しています</p>
-                <SmallStampCard />
               </>
-            ) : (
-              <div css={createStampCardContent}>
-                <h2>スタンプカード</h2>
-                <p>
-                  スマホからアクセスして診断をしよう！
-                  <br />
-                  相性診断結果から作成されたスタンプカードを持ってスタンプラリーに参加しよう！
-                </p>
-                <ColorBorderButton label="診断する" disabled={true} />
-              </div>
             )}
+            <ExchangeStampCard />
           </ExchangeSection>
         </div>
       </div>
