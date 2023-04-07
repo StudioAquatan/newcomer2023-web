@@ -61,7 +61,8 @@ export default function ExchangeStampCard() {
 
   const props: StampCardProps = {
     stamps: stamps,
-    // size: { maxWidth: "30rem", maxHeight: "50vw" },
+    size: { maxWidth: "30rem", maxHeight: "50vw" },
+    largeMark: true,
   };
 
   return (
