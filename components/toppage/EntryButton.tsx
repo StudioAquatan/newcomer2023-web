@@ -1,6 +1,7 @@
 import { css, useTheme } from "@emotion/react";
 import Link from "next/link";
 import ColorBorderButton from "../buttons/ColorBorderButton";
+import { OrgListLink } from "./OrgList";
 
 type EntryButtonProps = {
   isMobile: boolean;
@@ -11,10 +12,6 @@ const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  a {
-    text-decoration: none;
-  }
 `;
 
 const notice = css`
@@ -66,6 +63,7 @@ export default function EntryButton(props: EntryButtonProps) {
   return (
     <div css={container}>
       <ActivateButton {...props} />
+      <OrgListLink />
     </div>
   );
 }

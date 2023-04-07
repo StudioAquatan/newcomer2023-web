@@ -152,6 +152,7 @@ export default function Home({
           isMobile={isMobile}
           hasStampCard={typeof recommendation === "object"}
         />
+
         <FeatureDiagnose {...featureDiagnose} />
         <FeatureStampRally {...featureStampRally} />
         <EventGuidance />
