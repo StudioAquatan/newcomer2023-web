@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { RecommendationItem, Visit } from "../api-client/@types";
 import MetaHead from "../components/MetaHead";
 import {
   ExchangeDescription,
@@ -7,9 +6,8 @@ import {
   ExchangeTitle,
 } from "../components/exchange/Exchange";
 import ExchangeStampCard from "../components/exchange/StampCard";
+import StampCount from "../components/exchange/StampCount";
 import Header from "../components/headers/Header";
-import { useRecommendation } from "../hooks/recommendation";
-import { useGetVisits } from "../hooks/visits";
 import { useIsMobile } from "../store/userAgent";
 
 const heroStyle = css`
@@ -57,44 +55,6 @@ const exchangePageContents = css`
   width: 100%;
 `;
 
-const stampCountStyle = css`
-  p {
-    font-size: 2.8rem;
-    font-weight: bold;
-  }
-`;
-
-const countStamp = (recommedations: RecommendationItem[], visits: Visit[]) => {
-  const orgsOnStampcard = recommedations.slice(0, 9);
-
-  const count = orgsOnStampcard.reduce((acc, org) => {
-    const isVisited = visits.some((visit) => visit.orgId === org.org.id);
-    return acc + (isVisited ? 1 : 0);
-  }, 0);
-
-  return count;
-};
-
-const StampCount = () => {
-  const { data: recommendationData } = useRecommendation();
-  const { data: visitsData } = useGetVisits();
-
-  if (
-    !recommendationData ||
-    typeof recommendationData === "symbol" ||
-    !visitsData
-  ) {
-    return <p css={stampCountStyle}>0個</p>;
-  }
-
-  const count = countStamp(
-    recommendationData.recommendation.orgs,
-    visitsData ?? []
-  );
-
-  return <p css={stampCountStyle}>{count}個</p>;
-};
-
 export default function Exchange() {
   const { isMobile } = useIsMobile();
 
@@ -138,15 +98,7 @@ export default function Exchange() {
             </ExchangeDescription>
           </ExchangeSection>
           <ExchangeSection>
-            {isMobile && (
-              <>
-                <p>あなたは現在スタンプを</p>
-                <div css={stampCountStyle}>
-                  <StampCount />
-                </div>
-                <p>獲得しています</p>
-              </>
-            )}
+            <StampCount />
             <ExchangeStampCard />
           </ExchangeSection>
         </div>
