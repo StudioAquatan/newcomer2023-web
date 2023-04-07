@@ -240,7 +240,9 @@ export default function Exchange() {
             <div css={createStampCardContent}>
               <h2>スタンプカード</h2>
               <p>
-                スマホからアクセスして診断をしよう！相性診断結果から作成されたスタンプカードを持ってスタンプラリーに参加しよう！
+                スマホからアクセスして診断をしよう！
+                <br />
+                相性診断結果から作成されたスタンプカードを持ってスタンプラリーに参加しよう！
               </p>
               <ColorBorderButton label="診断する" disabled={true} />
             </div>
