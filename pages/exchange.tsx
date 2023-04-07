@@ -1,6 +1,17 @@
 import { css } from "@emotion/react";
+import {
+  OrganizationFull,
+  RecommendationItem,
+  Visit,
+} from "../api-client/@types";
 import MetaHead from "../components/MetaHead";
 import Header from "../components/headers/Header";
+import { StampProps } from "../components/stampcard/Stamp";
+import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
+import useStampCardSeed from "../hooks/cardSeed";
+import { useOrganizations } from "../hooks/organizations";
+import { useRecommendation } from "../hooks/recommendation";
+import { useGetVisits } from "../hooks/visits";
 import { useIsMobile } from "../store/userAgent";
 
 const heroStyle = css`
@@ -59,6 +70,102 @@ const exchangePageStyle = css`
   }
 `;
 
+const stampCountStyle = css`
+  p {
+    font-size: 2.8rem;
+    font-weight: bold;
+  }
+`;
+
+const countStamp = (recommedations: RecommendationItem[], visits: Visit[]) => {
+  const orgsOnStampcard = recommedations.slice(0, 9);
+
+  const count = orgsOnStampcard.reduce((acc, org) => {
+    const isVisited = visits.some((visit) => visit.orgId === org.org.id);
+    return acc + (isVisited ? 1 : 0);
+  }, 0);
+
+  return count;
+};
+
+const StampCount = () => {
+  const { data: recommendationData } = useRecommendation();
+  const { data: visitsData } = useGetVisits();
+
+  if (
+    !recommendationData ||
+    typeof recommendationData === "symbol" ||
+    !visitsData
+  ) {
+    return <p css={stampCountStyle}>0個</p>;
+  }
+
+  const count = countStamp(
+    recommendationData.recommendation.orgs,
+    visitsData ?? []
+  );
+
+  return <p css={stampCountStyle}>{count}個</p>;
+};
+
+const SmallStampCard = () => {
+  const { data: orgsData } = useOrganizations();
+  const { data: recommendationData } = useRecommendation();
+  const { data: seedData } = useStampCardSeed();
+  const FALLBACKSEED = 0;
+  const seed = seedData?.seed ?? FALLBACKSEED;
+
+  const fallbackOrg: OrganizationFull = {
+    id: "fallback",
+    fullName: "",
+    shortName: "",
+    shortDescription: "",
+    description: "",
+  };
+
+  const stampCardContainer = css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  `;
+
+  if (
+    !recommendationData ||
+    !orgsData ||
+    typeof recommendationData === "symbol"
+  ) {
+    return null;
+  }
+
+  const recommendation = recommendationData.recommendation;
+
+  // TODO: 表示位置がつけられたもののみ使う
+  const stamps: StampProps[] = recommendation.orgs
+    .slice(0, 9)
+    .map((recommendationItem, index) => {
+      return {
+        recommendation: recommendationItem,
+        orgInfo:
+          orgsData.organizationsMap.get(recommendationItem.org.id) ??
+          fallbackOrg,
+        seed: seed + index,
+      };
+    });
+
+  const props: StampCardProps = {
+    stamps: stamps,
+    // size: { maxWidth: "30rem", maxHeight: "50vw" },
+  };
+
+  return (
+    <div css={stampCardContainer}>
+      <StampCard {...props} />
+    </div>
+  );
+};
+
 export default function Exchange() {
   const { isMobile } = useIsMobile();
 
@@ -73,7 +180,11 @@ export default function Exchange() {
         <h1 css={pageTitle}>景品交換の手順</h1>
       </div>
       <div css={exchangePageStyle}>
-        <p>スタンプが集まったら景品交換に行こう！</p>
+        <p>
+          スタンプが集まったら
+          <wbr />
+          景品交換に行こう！
+        </p>
         <div>
           <h2>持ち物</h2>
           <p>学生証</p>
@@ -93,11 +204,17 @@ export default function Exchange() {
             スタンプ3個につき、1回景品と交換できます
             <wbr /> （最大3回）
           </p>
-          <p>あなたは現在スタンプを</p>
-          <p>7個</p>
-          <p>獲得しています</p>
+          {isMobile && (
+            <>
+              <p>あなたは現在スタンプを</p>
+              <div css={stampCountStyle}>
+                <StampCount />
+              </div>
+              <p>獲得しています</p>
+              <SmallStampCard />
+            </>
+          )}
         </div>
-        {/* ここにスタンプカードを表示する */}
       </div>
     </>
   );
