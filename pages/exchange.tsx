@@ -1,10 +1,12 @@
 import { css } from "@emotion/react";
+import { useRouter } from "next/router";
 import {
   OrganizationFull,
   RecommendationItem,
   Visit,
 } from "../api-client/@types";
 import MetaHead from "../components/MetaHead";
+import ColorBorderButton from "../components/buttons/ColorBorderButton";
 import Header from "../components/headers/Header";
 import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
@@ -77,6 +79,14 @@ const stampCountStyle = css`
   }
 `;
 
+const createStampCardContent = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
 const countStamp = (recommedations: RecommendationItem[], visits: Visit[]) => {
   const orgsOnStampcard = recommedations.slice(0, 9);
 
@@ -109,6 +119,7 @@ const StampCount = () => {
 };
 
 const SmallStampCard = () => {
+  const router = useRouter();
   const { data: orgsData } = useOrganizations();
   const { data: recommendationData } = useRecommendation();
   const { data: seedData } = useStampCardSeed();
@@ -131,12 +142,24 @@ const SmallStampCard = () => {
     width: 100%;
   `;
 
+  const onClick = () => {
+    router.push("/diagnose");
+  };
+
   if (
     !recommendationData ||
     !orgsData ||
     typeof recommendationData === "symbol"
   ) {
-    return null;
+    return (
+      <div css={createStampCardContent}>
+        <h2>スタンプカード</h2>
+        <p>
+          相性診断結果から作成されたスタンプカードを持ってスタンプラリーに参加しよう！
+        </p>
+        <ColorBorderButton label="診断する" onClick={() => onClick()} />
+      </div>
+    );
   }
 
   const recommendation = recommendationData.recommendation;
@@ -204,7 +227,7 @@ export default function Exchange() {
             スタンプ3個につき、1回景品と交換できます
             <wbr /> （最大3回）
           </p>
-          {isMobile && (
+          {isMobile ? (
             <>
               <p>あなたは現在スタンプを</p>
               <div css={stampCountStyle}>
@@ -213,6 +236,14 @@ export default function Exchange() {
               <p>獲得しています</p>
               <SmallStampCard />
             </>
+          ) : (
+            <div css={createStampCardContent}>
+              <h2>スタンプカード</h2>
+              <p>
+                スマホからアクセスして診断をしよう！相性診断結果から作成されたスタンプカードを持ってスタンプラリーに参加しよう！
+              </p>
+              <ColorBorderButton label="診断する" disabled={true} />
+            </div>
           )}
         </div>
       </div>
