@@ -11,7 +11,7 @@ import MetaHead from "../../components/MetaHead";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
 import Header from "../../components/headers/Header";
 import Confetti, { ConfettiProps } from "../../components/visited/Confetti";
-import VisitedCard from "../../components/visited/VisitedCard";
+import VisitedCard, { VisitStatus } from "../../components/visited/VisitedCard";
 import {
   NoRecommendation,
   useRecommendation,
@@ -160,7 +160,7 @@ export default function Visited({ org }: VisitedProps) {
     }
   };
 
-  const cardStatus = () => {
+  const cardStatus = (): VisitStatus => {
     if (visitsRecordData === undefined) {
       return "loading";
     } else if (visitsRecordData?.status === "success") {
