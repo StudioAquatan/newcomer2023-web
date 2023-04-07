@@ -3,11 +3,13 @@ import { OrganizationFull } from "../../api-client/@types";
 import useStampCardSeed from "../../hooks/cardSeed";
 import { useOrganizations } from "../../hooks/organizations";
 import { useRecommendation } from "../../hooks/recommendation";
+import { useIsMobile } from "../../store/userAgent";
 import StampCard, { StampCardProps } from "../stampcard/Card";
 import { StampProps } from "../stampcard/Stamp";
 import DiagnoseLeader from "./DiagnoseLeader";
 
 export default function ExchangeStampCard() {
+  const { isMobile } = useIsMobile();
   const { data: orgsData } = useOrganizations();
   const { data: recommendationData } = useRecommendation();
   const { data: seedData } = useStampCardSeed();
@@ -30,7 +32,11 @@ export default function ExchangeStampCard() {
     width: 100%;
   `;
 
+  // デスクトップからアクセスした時、
+  // 全データが取得できるまで、
+  // または、スタンプカードがない場合は表示しない
   if (
+    !isMobile ||
     !recommendationData ||
     !orgsData ||
     typeof recommendationData === "symbol"
