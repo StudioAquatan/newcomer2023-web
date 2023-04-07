@@ -90,7 +90,7 @@ export default function OrgListPage({ organizations }: OrgListPageProps) {
         )}
         <div css={orgListStyle}>
           {(sortChecked ? orgs : organizations).map((org) => {
-            return <OrgPanel org={org} key={org.id} />;
+            return <OrgPanel org={org} key={org.id} isVisited={false} />;
           })}
         </div>
       </div>
