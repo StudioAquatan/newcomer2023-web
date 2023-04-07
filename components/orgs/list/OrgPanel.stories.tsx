@@ -29,4 +29,5 @@ Default.args = {
     activeDays: "LT会/部会 毎月最終金曜日 18:00~",
     links: ["https://twitter.com/StudioAquatan", "https://www.aquatan.studio/"],
   },
+  isVisited: false,
 };

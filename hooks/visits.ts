@@ -1,6 +1,7 @@
 import { HTTPError } from "@aspida/fetch";
 import useSWR from "swr";
 import { apiClient } from "../api-client/apiClient";
+import { VisitStatus } from "../components/visited/VisitedCard";
 import useUser from "./user";
 
 export function useGetVisits() {
@@ -53,7 +54,7 @@ export function useRecordVisits(visitsToken: string) {
         })
         .then((res) => {
           mutate();
-          return { status: "success", response: res };
+          return { status: "success" as VisitStatus, response: res };
         })
         .catch((error) => {
           if (error instanceof HTTPError) {
@@ -66,7 +67,10 @@ export function useRecordVisits(visitsToken: string) {
                 cause: error,
               });
             } else if (error.response.status === 409) {
-              return { status: "conflict", response: error.response };
+              return {
+                status: "conflict" as VisitStatus,
+                response: error.response,
+              };
             } else if (error.response.status === 412) {
               throw new Error("まだ訪問記録ができません", {
                 cause: error,
