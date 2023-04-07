@@ -7,6 +7,11 @@ import {
 } from "../api-client/@types";
 import MetaHead from "../components/MetaHead";
 import ColorBorderButton from "../components/buttons/ColorBorderButton";
+import {
+  ExchangeDescription,
+  ExchangeSection,
+  ExchangeTitle,
+} from "../components/exchange/Exchange";
 import Header from "../components/headers/Header";
 import { StampProps } from "../components/stampcard/Stamp";
 import StampCard, { StampCardProps } from "../components/stampcard/StampCard";
@@ -44,25 +49,6 @@ const exchangePageStyle = css`
   margin: 2rem;
   line-height: 1.8;
 
-  h2 {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-    font-size: 3.6rem;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  p {
-    padding: 0;
-    margin: 0;
-    margin-bottom: 1rem;
-    font-family: GenShinGothic-P, sans-serif;
-    font-size: 2.4rem;
-    text-align: center;
-    word-break: keep-all;
-    overflow-wrap: anywhere;
-  }
-
   ol {
     margin: 1rem 0;
   }
@@ -70,6 +56,14 @@ const exchangePageStyle = css`
   li {
     font-size: 2.4rem;
   }
+`;
+
+const exchangePageContents = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `;
 
 const stampCountStyle = css`
@@ -203,50 +197,56 @@ export default function Exchange() {
         <h1 css={pageTitle}>景品交換の手順</h1>
       </div>
       <div css={exchangePageStyle}>
-        <p>
-          スタンプが集まったら
-          <wbr />
-          景品交換に行こう！
-        </p>
-        <div>
-          <h2>持ち物</h2>
-          <p>学生証</p>
-        </div>
-        <div>
-          <h2>交換手順</h2>
-          <ol>
-            <li>景品交換会場（ここに会場名が入る）に行く</li>
-            <li>会場で学生証と、このページ下のスタンプの数を係員に見せる</li>
-            <li>交換したい回数を係員に伝える</li>
-            <li>景品を交換する</li>
-          </ol>
-        </div>
-        <div>
-          <h2>交換条件</h2>
-          <p>
-            スタンプ3個につき、1回景品と交換できます
-            <wbr /> （最大3回）
-          </p>
-          {isMobile ? (
-            <>
-              <p>あなたは現在スタンプを</p>
-              <div css={stampCountStyle}>
-                <StampCount />
+        <div css={exchangePageContents}>
+          <ExchangeSection>
+            <ExchangeDescription>
+              スタンプが集まったら
+              <wbr />
+              景品交換に行こう！
+            </ExchangeDescription>
+          </ExchangeSection>
+          <ExchangeSection>
+            <ExchangeTitle>持ち物</ExchangeTitle>
+            <ExchangeDescription>学生証</ExchangeDescription>
+          </ExchangeSection>
+          <ExchangeSection>
+            <ExchangeTitle>交換手順</ExchangeTitle>
+            <ol>
+              <li>景品交換会場（ここに会場名が入る）に行く</li>
+              <li>会場で学生証と、このページ下のスタンプの数を係員に見せる</li>
+              <li>交換したい回数を係員に伝える</li>
+              <li>景品を交換する</li>
+            </ol>
+          </ExchangeSection>
+          <ExchangeSection>
+            <ExchangeTitle>交換条件</ExchangeTitle>
+            <ExchangeDescription>
+              スタンプ3個につき、1回景品と交換できます
+              <wbr /> （最大3回）
+            </ExchangeDescription>
+          </ExchangeSection>
+          <ExchangeSection>
+            {isMobile ? (
+              <>
+                <p>あなたは現在スタンプを</p>
+                <div css={stampCountStyle}>
+                  <StampCount />
+                </div>
+                <p>獲得しています</p>
+                <SmallStampCard />
+              </>
+            ) : (
+              <div css={createStampCardContent}>
+                <h2>スタンプカード</h2>
+                <p>
+                  スマホからアクセスして診断をしよう！
+                  <br />
+                  相性診断結果から作成されたスタンプカードを持ってスタンプラリーに参加しよう！
+                </p>
+                <ColorBorderButton label="診断する" disabled={true} />
               </div>
-              <p>獲得しています</p>
-              <SmallStampCard />
-            </>
-          ) : (
-            <div css={createStampCardContent}>
-              <h2>スタンプカード</h2>
-              <p>
-                スマホからアクセスして診断をしよう！
-                <br />
-                相性診断結果から作成されたスタンプカードを持ってスタンプラリーに参加しよう！
-              </p>
-              <ColorBorderButton label="診断する" disabled={true} />
-            </div>
-          )}
+            )}
+          </ExchangeSection>
         </div>
       </div>
     </>
