@@ -45,7 +45,7 @@ const exchangePageStyle = css`
   h2 {
     margin-top: 1em;
     margin-bottom: 0.5em;
-    font-size: 2.4rem;
+    font-size: 3.6rem;
     font-weight: bold;
     text-align: center;
   }
@@ -55,7 +55,7 @@ const exchangePageStyle = css`
     margin: 0;
     margin-bottom: 1rem;
     font-family: GenShinGothic-P, sans-serif;
-    font-size: 1.6rem;
+    font-size: 2.4rem;
     text-align: center;
     word-break: keep-all;
     overflow-wrap: anywhere;
@@ -66,7 +66,7 @@ const exchangePageStyle = css`
   }
 
   li {
-    font-size: 1.6rem;
+    font-size: 2.4rem;
   }
 `;
 
