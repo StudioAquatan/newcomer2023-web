@@ -10,10 +10,8 @@ import MetaHead from "../../components/MetaHead";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
 import Header from "../../components/headers/Header";
 import JumpingLogoLoader from "../../components/loaders/JumpingLogoLoader";
+import StampCard, { StampCardProps } from "../../components/stampcard/Card";
 import { StampProps } from "../../components/stampcard/Stamp";
-import StampCard, {
-  StampCardProps,
-} from "../../components/stampcard/StampCard";
 import { BalloonContainer } from "../../components/tutorial/Balloon";
 import useStampCardSeed from "../../hooks/cardSeed";
 import { useOrganizations } from "../../hooks/organizations";
