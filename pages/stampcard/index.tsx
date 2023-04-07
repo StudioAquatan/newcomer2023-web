@@ -232,6 +232,7 @@ export default function StampCardPage() {
           他の部活を見る
           <FontAwesomeIcon icon={faChevronRight} css={iconMargin} />
         </Link>
+        <Link href="/exchange">景品交換の手順を見る</Link>
         {recommendation.renewRemains > 0 && (
           <BalloonContainer
             direction="bottom"
