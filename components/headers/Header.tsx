@@ -14,13 +14,13 @@ const getHeaderData = (hasStampCard: boolean) => {
         href: "/",
       },
     },
-    // {
-    //   label: "新歓について",
-    //   link: {
-    //     href: "",
-    //     external: true,
-    //   },
-    // },
+    {
+      label: "説明会の場所",
+      link: {
+        href: "https://twitter.com/Shinkan_KIT2023/status/1642525214667051011",
+        external: true,
+      },
+    },
     {
       label: "団体一覧",
       link: {
