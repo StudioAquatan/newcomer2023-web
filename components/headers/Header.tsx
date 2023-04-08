@@ -27,6 +27,12 @@ const getHeaderData = (hasStampCard: boolean) => {
         href: "/orgs",
       },
     },
+    {
+      label: "景品交換の手順",
+      link: {
+        href: "/exchange",
+      },
+    },
     // {
     //   label: "スマホからアクセスして診断を始めてみよう！",
     //   targetDevice: "desktop",

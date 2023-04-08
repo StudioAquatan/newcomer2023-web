@@ -10,10 +10,8 @@ import MetaHead from "../../components/MetaHead";
 import ColorBorderButton from "../../components/buttons/ColorBorderButton";
 import Header from "../../components/headers/Header";
 import JumpingLogoLoader from "../../components/loaders/JumpingLogoLoader";
+import StampCard, { StampCardProps } from "../../components/stampcard/Card";
 import { StampProps } from "../../components/stampcard/Stamp";
-import StampCard, {
-  StampCardProps,
-} from "../../components/stampcard/StampCard";
 import { BalloonContainer } from "../../components/tutorial/Balloon";
 import useStampCardSeed from "../../hooks/cardSeed";
 import { useOrganizations } from "../../hooks/organizations";
@@ -241,6 +239,7 @@ export default function StampCardPage() {
         >
           説明会の会場を見る
         </a>
+        <Link href="/exchange">景品交換の手順を見る</Link>
         {recommendation.renewRemains > 0 && (
           <BalloonContainer
             direction="bottom"
