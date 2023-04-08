@@ -232,6 +232,13 @@ export default function StampCardPage() {
           他の部活を見る
           <FontAwesomeIcon icon={faChevronRight} css={iconMargin} />
         </Link>
+        <a
+          href="https://twitter.com/Shinkan_KIT2023/status/1642525214667051011"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          説明会の会場を見る
+        </a>
         <Link href="/exchange">景品交換の手順を見る</Link>
         {recommendation.renewRemains > 0 && (
           <BalloonContainer

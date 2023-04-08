@@ -113,7 +113,17 @@ export default function EventGuidance() {
               <h6>注意</h6>
             </td>
             <td css={[body, noBorder]}>
-              <p>各団体によって、説明会をしている日、場所が異なります</p>
+              <p>各団体によって、説明会をしている日、場所が異なります。</p>
+              <p>
+                <a
+                  href="https://twitter.com/Shinkan_KIT2023/status/1642525214667051011"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  こちら
+                </a>
+                から詳細を確認してください。
+              </p>
             </td>
           </tr>
         </tbody>
