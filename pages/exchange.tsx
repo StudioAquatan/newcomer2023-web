@@ -84,7 +84,20 @@ export default function Exchange() {
           <ExchangeSection>
             <ExchangeTitle>交換手順</ExchangeTitle>
             <ol>
-              <li>景品交換会場（ここに会場名が入る）に行く</li>
+              <li>景品交換会場（新歓委員会本部）に行く</li>
+              <ul>
+                <li>4月18日はWL21、他の日はK201が会場です</li>
+                <li>
+                  全団体の会場は
+                  <a
+                    href="https://twitter.com/Shinkan_KIT2023/status/1642525214667051011"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    こちら
+                  </a>
+                </li>
+              </ul>
               <li>会場で学生証と、このページ下のスタンプの数を係員に見せる</li>
               <li>交換したい回数を係員に伝える</li>
               <li>景品を交換する</li>
