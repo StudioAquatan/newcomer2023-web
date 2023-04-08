@@ -70,7 +70,7 @@ const markVisitedStyle = (seed: number) => {
     right: calc(${maxMove} * ${random.nextNumber(0, 1)});
     bottom: calc(${maxMove} * ${random.nextNumber(0, 1)});
     z-index: 2;
-    width: 30%;
+    width: 50%;
     height: auto;
     transform: rotate(${rotate}turn);
   `;
