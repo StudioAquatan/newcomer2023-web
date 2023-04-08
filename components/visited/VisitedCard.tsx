@@ -79,7 +79,7 @@ const logoContainer = (logoFocus: boolean) => css`
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: ${logoFocus ? "contain" : "cover"};
+    object-fit: ${logoFocus ? "cover" : "contain"};
     border-radius: 10px;
   }
 `;
