@@ -73,7 +73,7 @@ const markVisitedStyle = (seed: number, largeMark: boolean) => {
         transform: translate(-50%, -50%);
       `
     : css`
-        width: 30%;
+        width: 50%;
         height: auto;
       `;
 
