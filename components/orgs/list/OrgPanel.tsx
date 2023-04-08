@@ -33,7 +33,26 @@ const descriptionContainerStyle = css`
   height: 100px;
 `;
 
-const logoStyle = (logoFocus: boolean) => css`
+const logoContainerStyle = css`
+  position: relative;
+  width: 100px;
+  height: 100px;
+`;
+
+const logoVisitedStyle = css`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.1rem 0;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  background-color: rgb(0 0 0 / 40%);
+  border-radius: 0 0 10px 10px;
+`;
+
+const logoImageStyle = (logoFocus: boolean) => css`
   width: 100px;
   height: 100px;
   background-color: white;
@@ -48,8 +67,10 @@ const descriptionStyle = css`
 
 export default function OrgPanel({
   org: { id, fullName, shortDescription, logo, logoFocus },
+  isVisited,
 }: {
   org: OrganizationFull;
+  isVisited: boolean;
 }) {
   return (
     <div css={orgPanelStyle}>
@@ -60,14 +81,17 @@ export default function OrgPanel({
       >
         <div css={orgNameStyle(fullName)}>{fullName}</div>
         <div css={descriptionContainerStyle}>
-          <Image
-            css={logoStyle(logoFocus ?? false)}
-            src={logo?.src ?? "/org_icons/default.png"}
-            alt={fullName}
-            width={100}
-            height={100}
-            loader={imgixLoader}
-          />
+          <div css={logoContainerStyle}>
+            <Image
+              css={logoImageStyle(logoFocus ?? false)}
+              src={logo?.src ?? "/org_icons/default.png"}
+              alt={fullName}
+              width={100}
+              height={100}
+              loader={imgixLoader}
+            />
+            {isVisited && <span css={logoVisitedStyle}>訪問済</span>}
+          </div>
           <div css={descriptionStyle}>{shortDescription}</div>
         </div>
       </Link>

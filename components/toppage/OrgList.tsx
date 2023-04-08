@@ -21,6 +21,23 @@ const title = (theme: Theme) => css`
   }
 `;
 
+const linkStyle = (theme: Theme) => css`
+  margin-top: 0.8rem;
+  font-size: 1.8rem;
+  color: ${theme.colors.normalTextColor};
+  text-decoration: underline;
+`;
+
+export function OrgListLink() {
+  return (
+    <div css={container}>
+      <Link css={linkStyle} href="/orgs/">
+        部活動一覧を見る
+      </Link>
+    </div>
+  );
+}
+
 export default function OrgList() {
   const theme = useTheme();
   return (

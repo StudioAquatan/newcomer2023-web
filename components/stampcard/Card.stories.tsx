@@ -5,7 +5,7 @@ import { OrganizationFull, Recommendation } from "../../api-client/@types";
 import { orgsGetSuccessResponseJson } from "../../mocks/api/orgs";
 
 import { recommendationGetSuccessResponseJson } from "../../mocks/api/recommendation";
-import Card from "./StampCard";
+import Card from "./Card";
 
 export default {
   title: "StampCard/StampCard",

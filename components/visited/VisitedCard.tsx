@@ -2,11 +2,17 @@ import { css } from "@emotion/react";
 import Image from "next/image";
 import imgixLoader from "../../image-loader";
 
+export type VisitStatus =
+  | "loading"
+  | "conflict"
+  | "success"
+  | "no-stampcard"
+  | "error";
 type VisitedCardProps = {
   orgName: string;
   logo: string;
   logoFocus?: boolean;
-  cardStatus: string;
+  cardStatus: VisitStatus;
   visitsCount?: number;
 };
 
@@ -73,7 +79,7 @@ const logoContainer = (logoFocus: boolean) => css`
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: ${logoFocus ? "contain" : "cover"};
+    object-fit: ${logoFocus ? "cover" : "contain"};
     border-radius: 10px;
   }
 `;

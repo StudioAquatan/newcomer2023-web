@@ -9,6 +9,7 @@ export type StampProps = {
   recommendation: RecommendationItem;
   orgInfo: OrganizationFull;
   seed?: number;
+  largeMark?: boolean;
 };
 
 const stampStyle = ({ theme }: { theme: Theme }) => {
@@ -58,20 +59,32 @@ const logoStyle = (logoFocus: boolean) => css`
   object-fit: ${logoFocus ? "cover" : "contain"};
 `;
 
-const markVisitedStyle = (seed: number) => {
+const markVisitedStyle = (seed: number, largeMark: boolean) => {
   const random = new Random(seed);
   const minRotate = -0.15;
   const maxRotate = 0.15;
-  const rotate = random.nextNumber(0, 1) * (maxRotate - minRotate) + minRotate;
+  const rotate =
+    random.nextNumber(0, 10) * 0.1 * (maxRotate - minRotate) + minRotate;
   const maxMove = "5%";
+
+  const transform = largeMark
+    ? css`
+        width: 90%;
+        height: 90%;
+        transform: translate(-50%, -50%);
+      `
+    : css`
+        width: 50%;
+        height: auto;
+      `;
 
   return css`
     position: absolute;
-    right: calc(${maxMove} * ${random.nextNumber(0, 1)});
-    bottom: calc(${maxMove} * ${random.nextNumber(0, 1)});
+    right: calc(${maxMove} * ${random.nextNumber(0, 10) * 0.1});
+    bottom: calc(${maxMove} * ${random.nextNumber(0, 10) * 0.1});
     z-index: 2;
-    width: 30%;
-    height: auto;
+    ${transform}
+
     transform: rotate(${rotate}turn);
   `;
 };
@@ -80,6 +93,7 @@ export default function Stamp({
   recommendation,
   orgInfo,
   seed = 0,
+  largeMark = false,
 }: StampProps) {
   const random = new Random(seed);
   const secret = random.nextNumber(0, 2000);
@@ -94,7 +108,7 @@ export default function Stamp({
     >
       {recommendation.isVisited ? (
         <Image
-          css={markVisitedStyle(seed)}
+          css={markVisitedStyle(seed, largeMark)}
           src={
             secret === 224 ? "/mark_visited_aquatan.png" : "/mark_visited.png"
           }
@@ -106,7 +120,7 @@ export default function Stamp({
       ) : (
         ""
       )}
-      <div css={orgNameStyle}>{orgInfo.shortName}</div>
+      {!largeMark && <div css={orgNameStyle}>{orgInfo.shortName}</div>}
       <div css={logoContainer}>
         <Image
           src={orgInfo.logo?.src ?? ""}
