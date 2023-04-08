@@ -62,13 +62,14 @@ const markVisitedStyle = (seed: number) => {
   const random = new Random(seed);
   const minRotate = -0.15;
   const maxRotate = 0.15;
-  const rotate = random.nextNumber(0, 1) * (maxRotate - minRotate) + minRotate;
+  const rotate =
+    random.nextNumber(0, 10) * 0.1 * (maxRotate - minRotate) + minRotate;
   const maxMove = "5%";
 
   return css`
     position: absolute;
-    right: calc(${maxMove} * ${random.nextNumber(0, 1)});
-    bottom: calc(${maxMove} * ${random.nextNumber(0, 1)});
+    right: calc(${maxMove} * ${random.nextNumber(0, 10) * 0.1});
+    bottom: calc(${maxMove} * ${random.nextNumber(0, 10) * 0.1});
     z-index: 2;
     width: 30%;
     height: auto;
