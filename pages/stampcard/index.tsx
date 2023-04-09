@@ -232,14 +232,15 @@ export default function StampCardPage() {
               onClick={() => share()}
               isIcon
             />
-            <ColorBorderButton
-              label="景品交換の手順"
-              textColor={theme.colors.button.enable.backgroundColor}
-              borderColor={theme.colors.button.enable.backgroundColor}
-              fontSize="2.4rem"
-              onClick={() => share()}
-              css={stampGuideButton}
-            />
+            <Link href="/exchange">
+              <ColorBorderButton
+                label="景品交換の手順"
+                textColor={theme.colors.button.enable.backgroundColor}
+                borderColor={theme.colors.button.enable.backgroundColor}
+                fontSize="2.4rem"
+                css={stampGuideButton}
+              />
+            </Link>
           </div>
           <div css={otherLinks}>
             <a
