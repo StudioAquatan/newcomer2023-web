@@ -8,16 +8,18 @@ type ColorBorderButtonProps = {
   type?: string;
   disabled?: boolean;
   css?: Interpolation<Theme>;
+  isIcon?: boolean;
 } & Omit<React.HTMLProps<HTMLButtonElement>, "label">;
 
 const button = (
   theme: Theme,
   fontSize?: string,
   textColor?: string,
-  borderColor?: string
+  borderColor?: string,
+  isIcon?: boolean
 ) => {
   return css`
-    padding: 1.6rem 4rem;
+    padding: ${isIcon ? "1.6rem 2.4rem" : "1.6rem 4rem"};
     font-family: GenJyuuGothic-P, sans-serif;
     font-size: ${fontSize ?? "2.5rem"};
     font-weight: bold;
@@ -28,7 +30,7 @@ const button = (
     border: 3px ${borderColor ?? "#000"} solid;
 
     /* border-radius: 0.8rem; */
-    border-radius: 4.8rem;
+    border-radius: ${isIcon ? "1000px" : "4.8rem"};
     transition: all 100ms ease-out 0s;
 
     &:hover {
@@ -56,6 +58,7 @@ export default function ColorBorderButton({
   fontSize,
   type,
   disabled = false,
+  isIcon = false,
   ...rest
 }: ColorBorderButtonProps) {
   const theme = useTheme();
@@ -67,7 +70,8 @@ export default function ColorBorderButton({
             theme,
             fontSize,
             textColor ?? theme.colors.button.disable.backgroundColor,
-            borderColor ?? theme.colors.button.disable.backgroundColor
+            borderColor ?? theme.colors.button.disable.backgroundColor,
+            isIcon
           ),
         ]}
         disabled
@@ -83,7 +87,8 @@ export default function ColorBorderButton({
           theme,
           fontSize,
           textColor ?? theme.colors.button.enable.backgroundColor,
-          borderColor ?? theme.colors.button.enable.backgroundColor
+          borderColor ?? theme.colors.button.enable.backgroundColor,
+          isIcon
         )}
         type="submit"
         {...rest}
@@ -98,7 +103,8 @@ export default function ColorBorderButton({
           theme,
           fontSize,
           textColor ?? theme.colors.button.enable.backgroundColor,
-          borderColor ?? theme.colors.button.enable.backgroundColor
+          borderColor ?? theme.colors.button.enable.backgroundColor,
+          isIcon
         )}
         {...rest}
       >
