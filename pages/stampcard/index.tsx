@@ -1,9 +1,10 @@
 import { css, useTheme } from "@emotion/react";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
+import { faShareNodes } from "@fortawesome/free-solid-svg-icons/faShareNodes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import { useInView } from "react-intersection-observer";
 import { OrganizationFull } from "../../api-client/@types";
 import MetaHead from "../../components/MetaHead";
@@ -76,26 +77,34 @@ const stampCardContainer = css`
 
 const stampCardBottom = css`
   display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
+  flex-direction: row;
+  gap: 1rem;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   margin: 0 3.2rem;
 `;
 
+const stampGuideButton = css`
+  padding: 1.6rem;
+`;
 const otherLinks = css`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem 0;
   font-size: 2rem;
   text-align: center;
+`;
 
-  a {
-    width: 80vw;
-    padding: 1rem 0;
-    color: rgba(0 0 0 / 95%);
-  }
+const linkStyle = css`
+  width: 80vw;
+  padding: 1rem 0;
+  color: rgba(0 0 0 / 95%);
+`;
+
+const locationLinkStyle = css`
+  width: 100%;
+  padding: 0.8rem 0;
+  color: rgba(0 0 0 / 95%);
 `;
 
 const iconMargin = css`
@@ -117,8 +126,6 @@ export default function StampCardPage() {
   const { data: orgsData } = useOrganizations();
   const { data: recommendationData } = useRecommendation();
   const { data: seedData } = useStampCardSeed();
-  const [shareButtonLabel, setShareButtonLabel] =
-    useState("シェアしてみよう！");
   const FALLBACKSEED = 0;
   const seed = seedData?.seed ?? FALLBACKSEED;
   const { push } = useRouter();
@@ -189,10 +196,8 @@ export default function StampCardPage() {
         .catch((error) => console.log("リンクの共有に失敗しました", error));
     } else if (navigator.clipboard) {
       navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
-      setShareButtonLabel("URLをコピーしました！");
-      setTimeout(() => {
-        setShareButtonLabel("シェアしてみよう！");
-      }, 5000);
+      // TODO
+      alert("リンクをコピーしました！");
     } else {
       console.log("リンクの共有方法がありません");
       console.log("以下のリンクをコピーして共有してください");
@@ -217,29 +222,42 @@ export default function StampCardPage() {
         <div css={stampCardContainer}>
           <StampCard {...props} />
         </div>
-        <div css={stampCardBottom}>
-          <ColorBorderButton
-            label={shareButtonLabel}
-            textColor={theme.colors.button.enable.backgroundColor}
-            borderColor={theme.colors.button.enable.backgroundColor}
-            fontSize="2.4rem"
-            onClick={() => share()}
-          />
+        <div>
+          <div css={stampCardBottom}>
+            <ColorBorderButton
+              label={<FontAwesomeIcon icon={faShareNodes} />}
+              textColor={theme.colors.button.enable.backgroundColor}
+              borderColor={theme.colors.button.enable.backgroundColor}
+              fontSize="2.4rem"
+              onClick={() => share()}
+              isIcon
+            />
+            <ColorBorderButton
+              label="景品交換の手順"
+              textColor={theme.colors.button.enable.backgroundColor}
+              borderColor={theme.colors.button.enable.backgroundColor}
+              fontSize="2.4rem"
+              onClick={() => share()}
+              css={stampGuideButton}
+            />
+          </div>
+          <div css={otherLinks}>
+            <a
+              href="https://twitter.com/Shinkan_KIT2023/status/1642525214667051011"
+              target="_blank"
+              rel="noopener noreferrer"
+              css={locationLinkStyle}
+            >
+              説明会の会場を見る
+            </a>
+          </div>
         </div>
       </div>
       <div css={otherLinks}>
-        <Link href="/orgs">
+        <Link href="/orgs" css={linkStyle}>
           他の部活を見る
           <FontAwesomeIcon icon={faChevronRight} css={iconMargin} />
         </Link>
-        <a
-          href="https://twitter.com/Shinkan_KIT2023/status/1642525214667051011"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          説明会の会場を見る
-        </a>
-        <Link href="/exchange">景品交換の手順を見る</Link>
         {recommendation.renewRemains > 0 && (
           <BalloonContainer
             direction="bottom"
@@ -254,12 +272,14 @@ export default function StampCardPage() {
               )
             }
           >
-            <Link href="/diagnose" ref={ref}>
+            <Link href="/diagnose" ref={ref} css={linkStyle}>
               診断をやり直す
             </Link>
           </BalloonContainer>
         )}
-        <Link href="/stampcard/exclusion">除外する団体を設定</Link>
+        <Link href="/stampcard/exclusion" css={linkStyle}>
+          除外する団体を設定
+        </Link>
       </div>
     </div>
   );
