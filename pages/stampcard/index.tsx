@@ -212,7 +212,7 @@ export default function StampCardPage() {
       <div css={content}>
         <div css={stampCardHeader}>
           <p css={stampCardTitle}>スタンプラリー</p>
-          <p css={stampCardDescription}>ブースを回ってスタンプを集めよう！</p>
+          <p css={stampCardDescription}>説明会を回ってスタンプを集めよう！</p>
         </div>
         <div css={stampCardContainer}>
           <StampCard {...props} />
