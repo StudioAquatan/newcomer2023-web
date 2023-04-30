@@ -39,13 +39,17 @@ https://head.aquatan-newcomer2023-apidocs.pages.dev/#/
 `env.local` に環境変数をセットします。
 
 - `NEXT_PUBLIC_API_URL` は API サーバへの URL をセットします。
+- `NEXT_PUBLIC_IMGIX_DOMAIN` は画像処理用に利用している IMGIX のドメインをセットします。
+- `NEXT_PUBLIC_NEWT_ROOT` は NEWT のコンテンツ取得用の URL をセットします。
 - `NEXT_PUBLIC_OGP_URL` は OGP 画像生成用の API サーバへの URL をセットします。
-- `NEXT_PUBLIC_PUBLIC_DOMAIN`に自サイトのドメイン(`irodori-newcomer2023.pages.dev`)をセットします。
-- MSW を使って API のモックを有効にする場合は `NEXT_PUBLIC_API_MOCKING` に `enabled` をセットします。それ以外の値の場合はモックは無効になります。
+- `NEXT_PUBLIC_PUBLIC_DOMAIN` に自サイトのドメイン(`irodori-newcomer2023.pages.dev`)をセットします。
+- `NEXT_PUBLIC_RESOURCE_URL` は画像や動画などのコンテンツ取得用に用意している API サーバへの URL をセットします。
 
 ```env.local
 NEXT_PUBLIC_API_URL=https://newcomer2023-api.studioaquatan.workers.dev
+NEXT_PUBLIC_IMGIX_DOMAIN=studioaquatan.imgix.net
+NEXT_PUBLIC_NEWT_ROOT=https://storage.googleapis.com/<NEWT_PROJECT_ID>
 NEXT_PUBLIC_OGP_URL=https://newcomer2023-ogp.studioaquatan.workers.dev
 NEXT_PUBLIC_PUBLIC_DOMAIN=irodori-newcomer2023.pages.dev
-NEXT_PUBLIC_API_MOCKING=enabled
+NEXT_PUBLIC_RESOURCE_URL=https://newcomer2023-assets.studioaquatan.workers.dev/assets
 ```
