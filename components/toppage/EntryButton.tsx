@@ -22,9 +22,9 @@ const ActivateButton = () => {
   const theme = useTheme();
 
   return (
-    <Link href="/diagnose">
+    <Link href="/orgs">
       <ColorBorderButton
-        label="診断する"
+        label="団体一覧を見る"
         textColor={theme.colors.button.enable.backgroundColor}
         borderColor={theme.colors.button.enable.backgroundColor}
       />
