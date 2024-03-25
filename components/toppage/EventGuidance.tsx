@@ -89,10 +89,7 @@ export default function EventGuidance() {
               <h6>開催日</h6>
             </td>
             <td css={body}>
-              <p>DAY1 2023年4月18日(火)</p>
-              <p>DAY2 2023年4月19日(水)</p>
-              <p>DAY3 2023年4月20日(木)</p>
-              <p>DAY4 2023年4月21日(金)</p>
+              <p>イベントは終了しました！</p>
             </td>
           </tr>
           <tr>
