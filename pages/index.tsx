@@ -19,7 +19,6 @@ import FeatureStampRally from "../components/toppage/FeatureStampRally";
 import Hero from "../components/toppage/Hero";
 import OrgList from "../components/toppage/OrgList";
 import { OrganizationProvider, useOrganizations } from "../hooks/organizations";
-import useUser from "../hooks/user";
 
 const OGP_URL = process.env.NEXT_PUBLIC_OGP_URL ?? "http://localhost:8787";
 
@@ -79,7 +78,7 @@ export default function Home({
 }: HomeProps) {
   const { replace, query } = useRouter();
   // TODO: 相性診断するときにユーザ情報を作成すれば良いので、ここでユーザ情報を作成する必要はない
-  useUser();
+  // useUser();
 
   const featureStampRally = {
     title: "スタンプラリー",
