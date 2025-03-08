@@ -9,7 +9,7 @@ export function useGetVisits() {
   const token = userData?.token;
 
   return useSWR(
-    token ? ["/visits", token] : null,
+    null,
     async () => {
       if (typeof window === "undefined") return null;
       const response = await apiClient.visits
@@ -40,7 +40,7 @@ export function useRecordVisits(visitsToken: string) {
   const token = userData?.token;
 
   return useSWR(
-    token && visitsToken ? ["/visits", token, visitsToken] : null,
+    null,
     async () => {
       if (typeof window === "undefined") return null;
       const response = await apiClient.visits

@@ -29,7 +29,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
     orgs: {
       /**
        * 全団体のリストを取得する
-       * @returns OK
+       * @return OK
        */
       get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -39,7 +39,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         >(prefix, PATH0, GET, option).json(),
       /**
        * 全団体のリストを取得する
-       * @returns OK
+       * @return OK
        */
       $get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -54,7 +54,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
     questions: {
       /**
        * 質問と回答項目のリストを取得する
-       * @returns OK
+       * @return OK
        */
       get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -64,7 +64,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         >(prefix, PATH1, GET, option).json(),
       /**
        * 質問と回答項目のリストを取得する
-       * @returns OK
+       * @return OK
        */
       $get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -83,7 +83,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         return {
           /**
            * 特定団体のスタンプを除外し，補欠されたスタンプカードを返します
-           * @returns OK
+           * @return OK
            */
           delete: (option?: { config?: T | undefined } | undefined) =>
             fetch<
@@ -93,7 +93,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
             >(prefix, prefix1, DELETE, option).json(),
           /**
            * 特定団体のスタンプを除外し，補欠されたスタンプカードを返します
-           * @returns OK
+           * @return OK
            */
           $delete: (option?: { config?: T | undefined } | undefined) =>
             fetch<
@@ -105,7 +105,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
               .then((r) => r.body),
           /**
            * 特定団体のスタンプを除外したのを削除し，補欠されたスタンプカードを返します
-           * @returns OK
+           * @return OK
            */
           patch: (option?: { config?: T | undefined } | undefined) =>
             fetch<
@@ -115,7 +115,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
             >(prefix, prefix1, PATCH, option).json(),
           /**
            * 特定団体のスタンプを除外したのを削除し，補欠されたスタンプカードを返します
-           * @returns OK
+           * @return OK
            */
           $patch: (option?: { config?: T | undefined } | undefined) =>
             fetch<
@@ -130,7 +130,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       },
       /**
        * 診断結果に基づくおすすめの団体リストを取得する
-       * @returns OK
+       * @return OK
        */
       get: (
         option?:
@@ -147,7 +147,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         >(prefix, PATH2, GET, option).json(),
       /**
        * 診断結果に基づくおすすめの団体リストを取得する
-       * @returns OK
+       * @return OK
        */
       $get: (
         option?:
@@ -167,7 +167,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       /**
        * 診断からスタンプカード・ソート済み団体リストを作成する
        * @param option.body - 診断用質問の回答リスト
-       * @returns OK
+       * @return OK
        */
       put: (option: {
         body: Methods2["put"]["reqBody"];
@@ -181,7 +181,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       /**
        * 診断からスタンプカード・ソート済み団体リストを作成する
        * @param option.body - 診断用質問の回答リスト
-       * @returns OK
+       * @return OK
        */
       $put: (option: {
         body: Methods2["put"]["reqBody"];
@@ -206,7 +206,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
     rewards: {
       /**
        * 景品交換の状態を取得します．景品交換ができるかどうかも同時に取得できます．
-       * @returns OK
+       * @return OK
        */
       get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -216,7 +216,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         >(prefix, PATH3, GET, option).json(),
       /**
        * 景品交換の状態を取得します．景品交換ができるかどうかも同時に取得できます．
-       * @returns OK
+       * @return OK
        */
       $get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -247,7 +247,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
     user: {
       /**
        * 匿名ユーザを作成し，認証用トークンを返します
-       * @returns ユーザが正常に作成された
+       * @return ユーザが正常に作成された
        */
       post: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -257,7 +257,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         >(prefix, PATH4, POST, option).json(),
       /**
        * 匿名ユーザを作成し，認証用トークンを返します
-       * @returns ユーザが正常に作成された
+       * @return ユーザが正常に作成された
        */
       $post: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -268,7 +268,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
           .json()
           .then((r) => r.body),
       /**
-       * @returns OK
+       * @return OK
        */
       get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -277,7 +277,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
           Methods5["get"]["status"]
         >(prefix, PATH4, GET, option).json(),
       /**
-       * @returns OK
+       * @return OK
        */
       $get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -289,7 +289,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
           .then((r) => r.body),
       /**
        * ユーザ情報を更新します．現在はニックネーム更新のみです
-       * @returns OK
+       * @return OK
        */
       patch: (option: {
         body: Methods5["patch"]["reqBody"];
@@ -302,7 +302,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         >(prefix, PATH4, PATCH, option).json(),
       /**
        * ユーザ情報を更新します．現在はニックネーム更新のみです
-       * @returns OK
+       * @return OK
        */
       $patch: (option: {
         body: Methods5["patch"]["reqBody"];
@@ -324,7 +324,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         return {
           /**
            * 訪問を記録します．記録が重複する場合，上書きされません．
-           * @returns 訪問を記録した
+           * @return 訪問を記録した
            */
           post: (option?: { config?: T | undefined } | undefined) =>
             fetch<
@@ -334,7 +334,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
             >(prefix, prefix1, POST, option).json(),
           /**
            * 訪問を記録します．記録が重複する場合，上書きされません．
-           * @returns 訪問を記録した
+           * @return 訪問を記録した
            */
           $post: (option?: { config?: T | undefined } | undefined) =>
             fetch<
@@ -349,7 +349,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       },
       /**
        * 訪問した団体一覧を取得します
-       * @returns OK
+       * @return OK
        */
       get: (option?: { config?: T | undefined } | undefined) =>
         fetch<
@@ -359,7 +359,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         >(prefix, PATH5, GET, option).json(),
       /**
        * 訪問した団体一覧を取得します
-       * @returns OK
+       * @return OK
        */
       $get: (option?: { config?: T | undefined } | undefined) =>
         fetch<

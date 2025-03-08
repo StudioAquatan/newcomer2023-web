@@ -3,7 +3,7 @@ import { apiClient } from "../api-client/apiClient";
 
 export default function useUser() {
   return useSWR(
-    typeof window === "undefined" ? null : "/user",
+    null,
     async () => {
       const userToken = localStorage.getItem("userToken") ?? null;
       const userInfo = localStorage.getItem("userInfo") ?? null;
